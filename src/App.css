@@ -1,0 +1,28 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  background-color: lightblue;
+}
+
+.letter {
+  touch-action: none;
+/*   pointer-events: all; */
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background-color: lightgray;
+  padding: 10px; 
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  /* todo: make px values and font size more responsive, make color a gradient */
+}
+
+.letter.unavailable {
+  color: darkgray;
+  background-color: lightgray;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(4, 60px);
+  /* width: 100px; */
+}
