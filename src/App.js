@@ -6,16 +6,16 @@ function Settings() {
   return <div>Settings</div>;
 }
 
-function Letter({ letter, letterAvailability, index, handlePointerEnter, handlePointerDown }) {
+function Letter({ letter, letterAvailability, index, handlePointerEnter, handlePointerDown, handlePointerUp }) {
 
   // Cares about whether letter is disabled or not (just remove pointer enter event if disabled)
   return (
     <div
       className="letter"
-      key={index.toString()}
+      key={index.toString()+letter}
       onPointerDown={(e) => handlePointerDown(e, letter, index)}
       onPointerEnter={(e) => handlePointerEnter(e, letter, index, letterAvailability)}
-      // onPointerUp={() => handlePointerUp()}
+      onPointerUp={(e) => handlePointerUp(e)}
     >
       {letter}
     </div>
@@ -45,20 +45,21 @@ function Letter({ letter, letterAvailability, index, handlePointerEnter, handleP
   // }
 }
 
-function Board({ letters, letterAvailabilities, handlePointerEnter, handlePointerDown }) {
+function Board({ letters, letterAvailabilities, handlePointerEnter, handlePointerDown, handlePointerUp }) {
   // cares about what letters are disabled to pass it down
   const board = letters.map((letter, index) => (
-    <Letter letter={letter} letterAvailability={letterAvailabilities[index]} index={index} handlePointerEnter={handlePointerEnter } handlePointerDown={handlePointerDown}></Letter>
+    <Letter letter={letter} letterAvailability={letterAvailabilities[index]} index={index} handlePointerEnter={handlePointerEnter } handlePointerDown={handlePointerDown} handlePointerUp={handlePointerUp} draggable={false}></Letter>
   ));
-  return <div id="board" key="board">{board}</div>;
+  return <div id="board" >{board} </div>;
 }
 
 function Score() {
   return <div>Score</div>;
 }
 
-function FoundWords() {
-  return <div>Found</div>;
+function FoundWords({foundWords}) {
+  
+  return foundWords.map((word, index) => <div key={index}>{word}</div>)
 }
 
 function getLetters(numLetters) {
@@ -126,6 +127,17 @@ function App() {
         letterAvailabilities: newLetterAvailabilities,
       };
     }
+
+    if (payload.action === "endWord") {
+      const newFoundWords = [...currentState.foundWords, currentState.currentWord]
+      const newLetterAvailabilities = currentState.letters.map(i => true)
+      return {
+        ...currentState,
+        foundWords: newFoundWords,
+        currentWord: "",
+        letterAvailabilities: newLetterAvailabilities,
+      }
+    }
   }
 
   const [gameState, dispatchGameState] = React.useReducer(
@@ -163,18 +175,27 @@ function App() {
     // change the style to indicate that letter can't be used again
   }
 
-  function handlePointerUp() {
+  function handlePointerUp(e) {
+    console.log('POINTER UP')
+    e.target.releasePointerCapture(e.pointerId);
+
+    // Reset the letter styling
+    Array.from(e.target.parentElement.children).forEach(child => child.className = "letter")
     // Check if the list of letters is a valid word
     // If yes, add the word to the list of words
+    
     // If no, indicate that invalid
     // clear the letter list
     // reset the letter styling (or maybe happens automatically)?
+    dispatchGameState({
+      action: "endWord"
+    })
   }
 
   return (
     <div className="App" >
       <Score />
-      <FoundWords />
+      <FoundWords foundWords={gameState.foundWords}/>
       <Settings />
       <pre>{gameState.currentWord}</pre>
       <Board
@@ -182,6 +203,7 @@ function App() {
         letterAvailabilities={gameState.letterAvailabilities}
         handlePointerEnter={handlePointerEnter}
         handlePointerDown={handlePointerDown}
+        handlePointerUp={handlePointerUp}
       ></Board>
     </div>
   );
