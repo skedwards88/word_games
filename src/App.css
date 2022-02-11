@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   background-color: lightblue;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+
 }
 
 .letter {
@@ -27,10 +30,18 @@
   display: grid;
   grid-template-columns: repeat(4, 60px);
   background-color: lightgray;
+  touch-action: none;
   /* width: 100px; */
 }
 
 #foundWords {
   display: flex;
+  background-color: white;
+  border: 1px solid black;
   flex-direction: column;
+  min-height: 30vh;
+}
+
+#currentWord {
+  min-height: 5vh;
 }
