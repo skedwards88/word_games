@@ -1,25 +1,36 @@
 import React from "react";
 import "./App.css";
 
-
 function App() {
   function handlePointerDown(e) {
     console.log(`pointer down`);
-    console.log(e.pointerId)
-    console.log(e.target)
+    console.log(e.pointerId);
+    console.log(e.target);
     e.target.releasePointerCapture(e.pointerId);
   }
   function handlePointerMove(e) {
-    console.log('move')
+    console.log("move");
   }
 
   function handlePointerEnterStateChange(e, state) {
     // e.preventDefault();
     console.log(`pointer enter`);
-    console.log(e.pointerId)
-    try {e.target.releasePointerCapture(e.pointerId);} catch (error) { console.log(`'error 1 ${e.pointerId}'`)}
-    try {e.target.releasePointerCapture(state.pointerId);} catch (error) { console.log(`'error 2' ${state.pointerId}`)}
-    try {e.target.releasePointerCapture(state.pointerId + 1);} catch (error) { console.log(`'error 3 ${e.pointerId + 1}'`)}
+    console.log(e.pointerId);
+    try {
+      e.target.releasePointerCapture(e.pointerId);
+    } catch (error) {
+      console.log(`'error 1 ${e.pointerId}'`);
+    }
+    try {
+      e.target.releasePointerCapture(state.pointerId);
+    } catch (error) {
+      console.log(`'error 2' ${state.pointerId}`);
+    }
+    try {
+      e.target.releasePointerCapture(state.pointerId + 1);
+    } catch (error) {
+      console.log(`'error 3 ${e.pointerId + 1}'`);
+    }
 
     dispatch({ type: "state-change", pointerId: e.pointerId });
   }
@@ -27,8 +38,8 @@ function App() {
   function handlePointerEnterNoStateChange(e) {
     // e.preventDefault();
     console.log(`pointer enter`);
-    console.log(e.pointerId)
-    console.log(e.target)
+    console.log(e.pointerId);
+    console.log(e.target);
     dispatch({ type: "no-state-change" });
   }
 
@@ -37,8 +48,8 @@ function App() {
   }
 
   function reducer(state, action) {
-    console.log('in reducer')
-    console.log(action)
+    console.log("in reducer");
+    console.log(action);
     switch (action.type) {
       case "no-state-change":
         return state;
@@ -52,7 +63,7 @@ function App() {
   const [state, dispatch] = React.useReducer(reducer, 3, init);
 
   function ComponentNoStateChange() {
-    console.log('render component')
+    console.log("render component");
 
     return (
       <div
@@ -67,22 +78,23 @@ function App() {
   }
 
   function NestedComponentStateChange() {
-    console.log('render component')
+    console.log("render component");
     return (
-      <div><div
-        className="letter"
-        key="3"
-        onPointerDown={(e) => handlePointerDown(e)}
-        onPointerEnter={(e) => handlePointerEnterStateChange(e)}
-      >
-        Nested component div with state change
-      </div>
+      <div>
+        <div
+          className="letter"
+          key="3"
+          onPointerDown={(e) => handlePointerDown(e)}
+          onPointerEnter={(e) => handlePointerEnterStateChange(e)}
+        >
+          Nested component div with state change
+        </div>
       </div>
     );
   }
 
-  function ComponentStateChange({state}) {
-    console.log('render component')
+  function ComponentStateChange({ state }) {
+    console.log("render component");
     return (
       <div
         className="letter"
@@ -95,7 +107,7 @@ function App() {
       </div>
     );
   }
-  console.log('render app')
+  console.log("render app");
   return (
     <div className="App">
       <div
@@ -117,7 +129,7 @@ function App() {
 
       <ComponentNoStateChange />
       <ComponentStateChange state={state}></ComponentStateChange>
-      <NestedComponentStateChange/>
+      <NestedComponentStateChange />
       <div>
         <div
           className="letter"
@@ -139,7 +151,6 @@ function App() {
     </div>
   );
 }
-
 
 // function App() {
 //   const letterDistribution = {
@@ -311,7 +322,7 @@ function App() {
 // //     </div>
 // //   );
 // return (
-//   <div className="App" 
+//   <div className="App"
 //   >
 //     <div>
 //       <div>NOT POINTER</div>
