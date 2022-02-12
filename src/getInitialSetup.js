@@ -100,5 +100,6 @@ export function getInitialSetup(numLetters) {
     minLength: 3,
     letters: letters,
     letterAvailabilities: letterAvailabilities,
+    playedIndexes: [],
   };
 }
