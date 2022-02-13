@@ -1,32 +1,65 @@
 import React from "react";
 
-function Letter({
-  letter,
-  letterAvailability,
-  index,
-  handlePointerEnter,
-  handlePointerDown,
-  handlePointerUp,
-}) {
-  // Cares about whether letter is disabled or not (just remove pointer enter event if disabled)
+function Letter({ letter, letterAvailability, index, dispatchGameState }) {
+  const myRef = React.useRef();
+
+  React.useEffect(() => {
+    const myDiv = myRef.current;
+
+    const newClass = letterAvailability ? "letter" : "letter unavailable";
+
+    myDiv.className = newClass;
+  }, [letterAvailability]);
+
+  function handlePointerDown(e, letter, index) {
+    e.preventDefault();
+    e.target.releasePointerCapture(e.pointerId);
+
+    // Start a new word
+    dispatchGameState({
+      action: "startWord",
+      letter: letter,
+      letterIndex: index,
+    });
+  }
+
+  function handlePointerEnter(e, letter, index, letterAvailability) {
+    e.preventDefault();
+    if (!letterAvailability) {
+      return;
+    }
+
+    // Add the letter to the list of letters
+    dispatchGameState({
+      action: "addLetter",
+      letter: letter,
+      letterIndex: index,
+    });
+  }
+
+  function handlePointerUp(e) {
+    e.preventDefault();
+
+    // Reset the letter styling
+    // Array.from(e.target.parentElement.children).forEach(
+    //   (child) => (child.className = "letter")
+    // );
+
+    dispatchGameState({
+      action: "endWord",
+    });
+  }
+
   return (
     <div
-      className="letter"
+      ref={myRef}
+      // className="letter"
       key={index.toString() + letter}
       onPointerDown={(e) => handlePointerDown(e, letter, index)}
       onPointerEnter={(e) =>
         handlePointerEnter(e, letter, index, letterAvailability)
       }
-      // onPointerUp={(e) => handlePointerUp(e)}
       onTouchEnd={(e) => handlePointerUp(e)}
-      // onPointerOut={()=>console.log("pointer out")}
-      // onPointerLeave={()=>console.log("pointer leave")}
-      // onPointerCancel={()=>console.log("pointer cancel")}
-      // onGotPointerCapture={()=>console.log("got pointer capture")}
-      // onGotPointerCaptureCapture={()=>console.log("got pointer capture capture")}
-      // onLostPointerCapture={()=>console.log("lost pointer capture")}
-      // onLostPointerCaptureCapture={()=>console.log("lost pointer capture capture")}
-      // onTouchEnd={()=>console.log("touch end")}
       onMouseUp={(e) => handlePointerUp(e)}
       draggable={false}
     >
@@ -38,19 +71,15 @@ function Letter({
 export default function Board({
   letters,
   letterAvailabilities,
-  handlePointerEnter,
-  handlePointerDown,
-  handlePointerUp,
+  dispatchGameState,
 }) {
   const board = letters.map((letter, index) => (
     <Letter
       letter={letter}
       letterAvailability={letterAvailabilities[index]}
       index={index}
-      handlePointerEnter={handlePointerEnter}
-      handlePointerDown={handlePointerDown}
-      handlePointerUp={handlePointerUp}
       draggable={false}
+      dispatchGameState={dispatchGameState}
     ></Letter>
   ));
   return <div id="board">{board} </div>;
