@@ -40,11 +40,6 @@ function Letter({ letter, letterAvailability, index, dispatchGameState }) {
   function handlePointerUp(e) {
     e.preventDefault();
 
-    // Reset the letter styling
-    // Array.from(e.target.parentElement.children).forEach(
-    //   (child) => (child.className = "letter")
-    // );
-
     dispatchGameState({
       action: "endWord",
     });
@@ -53,7 +48,6 @@ function Letter({ letter, letterAvailability, index, dispatchGameState }) {
   return (
     <div
       ref={myRef}
-      // className="letter"
       key={index.toString() + letter}
       onPointerDown={(e) => handlePointerDown(e, letter, index)}
       onPointerEnter={(e) =>
