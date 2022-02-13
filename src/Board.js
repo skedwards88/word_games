@@ -3,7 +3,7 @@ import React from "react";
 function Letter({ letter, letterAvailability, index, dispatchGameState }) {
   const myRef = React.useRef();
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const myDiv = myRef.current;
 
     const newClass = letterAvailability ? "letter" : "letter unavailable";
