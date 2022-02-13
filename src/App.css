@@ -25,10 +25,6 @@
   background-color: lightgray;
 }
 
-.yo {
-  color: red;
-}
-
 #board {
   display: grid;
   grid-template-columns: repeat(4, 60px);
