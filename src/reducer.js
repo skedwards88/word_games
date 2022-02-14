@@ -51,6 +51,7 @@ export function updateGameState(currentState, payload) {
       currentWord: newWord,
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: newPlayedIndexes,
+      result: "",
     };
   }
 
@@ -92,6 +93,7 @@ export function updateGameState(currentState, payload) {
         currentWord: "",
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
+        result: "Too short",
       };
     }
 
@@ -103,10 +105,11 @@ export function updateGameState(currentState, payload) {
         currentWord: "",
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
+        result: "Already found",
       };
     }
 
-    // todo check if word is a real word
+    // check if word is a real word
     if (!knownWords.has(currentState.currentWord.toLowerCase())) {
       console.log(`unknown word ${currentState.currentWord}`);
       return {
@@ -114,6 +117,7 @@ export function updateGameState(currentState, payload) {
         currentWord: "",
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
+        result: "Unknown word",
       };
     }
 

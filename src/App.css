@@ -2,19 +2,15 @@
   display: flex;
   flex-direction: column;
   background-color: lightblue;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS", sans-serif;
   font-weight: bold;
 }
 
 .letter {
   touch-action: none;
-  /*   pointer-events: all; */
-  /* border: 1px solid darkgray; */
-  /* padding:50px; */
   margin: 10px;
   border-radius: 5px;
   background-color: lightgray;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: bold;
   text-align: center;
   /* todo: make px values and font size more responsive, make color a gradient */
@@ -31,7 +27,7 @@
   background-color: lightgray;
   touch-action: none;
   justify-content: center;
-  /* width: 100px; */
+  grid-area: 1 / 1;
 }
 
 #foundWords {
@@ -45,4 +41,32 @@
 #currentWord {
   min-height: 5vh;
   text-align: center;
+}
+
+#game {
+  display: grid;
+}
+
+#result {
+  opacity: 0%;
+  background-color: lightgray;
+  padding: 60px;
+  grid-area: 1 / 1;
+  width: auto;
+  height: auto;
+  text-align: center;
+  touch-action: none;
+  pointer-events: none;
+  animation-duration: 2s;
+  animation-name: fadeout;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 90%;
+  }
+}
+
+#result:hover {
+  font-size: 36px;
 }
