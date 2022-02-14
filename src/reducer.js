@@ -1,4 +1,5 @@
 import { getScore } from "./getScore";
+import knownWords from "./knownWords";
 
 function getSurroundingIndexes({ index, gridSize }) {
   const column = index % gridSize;
@@ -106,6 +107,15 @@ export function updateGameState(currentState, payload) {
     }
 
     // todo check if word is a real word
+    if (!knownWords.has(currentState.currentWord.toLowerCase())) {
+      console.log(`unknown word ${currentState.currentWord}`);
+      return {
+        ...currentState,
+        currentWord: "",
+        letterAvailabilities: newLetterAvailabilities,
+        playedIndexes: [],
+      };
+    }
 
     const newFoundWords = [
       ...currentState.foundWords,
