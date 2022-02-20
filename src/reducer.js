@@ -38,6 +38,7 @@ function checkIfNeighbors({ prevPlayedIndex, playedIndex, flatList }) {
 }
 
 export function updateGameState(currentState, payload) {
+  console.log("in reducer");
   if (payload.action === "startWord") {
     const newWord = payload.letter;
     let newLetterAvailabilities = [...currentState.letterAvailabilities];
@@ -93,7 +94,7 @@ export function updateGameState(currentState, payload) {
         currentWord: "",
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
-        result: "Too short",
+        result: currentState.currentWord.length <= 1 ? "" : "Too short",
       };
     }
 

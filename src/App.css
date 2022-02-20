@@ -1,9 +1,9 @@
 .App {
-  display: flex;
-  flex-direction: column;
   background-color: lightblue;
-  font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS", sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS",
+    sans-serif;
   font-weight: bold;
+  display: grid;
 }
 
 .letter {
@@ -36,6 +36,9 @@
   border: 1px solid black;
   flex-direction: column;
   min-height: 30vh;
+  max-height: 50vh;
+  overflow: scroll;
+  flex-wrap: wrap;
 }
 
 #currentWord {
@@ -43,12 +46,11 @@
   text-align: center;
 }
 
-#game {
-  display: grid;
+.overlaid {
+  grid-area: 1 / 1;
 }
 
-#result {
-  opacity: 0%;
+.overlay {
   background-color: lightgray;
   padding: 60px;
   grid-area: 1 / 1;
@@ -56,6 +58,11 @@
   height: auto;
   text-align: center;
   touch-action: none;
+  z-index: 1;
+}
+
+.fadeOut {
+  opacity: 0%;
   pointer-events: none;
   animation-duration: 2s;
   animation-name: fadeout;
@@ -69,4 +76,8 @@
 
 #result:hover {
   font-size: 36px;
+}
+
+.overlayContainer {
+  display: grid;
 }

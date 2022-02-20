@@ -76,5 +76,9 @@ export default function Board({
       dispatchGameState={dispatchGameState}
     ></Letter>
   ));
-  return <div id="board">{board} </div>;
+  return (
+    <div id="board" className="overlaid">
+      {board}{" "}
+    </div>
+  );
 }
