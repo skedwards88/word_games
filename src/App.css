@@ -81,3 +81,35 @@
 .overlayContainer {
   display: grid;
 }
+
+#controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 50px;
+}
+
+#controls > button {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 0;
+
+  /* width: calc(var(--width) / 6); */
+  /* height: calc(var(--width) / 6); */
+}
+
+#newGameButton {
+  background-image: url("./images/new_game.svg");
+}
+
+#infoButton {
+  background-image: url("./images/info.svg");
+}
+
+#settingsButton {
+  background-image: url("./images/settings.svg");
+}
+
+#pauseButton {
+  background-image: url("./images/pause.svg");
+}

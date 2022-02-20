@@ -68,7 +68,7 @@ function Result({ result }) {
 }
 
 function Overlay({ timerState, timerDispatch }) {
-  if (timerState.remainingTime === 0) {
+  if (timerState.remainingTime <= 0) {
     return <div className="overlay fadeOut">{"GAME OVER!"}</div>;
   }
   if (timerState.state === "paused") {
@@ -99,7 +99,7 @@ function App() {
     { gameLength: gameLength },
     initTimer
   );
-
+  console.log(timerState.remainingTime)
   return (
     <div className="App overlayContainer">
       <Overlay timerState={timerState} timerDispatch={timerDispatch}></Overlay>
@@ -113,7 +113,7 @@ function App() {
           <Board
             letters={gameState.letters}
             letterAvailabilities={
-              timerState.remainingTime === 0
+              timerState.remainingTime <= 0
                 ? gameState.letters.map((_) => false)
                 : gameState.letterAvailabilities
             }
@@ -124,16 +124,12 @@ function App() {
               id="pauseButton"
               onClick={() => timerDispatch({ action: "pause" })}
               disabled={
-                timerState.state !== "playing" || timerState.remainingTime === 0
+                timerState.state !== "playing" || timerState.remainingTime <= 0
               }
-            >
-              Pause
-            </button>
-            <button id="newGameButton" onClick={() => handleNewGame()}>
-              N
-            </button>
-            <button id="settingsButton">S</button>
-            <button id="infoButton">I</button>
+            ></button>
+            <button id="newGameButton" onClick={() => handleNewGame()}></button>
+            <button id="settingsButton"></button>
+            <button id="infoButton"></button>
           </div>
         </div>
       </div>
@@ -143,7 +139,6 @@ function App() {
 
 export default App;
 
-// new game button
-// / Settings
+// Settings
 // tests
-// when game over, can't find more words
+// enums
