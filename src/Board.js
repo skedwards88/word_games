@@ -47,6 +47,7 @@ function Letter({ letter, letterAvailability, index, dispatchGameState }) {
 
   return (
     <div
+      className="letter"
       ref={myRef}
       key={index.toString() + letter}
       onPointerDown={(e) => handlePointerDown(e, letter, index)}

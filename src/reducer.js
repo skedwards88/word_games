@@ -1,5 +1,6 @@
 import { getScore } from "./getScore";
 import knownWords from "./knownWords";
+import { getInitialSetup } from "./getInitialSetup";
 
 function getSurroundingIndexes({ index, gridSize }) {
   const column = index % gridSize;
@@ -38,7 +39,10 @@ function checkIfNeighbors({ prevPlayedIndex, playedIndex, flatList }) {
 }
 
 export function updateGameState(currentState, payload) {
-  console.log("in reducer");
+  if (payload.action === "newGame") {
+    return getInitialSetup(4);
+  }
+
   if (payload.action === "startWord") {
     const newWord = payload.letter;
     let newLetterAvailabilities = [...currentState.letterAvailabilities];
