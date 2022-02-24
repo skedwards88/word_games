@@ -125,7 +125,10 @@ function App() {
 
   return (
     <div className="App">
-      <TimerBlocker timerState={timerState} timerDispatch={timerDispatch}></TimerBlocker>
+      <TimerBlocker
+        timerState={timerState}
+        timerDispatch={timerDispatch}
+      ></TimerBlocker>
       <div>
         <Timer timerState={timerState} timerDispatch={timerDispatch} />
         <div>Score: {gameState.score}</div>
