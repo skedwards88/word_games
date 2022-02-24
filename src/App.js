@@ -65,22 +65,24 @@ function FoundWords({ foundWords }) {
   );
 }
 
-function Result({ result }) {
+function WordResult({ result }) {
   return result == "" ? <></> : <div className="overlay fadeOut">{result}</div>;
 }
 
-function Overlay({ timerState, timerDispatch }) {
+function TimerBlocker({ timerState, timerDispatch }) {
   if (timerState.remainingTime <= 0) {
-    return <div className="overlay fadeOut">{"GAME OVER!"}</div>;
+    return <div className="modal fadeOut">{"GAME OVER!"}</div>;
   }
+
   if (timerState.state === "paused") {
     return (
       <div
-        className="overlay"
+        className="modal"
         onClick={() => timerDispatch({ action: "play" })}
       >{`Tap to play`}</div>
     );
   }
+
   return <></>;
 }
 
@@ -95,7 +97,7 @@ function NewGame({ dispatchGameState, timerDispatch }) {
   }
   // todo should pause timer ?
   return showNewGameConfirmation ? (
-    <div className="modal fadeOut">
+    <div className="modal">
       New Game?
       <button onClick={() => handleNewGame()}>Yes</button>
       <button onClick={() => setShowNewGameConfirmation(false)}>No</button>
@@ -122,15 +124,15 @@ function App() {
   );
 
   return (
-    <div className="App overlayContainer">
-      <Overlay timerState={timerState} timerDispatch={timerDispatch}></Overlay>
-      <div className="overlaid">
+    <div className="App">
+      <TimerBlocker timerState={timerState} timerDispatch={timerDispatch}></TimerBlocker>
+      <div>
         <Timer timerState={timerState} timerDispatch={timerDispatch} />
         <div>Score: {gameState.score}</div>
         <FoundWords foundWords={gameState.foundWords} />
         <div id="currentWord">{gameState.currentWord}</div>
         <div className="overlayContainer">
-          <Result result={gameState.result} />
+          <WordResult result={gameState.result} />
           <Board
             letters={gameState.letters}
             letterAvailabilities={
