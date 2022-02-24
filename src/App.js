@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { getInitialSetup } from "./getInitialSetup";
 import Settings from "./Settings";
+import Info from "./Info";
 import Board from "./Board";
 import { updateGameState } from "./reducer";
 
@@ -28,6 +29,7 @@ function timerStateReducer(currentState, payload) {
   if (payload.action === "pause") {
     return { ...currentState, state: "paused" };
   }
+  // todo error
   console.log(`unknown ${console.log(JSON.stringify(payload))}`);
 }
 
@@ -82,6 +84,30 @@ function Overlay({ timerState, timerDispatch }) {
   return <></>;
 }
 
+function NewGame({ dispatchGameState, timerDispatch }) {
+  const [showNewGameConfirmation, setShowNewGameConfirmation] =
+    React.useState(false);
+
+  function handleNewGame() {
+    dispatchGameState({ action: "newGame" });
+    timerDispatch({ action: "reset" });
+    setShowNewGameConfirmation(false);
+  }
+  // todo should pause timer ?
+  return showNewGameConfirmation ? (
+    <div className="modal fadeOut">
+      New Game?
+      <button onClick={() => handleNewGame()}>Yes</button>
+      <button onClick={() => setShowNewGameConfirmation(false)}>No</button>
+    </div>
+  ) : (
+    <button
+      id="newGameButton"
+      onClick={() => setShowNewGameConfirmation(true)}
+    ></button>
+  );
+}
+
 function App() {
   const [gameState, dispatchGameState] = React.useReducer(
     updateGameState,
@@ -89,17 +115,12 @@ function App() {
     getInitialSetup
   );
 
-  function handleNewGame() {
-    dispatchGameState({ action: "newGame" });
-    timerDispatch({ action: "reset" });
-  }
-
   const [timerState, timerDispatch] = React.useReducer(
     timerStateReducer,
     { gameLength: gameLength },
     initTimer
   );
-  console.log(timerState.remainingTime)
+
   return (
     <div className="App overlayContainer">
       <Overlay timerState={timerState} timerDispatch={timerDispatch}></Overlay>
@@ -127,9 +148,12 @@ function App() {
                 timerState.state !== "playing" || timerState.remainingTime <= 0
               }
             ></button>
-            <button id="newGameButton" onClick={() => handleNewGame()}></button>
-            <button id="settingsButton"></button>
-            <button id="infoButton"></button>
+            <NewGame
+              dispatchGameState={dispatchGameState}
+              timerDispatch={timerDispatch}
+            />
+            <Settings />
+            <Info />
           </div>
         </div>
       </div>
@@ -142,3 +166,6 @@ export default App;
 // Settings
 // tests
 // enums
+// new game confirmation
+// local storage
+// PWA
