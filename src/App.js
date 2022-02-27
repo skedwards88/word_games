@@ -18,8 +18,15 @@ function initTimer({ gameLength }) {
 
 function timerStateReducer(currentState, payload) {
   console.log("in timer reducer");
+  console.log(JSON.stringify(payload));
+  console.log(payload.action === "decrement");
   if (payload.action === "decrement") {
-    return { ...currentState, remainingTime: currentState.remainingTime - 1 };
+    const newRemainingTime = currentState.remainingTime - 1;
+    return {
+      ...currentState,
+      remainingTime: newRemainingTime,
+      isRunning: newRemainingTime > 0 ? currentState.isRunning : false,
+    };
   }
   if (payload.action === "reset") {
     return initTimer({ gameLength: gameLength });
