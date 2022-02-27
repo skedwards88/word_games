@@ -15,24 +15,23 @@ function useInterval(callback, delay) {
 
   React.useEffect(() => {
     function tick() {
-      savedCallback.current()
+      savedCallback.current();
     }
 
     if (delay !== null) {
-      let id = setInterval(tick, delay)
-      return () => clearInterval(id)
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
     }
-  }, [delay])
+  }, [delay]);
 }
 
 function TimerNew() {
   const [timeRemaining, setTimeRemaining] = React.useState(60);
-  const [isRunning, setIsRunning] = React.useState(true)
+  const [isRunning, setIsRunning] = React.useState(true);
 
   useInterval(() => {
     setTimeRemaining(timeRemaining - 1);
-  }, 1000)
-
+  }, 1000);
 
   let display;
   if (timeRemaining > 0) {

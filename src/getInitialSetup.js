@@ -90,7 +90,7 @@ function getLetters(gridSize) {
   return shuffleArray(letters);
 }
 
-export function getInitialSetup({gridSize, minWordLength}) {
+export function getInitialSetup({ gridSize, minWordLength }) {
   const letters = getLetters(gridSize);
   const letterAvailabilities = letters.map((_) => true);
   return {

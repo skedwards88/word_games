@@ -9,7 +9,7 @@ import { updateGameState } from "./reducer";
 const gameLength = 6;
 
 function initTimer({ gameLength }) {
-  console.log('timer init')
+  console.log("timer init");
   return {
     remainingTime: gameLength,
     isRunning: false,
@@ -17,7 +17,7 @@ function initTimer({ gameLength }) {
 }
 
 function timerStateReducer(currentState, payload) {
-  console.log('in timer reducer')
+  console.log("in timer reducer");
   if (payload.action === "decrement") {
     return { ...currentState, remainingTime: currentState.remainingTime - 1 };
   }
@@ -25,7 +25,7 @@ function timerStateReducer(currentState, payload) {
     return initTimer({ gameLength: gameLength });
   }
   if (payload.action === "play") {
-    return { ...currentState, isRunning: true};
+    return { ...currentState, isRunning: true };
   }
   if (payload.action === "pause") {
     return { ...currentState, isRunning: false };
@@ -35,16 +35,18 @@ function timerStateReducer(currentState, payload) {
 }
 
 function Timer({ timerState, timerDispatch }) {
-
   React.useEffect(() => {
-    console.log('timer effect')
-    let timerID
+    console.log("timer effect");
+    let timerID;
     if (timerState.isRunning) {
       if (timerState.remainingTime > 0) {
-        timerID = setInterval(() => timerDispatch({ action: "decrement" }), 1000);
+        timerID = setInterval(
+          () => timerDispatch({ action: "decrement" }),
+          1000
+        );
       }
     }
-    return () => clearInterval(timerID)
+    return () => clearInterval(timerID);
   }, [timerState.isRunning]);
 
   let display;
@@ -94,7 +96,7 @@ function TimerBlocker({ timerState, timerDispatch }) {
 function App() {
   const [gameState, dispatchGameState] = React.useReducer(
     updateGameState,
-    {gridSize: 4, minWordLength: 3}, // todo pull from local storage
+    { gridSize: 4, minWordLength: 3 }, // todo pull from local storage
     getInitialSetup
   );
 
@@ -130,11 +132,13 @@ function App() {
             <button
               id="pauseButton"
               onClick={() => timerDispatch({ action: "pause" })}
-              disabled={
-                !timerState.isRunning || timerState.remainingTime <= 0
-              }
+              disabled={!timerState.isRunning || timerState.remainingTime <= 0}
             ></button>
-            <Settings dispatchGameState={dispatchGameState} gameState={gameState} timerDispatch={timerDispatch}/>
+            <Settings
+              dispatchGameState={dispatchGameState}
+              gameState={gameState}
+              timerDispatch={timerDispatch}
+            />
             <Info />
           </div>
         </div>
