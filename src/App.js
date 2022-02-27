@@ -9,14 +9,15 @@ import { updateGameState } from "./reducer";
 const gameLength = 6;
 
 function initTimer({ gameLength }) {
+  console.log('timer init')
   return {
     remainingTime: gameLength,
-    endTime: gameLength,
-    state: "paused", // paused | playing | over
+    isRunning: false,
   };
 }
 
 function timerStateReducer(currentState, payload) {
+  console.log('in timer reducer')
   if (payload.action === "decrement") {
     return { ...currentState, remainingTime: currentState.remainingTime - 1 };
   }
@@ -24,23 +25,27 @@ function timerStateReducer(currentState, payload) {
     return initTimer({ gameLength: gameLength });
   }
   if (payload.action === "play") {
-    return { ...currentState, state: "playing" };
+    return { ...currentState, isRunning: true};
   }
   if (payload.action === "pause") {
-    return { ...currentState, state: "paused" };
+    return { ...currentState, isRunning: false };
   }
-  // todo error
+  // todo make error
   console.log(`unknown ${console.log(JSON.stringify(payload))}`);
 }
 
 function Timer({ timerState, timerDispatch }) {
+
   React.useEffect(() => {
-    if (timerState.state === "playing") {
+    console.log('timer effect')
+    let timerID
+    if (timerState.isRunning) {
       if (timerState.remainingTime > 0) {
-        setTimeout(() => timerDispatch({ action: "decrement" }), 1000);
+        timerID = setInterval(() => timerDispatch({ action: "decrement" }), 1000);
       }
     }
-  });
+    return () => clearInterval(timerID)
+  }, [timerState.isRunning]);
 
   let display;
   if (timerState.remainingTime > 0) {
@@ -74,7 +79,7 @@ function TimerBlocker({ timerState, timerDispatch }) {
     return <div className="modal fadeOut">{"GAME OVER!"}</div>;
   }
 
-  if (timerState.state === "paused") {
+  if (!timerState.isRunning) {
     return (
       <div
         className="modal"
@@ -86,34 +91,10 @@ function TimerBlocker({ timerState, timerDispatch }) {
   return <></>;
 }
 
-function NewGame({ dispatchGameState, timerDispatch }) {
-  const [showNewGameConfirmation, setShowNewGameConfirmation] =
-    React.useState(false);
-
-  function handleNewGame() {
-    dispatchGameState({ action: "newGame" });
-    timerDispatch({ action: "reset" });
-    setShowNewGameConfirmation(false);
-  }
-  // todo should pause timer ?
-  return showNewGameConfirmation ? (
-    <div className="modal">
-      New Game?
-      <button onClick={() => handleNewGame()}>Yes</button>
-      <button onClick={() => setShowNewGameConfirmation(false)}>No</button>
-    </div>
-  ) : (
-    <button
-      id="newGameButton"
-      onClick={() => setShowNewGameConfirmation(true)}
-    ></button>
-  );
-}
-
 function App() {
   const [gameState, dispatchGameState] = React.useReducer(
     updateGameState,
-    4,
+    {gridSize: 4, minWordLength: 3}, // todo pull from local storage
     getInitialSetup
   );
 
@@ -150,14 +131,10 @@ function App() {
               id="pauseButton"
               onClick={() => timerDispatch({ action: "pause" })}
               disabled={
-                timerState.state !== "playing" || timerState.remainingTime <= 0
+                !timerState.isRunning || timerState.remainingTime <= 0
               }
             ></button>
-            <NewGame
-              dispatchGameState={dispatchGameState}
-              timerDispatch={timerDispatch}
-            />
-            <Settings />
+            <Settings dispatchGameState={dispatchGameState} gameState={gameState} timerDispatch={timerDispatch}/>
             <Info />
           </div>
         </div>

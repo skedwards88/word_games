@@ -40,7 +40,7 @@ function checkIfNeighbors({ prevPlayedIndex, playedIndex, flatList }) {
 
 export function updateGameState(currentState, payload) {
   if (payload.action === "newGame") {
-    return getInitialSetup(4);
+    return getInitialSetup(payload);
   }
 
   if (payload.action === "startWord") {

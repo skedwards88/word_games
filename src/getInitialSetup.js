@@ -24,7 +24,7 @@ function shuffleArray(array) {
   return shuffledArray;
 }
 
-function getLetters(numLetters) {
+function getLetters(gridSize) {
   //todo could add distributions for other languages also
 
   const letterDistributions = {
@@ -75,7 +75,7 @@ function getLetters(numLetters) {
     ],
   };
 
-  const letterDistribution = letterDistributions[numLetters];
+  const letterDistribution = letterDistributions[gridSize];
 
   if (!letterDistribution) {
     // todo error
@@ -90,14 +90,14 @@ function getLetters(numLetters) {
   return shuffleArray(letters);
 }
 
-export function getInitialSetup(numLetters) {
-  const letters = getLetters(numLetters);
+export function getInitialSetup({gridSize, minWordLength}) {
+  const letters = getLetters(gridSize);
   const letterAvailabilities = letters.map((_) => true);
   return {
     foundWords: [],
     currentWord: "",
     score: 0,
-    minLength: 3,
+    minLength: minWordLength ? minWordLength : 3, //todo see operator notes
     letters: letters,
     letterAvailabilities: letterAvailabilities,
     playedIndexes: [],
