@@ -38,21 +38,21 @@ function checkIfNeighbors({ prevPlayedIndex, playedIndex, flatList }) {
   return surroundingIndexes.includes(prevPlayedIndex) ? true : false;
 }
 
-export function updateGameState(currentState, payload) {
+export function updateGameState(currentGameState, payload) {
   if (payload.action === "newGame") {
     return getInitialSetup(payload);
   }
 
   if (payload.action === "startWord") {
     const newWord = payload.letter;
-    let newLetterAvailabilities = [...currentState.letterAvailabilities];
-    newLetterAvailabilities[currentState.letterIndex] = false;
+    let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
+    newLetterAvailabilities[currentGameState.letterIndex] = false;
     const newPlayedIndexes = [
-      ...currentState.playedIndexes,
+      ...currentGameState.playedIndexes,
       payload.letterIndex,
     ];
     return {
-      ...currentState,
+      ...currentGameState,
       currentWord: newWord,
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: newPlayedIndexes,
@@ -63,25 +63,25 @@ export function updateGameState(currentState, payload) {
   if (payload.action === "addLetter") {
     const isNeighboring = checkIfNeighbors({
       prevPlayedIndex:
-        currentState.playedIndexes[currentState.playedIndexes.length - 1],
+        currentGameState.playedIndexes[currentGameState.playedIndexes.length - 1],
       playedIndex: payload.letterIndex,
-      flatList: currentState.letters,
+      flatList: currentGameState.letters,
     });
 
     if (!isNeighboring) {
-      return currentState;
+      return currentGameState;
     }
 
     const newPlayedIndexes = [
-      ...currentState.playedIndexes,
+      ...currentGameState.playedIndexes,
       payload.letterIndex,
     ];
 
-    const newWord = (currentState.currentWord += payload.letter);
-    let newLetterAvailabilities = [...currentState.letterAvailabilities];
+    const newWord = (currentGameState.currentWord += payload.letter);
+    let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
     newLetterAvailabilities[payload.letterIndex] = false;
     return {
-      ...currentState,
+      ...currentGameState,
       currentWord: newWord,
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: newPlayedIndexes,
@@ -89,24 +89,24 @@ export function updateGameState(currentState, payload) {
   }
 
   if (payload.action === "endWord") {
-    const newLetterAvailabilities = currentState.letters.map((i) => true);
+    const newLetterAvailabilities = currentGameState.letters.map((i) => true);
 
     // if the word is below the min length, don't add the word
-    if (currentState.currentWord.length < currentState.minLength) {
+    if (currentGameState.currentWord.length < currentGameState.minLength) {
       return {
-        ...currentState,
+        ...currentGameState,
         currentWord: "",
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
-        result: currentState.currentWord.length <= 1 ? "" : "Too short",
+        result: currentGameState.currentWord.length <= 1 ? "" : "Too short",
       };
     }
 
     // if we already have the word, don't add the word
-    if (currentState.foundWords.includes(currentState.currentWord)) {
+    if (currentGameState.foundWords.includes(currentGameState.currentWord)) {
       console.log("already found");
       return {
-        ...currentState,
+        ...currentGameState,
         currentWord: "",
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
@@ -115,10 +115,10 @@ export function updateGameState(currentState, payload) {
     }
 
     // check if word is a real word
-    if (!knownWords.has(currentState.currentWord.toLowerCase())) {
-      console.log(`unknown word ${currentState.currentWord}`);
+    if (!knownWords.has(currentGameState.currentWord.toLowerCase())) {
+      console.log(`unknown word ${currentGameState.currentWord}`);
       return {
-        ...currentState,
+        ...currentGameState,
         currentWord: "",
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
@@ -127,14 +127,14 @@ export function updateGameState(currentState, payload) {
     }
 
     const newFoundWords = [
-      ...currentState.foundWords,
-      currentState.currentWord,
+      ...currentGameState.foundWords,
+      currentGameState.currentWord,
     ];
-    const wordScore = getScore(currentState.currentWord);
+    const wordScore = getScore(currentGameState.currentWord);
     return {
-      ...currentState,
+      ...currentGameState,
       foundWords: newFoundWords,
-      score: currentState.score + wordScore,
+      score: currentGameState.score + wordScore,
       currentWord: "",
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: [],

@@ -22,8 +22,8 @@
 }
 
 #board {
-  display: grid;
-  grid-template-columns: repeat(4, 60px);
+  display: flex;
+  /* grid-template-columns: repeat(auto, 60px); */
   background-color: lightgray;
   touch-action: none;
   justify-content: center;

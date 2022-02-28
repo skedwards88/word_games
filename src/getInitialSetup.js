@@ -97,7 +97,7 @@ export function getInitialSetup({ gridSize, minWordLength }) {
     foundWords: [],
     currentWord: "",
     score: 0,
-    minLength: minWordLength ? minWordLength : 3, //todo see operator notes
+    minLength: minWordLength, //todo see operator notes
     letters: letters,
     letterAvailabilities: letterAvailabilities,
     playedIndexes: [],

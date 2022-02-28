@@ -6,36 +6,31 @@ import Info from "./Info";
 import Board from "./Board";
 import { updateGameState } from "./reducer";
 
-const gameLength = 6;
-
 function initTimer({ gameLength }) {
-  console.log("timer init");
   return {
     remainingTime: gameLength,
     isRunning: false,
+    gameLength: gameLength,
   };
 }
 
-function timerStateReducer(currentState, payload) {
-  console.log("in timer reducer");
-  console.log(JSON.stringify(payload));
-  console.log(payload.action === "decrement");
+function timerStateReducer(currentTimerState, payload) {
   if (payload.action === "decrement") {
-    const newRemainingTime = currentState.remainingTime - 1;
+    const newRemainingTime = currentTimerState.remainingTime - 1;
     return {
-      ...currentState,
+      ...currentTimerState,
       remainingTime: newRemainingTime,
-      isRunning: newRemainingTime > 0 ? currentState.isRunning : false,
+      isRunning: newRemainingTime > 0 ? currentTimerState.isRunning : false,
     };
   }
   if (payload.action === "reset") {
-    return initTimer({ gameLength: gameLength });
+    return initTimer({ gameLength: payload.gameLength });
   }
   if (payload.action === "play") {
-    return { ...currentState, isRunning: true };
+    return { ...currentTimerState, isRunning: true };
   }
   if (payload.action === "pause") {
-    return { ...currentState, isRunning: false };
+    return { ...currentTimerState, isRunning: false };
   }
   // todo make error
   console.log(`unknown ${console.log(JSON.stringify(payload))}`);
@@ -109,7 +104,7 @@ function App() {
 
   const [timerState, timerDispatch] = React.useReducer(
     timerStateReducer,
-    { gameLength: gameLength },
+    { gameLength: 3*60 },
     initTimer
   );
 
@@ -145,6 +140,7 @@ function App() {
               dispatchGameState={dispatchGameState}
               gameState={gameState}
               timerDispatch={timerDispatch}
+              timerState={timerState}
             />
             <Info />
           </div>
@@ -162,3 +158,4 @@ export default App;
 // new game confirmation
 // local storage
 // PWA
+// give word list credit
