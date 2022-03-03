@@ -63,7 +63,6 @@ function Letter({ letter, letterAvailability, index, dispatchGameState }) {
   );
 }
 
-
 export default function Board({
   letters,
   letterAvailabilities,
@@ -79,17 +78,11 @@ export default function Board({
     ></Letter>
   ));
 
-  const numColumns = Math.sqrt(letters.length)
-
-  const boardGrid = []
-  for (var i = 0; i < board.length; i += numColumns) {
-    boardGrid[boardGrid.length] = <div>{board.slice(i, i + numColumns)}</div>
-  }
-
+  const numColumns = Math.sqrt(letters.length);
 
   return (
-    <div id="board" className="overlaid">
-      {boardGrid}{" "}
+    <div id="board" className={`rows${numColumns}`}>
+      {board}{" "}
     </div>
   );
 }

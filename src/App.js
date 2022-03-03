@@ -75,7 +75,13 @@ function FoundWords({ foundWords }) {
 }
 
 function WordResult({ result }) {
-  return result == "" ? <></> : <div className="overlay fadeOut">{result}</div>;
+  return result == "" ? (
+    <></>
+  ) : (
+    <div id="wordResult" className="fadeOut">
+      {result}
+    </div>
+  );
 }
 
 function TimerBlocker({ timerState, timerDispatch }) {
@@ -104,7 +110,7 @@ function App() {
 
   const [timerState, timerDispatch] = React.useReducer(
     timerStateReducer,
-    { gameLength: 3*60 },
+    { gameLength: 3 * 60 },
     initTimer
   );
 
@@ -114,37 +120,37 @@ function App() {
         timerState={timerState}
         timerDispatch={timerDispatch}
       ></TimerBlocker>
-      <div>
+      <div id="stats">
         <Timer timerState={timerState} timerDispatch={timerDispatch} />
         <div>Score: {gameState.score}</div>
-        <FoundWords foundWords={gameState.foundWords} />
-        <div id="currentWord">{gameState.currentWord}</div>
-        <div className="overlayContainer">
-          <WordResult result={gameState.result} />
-          <Board
-            letters={gameState.letters}
-            letterAvailabilities={
-              timerState.remainingTime <= 0
-                ? gameState.letters.map((_) => false)
-                : gameState.letterAvailabilities
-            }
-            dispatchGameState={dispatchGameState}
-          ></Board>
-          <div id="controls">
-            <button
-              id="pauseButton"
-              onClick={() => timerDispatch({ action: "pause" })}
-              disabled={!timerState.isRunning || timerState.remainingTime <= 0}
-            ></button>
-            <Settings
-              dispatchGameState={dispatchGameState}
-              gameState={gameState}
-              timerDispatch={timerDispatch}
-              timerState={timerState}
-            />
-            <Info />
-          </div>
-        </div>
+      </div>
+      <FoundWords foundWords={gameState.foundWords} />
+      <div id="currentWord">
+        {gameState.currentWord ? gameState.currentWord : " "}
+      </div>
+      <WordResult result={gameState.result} />
+      <Board
+        letters={gameState.letters}
+        letterAvailabilities={
+          timerState.remainingTime <= 0
+            ? gameState.letters.map((_) => false)
+            : gameState.letterAvailabilities
+        }
+        dispatchGameState={dispatchGameState}
+      ></Board>
+      <div id="controls">
+        <button
+          id="pauseButton"
+          onClick={() => timerDispatch({ action: "pause" })}
+          disabled={!timerState.isRunning || timerState.remainingTime <= 0}
+        ></button>
+        <Settings
+          dispatchGameState={dispatchGameState}
+          gameState={gameState}
+          timerDispatch={timerDispatch}
+          timerState={timerState}
+        />
+        <Info />
       </div>
     </div>
   );

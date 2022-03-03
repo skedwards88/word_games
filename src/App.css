@@ -3,17 +3,87 @@
   font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS",
     sans-serif;
   font-weight: bold;
+  height: 99vh;
   display: grid;
+  grid-template-areas:
+    "stats"
+    "foundWords"
+    "currentWord"
+    "board"
+    "controls";
+  grid-template-rows: 
+  /* min(13vmin, 1.5cm)  */
+    auto
+    1fr
+    /* min(13vmin, 1.5cm)  */
+    auto
+    /* min(70vmin, 9.5cm)  */
+    auto
+    /* min(13vmin, 1.5cm); */
+    auto;
+}
+
+#stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  grid-area: stats;
+  padding: 5px;
+}
+
+#foundWords {
+  grid-area: foundWords;
+  display: flex;
+  background-color: white;
+  border: solid black;
+  border-width: 2px 0;
+  flex-direction: column;
+  min-height: 10vh;
+  overflow: scroll;
+  flex-wrap: wrap;
+}
+
+#currentWord {
+  grid-area: currentWord;
+  text-align: center;
+  white-space: pre;
+}
+
+#wordResult {
+  grid-area: board;
+  background-color: lightgray;
+  touch-action: none;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#board {
+  grid-area: board;
+  display: grid;
+  background-color: lightgray;
+  touch-action: none;
+  justify-content: center;
+}
+
+#board.rows5 {
+  /* grid-template-columns: repeat(5, min(14vmin, 1.9cm)); */
+  grid-template-columns: repeat(5, auto);
+}
+
+#board.rows4 {
+  /* grid-template-columns: repeat(4, min(18vmin, 2.3cm)); */
+  grid-template-columns: repeat(4, auto);
 }
 
 .letter {
   touch-action: none;
-  margin: 10px;
-  border-radius: 5px;
+  margin: min(4vmin, 0.4cm);
   background-color: lightgray;
   font-weight: bold;
   text-align: center;
-  /* todo: make px values and font size more responsive, make color a gradient */
+  font-size: min(7vmin, 0.8cm);
 }
 
 .letter.unavailable {
@@ -21,71 +91,10 @@
   background-color: lightgray;
 }
 
-#board {
-  display: flex;
-  /* grid-template-columns: repeat(auto, 60px); */
-  background-color: lightgray;
-  touch-action: none;
-  justify-content: center;
-  grid-area: 1 / 1;
-}
-
-#foundWords {
-  display: flex;
-  background-color: white;
-  border: 1px solid black;
-  flex-direction: column;
-  min-height: 30vh;
-  max-height: 50vh;
-  overflow: scroll;
-  flex-wrap: wrap;
-}
-
-#currentWord {
-  min-height: 5vh;
-  text-align: center;
-}
-
-.overlaid {
-  grid-area: 1 / 1;
-}
-
-.overlay {
-  background-color: lightgray;
-  padding: 60px;
-  grid-area: 1 / 1;
-  width: auto;
-  height: auto;
-  text-align: center;
-  touch-action: none;
-  z-index: 1;
-}
-
-.fadeOut {
-  opacity: 0%;
-  pointer-events: none;
-  animation-duration: 2s;
-  animation-name: fadeout;
-}
-
-@keyframes fadeout {
-  from {
-    opacity: 90%;
-  }
-}
-
-#result:hover {
-  font-size: 36px;
-}
-
-.overlayContainer {
-  display: grid;
-}
-
 #controls {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  height: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  grid-area: controls;
 }
 
 #controls > button {
@@ -93,9 +102,15 @@
   background-repeat: no-repeat;
   background-size: contain;
   border: 0;
+  width: min(10vmin, 1cm);
+  height: min(10vmin, 1cm);
+  margin: 5px;
+  background-color: transparent;
+}
 
-  /* width: calc(var(--width) / 6); */
-  /* height: calc(var(--width) / 6); */
+#controls > button:disabled {
+  /* opacity: .3; */
+  /* todo decide how to style */
 }
 
 #newGameButton {
@@ -112,6 +127,19 @@
 
 #pauseButton {
   background-image: url("./images/pause.svg");
+}
+
+.fadeOut {
+  opacity: 0%;
+  pointer-events: none;
+  animation-duration: 2s;
+  animation-name: fadeout;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 90%;
+  }
 }
 
 .modal {

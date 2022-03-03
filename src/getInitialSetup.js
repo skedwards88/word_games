@@ -27,6 +27,7 @@ function shuffleArray(array) {
 function getLetters(gridSize) {
   //todo could add distributions for other languages also
 
+  // todo build letter frequency from word list instead of dice
   const letterDistributions = {
     4: [
       ["A", "A", "E", "E", "G", "N"],
@@ -43,7 +44,7 @@ function getLetters(gridSize) {
       ["E", "H", "R", "T", "V", "W"],
       ["E", "I", "O", "S", "S", "T"],
       ["E", "L", "R", "T", "T", "Y"],
-      ["H", "I", "M", "N", "QU", "U"],
+      ["H", "I", "M", "N", "Qu", "U"],
       ["H", "L", "N", "N", "R", "Z"],
     ],
     5: [
@@ -55,7 +56,7 @@ function getLetters(gridSize) {
       ["A", "E", "E", "G", "M", "U"],
       ["A", "E", "G", "M", "N", "N"],
       ["A", "F", "I", "R", "S", "Y"],
-      ["B", "J", "K", "QU", "X", "Z"],
+      ["B", "J", "K", "Qu", "X", "Z"],
       ["C", "C", "E", "N", "S", "T"],
       ["C", "E", "I", "I", "L", "T"],
       ["C", "E", "I", "L", "P", "T"],
@@ -97,7 +98,7 @@ export function getInitialSetup({ gridSize, minWordLength }) {
     foundWords: [],
     currentWord: "",
     score: 0,
-    minLength: minWordLength, //todo see operator notes
+    minLength: minWordLength,
     letters: letters,
     letterAvailabilities: letterAvailabilities,
     playedIndexes: [],

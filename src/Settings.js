@@ -4,10 +4,8 @@ export default function Settings({
   dispatchGameState,
   gameState,
   timerDispatch,
-  timerState
+  timerState,
 }) {
-
-  
   // todo allow to set grid size (4/5), min word length (>=3), timer
 
   // when you select grid size, it should not store grid size but should call dispatch init method
@@ -70,7 +68,6 @@ export default function Settings({
             <option value="9">9</option>
           </select>
         </div>
-
       </div>
       <div id="setting-buttons">
         <button type="submit" aria-label="new game">
