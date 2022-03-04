@@ -25,7 +25,6 @@ function shuffleArray(array) {
 }
 
 function getLetters(gridSize) {
-  //todo could add distributions for other languages also
 
   // todo build letter frequency from word list instead of dice
   const letterDistributions = {

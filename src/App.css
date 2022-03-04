@@ -11,14 +11,10 @@
     "board"
     "controls";
   grid-template-rows: 
-  /* min(13vmin, 1.5cm)  */
     auto
     1fr
-    /* min(13vmin, 1.5cm)  */
     auto
-    /* min(70vmin, 9.5cm)  */
     auto
-    /* min(13vmin, 1.5cm); */
     auto;
 }
 
@@ -108,7 +104,6 @@
 }
 
 #controls > button:disabled {
-  /* opacity: .3; */
   /* todo decide how to style */
 }
 
@@ -192,5 +187,4 @@
 
 #setting-buttons > button {
   margin: 10px;
-  /* font-weight: bold; */
 }
