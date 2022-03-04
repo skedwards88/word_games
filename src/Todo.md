@@ -8,3 +8,5 @@ build letter frequency from word list instead of dice
 multiplayer play
 calculate all possible words for game
 errors/error boundaries
+horizontal layout
+works on desktop too
