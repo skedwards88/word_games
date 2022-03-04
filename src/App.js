@@ -32,7 +32,7 @@ function timerStateReducer(currentTimerState, payload) {
   if (payload.action === "pause") {
     return { ...currentTimerState, isRunning: false };
   }
-  // todo make error
+  // todo make this an error
   console.log(`unknown ${console.log(JSON.stringify(payload))}`);
 }
 
@@ -162,4 +162,4 @@ export default App;
 // enums
 // local storage
 // PWA
-// give word list credit
+// pause timer when settings or info opens, restart when closes

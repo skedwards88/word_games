@@ -2,7 +2,6 @@
   background-color: lightblue;
   font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS",
     sans-serif;
-  font-weight: bold;
   height: 99vh;
   display: grid;
   grid-template-areas:
@@ -70,7 +69,6 @@
 #board.rows5 {
   grid-template-columns: repeat(5, 18vmin);
   grid-template-rows: repeat(5, 18vmin);
-
 }
 
 #board.rows4 {
@@ -194,5 +192,5 @@
 
 #setting-buttons > button {
   margin: 10px;
-  font-weight: bold;
+  /* font-weight: bold; */
 }

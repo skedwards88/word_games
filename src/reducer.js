@@ -79,7 +79,8 @@ export function updateGameState(currentGameState, payload) {
       payload.letterIndex,
     ];
 
-    const newWord = (currentGameState.currentWord += payload.letter.toUpperCase());
+    const newWord = (currentGameState.currentWord +=
+      payload.letter.toUpperCase());
     let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
     newLetterAvailabilities[payload.letterIndex] = false;
     return {
