@@ -5,8 +5,13 @@ export default function Info() {
 
   return showInfo ? (
     <div className="modal">
-      <button onClick={() => setShowInfo(false)}>X</button>
-      Info
+      <div id="info">
+        {`Word Grid (beta 1.0)\n\nConnect adjacent letters to build words.\n\nDesigned by Colin\nBuilt by Sarah\n\nWant more games?\nVisit `}
+        <a href="https://skedwards88.github.io/portfolio/">CnS Games</a>
+      </div>
+      <button className="close" onClick={() => setShowInfo(false)}>
+        CLOSE
+      </button>
     </div>
   ) : (
     <button id="infoButton" onClick={() => setShowInfo(true)}></button>

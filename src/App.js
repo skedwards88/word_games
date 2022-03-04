@@ -158,10 +158,8 @@ function App() {
 
 export default App;
 
-// Settings
 // tests
 // enums
-// new game confirmation
 // local storage
 // PWA
 // give word list credit

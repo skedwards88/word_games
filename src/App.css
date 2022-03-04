@@ -122,6 +122,10 @@
   background-image: url("./images/info.svg");
 }
 
+#info {
+  white-space: pre-line;
+}
+
 #settingsButton {
   background-image: url("./images/settings.svg");
 }
