@@ -44,7 +44,7 @@ export function updateGameState(currentGameState, payload) {
   }
 
   if (payload.action === "startWord") {
-    const newWord = payload.letter;
+    const newWord = payload.letter.toUpperCase();
     let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
     newLetterAvailabilities[currentGameState.letterIndex] = false;
     const newPlayedIndexes = [
@@ -79,7 +79,7 @@ export function updateGameState(currentGameState, payload) {
       payload.letterIndex,
     ];
 
-    const newWord = (currentGameState.currentWord += payload.letter);
+    const newWord = (currentGameState.currentWord += payload.letter.toUpperCase());
     let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
     newLetterAvailabilities[payload.letterIndex] = false;
     return {
