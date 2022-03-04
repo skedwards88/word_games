@@ -68,13 +68,14 @@
 }
 
 #board.rows5 {
-  /* grid-template-columns: repeat(5, min(14vmin, 1.9cm)); */
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(5, 18vmin);
+  grid-template-rows: repeat(5, 18vmin);
+
 }
 
 #board.rows4 {
-  /* grid-template-columns: repeat(4, min(18vmin, 2.3cm)); */
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(4, 20vmin);
+  grid-template-rows: repeat(4, 20vmin);
 }
 
 .letter {
@@ -154,4 +155,40 @@
   overflow: scroll;
   justify-items: center;
   background-color: lightblue;
+  justify-content: center;
+  align-items: center;
+}
+
+#settings {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  background-color: white;
+  opacity: 80%;
+}
+
+.setting {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: left;
+  margin: 10px;
+}
+
+.setting-description {
+  padding: 0 5px 0 0;
+}
+
+.setting-info {
+  font-size: xx-small;
+}
+
+#setting-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+#setting-buttons > button {
+  margin: 10px;
+  font-weight: bold;
 }

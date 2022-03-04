@@ -44,7 +44,7 @@ export default function Settings({
 
         <div className="setting">
           <div className="setting-description">
-            <label htmlFor="minWordLength">Minimum word length</label>
+            <label htmlFor="minWordLength">Min word length</label>
           </div>
           <select id="minWordLength" defaultValue={gameState.minLength}>
             <option value="3">3</option>
