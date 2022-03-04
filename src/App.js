@@ -5,106 +5,14 @@ import Settings from "./Settings";
 import Info from "./Info";
 import Board from "./Board";
 import { updateGameState } from "./reducer";
-
-function initTimer({ gameLength }) {
-  return {
-    remainingTime: gameLength,
-    isRunning: false,
-    gameLength: gameLength,
-  };
-}
-
-function timerStateReducer(currentTimerState, payload) {
-  if (payload.action === "decrement") {
-    const newRemainingTime = currentTimerState.remainingTime - 1;
-    return {
-      ...currentTimerState,
-      remainingTime: newRemainingTime,
-      isRunning: newRemainingTime > 0 ? currentTimerState.isRunning : false,
-    };
-  }
-  if (payload.action === "reset") {
-    return initTimer({ gameLength: payload.gameLength });
-  }
-  if (payload.action === "play") {
-    return { ...currentTimerState, isRunning: true };
-  }
-  if (payload.action === "pause") {
-    return { ...currentTimerState, isRunning: false };
-  }
-  // todo make this an error
-  console.log(`unknown ${console.log(JSON.stringify(payload))}`);
-}
-
-function Timer({ timerState, timerDispatch }) {
-  React.useEffect(() => {
-    console.log("timer effect");
-    let timerID;
-    if (timerState.isRunning) {
-      if (timerState.remainingTime > 0) {
-        timerID = setInterval(
-          () => timerDispatch({ action: "decrement" }),
-          1000
-        );
-      }
-    }
-    return () => clearInterval(timerID);
-  }, [timerState.isRunning]);
-
-  let display;
-  if (timerState.remainingTime > 0) {
-    const minutes = Math.floor(timerState.remainingTime / 60);
-    const seconds = timerState.remainingTime % 60;
-    const displaySeconds = seconds < 10 ? `0${seconds}` : seconds;
-    display = `${minutes}:${displaySeconds}`;
-  } else {
-    display = "GAME OVER";
-  }
-
-  return <div>{display}</div>;
-}
-
-function FoundWords({ foundWords }) {
-  return (
-    <div id="foundWords">
-      {foundWords.map((word, index) => (
-        <div key={index}>{word}</div>
-      ))}
-    </div>
-  );
-}
-
-function WordResult({ result }) {
-  return result == "" ? (
-    <></>
-  ) : (
-    <div id="wordResult" className="fadeOut">
-      {result}
-    </div>
-  );
-}
-
-function TimerBlocker({ timerState, timerDispatch }) {
-  if (timerState.remainingTime <= 0) {
-    return <div className="modal fadeOut">{"GAME OVER!"}</div>;
-  }
-
-  if (!timerState.isRunning) {
-    return (
-      <div
-        className="modal"
-        onClick={() => timerDispatch({ action: "play" })}
-      >{`Tap to play`}</div>
-    );
-  }
-
-  return <></>;
-}
+import { initTimer, timerStateReducer, Timer, TimerBlocker } from "./Timer";
+import { FoundWords } from "./FoundWords";
+import { WordResult } from "./WordResult";
 
 function App() {
   const [gameState, dispatchGameState] = React.useReducer(
     updateGameState,
-    { gridSize: 4, minWordLength: 3 }, // todo pull from local storage
+    { gridSize: 4, minWordLength: 3 },
     getInitialSetup
   );
 
@@ -157,9 +65,3 @@ function App() {
 }
 
 export default App;
-
-// tests
-// enums
-// local storage
-// PWA
-// pause timer when settings or info opens, restart when closes
