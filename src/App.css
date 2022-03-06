@@ -67,8 +67,8 @@
 }
 
 #board.rows5 {
-  grid-template-columns: repeat(5, 18vmin);
-  grid-template-rows: repeat(5, 18vmin);
+  grid-template-columns: repeat(5, 16vmin);
+  grid-template-rows: repeat(5, 16vmin);
 }
 
 #board.rows4 {
@@ -193,4 +193,26 @@
 
 a {
   color: white;
+}
+
+@media (orientation: landscape) {
+  .App {
+    grid-template-areas:
+    "stats currentWord controls"
+    "foundWords board controls";
+    grid-template-columns: 1fr;
+    /* grid-template-rows: 1fr; */
+  }
+  #controls {
+    flex-direction: column;
+    border: solid white;
+    border-width: 0 0 0 2px;
+    align-items: center;
+  }
+  #currentWord {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: min(7vmin, 0.8cm);
+  }
 }
