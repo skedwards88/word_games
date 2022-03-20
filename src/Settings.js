@@ -8,6 +8,11 @@ export default function Settings({
 }) {
   const [showSettings, setShowSettings] = React.useState(false);
 
+  function handleShowSettings() {
+    timerDispatch({ action: showSettings ? "play" : "pause" });
+    setShowSettings(!showSettings);
+  }
+
   function handleNewGame(event) {
     event.preventDefault();
     const newGridSize = event.target.elements.gridSize.value;
@@ -72,13 +77,13 @@ export default function Settings({
         <button
           type="button"
           aria-label="cancel"
-          onClick={() => setShowSettings(false)}
+          onClick={() => handleShowSettings()}
         >
           Cancel
         </button>
       </div>
     </form>
   ) : (
-    <button id="settingsButton" onClick={() => setShowSettings(true)}></button>
+    <button id="settingsButton" onClick={() => handleShowSettings()}></button>
   );
 }

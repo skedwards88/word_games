@@ -58,7 +58,7 @@ function App() {
           timerDispatch={timerDispatch}
           timerState={timerState}
         />
-        <Info />
+        <Info timerDispatch={timerDispatch} />
       </div>
     </div>
   );

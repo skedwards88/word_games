@@ -1,7 +1,16 @@
 import React from "react";
 
-export default function Info() {
+export default function Info({ timerDispatch }) {
   const [showInfo, setShowInfo] = React.useState(false);
+
+  function handleShowInfo() {
+    console.log(
+      `showSettings is ${showInfo} so will  ${showInfo ? "play" : "pause"}`
+    );
+
+    timerDispatch({ action: showInfo ? "play" : "pause" });
+    setShowInfo(!showInfo);
+  }
 
   return showInfo ? (
     <div className="modal">
@@ -12,11 +21,11 @@ export default function Info() {
         <a href="https://github.com/wordnik/wordlist">Wordnik</a>
         {` for their open source word list.`}
       </div>
-      <button className="close" onClick={() => setShowInfo(false)}>
+      <button className="close" onClick={() => handleShowInfo()}>
         CLOSE
       </button>
     </div>
   ) : (
-    <button id="infoButton" onClick={() => setShowInfo(true)}></button>
+    <button id="infoButton" onClick={() => handleShowInfo()}></button>
   );
 }
