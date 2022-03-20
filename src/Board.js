@@ -75,6 +75,7 @@ export default function Board({
       index={index}
       draggable={false}
       dispatchGameState={dispatchGameState}
+      key={index + letter}
     ></Letter>
   ));
 

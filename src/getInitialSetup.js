@@ -1,3 +1,5 @@
+import { letterPool } from "./knownWords";
+
 function shuffleArray(array) {
   let shuffledArray = array.slice();
 
@@ -25,69 +27,13 @@ function shuffleArray(array) {
 }
 
 function getLetters(gridSize) {
+  // Given the distribution of letters in the word list
+  // Choose n letters without substitution
+  const shuffledLetters = shuffleArray(letterPool);
+  const chosenLetters = shuffledLetters.slice(0, gridSize * gridSize);
+  console.log(letterPool.length);
 
-  // todo build letter frequency from word list instead of dice
-  const letterDistributions = {
-    4: [
-      ["A", "A", "E", "E", "G", "N"],
-      ["A", "B", "B", "J", "O", "O"],
-      ["A", "C", "H", "O", "P", "S"],
-      ["A", "F", "F", "K", "P", "S"],
-      ["A", "O", "O", "T", "T", "W"],
-      ["C", "I", "M", "O", "T", "U"],
-      ["D", "E", "I", "L", "R", "X"],
-      ["D", "E", "L", "R", "V", "Y"],
-      ["D", "I", "S", "T", "T", "Y"],
-      ["E", "E", "G", "H", "N", "W"],
-      ["E", "E", "I", "N", "S", "U"],
-      ["E", "H", "R", "T", "V", "W"],
-      ["E", "I", "O", "S", "S", "T"],
-      ["E", "L", "R", "T", "T", "Y"],
-      ["H", "I", "M", "N", "Qu", "U"],
-      ["H", "L", "N", "N", "R", "Z"],
-    ],
-    5: [
-      ["A", "A", "A", "F", "R", "S"],
-      ["A", "A", "E", "E", "E", "E"],
-      ["A", "A", "F", "I", "R", "S"],
-      ["A", "D", "E", "N", "N", "N"],
-      ["A", "E", "E", "E", "E", "M"],
-      ["A", "E", "E", "G", "M", "U"],
-      ["A", "E", "G", "M", "N", "N"],
-      ["A", "F", "I", "R", "S", "Y"],
-      ["B", "J", "K", "Qu", "X", "Z"],
-      ["C", "C", "E", "N", "S", "T"],
-      ["C", "E", "I", "I", "L", "T"],
-      ["C", "E", "I", "L", "P", "T"],
-      ["C", "E", "I", "P", "S", "T"],
-      ["D", "D", "H", "N", "O", "T"],
-      ["D", "H", "H", "L", "O", "R"],
-      ["D", "H", "L", "N", "O", "R"],
-      ["D", "H", "L", "N", "O", "R"],
-      ["E", "I", "I", "I", "T", "T"],
-      ["E", "M", "O", "T", "T", "T"],
-      ["E", "N", "S", "S", "S", "U"],
-      ["F", "I", "P", "R", "S", "Y"],
-      ["G", "O", "R", "R", "V", "W"],
-      ["I", "P", "R", "R", "R", "Y"],
-      ["N", "O", "O", "T", "U", "W"],
-      ["O", "O", "O", "T", "T", "U"],
-    ],
-  };
-
-  const letterDistribution = letterDistributions[gridSize];
-
-  if (!letterDistribution) {
-    // todo error
-  }
-
-  // For each sublist of letters, choose a random letter
-  const letters = letterDistribution.map(
-    (letterList) => letterList[Math.floor(Math.random() * letterList.length)]
-  );
-
-  // Shuffle the chosen letters
-  return shuffleArray(letters);
+  return chosenLetters;
 }
 
 export function getInitialSetup({ gridSize, minWordLength }) {

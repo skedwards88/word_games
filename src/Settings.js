@@ -6,7 +6,6 @@ export default function Settings({
   timerDispatch,
   timerState,
 }) {
-
   const [showSettings, setShowSettings] = React.useState(false);
 
   function handleNewGame(event) {

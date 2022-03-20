@@ -1,5 +1,5 @@
 import { getScore } from "./getScore";
-import knownWords from "./knownWords";
+import { knownWords } from "./knownWords";
 import { getInitialSetup } from "./getInitialSetup";
 
 function getSurroundingIndexes({ index, gridSize }) {
@@ -118,7 +118,7 @@ export function updateGameState(currentGameState, payload) {
     }
 
     // check if word is a real word
-    if (!knownWords.has(currentGameState.currentWord.toLowerCase())) {
+    if (!knownWords.has(currentGameState.currentWord.toUpperCase())) {
       console.log(`unknown word ${currentGameState.currentWord}`);
       return {
         ...currentGameState,
