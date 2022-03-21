@@ -10,6 +10,7 @@ export function initTimer({ gameLength }) {
 
 export function timerStateReducer(currentTimerState, payload) {
   if (payload.action === "decrement") {
+    console.log("DECREMENT");
     const newRemainingTime = currentTimerState.remainingTime - 1;
     return {
       ...currentTimerState,

@@ -22,6 +22,21 @@ function App() {
     initTimer
   );
 
+  function handleVisibilityChange() {
+    if (
+      (document.hidden || document.msHidden || document.webkitHidden) &&
+      timerState.isRunning
+    ) {
+      timerDispatch({ action: "pause" });
+    }
+  }
+
+  React.useEffect(() => {
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () =>
+      removeEventListener("visibilitychange", handleVisibilityChange);
+  });
+
   return (
     <div className="App">
       <TimerBlocker
