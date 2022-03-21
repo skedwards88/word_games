@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
   entry: "./src/index.js",
@@ -37,5 +38,25 @@ module.exports = {
       // Need to use template because need 'root' div for react injection. templateContent doesn't play nice with title, so just use a template file instead.
       template: "./src/index.html",
     }),
+    new FaviconsWebpackPlugin({
+      logo: "./src/images/favicon.svg",
+      mode: "webapp", // optional can be 'webapp', 'light' or 'auto' - 'auto' by default
+      devMode: "webapp", // optional can be 'webapp' or 'light' - 'light' by default
+      favicons: {
+        appName: "Word games",
+        short_name: "Word games",
+        start_url: "../.",
+        appDescription: "A collection of word games",
+        display: "standalone",
+        developerName: "skedwards88",
+        developerURL: null, // prevent retrieving from the nearest package.json
+        background: "#F1F0F0",
+        theme_color: "#6e799e",
+        icons: {
+          coast: false,
+          yandex: false,
+        },
+      },
+    })
   ],
 };

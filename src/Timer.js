@@ -10,7 +10,6 @@ export function initTimer({ gameLength }) {
 
 export function timerStateReducer(currentTimerState, payload) {
   if (payload.action === "decrement") {
-    console.log("DECREMENT");
     const newRemainingTime = currentTimerState.remainingTime - 1;
     return {
       ...currentTimerState,
@@ -33,7 +32,6 @@ export function timerStateReducer(currentTimerState, payload) {
 
 export function Timer({ timerState, timerDispatch }) {
   React.useEffect(() => {
-    console.log("timer effect");
     let timerID;
     if (timerState.isRunning) {
       if (timerState.remainingTime > 0) {
