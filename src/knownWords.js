@@ -157538,6 +157538,7 @@ const knownWords = [
   "SHARPTAIL",
   "SHARPTAILS",
   "SHARPY",
+  "SHART",
   "SHASH",
   "SHASHLICK",
   "SHASHLICKS",
