@@ -9,3 +9,23 @@ export function FoundWords({ foundWords }) {
     </div>
   );
 }
+
+export function AllWords({ foundWords, allWords }) {
+  const foundWordDivs = foundWords.map((word, index) => (
+    <div key={index}>{word}</div>
+  ));
+
+  const unfoundWords = allWords.filter((word) => !foundWords.includes(word));
+
+  const unfoundWordDivs = unfoundWords.map((word, index) => (
+    <div className="computerWord" key={index}>
+      {word}
+    </div>
+  ));
+  return (
+    <div id="foundWords">
+      {foundWordDivs}
+      {unfoundWordDivs}
+    </div>
+  );
+}

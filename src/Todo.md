@@ -1,7 +1,13 @@
-tests
-enums
+set up auto deploy
+make settings buttons bigger/more spaced
 local storage
 PWA
+add a new game button as well as settings button
+
+make it have a min num vowels?
+
+tests
+enums
 
 multiplayer play
 calculate all possible words for game

@@ -1,4 +1,5 @@
-import { letterPool } from "./knownWords";
+import { letterPool, isKnown } from "./knownWords";
+import { getSurroundingIndexes } from "./reducer";
 
 function shuffleArray(array) {
   let shuffledArray = array.slice();
@@ -36,9 +37,57 @@ function getLetters(gridSize) {
   return chosenLetters;
 }
 
+function findAllWords({ grid, minWordLength }) {
+  let foundWords = [];
+  const neighborIndexes = grid.map((_, index) =>
+    getSurroundingIndexes({ index: index, gridSize: Math.sqrt(grid.length) })
+  );
+
+  function checkSurrounding(currentIndex, currentWord, visitedIndexes) {
+    // console.log(`in checkSurrounding for ${currentIndex}, ${currentWord}, ${visitedIndexes}`)
+    let surroundingIndexes = neighborIndexes[currentIndex];
+    for (let surroundingIndex of surroundingIndexes) {
+      // if the index has already been used, skip
+      if (visitedIndexes.includes(surroundingIndex)) {
+        // console.log(`Already used index ${surroundingIndex} in ${currentWord}, ${visitedIndexes}`)
+        continue;
+      }
+      // console.log(`index ${surroundingIndex} is new to ${visitedIndexes}`)
+      const newWord = currentWord + grid[surroundingIndex];
+      const [isPartialWord, isWord] = isKnown(newWord);
+      if (isWord && newWord.length >= minWordLength) {
+        // console.log(`found word ${newWord}`)
+        foundWords.push(newWord);
+      }
+      if (isPartialWord) {
+        // console.log(`found partial ${newWord}`)
+        checkSurrounding(
+          surroundingIndex,
+          newWord,
+          visitedIndexes.concat(surroundingIndex)
+        );
+      } else {
+        // console.log(`discontinuing for ${newWord}`)
+      }
+    }
+  }
+
+  for (let startingIndex = 0; startingIndex < grid.length; startingIndex++) {
+    checkSurrounding(startingIndex, grid[startingIndex], [startingIndex]);
+  }
+
+  const uniqueFoundWords = new Set(foundWords);
+
+  return Array.from(uniqueFoundWords).sort();
+}
+
 export function getInitialSetup({ gridSize, minWordLength }) {
   const letters = getLetters(gridSize);
   const letterAvailabilities = letters.map((_) => true);
+  const allWords = findAllWords({
+    grid: letters,
+    minWordLength: minWordLength,
+  });
   return {
     foundWords: [],
     currentWord: "",
@@ -48,5 +97,6 @@ export function getInitialSetup({ gridSize, minWordLength }) {
     letterAvailabilities: letterAvailabilities,
     playedIndexes: [],
     result: "",
+    allWords: allWords,
   };
 }

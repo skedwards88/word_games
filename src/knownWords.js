@@ -1,4 +1,4 @@
-export const knownWords = new Set([
+const knownWords = [
   "AA",
   "AAH",
   "AAHED",
@@ -198421,17 +198421,52 @@ export const knownWords = new Set([
   "ZYZZYVAS",
   "ZZZ",
   "ZZZS",
-]);
+];
+
+function getTrie() {
+  console.log("build trie start");
+  let trie = {};
+  for (let word of knownWords) {
+    let current = trie;
+    for (let letter of word) {
+      if (!current[letter]) {
+        current[letter] = {};
+      } else {
+      }
+      current = current[letter];
+    }
+    current["endOfWord"] = true;
+  }
+  console.log("build trie end");
+  return trie;
+}
+
+const trie = getTrie(knownWords);
+
+export function isKnown(word) {
+  // return [bool, bool] indicating [partial, full] match
+  let current = trie;
+  for (let letter of word) {
+    if (current[letter]) {
+      current = current[letter];
+    } else {
+      return [false, false];
+    }
+  }
+  if (current["endOfWord"]) {
+    return [true, true];
+  } else {
+    return [true, false];
+  }
+}
 
 function getLetterPool(knownWords) {
-  console.log("semi expensive calc");
-  let words = Array.from(knownWords);
+  console.log("get letter pool");
   let letterDistribution = {};
   let totalLetters = 0;
 
   // Get the letter counts
-  while (words.length > 0) {
-    const word = words.pop();
+  for (let word of knownWords) {
     const letters = word.split("");
     letters.forEach((letter) => {
       letterDistribution[letter] = letterDistribution[letter]

@@ -1,8 +1,8 @@
 import { getScore } from "./getScore";
-import { knownWords } from "./knownWords";
+import { isKnown } from "./knownWords";
 import { getInitialSetup } from "./getInitialSetup";
 
-function getSurroundingIndexes({ index, gridSize }) {
+export function getSurroundingIndexes({ index, gridSize }) {
   const column = index % gridSize;
   const row = Math.floor(index / gridSize);
   let surroundingIndexes = [];
@@ -118,7 +118,8 @@ export function updateGameState(currentGameState, payload) {
     }
 
     // check if word is a real word
-    if (!knownWords.has(currentGameState.currentWord.toUpperCase())) {
+    const [_, isWord] = isKnown(currentGameState.currentWord.toUpperCase());
+    if (!isWord) {
       console.log(`unknown word ${currentGameState.currentWord}`);
       return {
         ...currentGameState,

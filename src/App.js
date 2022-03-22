@@ -6,7 +6,7 @@ import Info from "./Info";
 import Board from "./Board";
 import { updateGameState } from "./reducer";
 import { initTimer, timerStateReducer, Timer, TimerBlocker } from "./Timer";
-import { FoundWords } from "./FoundWords";
+import { FoundWords, AllWords } from "./FoundWords";
 import { WordResult } from "./WordResult";
 
 function App() {
@@ -47,7 +47,14 @@ function App() {
         <Timer timerState={timerState} timerDispatch={timerDispatch} />
         <div>Score: {gameState.score}</div>
       </div>
-      <FoundWords foundWords={gameState.foundWords} />
+      {timerState.remainingTime > 0 ? (
+        <FoundWords foundWords={gameState.foundWords} />
+      ) : (
+        <AllWords
+          foundWords={gameState.foundWords}
+          allWords={gameState.allWords}
+        />
+      )}
       <div id="currentWord">
         {gameState.currentWord ? gameState.currentWord : " "}
       </div>

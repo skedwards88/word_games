@@ -43,6 +43,10 @@
   padding: 10px;
 }
 
+#foundWords > div {
+  margin: 3px;
+}
+
 #currentWord {
   grid-area: currentWord;
   text-align: center;
@@ -216,4 +220,8 @@ a {
     align-items: center;
     font-size: min(7vmin, 0.8cm);
   }
+}
+
+.computerWord {
+  color: gray;
 }
