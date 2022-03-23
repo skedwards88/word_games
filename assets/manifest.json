@@ -1,14 +1,14 @@
 {
-  "name": "Word games",
-  "short_name": "Word games",
+  "name": "Word Games",
+  "short_name": "Word Games",
   "description": "A collection of word games",
   "dir": "auto",
   "lang": "en-US",
   "display": "standalone",
   "orientation": "any",
   "start_url": "../.",
-  "background_color": "#F1F0F0",
-  "theme_color": "#6e799e",
+  "background_color": "#FFFFFF",
+  "theme_color": "#262481",
   "icons": [
     {
       "src": "android-chrome-36x36.png",
