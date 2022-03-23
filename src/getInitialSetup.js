@@ -38,6 +38,7 @@ function getLetters(gridSize) {
 }
 
 function findAllWords({ grid, minWordLength }) {
+  console.log(`finding words with min ${minWordLength}`)
   let foundWords = [];
   const neighborIndexes = grid.map((_, index) =>
     getSurroundingIndexes({ index: index, gridSize: Math.sqrt(grid.length) })

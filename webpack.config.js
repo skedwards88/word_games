@@ -43,15 +43,15 @@ module.exports = {
       mode: "webapp", // optional can be 'webapp', 'light' or 'auto' - 'auto' by default
       devMode: "webapp", // optional can be 'webapp' or 'light' - 'light' by default
       favicons: {
-        appName: "Word games",
-        short_name: "Word games",
+        appName: "Word Games",
+        short_name: "Word Games",
         start_url: "../.",
         appDescription: "A collection of word games",
         display: "standalone",
         developerName: "skedwards88",
         developerURL: null, // prevent retrieving from the nearest package.json
-        background: "#F1F0F0",
-        theme_color: "#6e799e",
+        background: "#FFFFFF",
+        theme_color: "#262481",
         icons: {
           coast: false,
           yandex: false,
