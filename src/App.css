@@ -20,6 +20,14 @@
     auto;
 }
 
+button {
+  font-size: min(5vmin, 0.5cm);
+}
+
+select {
+  font-size: min(7vmin, 0.8cm);
+}
+
 #stats {
   display: flex;
   flex-direction: row;

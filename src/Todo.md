@@ -2,7 +2,7 @@ set up auto deploy
 make settings buttons bigger/more spaced
 local storage
 PWA
-add a new game button as well as settings button
+
 add to cns games site
 
 make it have a min num vowels?
