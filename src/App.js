@@ -74,6 +74,20 @@ function App() {
           onClick={() => timerDispatch({ action: "pause" })}
           disabled={!timerState.isRunning || timerState.remainingTime <= 0}
         ></button>
+        <button
+          id="newGameButton"
+          onClick={() => {
+            dispatchGameState({
+              action: "newGame",
+              gridSize: Math.sqrt(gameState.letters.length),
+              minWordLength: gameState.minWordLength,
+            });
+            timerDispatch({
+              action: "reset",
+              gameLength: timerState.gameLength,
+            });
+          }}
+        ></button>
         <Settings
           dispatchGameState={dispatchGameState}
           gameState={gameState}

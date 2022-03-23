@@ -95,7 +95,7 @@ export function updateGameState(currentGameState, payload) {
     const newLetterAvailabilities = currentGameState.letters.map((i) => true);
 
     // if the word is below the min length, don't add the word
-    if (currentGameState.currentWord.length < currentGameState.minLength) {
+    if (currentGameState.currentWord.length < currentGameState.minWordLength) {
       return {
         ...currentGameState,
         currentWord: "",

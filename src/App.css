@@ -134,6 +134,10 @@
   background-image: url("./images/pause.svg");
 }
 
+#newGameButton {
+  background-image: url("./images/new_game.svg");
+}
+
 .fadeOut {
   opacity: 0%;
   pointer-events: none;

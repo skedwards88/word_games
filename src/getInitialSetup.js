@@ -32,13 +32,12 @@ function getLetters(gridSize) {
   // Choose n letters without substitution
   const shuffledLetters = shuffleArray(letterPool);
   const chosenLetters = shuffledLetters.slice(0, gridSize * gridSize);
-  console.log(letterPool.length);
 
   return chosenLetters;
 }
 
 function findAllWords({ grid, minWordLength }) {
-  console.log(`finding words with min ${minWordLength}`)
+  console.log(`finding words with min ${minWordLength}`);
   let foundWords = [];
   const neighborIndexes = grid.map((_, index) =>
     getSurroundingIndexes({ index: index, gridSize: Math.sqrt(grid.length) })
@@ -93,7 +92,7 @@ export function getInitialSetup({ gridSize, minWordLength }) {
     foundWords: [],
     currentWord: "",
     score: 0,
-    minLength: minWordLength,
+    minWordLength: minWordLength,
     letters: letters,
     letterAvailabilities: letterAvailabilities,
     playedIndexes: [],
