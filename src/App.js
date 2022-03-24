@@ -63,7 +63,7 @@ function App() {
         letters={gameState.letters}
         letterAvailabilities={
           timerState.remainingTime <= 0
-            ? gameState.letters.map((_) => false)
+            ? gameState.letters.map(() => false)
             : gameState.letterAvailabilities
         }
         dispatchGameState={dispatchGameState}

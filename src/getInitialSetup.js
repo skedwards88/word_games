@@ -83,7 +83,7 @@ function findAllWords({ grid, minWordLength }) {
 
 export function getInitialSetup({ gridSize, minWordLength }) {
   const letters = getLetters(gridSize);
-  const letterAvailabilities = letters.map((_) => true);
+  const letterAvailabilities = letters.map(() => true);
   const allWords = findAllWords({
     grid: letters,
     minWordLength: minWordLength,

@@ -198432,7 +198432,6 @@ function getTrie() {
     for (let letter of word) {
       if (!current[letter]) {
         current[letter] = {};
-      } else {
       }
       current = current[letter];
     }

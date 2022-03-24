@@ -92,7 +92,7 @@ export function updateGameState(currentGameState, payload) {
   }
 
   if (payload.action === "endWord") {
-    const newLetterAvailabilities = currentGameState.letters.map((i) => true);
+    const newLetterAvailabilities = currentGameState.letters.map(() => true);
 
     // if the word is below the min length, don't add the word
     if (currentGameState.currentWord.length < currentGameState.minWordLength) {
@@ -118,7 +118,7 @@ export function updateGameState(currentGameState, payload) {
     }
 
     // check if word is a real word
-    const [_, isWord] = isKnown(currentGameState.currentWord.toUpperCase());
+    const [, isWord] = isKnown(currentGameState.currentWord.toUpperCase());
     if (!isWord) {
       console.log(`unknown word ${currentGameState.currentWord}`);
       return {

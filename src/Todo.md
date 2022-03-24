@@ -1,9 +1,9 @@
 set up auto deploy
-make settings buttons bigger/more spaced
 local storage
 PWA
 
 add to cns games site
+add readme and update repo profile
 
 make it have a min num vowels?
 
@@ -11,7 +11,6 @@ tests
 enums
 
 multiplayer play
-calculate all possible words for game
 errors/error boundaries
 works on desktop too
 
