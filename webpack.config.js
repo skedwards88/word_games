@@ -1,8 +1,47 @@
 const path = require("path");
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const CopyPlugin = require("copy-webpack-plugin");
+const { javascript } = require("webpack");
 
-module.exports = {
+module.exports = (env, argv) => {
+
+  if (argv.mode === 'development') {
+    console.log('RUNNING IN DEV MODE. Service worker will not generate.')
+  } else {
+    console.log('RUNNING IN NON-DEV MODE. Service worker will generate.')
+  }
+
+  const htmlPlugin = new HtmlWebpackPlugin({
+    // Need to use template because need 'root' div for react injection. templateContent doesn't play nice with title, so just use a template file instead.
+    template: "./src/index.html"
+  })
+
+  const copyPlugin = new CopyPlugin({
+    patterns: [
+      { from: "./src/images/favicon.svg", to: "./assets/favicon.svg" },
+      { from: "./src/images/favicon.ico", to: "./assets/favicon.ico" },
+      { from: "./src/images/icon_192.png", to: "./assets/icon_192.png" },
+      { from: "./src/images/icon_512.png", to: "./assets/icon_512.png" },
+      { from: "./src/images/maskable_icon.png", to: "./assets/maskable_icon.png" },
+      { from: "./src/manifest.json", to: "./assets/manifest.json" },
+    ],
+    options: {
+      concurrency: 100,
+    },
+  })
+
+  const serviceWorkerPlugin = new WorkboxPlugin.GenerateSW({
+    // these options encourage the ServiceWorkers to get in there fast
+    // and not allow any straggling "old" SWs to hang around
+    clientsClaim: true,
+    skipWaiting: true,
+    maximumFileSizeToCacheInBytes: 4200000, // special case to cache word list for offline play
+  })
+
+  const plugins = argv.mode === 'development' ? [htmlPlugin, copyPlugin] : [htmlPlugin, copyPlugin, serviceWorkerPlugin]
+
+  return {
   entry: "./src/index.js",
   mode: "production",
   module: {
@@ -30,33 +69,13 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true, // removes unused files from output dir
   },
+  performance: {
+    maxEntrypointSize: 2700000, // special case to cache word list for offline play
+    maxAssetSize: 2700000 // special case to cache word list for offline play
+  },
   devServer: {
     static: "./dist",
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      // Need to use template because need 'root' div for react injection. templateContent doesn't play nice with title, so just use a template file instead.
-      template: "./src/index.html",
-    }),
-    new FaviconsWebpackPlugin({
-      logo: "./src/images/favicon.svg",
-      mode: "webapp", // optional can be 'webapp', 'light' or 'auto' - 'auto' by default
-      devMode: "webapp", // optional can be 'webapp' or 'light' - 'light' by default
-      favicons: {
-        appName: "Word Games",
-        short_name: "Word Games",
-        start_url: "../.",
-        appDescription: "A collection of word games",
-        display: "standalone",
-        developerName: "skedwards88",
-        developerURL: null, // prevent retrieving from the nearest package.json
-        background: "#FFFFFF",
-        theme_color: "#262481",
-        icons: {
-          coast: false,
-          yandex: false,
-        },
-      },
-    })
-  ],
+  plugins: plugins,
+}
 };

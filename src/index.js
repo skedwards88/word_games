@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App.js";
 
-if ("serviceWorker" in navigator) {
+if (process.env.NODE_ENV !== "development" && "serviceWorker" in navigator) {
   const path =
     location.hostname === "localhost"
       ? "/service-worker.js"
-      : "/react-base/service-worker.js";
-  const scope = location.hostname === "localhost" ? "" : "/react-base/";
+      : "/word_games/service-worker.js";
+  const scope = location.hostname === "localhost" ? "" : "/word_games/";
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register(path, { scope: scope })
