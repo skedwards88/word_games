@@ -1,5 +1,11 @@
+local storage:
+
+- settings
+- elapsed time
+- found words
+- letters
+
 set up auto deploy
-local storage
 PWA
 
 add to cns games site
