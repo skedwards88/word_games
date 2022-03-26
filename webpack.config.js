@@ -2,7 +2,6 @@ const path = require("path");
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const { javascript } = require("webpack");
 
 module.exports = (env, argv) => {
 
