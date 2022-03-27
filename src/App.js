@@ -12,15 +12,30 @@ import { WordResult } from "./WordResult";
 function App() {
   const [gameState, dispatchGameState] = React.useReducer(
     updateGameState,
-    { gridSize: 4, minWordLength: 3 },
+    {},
     getInitialGameState
   );
 
   const [timerState, timerDispatch] = React.useReducer(
     timerStateReducer,
-    { gameLength: 3 * 60 },
+    {},
     initTimer
   );
+
+  React.useEffect(() => {
+    window.localStorage.setItem('gridSize', JSON.stringify(Math.sqrt(gameState.letters.length)))
+  }, [gameState.letters]
+  )
+
+  React.useEffect(() => {
+    window.localStorage.setItem('minWordLength', JSON.stringify(gameState.minWordLength))
+  }, [gameState.minWordLength]
+  )
+
+  React.useEffect(() => {
+    window.localStorage.setItem('gameLength', JSON.stringify(timerState.gameLength))
+  }, [timerState.gameLength]
+  )
 
   function handleVisibilityChange() {
     // Pause the timer if the page is hidden

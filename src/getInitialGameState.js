@@ -50,6 +50,10 @@ function findAllWords({ grid, minWordLength }) {
 }
 
 export function getInitialGameState({ gridSize, minWordLength }) {
+  // use the specified settings, otherwise check local storage, otherwise use default
+  gridSize = gridSize || JSON.parse(localStorage.getItem("gridSize")) || 4
+  minWordLength = minWordLength || JSON.parse(localStorage.getItem("minWordLength")) || 3
+
   const letters = getLetters(gridSize);
   const letterAvailabilities = letters.map(() => true);
   const allWords = findAllWords({
