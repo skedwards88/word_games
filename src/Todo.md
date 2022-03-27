@@ -5,6 +5,10 @@ local storage:
 - found words
 - letters
 
+precommit hooks
+
+linters run
+
 set up auto deploy
 PWA
 

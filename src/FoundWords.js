@@ -11,17 +11,20 @@ export function FoundWords({ foundWords }) {
 }
 
 export function AllWords({ foundWords, allWords }) {
+  // The words that the user found
+  // And all of the words that the user didn't find
+  const unfoundWords = allWords.filter((word) => !foundWords.includes(word));
+
   const foundWordDivs = foundWords.map((word, index) => (
     <div key={index}>{word}</div>
   ));
-
-  const unfoundWords = allWords.filter((word) => !foundWords.includes(word));
 
   const unfoundWordDivs = unfoundWords.map((word, index) => (
     <div className="computerWord" key={index}>
       {word}
     </div>
   ));
+
   return (
     <div id="foundWords">
       {foundWordDivs}

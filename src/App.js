@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.css";
-import { getInitialSetup } from "./getInitialSetup";
+import { getInitialGameState } from "./getInitialGameState";
 import Settings from "./Settings";
 import Info from "./Info";
 import Board from "./Board";
-import { updateGameState } from "./reducer";
+import { updateGameState } from "./updateGameState";
 import { initTimer, timerStateReducer, Timer, TimerBlocker } from "./Timer";
 import { FoundWords, AllWords } from "./FoundWords";
 import { WordResult } from "./WordResult";
@@ -13,7 +13,7 @@ function App() {
   const [gameState, dispatchGameState] = React.useReducer(
     updateGameState,
     { gridSize: 4, minWordLength: 3 },
-    getInitialSetup
+    getInitialGameState
   );
 
   const [timerState, timerDispatch] = React.useReducer(
@@ -23,6 +23,7 @@ function App() {
   );
 
   function handleVisibilityChange() {
+    // Pause the timer if the page is hidden
     if (
       (document.hidden || document.msHidden || document.webkitHidden) &&
       timerState.isRunning

@@ -198425,7 +198425,6 @@ const knownWords = [
 ];
 
 function getTrie() {
-  console.log("build trie start");
   let trie = {};
   for (let word of knownWords) {
     let current = trie;
@@ -198437,7 +198436,6 @@ function getTrie() {
     }
     current["endOfWord"] = true;
   }
-  console.log("build trie end");
   return trie;
 }
 
@@ -198461,7 +198459,6 @@ export function isKnown(word) {
 }
 
 function getLetterPool(knownWords) {
-  console.log("get letter pool");
   let letterDistribution = {};
   let totalLetters = 0;
 

@@ -4,10 +4,6 @@ export default function Info({ timerDispatch }) {
   const [showInfo, setShowInfo] = React.useState(false);
 
   function handleShowInfo() {
-    console.log(
-      `showSettings is ${showInfo} so will  ${showInfo ? "play" : "pause"}`
-    );
-
     timerDispatch({ action: showInfo ? "play" : "pause" });
     setShowInfo(!showInfo);
   }

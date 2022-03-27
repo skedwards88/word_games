@@ -1,6 +1,6 @@
 import { getScore } from "./getScore";
 import { isKnown } from "./knownWords";
-import { getInitialSetup } from "./getInitialSetup";
+import { getInitialGameState } from "./getInitialGameState";
 
 export function getSurroundingIndexes({ index, gridSize }) {
   const column = index % gridSize;
@@ -40,7 +40,7 @@ function checkIfNeighbors({ prevPlayedIndex, playedIndex, flatList }) {
 
 export function updateGameState(currentGameState, payload) {
   if (payload.action === "newGame") {
-    return getInitialSetup(payload);
+    return getInitialGameState(payload);
   }
 
   if (payload.action === "startWord") {
