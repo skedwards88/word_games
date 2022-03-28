@@ -8,10 +8,6 @@ precommit hooks
 
 linters run
 
-add to cns games site
-
-make it have a min num vowels?
-
 tests
 enums
 

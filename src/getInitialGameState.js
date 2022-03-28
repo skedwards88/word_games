@@ -49,17 +49,39 @@ function findAllWords({ grid, minWordLength }) {
   return Array.from(uniqueFoundWords).sort();
 }
 
+function getPlayableLetters({ gridSize, minWordLength }) {
+  // Select letters and make sure that the computer can find at least 50 words
+  // otherwise the player will not be able to find many words
+  let foundPlayableLetters = false;
+  let letters;
+  let allWords;
+  while (!foundPlayableLetters) {
+    letters = getLetters(gridSize);
+    allWords = findAllWords({
+      grid: letters,
+      minWordLength: minWordLength,
+    });
+    console.log(`FOUND ${allWords.length}`);
+    if (allWords.length > 50) {
+      foundPlayableLetters = true;
+    }
+  }
+  return [letters, allWords];
+}
+
 export function getInitialGameState({ gridSize, minWordLength }) {
   // use the specified settings, otherwise check local storage, otherwise use default
-  gridSize = gridSize || JSON.parse(localStorage.getItem("gridSize")) || 4
-  minWordLength = minWordLength || JSON.parse(localStorage.getItem("minWordLength")) || 3
+  gridSize = gridSize || JSON.parse(localStorage.getItem("gridSize")) || 4;
+  minWordLength =
+    minWordLength || JSON.parse(localStorage.getItem("minWordLength")) || 3;
 
-  const letters = getLetters(gridSize);
-  const letterAvailabilities = letters.map(() => true);
-  const allWords = findAllWords({
-    grid: letters,
+  const [letters, allWords] = getPlayableLetters({
+    gridSize: gridSize,
     minWordLength: minWordLength,
   });
+
+  const letterAvailabilities = letters.map(() => true);
+
   return {
     foundWords: [],
     currentWord: "",

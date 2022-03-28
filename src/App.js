@@ -23,19 +23,25 @@ function App() {
   );
 
   React.useEffect(() => {
-    window.localStorage.setItem('gridSize', JSON.stringify(Math.sqrt(gameState.letters.length)))
-  }, [gameState.letters]
-  )
+    window.localStorage.setItem(
+      "gridSize",
+      JSON.stringify(Math.sqrt(gameState.letters.length))
+    );
+  }, [gameState.letters]);
 
   React.useEffect(() => {
-    window.localStorage.setItem('minWordLength', JSON.stringify(gameState.minWordLength))
-  }, [gameState.minWordLength]
-  )
+    window.localStorage.setItem(
+      "minWordLength",
+      JSON.stringify(gameState.minWordLength)
+    );
+  }, [gameState.minWordLength]);
 
   React.useEffect(() => {
-    window.localStorage.setItem('gameLength', JSON.stringify(timerState.gameLength))
-  }, [timerState.gameLength]
-  )
+    window.localStorage.setItem(
+      "gameLength",
+      JSON.stringify(timerState.gameLength)
+    );
+  }, [timerState.gameLength]);
 
   function handleVisibilityChange() {
     // Pause the timer if the page is hidden

@@ -1,8 +1,9 @@
 import React from "react";
 
 export function initTimer({ gameLength }) {
-    // use the specified settings, otherwise check local storage, otherwise use default
-    gameLength = gameLength || JSON.parse(localStorage.getItem("gameLength")) || 3 * 60
+  // use the specified settings, otherwise check local storage, otherwise use default
+  gameLength =
+    gameLength || JSON.parse(localStorage.getItem("gameLength")) || 3 * 60;
 
   return {
     remainingTime: gameLength,
