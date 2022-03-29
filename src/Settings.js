@@ -17,13 +17,15 @@ export default function Settings({
     event.preventDefault();
     const newGridSize = event.target.elements.gridSize.value;
     const newMinWordLength = event.target.elements.minWordLength.value;
-    const newGameLength = event.target.elements.gameLength.value * 60;
+    const newGameLength = parseInt(event.target.elements.gameLength.value);
+    const newBonusTime = parseInt(event.target.elements.bonusTime.value);
+
     dispatchGameState({
       action: "newGame",
       gridSize: newGridSize,
       minWordLength: newMinWordLength,
     });
-    timerDispatch({ action: "reset", gameLength: newGameLength });
+    timerDispatch({ action: "reset", gameLength: newGameLength, bonusTime: newBonusTime });
     setShowSettings(false);
   }
 
@@ -55,18 +57,30 @@ export default function Settings({
 
         <div className="setting">
           <div className="setting-description">
-            <label htmlFor="gameLength">Minutes</label>
+            <label htmlFor="gameLength">Base time</label>
           </div>
-          <select id="gameLength" defaultValue={timerState.gameLength / 60}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
+          <select id="gameLength" defaultValue={timerState.gameLength}>
+            <option value="15">15 sec</option>
+            <option value="30">30 sec</option>
+            <option value="60">1 min</option>
+            <option value="120">2 min</option>
+            <option value="180">3 min</option>
+            <option value="240">4 min</option>
+            <option value="300">5 min</option>
+            <option value="360">6 min</option>
+            <option value="420">7 min</option>
+            <option value="480">8 min</option>
+            <option value="540">9 min</option>
+          </select>
+        </div>
+        <div className="setting">
+          <div className="setting-description">
+            <label htmlFor="bonusTime">Bonus time</label>
+          </div>
+          <select id="bonusTime" defaultValue={timerState.bonusTime}>
+            <option value="0">0 sec</option>
+            <option value="5">5 sec</option>
+            <option value="10">10 sec</option>
           </select>
         </div>
       </div>

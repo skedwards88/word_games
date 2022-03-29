@@ -24,6 +24,13 @@ function App() {
   );
 
   React.useEffect(() => {
+    //todo is it ok for useEffect to call dispatch?
+    if (gameState.foundWords.length > 0){
+    timerDispatch({ action: "increment" })
+  }
+  }, [gameState.foundWords])
+
+  React.useEffect(() => {
     window.localStorage.setItem(
       "gridSize",
       JSON.stringify(Math.sqrt(gameState.letters.length))
@@ -43,6 +50,13 @@ function App() {
       JSON.stringify(timerState.gameLength)
     );
   }, [timerState.gameLength]);
+  
+  React.useEffect(() => {
+    window.localStorage.setItem(
+      "bonusTime",
+      JSON.stringify(timerState.bonusTime)
+    );
+  }, [timerState.bonusTime]);
 
   function handleVisibilityChange() {
     // Pause the timer if the page is hidden

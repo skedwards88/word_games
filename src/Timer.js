@@ -1,14 +1,17 @@
 import React from "react";
 
-export function initTimer({ gameLength }) {
+export function initTimer({ gameLength, bonusTime }) {
   // use the specified settings, otherwise check local storage, otherwise use default
   gameLength =
-    gameLength || JSON.parse(localStorage.getItem("gameLength")) || 3 * 60;
-
+    gameLength || JSON.parse(localStorage.getItem("gameLength")) || 30;
+    // bonusTime can be 0, so use the nullish operator
+  bonusTime =
+    bonusTime ?? JSON.parse(localStorage.getItem("bonusTime")) ?? 5;
   return {
     remainingTime: gameLength,
     isRunning: false,
     gameLength: gameLength,
+    bonusTime: bonusTime,
   };
 }
 
@@ -21,8 +24,16 @@ export function timerStateReducer(currentTimerState, payload) {
       isRunning: newRemainingTime > 0 ? currentTimerState.isRunning : false,
     };
   }
+  if (payload.action === "increment") {
+    const newRemainingTime = currentTimerState.remainingTime + currentTimerState.bonusTime;
+    return {
+      ...currentTimerState,
+      remainingTime: newRemainingTime,
+      isRunning: newRemainingTime > 0 ? currentTimerState.isRunning : false,
+    };
+  }
   if (payload.action === "reset") {
-    return initTimer({ gameLength: payload.gameLength });
+    return initTimer({ gameLength: payload.gameLength, bonusTime: payload.bonusTime });
   }
   if (payload.action === "play") {
     return { ...currentTimerState, isRunning: true };
