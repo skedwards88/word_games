@@ -85,7 +85,6 @@ export function getInitialGameState({ gridSize, minWordLength }) {
   return {
     foundWords: [],
     currentWord: "",
-    score: 0,
     minWordLength: minWordLength,
     letters: letters,
     letterAvailabilities: letterAvailabilities,

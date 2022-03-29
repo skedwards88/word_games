@@ -1,4 +1,3 @@
-import { getScore } from "./getScore";
 import { isKnown } from "./knownWords";
 import { getInitialGameState } from "./getInitialGameState";
 
@@ -134,11 +133,9 @@ export function updateGameState(currentGameState, payload) {
       ...currentGameState.foundWords,
       currentGameState.currentWord,
     ];
-    const wordScore = getScore(currentGameState.currentWord);
     return {
       ...currentGameState,
       foundWords: newFoundWords,
-      score: currentGameState.score + wordScore,
       currentWord: "",
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: [],

@@ -8,6 +8,7 @@ import { updateGameState } from "./updateGameState";
 import { initTimer, timerStateReducer, Timer, TimerBlocker } from "./Timer";
 import { FoundWords, AllWords } from "./FoundWords";
 import { WordResult } from "./WordResult";
+import Score from "./Score";
 
 function App() {
   const [gameState, dispatchGameState] = React.useReducer(
@@ -67,7 +68,7 @@ function App() {
       ></TimerBlocker>
       <div id="stats">
         <Timer timerState={timerState} timerDispatch={timerDispatch} />
-        <div>Score: {gameState.score}</div>
+        <Score foundWords={gameState.foundWords} allWords={gameState.allWords}></Score>
       </div>
       {timerState.remainingTime > 0 ? (
         <FoundWords foundWords={gameState.foundWords} />
