@@ -244392,23 +244392,22 @@ function getTrie() {
 const trie = getTrie(knownWords);
 
 export function isKnown(word) {
-  // return [bool, bool] indicating [partial, full, easy] match
   let current = trie;
   for (let letter of word) {
     if (current[letter]) {
       current = current[letter];
     } else {
-      return [false, false, false];
+      return { isPartial: false, isWord: false, isEasy: false };
     }
   }
   if (current["endOfWord"]) {
     if (current["easyWord"]) {
-      return [true, true, true];
+      return { isPartial: true, isWord: true, isEasy: true };
     } else {
-      return [true, true, false];
+      return { isPartial: true, isWord: true, isEasy: false };
     }
   } else {
-    return [true, false, false];
+    return { isPartial: true, isWord: false, isEasy: false };
   }
 }
 

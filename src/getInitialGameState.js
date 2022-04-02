@@ -12,7 +12,6 @@ function getLetters(gridSize) {
 }
 
 function findAllWords({ grid, minWordLength, easyMode }) {
-  console.log(`PLAYING IN ${easyMode}`);
   let foundWords = [];
 
   const neighborIndexes = grid.map((_, index) =>
@@ -27,11 +26,7 @@ function findAllWords({ grid, minWordLength, easyMode }) {
         continue;
       }
       const newWord = currentWord + grid[surroundingIndex];
-      const [isPartialWord, isWord, isEasy] = isKnown(newWord);
-
-      if (isWord && newWord.length >= minWordLength) {
-        console.log(`${newWord}, ${isEasy}`);
-      }
+      const { isPartial, isWord, isEasy } = isKnown(newWord);
 
       if (easyMode) {
         if (isEasy && newWord.length >= minWordLength) {
@@ -42,7 +37,7 @@ function findAllWords({ grid, minWordLength, easyMode }) {
           foundWords.push(newWord);
         }
       }
-      if (isPartialWord) {
+      if (isPartial) {
         checkSurrounding(
           surroundingIndex,
           newWord,

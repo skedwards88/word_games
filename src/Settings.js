@@ -15,13 +15,12 @@ export default function Settings({
 
   function handleNewGame(event) {
     event.preventDefault();
-    const newGridSize = event.target.elements.gridSize.value;
-    const newMinWordLength = event.target.elements.minWordLength.value;
+    const newGridSize = parseInt(event.target.elements.gridSize.value);
+    const newMinWordLength = parseInt(
+      event.target.elements.minWordLength.value
+    );
     const newGameLength = parseInt(event.target.elements.gameLength.value);
     const newBonusTime = parseInt(event.target.elements.bonusTime.value);
-    console.log(`Easy mode new: ${event.target.elements.easyMode.checked}`);
-    console.log(`Easy mode old: ${gameState.easyMode}`);
-
     const newEasyMode = event.target.elements.easyMode.checked;
 
     dispatchGameState({

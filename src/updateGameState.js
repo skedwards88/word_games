@@ -117,7 +117,9 @@ export function updateGameState(currentGameState, payload) {
     }
 
     // check if word is a real word
-    const [, isWord] = isKnown(currentGameState.currentWord.toUpperCase());
+    const { isPartialWord, isWord, isEasy } = isKnown(
+      currentGameState.currentWord.toUpperCase()
+    );
     if (!isWord) {
       console.log(`unknown word ${currentGameState.currentWord}`);
       return {
