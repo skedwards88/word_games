@@ -25,10 +25,10 @@ function App() {
 
   React.useEffect(() => {
     //todo is it ok for useEffect to call dispatch?
-    if (gameState.foundWords.length > 0){
-    timerDispatch({ action: "increment" })
-  }
-  }, [gameState.foundWords])
+    if (gameState.foundWords.length > 0) {
+      timerDispatch({ action: "increment" });
+    }
+  }, [gameState.foundWords]);
 
   React.useEffect(() => {
     window.localStorage.setItem(
@@ -36,6 +36,10 @@ function App() {
       JSON.stringify(Math.sqrt(gameState.letters.length))
     );
   }, [gameState.letters]);
+
+  React.useEffect(() => {
+    window.localStorage.setItem("easyMode", JSON.stringify(gameState.easyMode));
+  }, [gameState.easyMode]);
 
   React.useEffect(() => {
     window.localStorage.setItem(
@@ -50,7 +54,7 @@ function App() {
       JSON.stringify(timerState.gameLength)
     );
   }, [timerState.gameLength]);
-  
+
   React.useEffect(() => {
     window.localStorage.setItem(
       "bonusTime",
@@ -82,7 +86,10 @@ function App() {
       ></TimerBlocker>
       <div id="stats">
         <Timer timerState={timerState} timerDispatch={timerDispatch} />
-        <Score foundWords={gameState.foundWords} allWords={gameState.allWords}></Score>
+        <Score
+          foundWords={gameState.foundWords}
+          allWords={gameState.allWords}
+        ></Score>
       </div>
       {timerState.remainingTime > 0 ? (
         <FoundWords foundWords={gameState.foundWords} />
@@ -118,6 +125,7 @@ function App() {
               action: "newGame",
               gridSize: Math.sqrt(gameState.letters.length),
               minWordLength: gameState.minWordLength,
+              easyMode: gameState.easyMode,
             });
             timerDispatch({
               action: "reset",

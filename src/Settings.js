@@ -19,13 +19,22 @@ export default function Settings({
     const newMinWordLength = event.target.elements.minWordLength.value;
     const newGameLength = parseInt(event.target.elements.gameLength.value);
     const newBonusTime = parseInt(event.target.elements.bonusTime.value);
+    console.log(`Easy mode new: ${event.target.elements.easyMode.checked}`);
+    console.log(`Easy mode old: ${gameState.easyMode}`);
+
+    const newEasyMode = event.target.elements.easyMode.checked;
 
     dispatchGameState({
       action: "newGame",
       gridSize: newGridSize,
       minWordLength: newMinWordLength,
+      easyMode: newEasyMode,
     });
-    timerDispatch({ action: "reset", gameLength: newGameLength, bonusTime: newBonusTime });
+    timerDispatch({
+      action: "reset",
+      gameLength: newGameLength,
+      bonusTime: newBonusTime,
+    });
     setShowSettings(false);
   }
 
@@ -73,6 +82,7 @@ export default function Settings({
             <option value="540">9 min</option>
           </select>
         </div>
+
         <div className="setting">
           <div className="setting-description">
             <label htmlFor="bonusTime">Bonus time</label>
@@ -82,6 +92,17 @@ export default function Settings({
             <option value="5">5 sec</option>
             <option value="10">10 sec</option>
           </select>
+        </div>
+
+        <div className="setting">
+          <div className="setting-description">
+            <label htmlFor="easyMode">Easy mode</label>
+          </div>
+          <input
+            id="easyMode"
+            type="checkbox"
+            defaultChecked={gameState.easyMode}
+          />
         </div>
       </div>
       <div id="setting-buttons">

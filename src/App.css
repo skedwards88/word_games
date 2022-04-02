@@ -27,6 +27,11 @@ select {
   font-size: min(7vmin, 0.8cm);
 }
 
+input {
+  min-width: min(7vmin, 0.8cm);
+  min-height: min(7vmin, 0.8cm);
+}
+
 #stats {
   display: flex;
   flex-direction: row;

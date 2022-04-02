@@ -11,7 +11,8 @@ function getLetters(gridSize) {
   return chosenLetters;
 }
 
-function findAllWords({ grid, minWordLength }) {
+function findAllWords({ grid, minWordLength, easyMode }) {
+  console.log(`PLAYING IN ${easyMode}`);
   let foundWords = [];
 
   const neighborIndexes = grid.map((_, index) =>
@@ -26,9 +27,20 @@ function findAllWords({ grid, minWordLength }) {
         continue;
       }
       const newWord = currentWord + grid[surroundingIndex];
-      const [isPartialWord, isWord] = isKnown(newWord);
+      const [isPartialWord, isWord, isEasy] = isKnown(newWord);
+
       if (isWord && newWord.length >= minWordLength) {
-        foundWords.push(newWord);
+        console.log(`${newWord}, ${isEasy}`);
+      }
+
+      if (easyMode) {
+        if (isEasy && newWord.length >= minWordLength) {
+          foundWords.push(newWord);
+        }
+      } else {
+        if (isWord && newWord.length >= minWordLength) {
+          foundWords.push(newWord);
+        }
       }
       if (isPartialWord) {
         checkSurrounding(
@@ -49,7 +61,7 @@ function findAllWords({ grid, minWordLength }) {
   return Array.from(uniqueFoundWords).sort();
 }
 
-function getPlayableLetters({ gridSize, minWordLength }) {
+function getPlayableLetters({ gridSize, minWordLength, easyMode }) {
   // Select letters and make sure that the computer can find at least 50 words
   // otherwise the player will not be able to find many words
   let foundPlayableLetters = false;
@@ -60,6 +72,7 @@ function getPlayableLetters({ gridSize, minWordLength }) {
     allWords = findAllWords({
       grid: letters,
       minWordLength: minWordLength,
+      easyMode: easyMode,
     });
     console.log(`FOUND ${allWords.length}`);
     if (allWords.length > 50) {
@@ -69,15 +82,17 @@ function getPlayableLetters({ gridSize, minWordLength }) {
   return [letters, allWords];
 }
 
-export function getInitialGameState({ gridSize, minWordLength }) {
+export function getInitialGameState({ gridSize, minWordLength, easyMode }) {
   // use the specified settings, otherwise check local storage, otherwise use default
   gridSize = gridSize || JSON.parse(localStorage.getItem("gridSize")) || 4;
   minWordLength =
     minWordLength || JSON.parse(localStorage.getItem("minWordLength")) || 3;
+  easyMode = easyMode || JSON.parse(localStorage.getItem("easyMode")) || false;
 
   const [letters, allWords] = getPlayableLetters({
     gridSize: gridSize,
     minWordLength: minWordLength,
+    easyMode: easyMode,
   });
 
   const letterAvailabilities = letters.map(() => true);
@@ -91,5 +106,6 @@ export function getInitialGameState({ gridSize, minWordLength }) {
     playedIndexes: [],
     result: "",
     allWords: allWords,
+    easyMode: easyMode,
   };
 }

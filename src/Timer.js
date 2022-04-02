@@ -4,9 +4,8 @@ export function initTimer({ gameLength, bonusTime }) {
   // use the specified settings, otherwise check local storage, otherwise use default
   gameLength =
     gameLength || JSON.parse(localStorage.getItem("gameLength")) || 30;
-    // bonusTime can be 0, so use the nullish operator
-  bonusTime =
-    bonusTime ?? JSON.parse(localStorage.getItem("bonusTime")) ?? 5;
+  // bonusTime can be 0, so use the nullish operator
+  bonusTime = bonusTime ?? JSON.parse(localStorage.getItem("bonusTime")) ?? 5;
   return {
     remainingTime: gameLength,
     isRunning: false,
@@ -25,7 +24,8 @@ export function timerStateReducer(currentTimerState, payload) {
     };
   }
   if (payload.action === "increment") {
-    const newRemainingTime = currentTimerState.remainingTime + currentTimerState.bonusTime;
+    const newRemainingTime =
+      currentTimerState.remainingTime + currentTimerState.bonusTime;
     return {
       ...currentTimerState,
       remainingTime: newRemainingTime,
@@ -33,7 +33,10 @@ export function timerStateReducer(currentTimerState, payload) {
     };
   }
   if (payload.action === "reset") {
-    return initTimer({ gameLength: payload.gameLength, bonusTime: payload.bonusTime });
+    return initTimer({
+      gameLength: payload.gameLength,
+      bonusTime: payload.bonusTime,
+    });
   }
   if (payload.action === "play") {
     return { ...currentTimerState, isRunning: true };
