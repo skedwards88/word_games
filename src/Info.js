@@ -11,7 +11,7 @@ export default function Info({ timerDispatch }) {
   return showInfo ? (
     <div className="modal">
       <div id="info">
-        {`Word Grid (beta 2.6)\n\nMobile only. Install for offline play!\n\nConnect adjacent letters to build words.\n\nWant more games?\nVisit `}
+        {`Word Grid (beta 2.7)\n\nMobile only. Install for offline play!\n\nConnect adjacent letters to build words.\n\nWant more games?\nVisit `}
         <a href="https://skedwards88.github.io/portfolio/">CnS Games</a>
         {`\n\nThanks to `}
         <a href="https://github.com/wordnik/wordlist">Wordnik</a>
