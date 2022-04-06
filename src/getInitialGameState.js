@@ -84,7 +84,7 @@ export function getInitialGameState({ gridSize, minWordLength, easyMode }) {
   gridSize = gridSize || JSON.parse(localStorage.getItem("gridSize")) || 4;
   minWordLength =
     minWordLength || JSON.parse(localStorage.getItem("minWordLength")) || 3;
-  easyMode = easyMode || JSON.parse(localStorage.getItem("easyMode")) || false;
+  easyMode = easyMode ?? JSON.parse(localStorage.getItem("easyMode")) ?? false;
 
   const [letters, allWords] = getPlayableLetters({
     gridSize: gridSize,
