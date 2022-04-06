@@ -57,8 +57,10 @@ function findAllWords({ grid, minWordLength, easyMode }) {
 }
 
 function getPlayableLetters({ gridSize, minWordLength, easyMode }) {
-  // Select letters and make sure that the computer can find at least 50 words
+  // Select letters and make sure that the computer can find at least
+  // 50 words (standard mode) or 20 words (easy mode)
   // otherwise the player will not be able to find many words
+  const minWords = easyMode ? 20 : 50
   let foundPlayableLetters = false;
   let letters;
   let allWords;
@@ -70,7 +72,7 @@ function getPlayableLetters({ gridSize, minWordLength, easyMode }) {
       easyMode: easyMode,
     });
     console.log(`FOUND ${allWords.length}`);
-    if (allWords.length > 50) {
+    if (allWords.length > minWords) {
       foundPlayableLetters = true;
     }
   }
