@@ -43,6 +43,13 @@ module.exports = (env, argv) => {
   return {
   entry: "./src/index.js",
   mode: "production",
+  // resolve: {
+  //   fallback: {
+  //     fs: false, // do not include a polyfill for fs
+  //   }},
+  // node: {
+  //   fs: 'empty'
+  // },
   module: {
     rules: [
       {
