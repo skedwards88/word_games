@@ -131,6 +131,14 @@ export function updateGameState(currentGameState, payload) {
       };
     }
 
+    // If playing in easy mode
+    // and the word isn't in the easy word list,
+    // consider it a bonus
+    const newBonusWordCount =
+      !isEasy && currentGameState.easyMode
+        ? currentGameState.bonusWordCount + 1
+        : currentGameState.bonusWordCount;
+
     const newFoundWords = [
       ...currentGameState.foundWords,
       currentGameState.currentWord,
@@ -141,6 +149,7 @@ export function updateGameState(currentGameState, payload) {
       currentWord: "",
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: [],
+      bonusWordCount: newBonusWordCount,
     };
   }
 }

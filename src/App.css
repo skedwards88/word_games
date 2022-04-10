@@ -36,6 +36,7 @@ input {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   grid-area: stats;
   padding: 10px;
 }

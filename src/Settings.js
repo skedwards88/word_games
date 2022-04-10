@@ -84,7 +84,7 @@ export default function Settings({
 
         <div className="setting">
           <div className="setting-description">
-            <label htmlFor="bonusTime">Bonus time</label>
+            <label htmlFor="bonusTime">Added time/word</label>
           </div>
           <select id="bonusTime" defaultValue={timerState.bonusTime}>
             <option value="0">0 sec</option>
