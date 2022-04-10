@@ -87,8 +87,9 @@ function App() {
       <div id="stats">
         <Timer timerState={timerState} timerDispatch={timerDispatch} />
         <Score
-          foundWords={gameState.foundWords}
-          allWords={gameState.allWords}
+          foundWordCount={gameState.foundWords.length}
+          bonusWordCount={gameState.easyMode ? gameState.bonusWordCount : null}
+          maxWordCount={gameState.allWords.length}
         ></Score>
       </div>
       {timerState.remainingTime > 0 ? (

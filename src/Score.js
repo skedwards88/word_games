@@ -1,12 +1,11 @@
 import React from "react";
 
-export default function Score({ foundWords, allWords }) {
-  const playerScore = foundWords.join("").length;
-  const maxScore = allWords.join("").length;
+export default function Score({ foundWordCount, bonusWordCount, maxWordCount }) {
 
   return (
-    <div>
-      {playerScore}/{maxScore}
+    <div id="score">
+      <div>Left: {maxWordCount - foundWordCount + bonusWordCount}</div>
+      {bonusWordCount !== null ? <div>Bonus: {bonusWordCount}</div> : <></>}
     </div>
   );
 }
