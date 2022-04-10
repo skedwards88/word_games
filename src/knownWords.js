@@ -198510,6 +198510,14 @@ function getLetterPool() {
   letterDistribution["Qu"] = numQs;
   delete letterDistribution["Q"];
 
+  // Remove some "s"s for plural bias
+  // About 74442 words ends in "s"
+  // Remove ~25% of that (18610)
+  // There are ~168676 "s" total
+  const numSs = letterDistribution["S"];
+  console.log(numSs);
+  letterDistribution["S"] = numSs - 18610;
+
   // Convert the letter distribution to a rounded percentage, rounding up to 1
   const letterPercentages = {};
   for (let letter in letterDistribution) {
