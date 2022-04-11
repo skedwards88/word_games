@@ -1,7 +1,5 @@
 import { shuffleArray } from "../common/shuffleArray"
-
-//todo only choose words > 4?
-const wordList = "todo"
+import commonWords from "../common/commonWords"
 
 function buildRegex(indexes, word) {
   let regex = ""
@@ -53,7 +51,7 @@ function getWord() {
     count += 1
 
     // Choose random word
-    word = wordList[Math.floor(Math.random() * wordList.length)];
+    word = commonWords[Math.floor(Math.random() * commonWords.length)];
     if (word.length < 4) { continue }
 
     // Choose 3 indexes from word
@@ -65,7 +63,7 @@ function getWord() {
 
     regex = buildRegex(indexes, word)
 
-    matches = wordList.filter(word => word.match(regex))
+    matches = commonWords.filter(word => word.match(regex))
 
     if (matches.length > 10 && matches.length < 50) {
       foundPlayable = true
