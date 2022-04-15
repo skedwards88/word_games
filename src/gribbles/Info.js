@@ -11,11 +11,7 @@ export default function Info({ timerDispatch }) {
   return showInfo ? (
     <div className="modal">
       <div id="info">
-        {`Word Grid (beta 2.9.1)\n\nMobile only. Install for offline play!\n\nConnect adjacent letters to build words.\n\nWant more games?\nVisit `}
-        <a href="https://skedwards88.github.io/portfolio/">CnS Games</a>
-        {`\n\nThanks to `}
-        <a href="https://github.com/wordnik/wordlist">Wordnik</a>
-        {` for their open source word list.`}
+        {`Gribbles\n\nConnect adjacent letters to build words. Can you find all the words before time is up?`}
       </div>
       <button className="close" onClick={() => handleShowInfo()}>
         CLOSE

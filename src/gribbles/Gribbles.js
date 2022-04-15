@@ -9,7 +9,7 @@ import { FoundWords, AllWords } from "./FoundWords";
 import { WordResult } from "./WordResult";
 import Score from "./Score";
 
-function Gribbles() {
+function Gribbles({setCurrentDisplay}) {
   const [gameState, dispatchGameState] = React.useReducer(
     updateGameState,
     {},
@@ -140,6 +140,7 @@ function Gribbles() {
           timerState={timerState}
         />
         <Info timerDispatch={timerDispatch} />
+        <button id="homeButton" onClick={() => setCurrentDisplay("home")}></button>
       </div>
     </div>
   );
