@@ -78,7 +78,7 @@ function Gribbles({setCurrentDisplay}) {
   });
 
   return (
-    <div className="App">
+    <div className="App" id="gribbles">
       <TimerBlocker
         timerState={timerState}
         timerDispatch={timerDispatch}

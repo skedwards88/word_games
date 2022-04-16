@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Gribbles from "./gribbles/Gribbles";
 import Info from "./Info";
+import Thirdle from "./thirdle/thirdle";
 
 function App() {
 
@@ -9,7 +10,7 @@ function App() {
   // gribbles
   // thirdle
   // info
-  const [currentDisplay, setCurrentDisplay] = React.useState("home")
+  const [currentDisplay, setCurrentDisplay] = React.useState("thirdle")
 
   function Home() {
     return <div className="App">
@@ -48,11 +49,12 @@ function App() {
           setCurrentDisplay={setCurrentDisplay}
         />
       );
-    // case "thirdle":
-    //   return (
-    //     <Thirdle
-    //     />
-    //   );
+    case "thirdle":
+      return (
+        <Thirdle
+        setCurrentDisplay={setCurrentDisplay}
+        />
+      );
     default:
       return (
         <Home />
