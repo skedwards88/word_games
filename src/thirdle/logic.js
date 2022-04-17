@@ -1,5 +1,6 @@
 import { shuffleArray } from "../common/shuffleArray";
 import commonWords from "../common/commonWords";
+import uncommonWords from "../common/uncommonWords";
 
 function buildRegex(indexes, word) {
   let regex = "";
@@ -72,18 +73,17 @@ export function getWord() {
 }
 
 export function isValid({ word, regex }) {
-  console.log("in is valud");
 
   const matchesPattern = word.match(regex);
-  console.log(matchesPattern);
 
   if (!matchesPattern) {
     console.log("not match pattern");
     return false;
   }
 
-  const isWord = commonWords.includes(word);
-  console.log(isWord);
+  // The computer will build the pattern based on the common word list,
+  // but the player may find any word
+  const isWord = uncommonWords.includes(word);
 
   return matchesPattern && isWord;
 }

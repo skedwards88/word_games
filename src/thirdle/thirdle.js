@@ -8,6 +8,9 @@ import { getWord, isValid } from "./logic";
 // todo make max word length?
 // todo allow to control whether one or multi space?
 // todo allow to specify number of spaces?
+// todo save pattern
+// todo make pattern larger and further down
+// todo there is a bug where i...ot... matches bigotry, but it should be forced to start with i
 
 function Thirdle({ setCurrentDisplay }) {
   function thirdleInit() {
@@ -57,6 +60,7 @@ function Thirdle({ setCurrentDisplay }) {
         return {
           ...currentState,
           result: "giveUp",
+          guess: ""
         };
 
       case "newGame":
@@ -88,7 +92,7 @@ function Thirdle({ setCurrentDisplay }) {
 
   return (
     <div className="App" id="thirdle">
-      <div id="pattern">{thirdleState.pattern.replaceAll("[A-Z]+", "_")}</div>
+      <div id="pattern">{thirdleState.pattern.replaceAll("[A-Z]+", "...")}</div>
       <Result thirdleState={thirdleState} />
       <div id="guess">{thirdleState.currentGuess}</div>
       <Keyboard dispatchThirdleState={dispatchThirdleState} />

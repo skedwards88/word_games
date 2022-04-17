@@ -1,7 +1,9 @@
+/* General */
+
 .App {
   background-color: rgb(38 36 129);
   color: rgb(255 255 255);
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: sans-serif;
   font-size: min(7vmin, 0.8cm);
   height: 99vh;
   display: grid;
@@ -19,41 +21,6 @@
     auto;
 }
 
-#gribbles {
-  display: grid;
-  grid-template-areas:
-    "stats"
-    "foundWords"
-    "currentWord"
-    "board"
-    "controls";
-  grid-template-rows:
-    auto
-    1fr
-    auto
-    auto
-    auto;
-
-}
-
-#thirdle {
-  display: grid;
-  grid-template-areas:
-    "pattern"
-    "result"
-    "guess"
-    "keyboard"
-    "controls";
-  grid-template-rows:
-    auto
-    1fr
-    auto
-    auto
-    auto;
-align-items: center;
-
-}
-
 button {
   font-size: min(5vmin, 0.5cm);
 }
@@ -67,77 +34,6 @@ input {
   min-height: min(7vmin, 0.8cm);
 }
 
-#stats {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  grid-area: stats;
-  padding: 10px;
-}
-
-#foundWords {
-  grid-area: foundWords;
-  display: flex;
-  background-color: white;
-  color: black;
-  flex-direction: column;
-  min-height: 10vh;
-  overflow: scroll;
-  flex-wrap: wrap;
-  padding: 10px;
-  font-size: initial;
-}
-
-#foundWords > div {
-  margin: 3px;
-}
-
-#currentWord {
-  grid-area: currentWord;
-  text-align: center;
-  white-space: pre;
-}
-
-#wordResult {
-  grid-area: board;
-  background-color: rgb(38 36 129);
-  touch-action: none;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#board {
-  grid-area: board;
-  display: grid;
-  background-color: rgb(38 36 129);
-  touch-action: none;
-  justify-content: center;
-}
-
-#board.rows5 {
-  grid-template-columns: repeat(5, 16vmin);
-  grid-template-rows: repeat(5, 16vmin);
-}
-
-#board.rows4 {
-  grid-template-columns: repeat(4, 20vmin);
-  grid-template-rows: repeat(4, 20vmin);
-}
-
-.letter {
-  touch-action: none;
-  margin: min(4vmin, 0.4cm);
-  background-color: rgb(38 36 129);
-  font-weight: bold;
-  text-align: center;
-}
-
-.letter.unavailable {
-  color: darkgray;
-}
 
 #controls {
   display: flex;
@@ -210,7 +106,7 @@ input {
   justify-content: space-evenly;
   align-items: center;
   color: rgb(255 255 255);
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: sans-serif;
   font-size: min(7vmin, 0.8cm);
 }
 
@@ -249,33 +145,7 @@ a {
   color: white;
 }
 
-@media (orientation: landscape) {
-  .App {
-    grid-template-areas:
-      "stats currentWord controls"
-      "foundWords board controls";
-    grid-template-columns: 1fr;
-  }
-
-  #controls {
-    flex-direction: column;
-    border: solid white;
-    border-width: 0 0 0 2px;
-    align-items: center;
-  }
-
-  #currentWord {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-.computerWord {
-  color: gray;
-}
-
-/*  */
+/* Home */
 
 #homeButton {
   background-image: url("./images/home.svg");
@@ -297,7 +167,6 @@ a {
   color: white;
   font-size: min(7vmin, 0.8cm);
   justify-items: center;
-  font-family: "Lucida Console", Courier, monospace;
 }
 
 .gameIcon {
@@ -320,35 +189,221 @@ a {
   background-image: url("./images/thirdle.svg");
 }
 
-/*  */
+/* Gribbles-specific */
 
-#keyboard {
-  /* display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-template-columns: auto; */
+#gribbles {
+  display: grid;
+  grid-template-areas:
+    "stats"
+    "foundWords"
+    "currentWord"
+    "board"
+    "controls";
+  grid-template-rows:
+    auto
+    1fr
+    auto
+    auto
+    auto;
+}
+
+#gribbles #stats {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  grid-area: stats;
+  padding: 10px;
+}
+
+#gribbles #foundWords {
+  grid-area: foundWords;
+  display: flex;
+  background-color: white;
+  color: black;
   flex-direction: column;
+  min-height: 10vh;
+  overflow: scroll;
+  flex-wrap: wrap;
+  padding: 10px;
+  font-size: initial;
+}
+
+#gribbles #foundWords > div {
+  margin: 3px;
+}
+
+#gribbles #currentWord {
+  grid-area: currentWord;
+  text-align: center;
+  white-space: pre;
+}
+
+#gribbles #wordResult {
+  grid-area: board;
+  background-color: rgb(38 36 129);
+  touch-action: none;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-.keyboardLetter {
-  font-family: "Lucida Console", Courier, monospace;
-  font-size: 7vw;
-
+#gribbles #board {
+  grid-area: board;
+  display: grid;
+  background-color: rgb(38 36 129);
+  touch-action: none;
+  justify-content: center;
 }
 
-/* #keyboard > *, */
-.keyboardRow  {
+#gribbles #board.rows5 {
+  grid-template-columns: repeat(5, 16vmin);
+  grid-template-rows: repeat(5, 16vmin);
+}
+
+#gribbles #board.rows4 {
+  grid-template-columns: repeat(4, 20vmin);
+  grid-template-rows: repeat(4, 20vmin);
+}
+
+#gribbles .letter {
+  touch-action: none;
+  margin: min(4vmin, 0.4cm);
+  background-color: rgb(38 36 129);
+  font-weight: bold;
+  text-align: center;
+}
+
+#gribbles .letter.unavailable {
+  color: darkgray;
+}
+
+#gribbles .computerWord {
+  color: gray;
+}
+
+/* Thirdle-specific */
+
+#thirdle {
+  display: grid;
+  grid-template-areas:
+    "pattern"
+    "result"
+    "guess"
+    "keyboard"
+    "controls";
+  grid-template-rows:
+    auto
+    1fr
+    auto
+    auto
+    auto;
+align-items: center;
+}
+
+#keyboard {
   display: flex;
-    align-self: stretch;
-    justify-content: space-evenly;
-    margin: 5px 0;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
 }
 
-#pattern,
-#guess,
-#result,
-#answers {
+#keyboard .keyboardLetter {
+  font-size: 7vw;
+  width: 8vw;
+  text-align: center;
+  padding: 1px 1px;
+}
+
+#keyboard .keyboardRow  {
+  display: flex;
+  align-self: stretch;
+  justify-content: space-evenly;
+  margin: 5px 0;
+}
+
+#thirdle #pattern,
+#thirdle #guess,
+#thirdle #result,
+#thirdle #answers {
   text-align: center;
   margin: 5px;
+}
+
+#thirdle #pattern {
+  grid-area: pattern;
+  font-size: 11vw;
+  margin: 5vh 0 0;
+}
+
+#thirdle #result {
+  grid-area: result;
+}
+
+#thirdle #guess {
+  grid-area: guess;
+}
+
+#thirdle #keyboard {
+  grid-area: keyboard;
+}
+
+#thirdle #answers {
+  grid-area: result;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  padding: 10px;
+  font-size: 5vmin;
+  max-height: 30vh;
+}
+
+/* Landscape */
+
+@media (orientation: landscape) {
+  #home {
+    grid-template-areas: 
+      "home controls";
+  }
+  #gribbles {
+    grid-template-areas:
+      "stats currentWord controls"
+      "foundWords board controls";
+    grid-template-columns: 1fr;
+  }
+
+  #thirdle {
+    grid-template-areas: 
+    "pattern controls"
+    "result controls"
+    "guess controls"
+    "keyboard controls";
+  }
+
+  #thirdle #pattern {
+    font-size: 9vmin;
+  }
+
+  #thirdle #answers {
+    flex-wrap: wrap;
+  }
+
+  #keyboard .keyboardLetter {
+    font-size: 4vw;
+  }
+
+  #controls {
+    flex-direction: column;
+    border: solid white;
+    border-width: 0 0 0 2px;
+    align-items: center;
+    height: 100%;
+  }
+
+  #currentWord {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
