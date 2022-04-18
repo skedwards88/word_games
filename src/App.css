@@ -7,18 +7,6 @@
   font-size: min(7vmin, 0.8cm);
   height: 99vh;
   display: grid;
-  grid-template-areas:
-    "stats"
-    "foundWords"
-    "currentWord"
-    "board"
-    "controls";
-  grid-template-rows:
-    auto
-    1fr
-    auto
-    auto
-    auto;
 }
 
 button {
@@ -34,12 +22,12 @@ input {
   min-height: min(7vmin, 0.8cm);
 }
 
-
 #controls {
   display: flex;
   justify-content: space-evenly;
   grid-area: controls;
   border-top: 2px solid white;
+  width: 100%;
 }
 
 #controls > button {
@@ -141,35 +129,43 @@ input {
   margin: 10px;
 }
 
+#homeButton {
+  background-image: url("./images/home.svg");
+}
+
 a {
   color: white;
 }
 
 /* Home */
 
-#homeButton {
-  background-image: url("./images/home.svg");
-}
-
 #home {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   justify-items: center;
   margin: 10px;
+  grid-template-areas:
+  "games"
+  "controls";
+  grid-template-rows: 1fr auto;
 }
 
-.gameButton {
+#home #games {
+  grid-area: games;
+  display: flex;
+}
+
+#home .gameButton {
   border: 0;
   margin: 3px;
-  display: grid;
+  /* display: grid; */
   width: 95%;
   background-color: transparent;
   color: white;
   font-size: min(7vmin, 0.8cm);
-  justify-items: center;
+  /* justify-items: center; */
 }
 
-.gameIcon {
+#home .gameIcon {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -363,9 +359,10 @@ align-items: center;
 
 @media (orientation: landscape) {
   #home {
-    grid-template-areas: 
-      "home controls";
+    grid-template-areas: "games controls";
+    grid-template-columns: 1fr auto;
   }
+
   #gribbles {
     grid-template-areas:
       "stats currentWord controls"

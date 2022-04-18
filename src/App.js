@@ -10,11 +10,11 @@ function App() {
   // gribbles
   // thirdle
   // info
-  const [currentDisplay, setCurrentDisplay] = React.useState("thirdle")
+  const [currentDisplay, setCurrentDisplay] = React.useState("home")
 
   function Home() {
-    return <div className="App">
-      <div  id="home">
+    return <div className="App" id="home">
+      <div id="games">
       <button className="gameButton" onClick={() => setCurrentDisplay("gribbles")}>
         <div className="gameIcon" id="gribbles_icon"></div>
         <div>Gribbles</div>

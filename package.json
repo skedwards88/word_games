@@ -7,7 +7,7 @@
     "dev": "webpack-dev-server --mode development",
     "start": "webpack-dev-server",
     "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
@@ -40,5 +40,8 @@
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.4",
     "workbox-webpack-plugin": "^6.5.2"
+  },
+  "jest": {
+    "verbose": true
   }
 }

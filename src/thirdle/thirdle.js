@@ -1,6 +1,7 @@
 import React from "react";
+import { getClue } from "./getClue";
+import { isValidGuess } from "./isValidGuess";
 import { Keyboard } from "./Keyboard";
-import { getWord, isValid } from "./logic";
 
 // todo work in horizontal
 // todo make styling subclassed
@@ -14,7 +15,7 @@ import { getWord, isValid } from "./logic";
 
 function Thirdle({ setCurrentDisplay }) {
   function thirdleInit() {
-    const { pattern, answers } = getWord();
+    const { pattern, answers } = getClue();
     return {
       pattern: pattern,
       answers: answers,
@@ -47,9 +48,9 @@ function Thirdle({ setCurrentDisplay }) {
         };
 
       case "guess":
-        const result = isValid({
+        const result = isValidGuess({
           word: currentState.currentGuess,
-          regex: currentState.pattern,
+          pattern: currentState.pattern,
         });
         return {
           ...currentState,
@@ -92,7 +93,7 @@ function Thirdle({ setCurrentDisplay }) {
 
   return (
     <div className="App" id="thirdle">
-      <div id="pattern">{thirdleState.pattern.replaceAll("[A-Z]+", "...")}</div>
+      <div id="pattern">{thirdleState.pattern.replaceAll("[A-Z]+", "...").replaceAll("$","").replaceAll("^","")}</div>
       <Result thirdleState={thirdleState} />
       <div id="guess">{thirdleState.currentGuess}</div>
       <Keyboard dispatchThirdleState={dispatchThirdleState} />
