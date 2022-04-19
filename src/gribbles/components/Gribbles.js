@@ -1,9 +1,9 @@
 import React from "react";
-import { getInitialGameState } from "./getInitialGameState";
+import { getInitialGameState } from "../logic/getInitialGameState";
 import Settings from "./Settings";
 import Info from "./Info";
 import Board from "./Board";
-import { updateGameState } from "./updateGameState";
+import { updateGameState } from "../logic/updateGameState";
 import { initTimer, timerStateReducer, Timer, TimerBlocker } from "./Timer";
 import { FoundWords, AllWords } from "./FoundWords";
 import { WordResult } from "./WordResult";

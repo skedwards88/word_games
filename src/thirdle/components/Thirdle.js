@@ -1,6 +1,6 @@
 import React from "react";
-import { getClue } from "./getClue";
-import { isValidGuess } from "./isValidGuess";
+import { getClue } from "../logic/getClue";
+import { isValidGuess } from "../logic/isValidGuess";
 import { Keyboard } from "./Keyboard";
 
 // todo work in horizontal

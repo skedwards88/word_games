@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
-import Gribbles from "./gribbles/Gribbles";
+import Gribbles from "./gribbles/components/Gribbles";
 import Info from "./Info";
-import Thirdle from "./thirdle/thirdle";
+import Thirdle from "./thirdle/components/Thirdle";
 
 function App() {
 

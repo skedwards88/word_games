@@ -1,6 +1,6 @@
 import { letterPool, isKnown } from "./knownWords";
 import { getSurroundingIndexes } from "./updateGameState";
-import { shuffleArray } from "../common/shuffleArray";
+import { shuffleArray } from "../../common/shuffleArray";
 
 function getLetters(gridSize) {
   // Given the distribution of letters in the word list

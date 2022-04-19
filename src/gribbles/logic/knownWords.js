@@ -1,5 +1,5 @@
-import commonWords from "../common/commonWords";
-import uncommonWords from "../common/uncommonWords";
+import commonWords from "../../common/commonWords";
+import uncommonWords from "../../common/uncommonWords";
 
 function getTrie() {
   let trie = {};
