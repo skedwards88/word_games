@@ -1,6 +1,6 @@
 import { isValidGuess } from "./isValidGuess";
 
-jest.mock('../common/uncommonWords')
+jest.mock('../../common/uncommonWords')
 
 test("word matches pattern and is known word", () => {
 

@@ -1,7 +1,7 @@
 import commonWords from "../../common/commonWords";
 import uncommonWords from "../../common/uncommonWords";
 
-function getTrie() {
+export function getTrie() {
   let trie = {};
   for (let word of uncommonWords) {
     let current = trie;
@@ -51,7 +51,7 @@ export function isKnown(word) {
   }
 }
 
-function getLetterPool() {
+export function getLetterPool() {
   let letterDistribution = {};
   let totalLetters = 0;
 
@@ -84,12 +84,12 @@ function getLetterPool() {
   delete letterDistribution["Q"];
 
   // Remove some "s"s for plural bias
-  // About 74442 words ends in "s"
-  // Remove ~25% of that (18610)
-  // There are ~168676 "s" total
+  // The .11 comes from:
+  //   There are ~168676 "s" total
+  //   About 74442 words ends in "s"
+  //   Remove ~25% of that (18610)
   const numSs = letterDistribution["S"];
-  console.log(numSs);
-  letterDistribution["S"] = numSs - 18610;
+  letterDistribution["S"] = numSs - (numSs*.11);
 
   // Convert the letter distribution to a rounded percentage, rounding up to 1
   const letterPercentages = {};
