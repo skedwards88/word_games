@@ -142,7 +142,6 @@ a {
 #home {
   display: grid;
   justify-items: center;
-  margin: 10px;
   grid-template-areas:
     "games"
     "controls";
@@ -361,14 +360,16 @@ a {
   #home {
     grid-template-areas: "games controls";
     grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr;
   }
 
   #gribbles {
     grid-template-areas:
       "stats currentWord controls"
       "foundWords board controls";
-    grid-template-columns: 1fr;
-  }
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr;
+    }
 
   #thirdle {
     grid-template-areas:
@@ -376,6 +377,8 @@ a {
       "result controls"
       "guess controls"
       "keyboard controls";
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr auto auto;
   }
 
   #thirdle #pattern {
