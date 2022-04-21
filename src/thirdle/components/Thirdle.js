@@ -3,16 +3,6 @@ import { getClue } from "../logic/getClue";
 import { isValidGuess } from "../logic/isValidGuess";
 import { Keyboard } from "./Keyboard";
 
-// todo work in horizontal
-// todo make styling subclassed
-// todo info button
-// todo make max word length?
-// todo allow to control whether one or multi space?
-// todo allow to specify number of spaces?
-// todo save pattern
-// todo make pattern larger and further down
-// todo there is a bug where i...ot... matches bigotry, but it should be forced to start with i
-
 function Thirdle({ setCurrentDisplay }) {
   function thirdleInit() {
     const { pattern, answers } = getClue();
