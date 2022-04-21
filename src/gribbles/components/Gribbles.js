@@ -1,25 +1,27 @@
 import React from "react";
-import { getInitialGameState } from "../logic/getInitialGameState";
+import { gameInit } from "../logic/gameInit";
 import Settings from "./Settings";
 import Info from "./Info";
 import Board from "./Board";
-import { updateGameState } from "../logic/updateGameState";
-import { initTimer, timerStateReducer, Timer, TimerBlocker } from "./Timer";
+import { Timer, TimerBlocker } from "./Timer";
 import { FoundWords, AllWords } from "./FoundWords";
 import { WordResult } from "./WordResult";
 import Score from "./Score";
+import { timerInit } from "../logic/timerInit";
+import { timerReducer } from "../logic/timerReducer";
+import { gameReducer } from "../logic/gameReducer";
 
 function Gribbles({setCurrentDisplay}) {
   const [gameState, dispatchGameState] = React.useReducer(
-    updateGameState,
+    gameReducer,
     {},
-    getInitialGameState
+    gameInit
   );
 
   const [timerState, timerDispatch] = React.useReducer(
-    timerStateReducer,
+    timerReducer,
     {},
-    initTimer
+    timerInit
   );
 
   React.useEffect(() => {

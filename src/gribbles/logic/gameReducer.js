@@ -1,45 +1,10 @@
 import { isKnown } from "../../common/isKnown";
-import { getInitialGameState } from "./getInitialGameState";
+import { gameInit } from "./gameInit";
+import { checkIfNeighbors } from "../../common/checkIfNeighbors";
 
-export function getSurroundingIndexes({ index, gridSize }) {
-  const column = index % gridSize;
-  const row = Math.floor(index / gridSize);
-  let surroundingIndexes = [];
-  for (let currentRow = row - 1; currentRow <= row + 1; currentRow++) {
-    for (
-      let currentColumn = column - 1;
-      currentColumn <= column + 1;
-      currentColumn++
-    ) {
-      if (
-        currentRow >= 0 &&
-        currentColumn >= 0 &&
-        currentRow < gridSize &&
-        currentColumn < gridSize
-      ) {
-        const currentIndex = currentColumn + currentRow * gridSize;
-        surroundingIndexes.push(currentIndex);
-      }
-    }
-  }
-  return surroundingIndexes;
-}
-
-function checkIfNeighbors({ prevPlayedIndex, playedIndex, flatList }) {
-  if (!prevPlayedIndex) {
-    return true;
-  }
-  const surroundingIndexes = getSurroundingIndexes({
-    index: playedIndex,
-    gridSize: Math.sqrt(flatList.length),
-  });
-
-  return surroundingIndexes.includes(prevPlayedIndex) ? true : false;
-}
-
-export function updateGameState(currentGameState, payload) {
+export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
-    return getInitialGameState(payload);
+    return gameInit(payload);
   }
 
   if (payload.action === "startWord") {
