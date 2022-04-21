@@ -1,4 +1,4 @@
-import { isKnown } from "./knownWords";
+import { isKnown } from "../../common/isKnown";
 import { getInitialGameState } from "./getInitialGameState";
 
 export function getSurroundingIndexes({ index, gridSize }) {

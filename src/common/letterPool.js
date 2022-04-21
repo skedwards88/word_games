@@ -1,55 +1,6 @@
-import commonWords from "../../common/commonWords";
-import uncommonWords from "../../common/uncommonWords";
+import commonWords from "./commonWords";
+import uncommonWords from "./uncommonWords";
 
-export function getTrie() {
-  let trie = {};
-  for (let word of uncommonWords) {
-    let current = trie;
-    for (let letter of word) {
-      if (!current[letter]) {
-        current[letter] = {};
-      }
-      current = current[letter];
-    }
-    current["endOfWord"] = true;
-  }
-
-  for (let word of commonWords) {
-    let current = trie;
-    for (let letter of word) {
-      if (!current[letter]) {
-        current[letter] = {};
-      }
-      current = current[letter];
-    }
-    current["endOfWord"] = true;
-    current["easyWord"] = true;
-  }
-
-  return trie;
-}
-
-const trie = getTrie();
-
-export function isKnown(word) {
-  let current = trie;
-  for (let letter of word) {
-    if (current[letter]) {
-      current = current[letter];
-    } else {
-      return { isPartial: false, isWord: false, isEasy: false };
-    }
-  }
-  if (current["endOfWord"]) {
-    if (current["easyWord"]) {
-      return { isPartial: true, isWord: true, isEasy: true };
-    } else {
-      return { isPartial: true, isWord: true, isEasy: false };
-    }
-  } else {
-    return { isPartial: true, isWord: false, isEasy: false };
-  }
-}
 
 export function getLetterPool() {
   let letterDistribution = {};

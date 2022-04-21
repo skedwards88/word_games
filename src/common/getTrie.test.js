@@ -1,7 +1,7 @@
-import { getTrie } from "./knownWords";
+import { getTrie } from "./trie";
 
-jest.mock('../../common/uncommonWords')
-jest.mock('../../common/commonWords')
+jest.mock('./uncommonWords')
+jest.mock('./commonWords')
 
 test("Trie builds as expected", () => {
   const trie = getTrie()

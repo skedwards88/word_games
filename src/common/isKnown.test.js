@@ -1,7 +1,7 @@
-import { isKnown } from "./knownWords";
+import { isKnown } from "./isKnown";
 
-jest.mock('../../common/uncommonWords')
-jest.mock('../../common/commonWords')
+jest.mock('./uncommonWords')
+jest.mock('./commonWords')
 
 test("Unknown word", () => {
   const result = isKnown("CAT")

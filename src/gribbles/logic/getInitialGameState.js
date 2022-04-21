@@ -1,4 +1,5 @@
-import { letterPool, isKnown } from "./knownWords";
+import { isKnown } from "../../common/isKnown";
+import { letterPool } from "../../common/letterPool";
 import { getSurroundingIndexes } from "./updateGameState";
 import { shuffleArray } from "../../common/shuffleArray";
 
