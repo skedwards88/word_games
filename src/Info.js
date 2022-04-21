@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function Info({setCurrentDisplay}) {
-
-  return <div className="modal">
+export default function Info({ setCurrentDisplay }) {
+  return (
+    <div className="modal">
       <div id="info">
         {`Word Games (beta 0.0.1)\n\nMobile only. Install for offline play!\n\nWant more games?\nVisit `}
         <a href="https://skedwards88.github.io/portfolio/">CnS Games</a>
@@ -14,4 +14,5 @@ export default function Info({setCurrentDisplay}) {
         CLOSE
       </button>
     </div>
+  );
 }

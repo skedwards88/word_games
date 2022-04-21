@@ -21419,4 +21419,4 @@ const commonWords = [
   "PER",
 ];
 
-export default commonWords
+export default commonWords;

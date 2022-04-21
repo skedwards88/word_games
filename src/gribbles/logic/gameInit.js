@@ -15,11 +15,12 @@ function getPlayableLetters({ gridSize, minWordLength, easyMode }) {
   // Select letters and make sure that the computer can find at least
   // 50 words (standard mode) or 20 words (easy mode)
   // otherwise the player will not be able to find many words
-  const minWords = easyMode ? 20 : 50
+  const minWords = easyMode ? 20 : 50;
   let foundPlayableLetters = false;
   let letters;
   let allWords;
-  while (!foundPlayableLetters) {//todo how to prevent infinite loop?
+  while (!foundPlayableLetters) {
+    //todo how to prevent infinite loop?
     letters = getLetters(gridSize);
     allWords = findAllWords({
       grid: letters,

@@ -1,9 +1,7 @@
-
 import uncommonWords from "../../common/uncommonWords";
 import commonWords from "../../common/commonWords";
 
 export function isValidGuess({ word, pattern }) {
-  
   const matchesPattern = word.match(pattern);
 
   if (!matchesPattern) {

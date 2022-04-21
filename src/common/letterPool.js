@@ -1,7 +1,6 @@
 import commonWords from "./commonWords";
 import uncommonWords from "./uncommonWords";
 
-
 export function getLetterPool() {
   let letterDistribution = {};
   let totalLetters = 0;
@@ -40,7 +39,7 @@ export function getLetterPool() {
   //   About 74442 words ends in "s"
   //   Remove ~25% of that (18610)
   const numSs = letterDistribution["S"];
-  letterDistribution["S"] = numSs - (numSs*.11);
+  letterDistribution["S"] = numSs - numSs * 0.11;
 
   // Convert the letter distribution to a rounded percentage, rounding up to 1
   const letterPercentages = {};

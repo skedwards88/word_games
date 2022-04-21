@@ -61,7 +61,7 @@ function Thirdle({ setCurrentDisplay }) {
         return {
           ...currentState,
           result: "giveUp",
-          guess: ""
+          guess: "",
         };
 
       case "newGame":
@@ -93,7 +93,12 @@ function Thirdle({ setCurrentDisplay }) {
 
   return (
     <div className="App" id="thirdle">
-      <div id="pattern">{thirdleState.pattern.replaceAll("[A-Z]+", "...").replaceAll("$","").replaceAll("^","")}</div>
+      <div id="pattern">
+        {thirdleState.pattern
+          .replaceAll("[A-Z]+", "...")
+          .replaceAll("$", "")
+          .replaceAll("^", "")}
+      </div>
       <Result thirdleState={thirdleState} />
       <div id="guess">{thirdleState.currentGuess}</div>
       <Keyboard dispatchThirdleState={dispatchThirdleState} />
@@ -108,9 +113,7 @@ function Thirdle({ setCurrentDisplay }) {
           onClick={() => dispatchThirdleState({ action: "giveUp" })}
         ></button>
 
-        <button
-          id="infoButton"
-        ></button>
+        <button id="infoButton"></button>
 
         <button
           id="homeButton"

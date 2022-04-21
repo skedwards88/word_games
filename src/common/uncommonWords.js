@@ -177007,4 +177007,4 @@ const uncommonWords = [
   "CABEZONE",
 ];
 
-export default uncommonWords
+export default uncommonWords;

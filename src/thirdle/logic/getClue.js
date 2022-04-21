@@ -8,7 +8,8 @@ export function getClue() {
   let matches;
   let count = 0;
 
-  while (!foundPlayable && count < 500) { //todo decide how to handle infinite loop
+  while (!foundPlayable && count < 500) {
+    //todo decide how to handle infinite loop
     console.log(count);
     count += 1;
 
@@ -34,6 +35,6 @@ export function getClue() {
       foundPlayable = true;
     }
   }
-  
+
   return { pattern: pattern, answers: matches.slice(0, 10) };
 }

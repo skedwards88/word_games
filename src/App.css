@@ -144,8 +144,8 @@ a {
   justify-items: center;
   margin: 10px;
   grid-template-areas:
-  "games"
-  "controls";
+    "games"
+    "controls";
   grid-template-rows: 1fr auto;
 }
 
@@ -295,7 +295,7 @@ a {
     auto
     auto
     auto;
-align-items: center;
+  align-items: center;
 }
 
 #keyboard {
@@ -312,7 +312,7 @@ align-items: center;
   padding: 1px 1px;
 }
 
-#keyboard .keyboardRow  {
+#keyboard .keyboardRow {
   display: flex;
   align-self: stretch;
   justify-content: space-evenly;
@@ -371,11 +371,11 @@ align-items: center;
   }
 
   #thirdle {
-    grid-template-areas: 
-    "pattern controls"
-    "result controls"
-    "guess controls"
-    "keyboard controls";
+    grid-template-areas:
+      "pattern controls"
+      "result controls"
+      "guess controls"
+      "keyboard controls";
   }
 
   #thirdle #pattern {

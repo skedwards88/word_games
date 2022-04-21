@@ -1,8 +1,3 @@
-const commonWords = [
-"WALK",
-"CAMP",
-"QUIET"
-]
+const commonWords = ["WALK", "CAMP", "QUIET"];
 
-export default commonWords
-
+export default commonWords;

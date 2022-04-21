@@ -4,8 +4,9 @@ export function buildPattern(indexes, word) {
   // if first index is not first letter in word
   if (indexes[0] !== 0) {
     pattern += "[A-Z]+";
-  } else { // if index is first letter in word
-    pattern += "^"
+  } else {
+    // if index is first letter in word
+    pattern += "^";
   }
 
   // first index
@@ -30,8 +31,9 @@ export function buildPattern(indexes, word) {
   // if last index is not last letter in word
   if (indexes[2] !== word.length - 1) {
     pattern += "[A-Z]+";
-  } else { // if last index is last letter in word
-    pattern += "$"
+  } else {
+    // if last index is last letter in word
+    pattern += "$";
   }
   return pattern;
 }
