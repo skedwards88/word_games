@@ -121,6 +121,14 @@ test("Trie builds as expected", () => {
         },
       },
     },
+    L: {
+      E: {
+        T: {
+          endOfWord: true,
+          easyWord: true,
+        },
+      },
+    },
   };
 
   expect(trie).toEqual(expectedTrie);
