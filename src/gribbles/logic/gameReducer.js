@@ -26,12 +26,12 @@ export function gameReducer(currentGameState, payload) {
 
   if (payload.action === "addLetter") {
     const isNeighboring = checkIfNeighbors({
-      prevPlayedIndex:
+      indexA:
         currentGameState.playedIndexes[
           currentGameState.playedIndexes.length - 1
         ],
-      playedIndex: payload.letterIndex,
-      flatList: currentGameState.letters,
+      indexB: payload.letterIndex,
+      gridSize: Math.sqrt(currentGameState.letters.length),
     });
 
     if (!isNeighboring) {
