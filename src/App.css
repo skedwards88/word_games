@@ -156,12 +156,10 @@ a {
 #home .gameButton {
   border: 0;
   margin: 3px;
-  /* display: grid; */
   width: 95%;
   background-color: transparent;
   color: white;
   font-size: min(7vmin, 0.8cm);
-  /* justify-items: center; */
 }
 
 #home .gameIcon {
@@ -308,7 +306,7 @@ a {
   font-size: 7vw;
   width: 8vw;
   text-align: center;
-  padding: 1px 1px;
+  padding: 1px;
 }
 
 #keyboard .keyboardRow {
@@ -367,9 +365,9 @@ a {
     grid-template-areas:
       "stats currentWord controls"
       "foundWords board controls";
-      grid-template-columns: 1fr auto;
-      grid-template-rows: auto 1fr;
-    }
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr;
+  }
 
   #thirdle {
     grid-template-areas:
@@ -377,8 +375,8 @@ a {
       "result controls"
       "guess controls"
       "keyboard controls";
-      grid-template-columns: 1fr auto;
-      grid-template-rows: auto 1fr auto auto;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr auto auto;
   }
 
   #thirdle #pattern {
