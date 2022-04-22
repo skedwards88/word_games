@@ -154,7 +154,7 @@ function Gribbles({ setCurrentDisplay }) {
         </Info> */}
         <button
           id="homeButton"
-          onClick={() => setCurrentDisplay("home")}
+          onClick={() => setCurrentDisplay(games.Home)}
         ></button>
       </div>
     </div>

@@ -4,11 +4,14 @@ import Gribbles from "./gribbles/components/Gribbles";
 import Thirdle from "./thirdle/components/Thirdle";
 import Info from "./common/Info";
 
+const games = {
+  Home: "home",
+  Gribbles: "gribbles",
+  Thirdle: "thirdle",
+}
+
 function App() {
-  // home
-  // gribbles
-  // thirdle
-  const [currentDisplay, setCurrentDisplay] = React.useState("home");
+  const [currentDisplay, setCurrentDisplay] = React.useState(games.Home);
 
   function Home() {
     return (
@@ -16,7 +19,7 @@ function App() {
         <div id="games">
           <button
             className="gameButton"
-            onClick={() => setCurrentDisplay("gribbles")}
+            onClick={() => setCurrentDisplay(games.Gribbles)}
           >
             <div className="gameIcon" id="gribbles_icon"></div>
             <div>Gribbles</div>
@@ -24,7 +27,7 @@ function App() {
 
           <button
             className="gameButton"
-            onClick={() => setCurrentDisplay("thirdle")}
+            onClick={() => setCurrentDisplay(games.Home)}
           >
             <div className="gameIcon" id="thirdle_icon"></div>
             <div>Thirdle</div>
@@ -33,9 +36,9 @@ function App() {
         <div id="controls">
           <Info
            info={<div id="info">
-           {`Word Games (beta 0.0.1)\n\nMobile only. Install for offline play!\n\nWant more games?\nVisit `}
-           <a href="https://skedwards88.github.io/portfolio/">CnS Games</a>
-           {`\n\nThanks to `}
+           {`Word Games (beta 0.0.1)\n\nMobile only. Install for offline play!\n\nWant more games?\nCheck `}
+           <a href="https://skedwards88.github.io/portfolio/">these</a>
+           {` out.\n\nThanks to `}
            <a href="https://github.com/wordnik/wordlist">Wordnik</a>
            {` for their open source word list.`}
          </div>}/>
