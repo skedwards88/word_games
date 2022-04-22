@@ -9,12 +9,12 @@
 - errors/error boundaries
 - works on desktop too?
 - curate common list
+- make styling subclassed
 
 ## Gribbles
 
 ## Thirdle
 
-- make styling subclassed
 - info button
 - make max word length?
 - allow to control whether one or multi space?

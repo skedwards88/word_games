@@ -1,7 +1,7 @@
 import React from "react";
 import { gameInit } from "../logic/gameInit";
 import Settings from "./Settings";
-import Info from "./Info";
+import Info from "../../common/Info";
 import Board from "./Board";
 import { Timer, TimerBlocker } from "./Timer";
 import { FoundWords, AllWords } from "./FoundWords";
@@ -141,7 +141,17 @@ function Gribbles({ setCurrentDisplay }) {
           timerDispatch={timerDispatch}
           timerState={timerState}
         />
-        <Info timerDispatch={timerDispatch} />
+        <Info
+          info={`Gribbles\n\nConnect adjacent letters to build words. Can you find all the words before time is up?`}
+          sideEffectShow={() => timerDispatch({ action: "pause" })}
+          sideEffectHide={() => timerDispatch({ action: "play"})}
+        >
+        </Info>
+        {/* <Info
+          info={`Gribbles!\n\nConnect adjacent letters to build words. Can you find all the words before time is up?`}
+          sideEffect={() => console.log('yay')}
+        >
+        </Info> */}
         <button
           id="homeButton"
           onClick={() => setCurrentDisplay("home")}

@@ -2,6 +2,7 @@ import React from "react";
 import { getClue } from "../logic/getClue";
 import { isValidGuess } from "../logic/isValidGuess";
 import { Keyboard } from "./Keyboard";
+import Info from "../../common/Info";
 
 function Thirdle({ setCurrentDisplay }) {
   function thirdleInit() {
@@ -103,7 +104,10 @@ function Thirdle({ setCurrentDisplay }) {
           onClick={() => dispatchThirdleState({ action: "giveUp" })}
         ></button>
 
-        <button id="infoButton"></button>
+        <Info
+          info="TODO"
+        >
+        </Info>
 
         <button
           id="homeButton"

@@ -1,14 +1,13 @@
 import React from "react";
 import "./App.css";
 import Gribbles from "./gribbles/components/Gribbles";
-import Info from "./Info";
 import Thirdle from "./thirdle/components/Thirdle";
+import Info from "./common/Info";
 
 function App() {
   // home
   // gribbles
   // thirdle
-  // info
   const [currentDisplay, setCurrentDisplay] = React.useState("home");
 
   function Home() {
@@ -32,10 +31,14 @@ function App() {
           </button>
         </div>
         <div id="controls">
-          <button
-            id="infoButton"
-            onClick={() => setCurrentDisplay("info")}
-          ></button>
+          <Info
+           info={<div id="info">
+           {`Word Games (beta 0.0.1)\n\nMobile only. Install for offline play!\n\nWant more games?\nVisit `}
+           <a href="https://skedwards88.github.io/portfolio/">CnS Games</a>
+           {`\n\nThanks to `}
+           <a href="https://github.com/wordnik/wordlist">Wordnik</a>
+           {` for their open source word list.`}
+         </div>}/>
         </div>
       </div>
     );
@@ -44,8 +47,6 @@ function App() {
   switch (currentDisplay) {
     case "home":
       return <Home />;
-    case "info":
-      return <Info setCurrentDisplay={setCurrentDisplay} />;
     case "gribbles":
       return <Gribbles setCurrentDisplay={setCurrentDisplay} />;
     case "thirdle":
