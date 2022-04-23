@@ -16,7 +16,6 @@
 ## Thirdle
 
 - info button
-- make max word length?
 - allow to control whether one or multi space?
 - allow to specify number of spaces?
 - save pattern and guess in local storage
