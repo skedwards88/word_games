@@ -3,6 +3,7 @@ import { getClue } from "../logic/getClue";
 import { isValidGuess } from "../logic/isValidGuess";
 import { Keyboard } from "./Keyboard";
 import Info from "../../common/Info";
+import { gameIndex } from "../../gameIndex";
 
 function Thirdle({ setCurrentDisplay }) {
   function thirdleInit() {
@@ -111,7 +112,7 @@ function Thirdle({ setCurrentDisplay }) {
 
         <button
           id="homeButton"
-          onClick={() => setCurrentDisplay(games.Home)}
+          onClick={() => setCurrentDisplay(gameIndex.Home)}
         ></button>
       </div>
     </div>

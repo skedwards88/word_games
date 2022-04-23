@@ -24,3 +24,5 @@
 ## Other ideas
 
 Interword: Make cross word, but only show letters at intersections. player needs to fill in remaining letters. Any known word that matches intersection letters works. Alternative: instead of showing grid spaces to fill, just show number of letters/blanks in that row like nonagrams.
+
+spatial: arrange words into crossword. maybe have islands or irregular boundary.

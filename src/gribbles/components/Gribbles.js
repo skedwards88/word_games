@@ -10,6 +10,7 @@ import Score from "./Score";
 import { timerInit } from "../logic/timerInit";
 import { timerReducer } from "../logic/timerReducer";
 import { gameReducer } from "../logic/gameReducer";
+import { gameIndex } from "../../gameIndex";
 
 function Gribbles({ setCurrentDisplay }) {
   const [gameState, dispatchGameState] = React.useReducer(
@@ -154,7 +155,7 @@ function Gribbles({ setCurrentDisplay }) {
         </Info> */}
         <button
           id="homeButton"
-          onClick={() => setCurrentDisplay(games.Home)}
+          onClick={() => setCurrentDisplay(gameIndex.Home)}
         ></button>
       </div>
     </div>

@@ -3,15 +3,10 @@ import "./App.css";
 import Gribbles from "./gribbles/components/Gribbles";
 import Thirdle from "./thirdle/components/Thirdle";
 import Info from "./common/Info";
-
-const games = {
-  Home: "home",
-  Gribbles: "gribbles",
-  Thirdle: "thirdle",
-}
+import { gameIndex } from "./gameIndex";
 
 function App() {
-  const [currentDisplay, setCurrentDisplay] = React.useState(games.Home);
+  const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.Home);
 
   function Home() {
     return (
@@ -19,7 +14,7 @@ function App() {
         <div id="games">
           <button
             className="gameButton"
-            onClick={() => setCurrentDisplay(games.Gribbles)}
+            onClick={() => setCurrentDisplay(gameIndex.Gribbles)}
           >
             <div className="gameIcon" id="gribbles_icon"></div>
             <div>Gribbles</div>
@@ -27,7 +22,7 @@ function App() {
 
           <button
             className="gameButton"
-            onClick={() => setCurrentDisplay(games.Home)}
+            onClick={() => setCurrentDisplay(gameIndex.Thirdle)}
           >
             <div className="gameIcon" id="thirdle_icon"></div>
             <div>Thirdle</div>
