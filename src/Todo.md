@@ -19,6 +19,7 @@
 - info button
 - allow to control whether one or multi space?
 - allow to specify number of spaces?
+- fix thirdle icon: ... instead of _, WO_D_ or W_RD_ not WO_R_
 
 ## Other ideas
 

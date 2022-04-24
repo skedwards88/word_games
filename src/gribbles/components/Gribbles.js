@@ -143,7 +143,7 @@ function Gribbles({ setCurrentDisplay }) {
           timerState={timerState}
         />
         <Info
-          info={`Gribbles\n\nConnect adjacent letters to build words. Can you find all the words before time is up?`}
+          info={<div>{<h1>Gribbles</h1>}{`\n\nConnect adjacent letters to build words. Can you find all the words before time is up?`}</div>}
           sideEffectShow={() => timerDispatch({ action: "pause" })}
           sideEffectHide={() => timerDispatch({ action: "play"})}
         >

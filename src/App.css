@@ -9,6 +9,10 @@
   display: grid;
 }
 
+h1 {
+  font-size: min(10vmin, 1cm);
+}
+
 button {
   font-size: min(5vmin, 0.5cm);
 }

@@ -42,7 +42,7 @@ function Thirdle({ setCurrentDisplay }) {
         ></button>
 
         <Info
-          info={<div>{`Thirdle\n\nCan you find a word that matches the pattern?\n\n---\n\n`}{<span></span>}{<strong>P...CE...</strong>}{`\n\n- Starts with P\n- Contains CE somewhere in the word, not next to the P and not at the end\n\n✓ PEACEFUL\nx PEACE`}</div>}
+          info={<div>{<h1>Thirdle</h1>}{`\n\nCan you find a word that matches the pattern?\n\n`}{<hr></hr>}{`P...CE...\n\n• Starts with P\n• Contains CE somewhere, but not next to the P and not at the end\n\n✓ PEACEFUL\n✗ PEACE`}</div>}
         >
         </Info>
 
