@@ -42,6 +42,6 @@ export function gameReducer(currentState, payload) {
       };
 
     case "newGame":
-      return gameInit();
+      return gameInit(false);
   }
 }
