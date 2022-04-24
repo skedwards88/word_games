@@ -15,6 +15,13 @@ function Thirdle({ setCurrentDisplay }) {
     gameInit
   );
 
+    React.useEffect(() => {
+      window.localStorage.setItem(
+        "thirdleState",
+        JSON.stringify(thirdleState)
+      );
+    }, [thirdleState]);
+
   return (
     <div className="App" id="thirdle">
       <div id="pattern">

@@ -10,6 +10,7 @@
 - works on desktop too?
 - curate common list
 - make styling subclassed
+- clean up wordlist repo. maybe move to here.
 
 ## Gribbles
 
@@ -18,7 +19,6 @@
 - info button
 - allow to control whether one or multi space?
 - allow to specify number of spaces?
-- save pattern and guess in local storage
 
 ## Other ideas
 
