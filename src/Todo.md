@@ -1,24 +1,28 @@
-local storage:
+# TODO
 
-- elapsed time
-- found words
-- letters
+## General
 
-precommit hooks
+- set up precommit hooks to auto run linters and tests
+- set up autodeploy and tests
+- enums
+- multiplayer play or way to share?
+- errors/error boundaries
+- works on desktop too?
+- curate common list
+- make styling subclassed
+- clean up wordlist repo. maybe move to here.
 
-linters run
+## Gribbles
 
-tests
-enums
+## Thirdle
 
-multiplayer play
-errors/error boundaries
-works on desktop too
+- info button
+- allow to control whether one or multi space?
+- allow to specify number of spaces?
+- fix thirdle icon: ... instead of _, WO_D_ or W_RD_ not WO_R_
 
-Other word games:
+## Other ideas
 
 Interword: Make cross word, but only show letters at intersections. player needs to fill in remaining letters. Any known word that matches intersection letters works. Alternative: instead of showing grid spaces to fill, just show number of letters/blanks in that row like nonagrams.
 
-? would it be more efficient to store known words as text file and read in?
-
-have script to generate trie and store in json file. run this as part of build, before bundling. then have the game code just read the json file. this should make it so that the initial word list isn't bundled.
+spatial: arrange words into crossword. maybe have islands or irregular boundary.
