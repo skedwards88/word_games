@@ -320,8 +320,27 @@ a {
   color: black;
   font-family: sans-serif;
   margin: 0;
-  border: none;
+  border: 1px solid rgb(239, 239, 239);
   border-radius: 2px;
+}
+
+#keyboard .keyboardControl {
+  background-color: black;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#keyboard #delete {
+  background-image: url("./images/delete.svg");
+}
+
+#keyboard #enter {
+  background-image: url("./images/checkmark.svg");
+}
+
+#keyboard #backspace {
+  background-image: url("./images/backspace.svg");
 }
 
 #keyboard .keyboardRow {

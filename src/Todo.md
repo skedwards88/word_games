@@ -11,11 +11,13 @@
 - curate common list
 - make styling subclassed
 - clean up wordlist repo. maybe move to here.
+- autobump version
 
 ## Gribbles
 
 ## Thirdle
 
+- clear all button styling
 - info button
 - allow to control whether one or multi space?
 - allow to specify number of spaces?

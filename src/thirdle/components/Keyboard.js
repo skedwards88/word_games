@@ -4,33 +4,33 @@ function Key({ dispatchThirdleState, key }) {
   if (key === "enter") {
     return (
       <button
-        className="keyboardLetter"
+        className="keyboardLetter keyboardControl"
+        id="enter"
         key={key}
         onClick={() => dispatchThirdleState({ action: "guess" })}
       >
-        ✓
       </button>
     );
   }
   if (key === "deleteLetter") {
     return (
       <button
-        className="keyboardLetter"
+        className="keyboardLetter keyboardControl"
+        id="backspace"
         key={key}
         onClick={() => dispatchThirdleState({ action: "removeLetter" })}
       >
-        ←
       </button>
     );
   }
   if (key === "deleteWord") {
     return (
       <button
-        className="keyboardLetter"
+        className="keyboardLetter keyboardControl"
+        id="delete"
         key={key}
         onClick={() => dispatchThirdleState({ action: "clearWord" })}
       >
-        ☒
       </button>
     );
   }
