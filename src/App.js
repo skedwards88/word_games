@@ -31,7 +31,7 @@ function App() {
         <div id="controls">
           <Info
            info={<div id="info">
-           {`Word Games (beta 0.0.2)\n\nMobile only. Install for offline play!\n\nWant more games?\nCheck `}
+           {`Word Games (beta 0.0.3)\n\nMobile only. Install for offline play!\n\nWant more games?\nCheck `}
            <a href="https://skedwards88.github.io/portfolio/">these</a>
            {` out.\n\nThanks to `}
            <a href="https://github.com/wordnik/wordlist">Wordnik</a>

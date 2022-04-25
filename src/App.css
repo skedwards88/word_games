@@ -14,7 +14,21 @@ h1 {
 }
 
 button {
+  all: unset;
+  text-decoration: none;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
   font-size: min(5vmin, 0.5cm);
+  font-family: sans-serif;
+  background-color: rgb(239, 239, 239);
+  border: 1px solid rgb(239, 239, 239);
+  border-radius: 2px;
+  text-align: center;
+  color: black;
+  margin: 0;
+  padding: 1px 6px;
 }
 
 select {
@@ -155,6 +169,7 @@ a {
 #home #games {
   grid-area: games;
   display: flex;
+  width: 90%;
 }
 
 #home .gameButton {
@@ -164,6 +179,10 @@ a {
   background-color: transparent;
   color: white;
   font-size: min(7vmin, 0.8cm);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction: column;
 }
 
 #home .gameIcon {
