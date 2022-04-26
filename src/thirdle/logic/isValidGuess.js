@@ -1,5 +1,4 @@
-import uncommonWords from "../../common/uncommonWords";
-import commonWords from "../../common/commonWords";
+import { isKnown } from "../../common/isKnown";
 
 export function isValidGuess({ word, pattern }) {
   const matchesPattern = word.match(pattern);
@@ -10,7 +9,7 @@ export function isValidGuess({ word, pattern }) {
 
   // The computer will build the pattern based on the common word list,
   // but the player may find any word
-  const isWord = commonWords.includes(word) || uncommonWords.includes(word);
+  const { isWord } = isKnown(word);
 
   return matchesPattern && isWord;
 }
