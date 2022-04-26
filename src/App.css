@@ -170,6 +170,7 @@ a {
   grid-area: games;
   display: flex;
   width: 90%;
+  align-items: center;
 }
 
 #home .gameButton {
@@ -183,6 +184,7 @@ a {
   justify-content:center;
   align-items:center;
   flex-direction: column;
+  height: fit-content;
 }
 
 #home .gameIcon {
