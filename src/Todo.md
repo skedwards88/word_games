@@ -17,11 +17,10 @@
 
 ## Thirdle
 
-- clear all button styling
-- info button
 - allow to control whether one or multi space?
 - allow to specify number of spaces?
-- fix thirdle icon: ... instead of _, WO_D_ or W_RD_ not WO_R_
+- allow to specify word length?
+- allow to specify number of letters given in clue
 
 ## Other ideas
 
