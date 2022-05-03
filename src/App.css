@@ -1,4 +1,7 @@
 /* General */
+html {
+  height: 100%;
+}
 
 .App {
   background-color: rgb(38 36 129);
