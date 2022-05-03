@@ -31,11 +31,15 @@ function App() {
         <div id="controls">
           <Info
            info={<div id="info">
-           {`Word Games (beta 0.0.5)\n\nMobile only. Install for offline play!\n\nWant more games?\nCheck `}
+           {`Word Games (beta 0.0.6)\n\nMobile only. Install or add to home screen for offline play!\n\nWant more games?\nCheck `}
            <a href="https://skedwards88.github.io/portfolio/">these</a>
-           {` out.\n\nThanks to `}
+           {` out. `}
+           {<hr></hr>}
+           {`Thanks to `}
            <a href="https://github.com/wordnik/wordlist">Wordnik</a>
-           {` for their open source word list.`}
+           {` for their open source word list and `}
+           <a href="https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists#English">Wiktionary</a>
+           {` and data therein for word frequency data.`}
          </div>}/>
         </div>
       </div>
