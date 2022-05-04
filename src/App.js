@@ -8,16 +8,16 @@ import { gameIndex } from "./gameIndex";
 function App() {
   const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.Home);  
 
-  function handleResize() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }
+  // function handleResize() {
+  //   const vh = window.innerHeight * 0.01;
+  //   document.documentElement.style.setProperty('--vh', `${vh}px`);
+  // }
 
-  React.useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () =>
-      removeEventListener("resize", handleResize);
-  });
+  // React.useEffect(() => {
+  //   window.addEventListener("resize", handleResize);
+  //   return () =>
+  //     removeEventListener("resize", handleResize);
+  // });
 
   function Home() {
     return (
@@ -42,7 +42,7 @@ function App() {
         <div id="controls">
           <Info
            info={<div id="info">
-           {`Word Games (beta 0.0.7)\n\nMobile only. Install or add to home screen for offline play!\n\nWant more games?\nCheck `}
+           {`Word Games (beta 0.0.71)\n\nMobile only. Install or add to home screen for offline play!\n\nWant more games?\nCheck `}
            <a href="https://skedwards88.github.io/portfolio/">these</a>
            {` out. `}
            {<hr></hr>}
