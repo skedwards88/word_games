@@ -9,6 +9,12 @@ html {
   font-family: sans-serif;
   font-size: min(7vmin, 0.8cm);
   height: 99vh;
+  /* So that URL bar doesn't push down content: */
+  height: calc(var(--vh, 1vh) * 99);
+  /* These aren't widespread enough to use yet: */
+  /* height: 99svh;
+  height: 99dvh;
+  height: 99lvh; */
   display: grid;
 }
 
