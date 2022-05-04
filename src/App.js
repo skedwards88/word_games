@@ -31,7 +31,7 @@ function App() {
         <div id="controls">
           <Info
            info={<div id="info">
-           {`Word Games (beta 0.0.71)\n\nMobile only. Install or add to home screen for offline play!\n\nWant more games?\nCheck `}
+           {`Word Games (beta 0.0.72)\n\nMobile only. Install or add to home screen for offline play!\n\nWant more games?\nCheck `}
            <a href="https://skedwards88.github.io/portfolio/">these</a>
            {` out. `}
            {<hr></hr>}
