@@ -1,10 +1,12 @@
+root = "src/common/wordLists/"
+
 wordnik = []
-with open("raw/wordnik.txt", "r") as file:
+with open(f"{root}raw/wordnik.txt", "r") as file:
   for line in file:
     wordnik.append(line.strip())
 
 wiki = []
-with open("raw/wiki.txt", "r") as inFile:
+with open(f"{root}raw/wiki.txt", "r") as inFile:
   for line in inFile:
     word = line.split(" ")[0]
     if not word.isalpha():
@@ -15,6 +17,6 @@ with open("raw/wiki.txt", "r") as inFile:
 
 common = list(set(wiki).intersection(set(wordnik)))
 
-with open("processed/wiki.txt", "w") as file:
+with open(f"{root}processed/wiki.txt", "w") as file:
   for word in common:
     file.writelines(f"{word}\n")
