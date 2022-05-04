@@ -1,5 +1,5 @@
-import commonWords from "./commonWords";
-import uncommonWords from "./uncommonWords";
+import commonWords from "./wordLists/compiled/commonWords.json"
+import uncommonWords from "./wordLists/compiled/uncommonWords.json"
 
 export function getLetterPool() {
   let letterDistribution = {};

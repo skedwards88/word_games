@@ -1,6 +1,7 @@
 import { isValidGuess } from "./isValidGuess";
 
-jest.mock("../../common/uncommonWords");
+jest.mock("../../common/wordLists/compiled/uncommonWords.json");
+jest.mock("../../common/wordLists/compiled/commonWords.json");
 
 test("word matches pattern and is known word", () => {
   expect(isValidGuess({ word: "CAMPERS", pattern: "[A-Z]+ERS$" })).toEqual(

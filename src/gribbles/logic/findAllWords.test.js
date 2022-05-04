@@ -1,7 +1,7 @@
 import { findAllWords } from "./findAllWords";
 
-jest.mock("../../common/commonWords");
-jest.mock("../../common/uncommonWords");
+jest.mock("../../common/wordLists/compiled/uncommonWords.json");
+jest.mock("../../common/wordLists/compiled/commonWords.json");
 
 test("Easy mode, min length 4", () => {
   const grid = [
