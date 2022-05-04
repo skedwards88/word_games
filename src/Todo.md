@@ -10,8 +10,6 @@
 - works on desktop too?
 - curate common list
 - make styling subclassed
-- clean up wordlist repo. maybe move to here.
-- autobump version
 - add install button https://web.dev/customize-install/
 
 ## Gribbles
