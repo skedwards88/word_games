@@ -9,7 +9,8 @@
     "build": "webpack",
     "test": "jest",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "prebuild": "python3 src/common/wordLists/compiled/compile.py"
   },
   "keywords": [],
   "author": "",

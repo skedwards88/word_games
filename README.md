@@ -18,8 +18,12 @@ Want more games? Visit [CnS Games](https://skedwards88.github.io/portfolio/).
 
 ## Development
 
-To run locally with live reloading and no service worker, run `npm run dev`. (If a service worker was previously registered, you can unregister it in chrome developer tools `Application` > `Service workers` > `Unregister`.)
+To build, run `npm run build`.
+
+To run locally with live reloading and no service worker, run `npm run dev`. (If a service worker was previously registered, you can unregister it in chrome developer tools: `Application` > `Service workers` > `Unregister`.)
 
 To run locally and register the service worker, run `npm start`.
 
-For information about the word lists, see `src/common/wordLists/README.md`. To add a word to "easy mode", add the word to `src/common/wordLists/compiled/notActuallyUncommon.txt`. To exclude a word from easy mode, add the word to `src/common/wordLists/compiled/notActuallyCommon.txt`.
+To deploy, run `npm run deploy`.
+
+To regenerate the word lists, run `npm run prebuild`. For information about the word lists, see `src/common/wordLists/README.md`. To add a word to "easy mode", add the word to `src/common/wordLists/compiled/notActuallyUncommon.txt`. To exclude a word from easy mode, add the word to `src/common/wordLists/compiled/notActuallyCommon.txt`.
