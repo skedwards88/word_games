@@ -4,6 +4,7 @@ import Gribbles from "./gribbles/components/Gribbles";
 import Thirdle from "./thirdle/components/Thirdle";
 import Info from "./common/Info";
 import { gameIndex } from "./gameIndex";
+import packageJson from "../package.json"
 
 function App() {
   const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.Home);  
@@ -31,7 +32,7 @@ function App() {
         <div id="controls">
           <Info
            info={<div id="info">
-           {`Word Games (beta 0.0.72)\n\nMobile only. Install or add to home screen for offline play!\n\nWant more games?\nCheck `}
+           {`Word Games (beta ${packageJson.version})\n\nMobile only. Install or add to home screen for offline play!\n\nWant more games?\nCheck `}
            <a href="https://skedwards88.github.io/portfolio/">these</a>
            {` out. `}
            {<hr></hr>}
