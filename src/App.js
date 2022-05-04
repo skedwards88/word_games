@@ -8,17 +8,6 @@ import { gameIndex } from "./gameIndex";
 function App() {
   const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.Home);  
 
-  // function handleResize() {
-  //   const vh = window.innerHeight * 0.01;
-  //   document.documentElement.style.setProperty('--vh', `${vh}px`);
-  // }
-
-  // React.useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
-  //   return () =>
-  //     removeEventListener("resize", handleResize);
-  // });
-
   function Home() {
     return (
       <div className="App" id="home">
