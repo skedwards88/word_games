@@ -1,7 +1,7 @@
 import { letterPool } from "../../common/letterPool";
 import { shuffleArray } from "../../common/shuffleArray";
 import { findAllWords } from "./findAllWords";
-import { findAllWordIndexes } from "./findAllWords"
+import { findAllWordIndexes } from "./findAllWords";
 
 function getLetters(gridSize) {
   // Given the distribution of letters in the word list
@@ -13,51 +13,56 @@ function getLetters(gridSize) {
 }
 
 function pickRandom(array) {
-  return array[Math.floor(Math.random() * array.length)]
+  return array[Math.floor(Math.random() * array.length)];
 }
 
 function getClueForPattern(pattern) {
-  const patternLength = pickRandom([2,3,4])
-  const maxPatternStartIndex = pattern.length - patternLength
-  const possiblePatternStartIndexes = [...Array(maxPatternStartIndex + 1).keys()]
-  const patternStartIndex = pickRandom(possiblePatternStartIndexes)
-  const clue = [...pattern].slice(patternStartIndex,patternStartIndex + patternLength)
-  return clue
+  const patternLength = pickRandom([2, 3, 4]);
+  const maxPatternStartIndex = pattern.length - patternLength;
+  const possiblePatternStartIndexes = [
+    ...Array(maxPatternStartIndex + 1).keys(),
+  ];
+  const patternStartIndex = pickRandom(possiblePatternStartIndexes);
+  const clue = [...pattern].slice(
+    patternStartIndex,
+    patternStartIndex + patternLength
+  );
+  return clue;
 }
 
 function isOverlappingClue(clue, clues) {
   // Check for exact match
   if (clues.includes(clue)) {
-    return true
+    return true;
   }
-  
+
   // Check for partial match
   for (let index = 0; index < clues.length; index++) {
     if (clues[index].includes(clue)) {
-      return true
+      return true;
     }
     if (clue.includes(clues[index])) {
-      return true
+      return true;
     }
   }
-  return false
+  return false;
 }
 
 function getClues(patterns) {
-  let clues = []
+  let clues = [];
   while (clues.length < 6 && patterns.length > 0) {
-    console.log(`found clues: ${clues.length}, remaining: ${patterns.length}`)
-    const pattern = patterns.pop() //todo shuffle before passing in
-    const clue = getClueForPattern(pattern).join(" ")
-    if (!isOverlappingClue(clue, clues)){
-      clues.push(clue)
+    console.log(`found clues: ${clues.length}, remaining: ${patterns.length}`);
+    const pattern = patterns.pop(); //todo shuffle before passing in
+    const clue = getClueForPattern(pattern).join(" ");
+    if (!isOverlappingClue(clue, clues)) {
+      clues.push(clue);
     }
   }
-  return clues.map(clue=>clue.split(" "))
+  return clues.map((clue) => clue.split(" "));
 }
 
 function getPlayableBoard({ gridSize, minWordLength, easyMode }) {
-  const colorDistribution = ["red","green","blue"]
+  const colorDistribution = ["red", "green", "blue"];
 
   let foundPlayableBoard = false;
   let letters;
@@ -71,14 +76,16 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode }) {
     const wordIndexes = findAllWordIndexes({
       grid: letters,
       minWordLength: minWordLength,
-      easyMode: easyMode
+      easyMode: easyMode,
     });
-    const wordPatterns = wordIndexes.map(indexList => indexList.map(index => colors[index]))
+    const wordPatterns = wordIndexes.map((indexList) =>
+      indexList.map((index) => colors[index])
+    );
     // If didn't find at least 20 patterns (words), choose a new set of letters
     // if (wordPatterns.length < 20) {
     //   continue
     // }
-    clues = getClues(wordPatterns)
+    clues = getClues(wordPatterns);
 
     // If found at least 6 clues, exit the loop
     if (clues.length > 5) {
@@ -89,11 +96,15 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode }) {
 }
 
 export function gameInit() {
-  const easyMode = true
-  const minWordLength = 4
-  const gridSize = 4
+  const easyMode = true;
+  const minWordLength = 4;
+  const gridSize = 4;
 
-  const [letters, colors, clues] = getPlayableBoard({ gridSize, minWordLength, easyMode })
+  const [letters, colors, clues] = getPlayableBoard({
+    gridSize,
+    minWordLength,
+    easyMode,
+  });
   const letterAvailabilities = letters.map(() => true);
 
   return {

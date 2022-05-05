@@ -1,6 +1,12 @@
 import React from "react";
 
-function Letter({ letter, color, letterAvailability, index, dispatchGameState }) {
+function Letter({
+  letter,
+  color,
+  letterAvailability,
+  index,
+  dispatchGameState,
+}) {
   const myRef = React.useRef();
 
   React.useLayoutEffect(() => {
@@ -8,9 +14,13 @@ function Letter({ letter, color, letterAvailability, index, dispatchGameState })
     // if (letterAvailability) {return}
 
     const myDiv = myRef.current;
-    const currentClasses = myDiv.className.split(" ").filter((entry) => (entry !== "unavailable"));
+    const currentClasses = myDiv.className
+      .split(" ")
+      .filter((entry) => entry !== "unavailable");
 
-    const newClass = letterAvailability ? currentClasses.join(" "): [...currentClasses, "unavailable"].join(" ");
+    const newClass = letterAvailability
+      ? currentClasses.join(" ")
+      : [...currentClasses, "unavailable"].join(" ");
 
     myDiv.className = newClass;
   }, [letterAvailability]);

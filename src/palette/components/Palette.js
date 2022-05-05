@@ -5,21 +5,25 @@ import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
 import { gameReducer } from "../logic/gameReducer";
 
-function Clue({clue, index}) {
-  return <div className="clue" key={index}>{clue.map(color => <div className={`clueBox ${color}`}></div>)}</div>
+function Clue({ clue, index }) {
+  return (
+    <div className="clue" key={index}>
+      {clue.map((color) => (
+        <div className={`clueBox ${color}`}></div>
+      ))}
+    </div>
+  );
 }
 
-function Patterns({clues}) {
+function Patterns({ clues }) {
   const clueDisplays = clues.map((clue, index) => (
-    <Clue
-      clue={clue}
-      key={index}
-    ></Clue>
+    <Clue clue={clue} key={index}></Clue>
   ));
 
   return (
     <div id="clues">
-      {clueDisplays}{""}
+      {clueDisplays}
+      {""}
     </div>
   );
 }
@@ -30,7 +34,7 @@ function Palette({ setCurrentDisplay }) {
     gameInit
   );
 
-  console.log(gameState.colors)
+  console.log(gameState.colors);
 
   return (
     <div className="App" id="palette">
@@ -39,12 +43,8 @@ function Palette({ setCurrentDisplay }) {
           <div>SCORE</div>
         </div>
       </div>
-      <Patterns
-        clues={gameState.clues}
-      ></Patterns>
-      <div id="currentWord">
-        WORD
-      </div>
+      <Patterns clues={gameState.clues}></Patterns>
+      <div id="currentWord">WORD</div>
       <Board
         letters={gameState.letters}
         colors={gameState.colors}
@@ -53,9 +53,13 @@ function Palette({ setCurrentDisplay }) {
       ></Board>
       <div id="controls">
         <Info
-          info={<div>{<h1>Palette</h1>}{`TODO`}</div>}
-        >
-        </Info>
+          info={
+            <div>
+              {<h1>Palette</h1>}
+              {`TODO`}
+            </div>
+          }
+        ></Info>
         <button
           id="homeButton"
           onClick={() => setCurrentDisplay(gameIndex.Home)}
