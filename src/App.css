@@ -179,6 +179,8 @@ a {
   width: 90%;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  overflow: scroll;
 }
 
 #home .gameButton {
@@ -469,4 +471,121 @@ a {
     justify-content: center;
     align-items: center;
   }
+}
+
+/* palette-specific */
+
+#palette {
+  display: grid;
+  grid-template-areas:
+    "stats"
+    "clues"
+    "currentWord"
+    "board"
+    "controls";
+  grid-template-rows:
+    auto
+    1fr
+    auto
+    auto
+    auto;
+}
+
+#palette #stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  grid-area: stats;
+  padding: 10px;
+}
+
+#palette #currentWord {
+  grid-area: currentWord;
+  text-align: center;
+  white-space: pre;
+}
+
+#palette #wordResult {
+  grid-area: board;
+  background-color: rgb(38 36 129);
+  touch-action: none;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#palette #board {
+  grid-area: board;
+  display: grid;
+  background-color: rgb(38 36 129);
+  touch-action: none;
+  justify-content: center;
+}
+
+#palette #board.rows5 {
+  grid-template-columns: repeat(5, 16vmin);
+  grid-template-rows: repeat(5, 16vmin);
+}
+
+#palette #board.rows4 {
+  grid-template-columns: repeat(4, 20vmin);
+  grid-template-rows: repeat(4, 20vmin);
+}
+
+#palette .letter {
+  touch-action: none;
+  margin: min(4vmin, 0.4cm);
+  background-color: rgb(38 36 129);
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+#palette .red {
+  background-color: rgb(199, 137, 79);
+}
+
+#palette .green {
+  background-color: rgb(87, 121, 95);
+}
+
+#palette .blue {
+  background-color: rgb(157, 159, 180);
+}
+
+#palette .letter.unavailable {
+  color: darkgray;
+}
+
+#palette .computerWord {
+  color: gray;
+}
+
+#palette #clues {
+  grid-area: clues;
+  display: flex;
+  background-color: white;
+  color: black;
+  flex-direction: column;
+  min-height: 10vh;
+  overflow: scroll;
+  flex-wrap: wrap;
+  padding: 10px;
+  font-size: initial;
+}
+
+#palette .clue {
+  display: flex;
+  flex-direction: row;
+  margin: 2px;
+}
+
+#palette .clueBox {
+  min-height: 5vh;
+  min-width: 5vh;
+  border: 1px solid black;
 }
