@@ -30,11 +30,11 @@ function Letter({
     e.target.releasePointerCapture(e.pointerId);
 
     // Start a new word
-    dispatchGameState({
-      action: "startWord",
-      letter: letter,
-      letterIndex: index,
-    });
+    // dispatchGameState({
+    //   action: "startWord",
+    //   letter: letter,
+    //   letterIndex: index,
+    // });
   }
 
   function handlePointerEnter(e, letter, index, letterAvailability) {

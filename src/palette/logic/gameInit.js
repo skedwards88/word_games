@@ -1,6 +1,5 @@
 import { letterPool } from "../../common/letterPool";
 import { shuffleArray } from "../../common/shuffleArray";
-import { findAllWords } from "./findAllWords";
 import { findAllWordIndexes } from "./findAllWords";
 
 function getLetters(gridSize) {
@@ -48,10 +47,10 @@ function isOverlappingClue(clue, clues) {
   return false;
 }
 
-function getClues(patterns) {
+function getClues(patterns, numClues) {
+  console.log(numClues)
   let clues = [];
-  while (clues.length < 6 && patterns.length > 0) {
-    console.log(`found clues: ${clues.length}, remaining: ${patterns.length}`);
+  while (clues.length < numClues && patterns.length > 0) {
     const pattern = patterns.pop(); //todo shuffle before passing in
     const clue = getClueForPattern(pattern).join(" ");
     if (!isOverlappingClue(clue, clues)) {
@@ -61,7 +60,7 @@ function getClues(patterns) {
   return clues.map((clue) => clue.split(" "));
 }
 
-function getPlayableBoard({ gridSize, minWordLength, easyMode }) {
+function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
   const colorDistribution = ["red", "green", "blue"];
 
   let foundPlayableBoard = false;
@@ -85,10 +84,10 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode }) {
     // if (wordPatterns.length < 20) {
     //   continue
     // }
-    clues = getClues(wordPatterns);
+    clues = getClues(wordPatterns, numClues);
 
-    // If found at least 6 clues, exit the loop
-    if (clues.length > 5) {
+    // If found numClues, exit
+    if (clues.length >= numClues) {
       foundPlayableBoard = true;
     }
   }
@@ -99,19 +98,23 @@ export function gameInit() {
   const easyMode = true;
   const minWordLength = 4;
   const gridSize = 4;
+  const numClues = 5;
 
   const [letters, colors, clues] = getPlayableBoard({
     gridSize,
     minWordLength,
     easyMode,
+    numClues,
   });
   const letterAvailabilities = letters.map(() => true);
+  const clueMatches = clues.map(() => false);
 
   return {
     minWordLength: minWordLength,
     letters: letters,
     colors: colors,
     clues: clues,
+    clueMatches: clueMatches,
     letterAvailabilities: letterAvailabilities,
     playedIndexes: [],
     result: "",

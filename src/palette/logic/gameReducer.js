@@ -8,7 +8,6 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "startWord") {
-    const newWord = payload.letter.toUpperCase();
     let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
     newLetterAvailabilities[currentGameState.letterIndex] = false;
     const newPlayedIndexes = [
@@ -17,7 +16,6 @@ export function gameReducer(currentGameState, payload) {
     ];
     return {
       ...currentGameState,
-      currentWord: newWord,
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: newPlayedIndexes,
       result: "",
@@ -25,6 +23,8 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "addLetter") {
+    console.log(JSON.stringify(currentGameState.playedIndexes));
+    // Don't add the letter if it isn't neighboring the current sequence
     const isNeighboring = checkIfNeighbors({
       indexA:
         currentGameState.playedIndexes[
@@ -33,7 +33,6 @@ export function gameReducer(currentGameState, payload) {
       indexB: payload.letterIndex,
       gridSize: Math.sqrt(currentGameState.letters.length),
     });
-
     if (!isNeighboring) {
       return currentGameState;
     }
@@ -43,13 +42,11 @@ export function gameReducer(currentGameState, payload) {
       payload.letterIndex,
     ];
 
-    const newWord = (currentGameState.currentWord +=
-      payload.letter.toUpperCase());
     let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
     newLetterAvailabilities[payload.letterIndex] = false;
+
     return {
       ...currentGameState,
-      currentWord: newWord,
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: newPlayedIndexes,
     };
@@ -59,62 +56,58 @@ export function gameReducer(currentGameState, payload) {
     const newLetterAvailabilities = currentGameState.letters.map(() => true);
 
     // if the word is below the min length, don't add the word
-    if (currentGameState.currentWord.length < currentGameState.minWordLength) {
+    if (
+      currentGameState.playedIndexes.length < currentGameState.minWordLength
+    ) {
       return {
         ...currentGameState,
-        currentWord: "",
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
-        result: currentGameState.currentWord.length <= 1 ? "" : "Too short",
-      };
-    }
-
-    // if we already have the word, don't add the word
-    if (currentGameState.foundWords.includes(currentGameState.currentWord)) {
-      console.log("already found");
-      return {
-        ...currentGameState,
-        currentWord: "",
-        letterAvailabilities: newLetterAvailabilities,
-        playedIndexes: [],
-        result: "Already found",
+        result: currentGameState.playedIndexes.length <= 1 ? "" : "Too short",
       };
     }
 
     // check if word is a real word
-    const { isPartialWord, isWord, isEasy } = isKnown(
-      currentGameState.currentWord.toUpperCase()
-    );
+    const word = currentGameState.playedIndexes
+      .map((index) => currentGameState.letters[index])
+      .join("");
+    const { isPartialWord, isWord, isEasy } = isKnown(word);
     if (!isWord) {
-      console.log(`unknown word ${currentGameState.currentWord}`);
+      console.log(`unknown word ${word}`);
       return {
         ...currentGameState,
-        currentWord: "",
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
         result: "Unknown word",
       };
     }
 
-    // If playing in easy mode
-    // and the word isn't in the easy word list,
-    // consider it a bonus
-    const newBonusWordCount =
-      !isEasy && currentGameState.easyMode
-        ? currentGameState.bonusWordCount + 1
-        : currentGameState.bonusWordCount;
+    // check if the word matches a pattern
+    const currentColors = currentGameState.playedIndexes
+      .map((index) => currentGameState.colors[index])
+      .join(" ");
+    let clueMatches = [...currentGameState.clueMatches];
 
-    const newFoundWords = [
-      ...currentGameState.foundWords,
-      currentGameState.currentWord,
-    ];
+    for (let index = 0; index < currentGameState.clues.length; index++) {
+      // go to the next iteration if we already have a match for the clue
+      if (clueMatches[index]) {
+        continue;
+      }
+      const comparisonClue = currentGameState.clues[index].join(" ");
+      if (currentColors.includes(comparisonClue)) {
+        clueMatches[index] = true;
+      }
+    }
+
+    // Check if all matches found
+    const newResult = clueMatches.every((i) => i) ? "game over" : "";
+
     return {
       ...currentGameState,
-      foundWords: newFoundWords,
-      currentWord: "",
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: [],
-      bonusWordCount: newBonusWordCount,
+      clueMatches: clueMatches,
+      result: newResult,
     };
   }
 }

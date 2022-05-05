@@ -4,29 +4,9 @@ import Board from "./Board";
 import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
 import { gameReducer } from "../logic/gameReducer";
+import Clues from "./Clues";
+import CurrentWord from "./CurrentWord";
 
-function Clue({ clue, index }) {
-  return (
-    <div className="clue" key={index}>
-      {clue.map((color) => (
-        <div className={`clueBox ${color}`}></div>
-      ))}
-    </div>
-  );
-}
-
-function Patterns({ clues }) {
-  const clueDisplays = clues.map((clue, index) => (
-    <Clue clue={clue} key={index}></Clue>
-  ));
-
-  return (
-    <div id="clues">
-      {clueDisplays}
-      {""}
-    </div>
-  );
-}
 function Palette({ setCurrentDisplay }) {
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
@@ -34,17 +14,18 @@ function Palette({ setCurrentDisplay }) {
     gameInit
   );
 
-  console.log(gameState.colors);
-
   return (
     <div className="App" id="palette">
-      <div id="stats">
-        <div id="score">
-          <div>SCORE</div>
-        </div>
-      </div>
-      <Patterns clues={gameState.clues}></Patterns>
-      <div id="currentWord">WORD</div>
+      <Clues
+        clues={gameState.clues}
+        clueMatches={gameState.clueMatches}
+      ></Clues>
+      <CurrentWord
+        letters={gameState.playedIndexes.map(
+          (index) => gameState.letters[index]
+        )}
+        colors={gameState.playedIndexes.map((index) => gameState.colors[index])}
+      ></CurrentWord>
       <Board
         letters={gameState.letters}
         colors={gameState.colors}
@@ -52,6 +33,17 @@ function Palette({ setCurrentDisplay }) {
         dispatchGameState={dispatchGameState}
       ></Board>
       <div id="controls">
+        <button
+          id="newGameButton"
+          onClick={() => {
+            dispatchGameState({
+              action: "newGame",
+              gridSize: Math.sqrt(gameState.letters.length),
+              minWordLength: gameState.minWordLength,
+              easyMode: gameState.easyMode,
+            });
+          }}
+        ></button>
         <Info
           info={
             <div>

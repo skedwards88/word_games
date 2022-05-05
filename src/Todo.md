@@ -14,12 +14,21 @@
 
 ## Gribbles
 
+- derive letter availablilties and current word from played indexes
+
 ## Thirdle
 
 - allow to control whether one or multi space?
 - allow to specify number of spaces?
 - allow to specify word length?
 - allow to specify number of letters given in clue
+
+## Palette
+
+- save to local storage
+- make icon
+- decide color scheme
+- show result (word unknown, too short, mathes pattern, game over)
 
 ## Other ideas
 
