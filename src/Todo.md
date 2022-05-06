@@ -27,11 +27,8 @@
 
 - save to local storage
 - make icon
-- decide color scheme
 - show result (word unknown, too short, mathes pattern, game over)
 - make sure at least 3 matches?
--  add hint to show matching word
-
 
 ## Other ideas
 

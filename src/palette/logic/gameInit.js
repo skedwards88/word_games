@@ -36,7 +36,7 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
       easyMode: easyMode,
     });
 
-    const shuffledWordIndexes = shuffleArray(wordIndexes)
+    const shuffledWordIndexes = shuffleArray(wordIndexes);
 
     for (let index = 0; index < shuffledWordIndexes.length; index++) {
       const currentClue = shuffledWordIndexes[index];

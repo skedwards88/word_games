@@ -9,32 +9,32 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "hint") {
-    let clueReveals = [...currentGameState.clueReveals]
-    let clueMatches = [...currentGameState.clueMatches]
+    let clueReveals = [...currentGameState.clueReveals];
+    let clueMatches = [...currentGameState.clueMatches];
 
     for (let index = 0; index < clueReveals.length; index++) {
       // If the player already found the clue, don't reveal
       if (clueMatches[index]) {
-        continue
+        continue;
       }
       // If the clue is already revealed, skip
       if (clueReveals[index]) {
-        continue
+        continue;
       }
 
-      clueReveals[index] = true
-      clueMatches[index] = true
-      break
+      clueReveals[index] = true;
+      clueMatches[index] = true;
+      break;
     }
 
-    const newResult = clueMatches.every((i) => i) ? "game over" : "";
+    const newResult = clueMatches.every((i) => i) ? "Game over" : "";
 
     return {
       ...currentGameState,
       clueReveals: clueReveals,
       clueMatches: clueMatches,
-      newResult: newResult,
-    }
+      result: newResult,
+    };
   }
 
   if (payload.action === "startWord") {
@@ -93,7 +93,7 @@ export function gameReducer(currentGameState, payload) {
         ...currentGameState,
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
-        result: currentGameState.playedIndexes.length <= 1 ? "" : "Too short",
+        result: currentGameState.playedIndexes.length <= 1 ? "" : "No match",
       };
     }
 
@@ -108,11 +108,12 @@ export function gameReducer(currentGameState, payload) {
         ...currentGameState,
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
-        result: "Unknown word",
+        result: "No match",
       };
     }
 
     // check if the word matches a pattern
+    let newResult = "";
     const currentColors = currentGameState.playedIndexes.map(
       (index) => currentGameState.colors[index]
     );
@@ -131,11 +132,17 @@ export function gameReducer(currentGameState, payload) {
       );
       if (arraysMatchQ(currentColors, comparisonColors)) {
         clueMatches[clueIndex] = true;
+        // there will only be one match, so exit early if we find one
+        break;
       }
+      // If didn't find a match
+      newResult = "No match";
     }
 
     // Check if all matches found
-    const newResult = clueMatches.every((i) => i) ? "game over" : "";
+    if (clueMatches.every((i) => i)) {
+      newResult = "Game over";
+    }
 
     return {
       ...currentGameState,

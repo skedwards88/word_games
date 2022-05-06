@@ -1,12 +1,10 @@
 import React from "react";
 
 export default function CurrentWord({ letters, colors }) {
-  // letters = ["A","B"]
-  // colors=["red","green"]
-  //todo capitalize qu
+  //todo change styling if capitalize qu
   const blocks = letters.map((letter, index) => (
     <div key={index} className={colors[index]}>
-      {letter}
+      {letter.toUpperCase()}
     </div>
   ));
 
