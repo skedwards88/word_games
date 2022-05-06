@@ -1,6 +1,7 @@
 import { letterPool } from "../../common/letterPool";
 import { shuffleArray } from "../../common/shuffleArray";
 import { findAllWordIndexes } from "./findAllWords";
+import { arraysMatchQ } from "./arraysMatchQ";
 
 function getLetters(gridSize) {
   // Given the distribution of letters in the word list
@@ -15,60 +16,17 @@ function pickRandom(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-function getClueForPattern(pattern) {
-  const patternLength = pickRandom([2, 3, 4]);
-  const maxPatternStartIndex = pattern.length - patternLength;
-  const possiblePatternStartIndexes = [
-    ...Array(maxPatternStartIndex + 1).keys(),
-  ];
-  const patternStartIndex = pickRandom(possiblePatternStartIndexes);
-  const clue = [...pattern].slice(
-    patternStartIndex,
-    patternStartIndex + patternLength
-  );
-  return clue;
-}
-
-function isOverlappingClue(clue, clues) {
-  // Check for exact match
-  if (clues.includes(clue)) {
-    return true;
-  }
-
-  // Check for partial match
-  for (let index = 0; index < clues.length; index++) {
-    if (clues[index].includes(clue)) {
-      return true;
-    }
-    if (clue.includes(clues[index])) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function getClues(patterns, numClues) {
-  console.log(numClues)
-  let clues = [];
-  while (clues.length < numClues && patterns.length > 0) {
-    const pattern = patterns.pop(); //todo shuffle before passing in
-    const clue = getClueForPattern(pattern).join(" ");
-    if (!isOverlappingClue(clue, clues)) {
-      clues.push(clue);
-    }
-  }
-  return clues.map((clue) => clue.split(" "));
-}
-
 function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
+  console.log("starting get playable");
   const colorDistribution = ["red", "green", "blue"];
-
   let foundPlayableBoard = false;
   let letters;
   let colors;
-  let clues;
+  let clueIndexes = [];
+
   while (!foundPlayableBoard) {
-    //todo how to prevent infinite loop?
+    console.log("new round");
+    // Pick a random assortment of letters and colors
     letters = getLetters(gridSize);
     colors = letters.map(() => pickRandom(colorDistribution));
 
@@ -77,21 +35,42 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
       minWordLength: minWordLength,
       easyMode: easyMode,
     });
-    const wordPatterns = wordIndexes.map((indexList) =>
-      indexList.map((index) => colors[index])
-    );
-    // If didn't find at least 20 patterns (words), choose a new set of letters
-    // if (wordPatterns.length < 20) {
-    //   continue
-    // }
-    clues = getClues(wordPatterns, numClues);
 
-    // If found numClues, exit
-    if (clues.length >= numClues) {
-      foundPlayableBoard = true;
+    for (let index = 0; index < wordIndexes.length; index++) {
+      const currentClue = wordIndexes[index];
+
+      // If word is not 4-6 long, skip
+      if (currentClue.length < 4 || currentClue.length > 6) {
+        continue;
+      }
+
+      // If the color pattern of the clue is already used, skip
+      const currentClueColors = currentClue.map((index) => colors[index]);
+      const foundCluesColors = clueIndexes.map((clue) =>
+        clue.map((index) => colors[index])
+      );
+      const duplicateClue = foundCluesColors.some((array) =>
+        arraysMatchQ(array, currentClueColors)
+      );
+      if (duplicateClue) {
+        continue;
+      }
+
+      clueIndexes.push(currentClue);
+
+      // If found numClues, exit
+      if (clueIndexes.length >= numClues) {
+        foundPlayableBoard = true;
+        break;
+      }
     }
   }
-  return [letters, colors, clues];
+
+  // Sort by clue length so longer clues are last
+  clueIndexes.sort(function (a, b) {
+    return a.length - b.length;
+  });
+  return [letters, colors, clueIndexes];
 }
 
 export function gameInit() {
@@ -100,20 +79,20 @@ export function gameInit() {
   const gridSize = 4;
   const numClues = 5;
 
-  const [letters, colors, clues] = getPlayableBoard({
+  const [letters, colors, clueIndexes] = getPlayableBoard({
     gridSize,
     minWordLength,
     easyMode,
     numClues,
   });
   const letterAvailabilities = letters.map(() => true);
-  const clueMatches = clues.map(() => false);
+  const clueMatches = clueIndexes.map(() => false);
 
   return {
     minWordLength: minWordLength,
     letters: letters,
     colors: colors,
-    clues: clues,
+    clueIndexes: clueIndexes,
     clueMatches: clueMatches,
     letterAvailabilities: letterAvailabilities,
     playedIndexes: [],

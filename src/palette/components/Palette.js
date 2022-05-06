@@ -17,8 +17,10 @@ function Palette({ setCurrentDisplay }) {
   return (
     <div className="App" id="palette">
       <Clues
-        clues={gameState.clues}
         clueMatches={gameState.clueMatches}
+        clues={gameState.clueIndexes.map((clue) =>
+          clue.map((index) => gameState.colors[index])
+        )}
       ></Clues>
       <CurrentWord
         letters={gameState.playedIndexes.map(

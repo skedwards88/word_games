@@ -13,6 +13,5 @@ export default function Clues({ clues, clueMatches }) {
     <Clue clue={clue} clueMatch={clueMatches[index]} key={index}></Clue>
   ));
 
-  console.log(clueDisplays);
   return <div id="clues">{clueDisplays}</div>;
 }

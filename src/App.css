@@ -552,15 +552,15 @@ a {
 }
 
 #palette .red {
-  background-color: gray;
+  background-color: rgb(169 75 80);
 }
 
 #palette .green {
-  background-color: rgb(134, 96, 46);
+  background-color: rgb(182 173 26);
 }
 
 #palette .blue {
-  background-color: rgb(82, 109, 70);
+  background-color: rgb(39 144 109);
 }
 
 #palette .letter.unavailable {
@@ -574,7 +574,6 @@ a {
 #palette #clues {
   grid-area: clues;
   display: flex;
-  background-color: white;
   color: black;
   flex-direction: column;
   min-height: 10vh;
@@ -582,12 +581,14 @@ a {
   flex-wrap: wrap;
   padding: 10px;
   font-size: initial;
+  justify-content: space-evenly;
 }
 
 #palette .clue {
   display: flex;
   flex-direction: row;
   margin: 2px;
+  justify-content: center;
 }
 
 #palette .clue.matched {

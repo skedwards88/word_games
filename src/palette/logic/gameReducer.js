@@ -1,6 +1,7 @@
 import { isKnown } from "../../common/isKnown";
 import { gameInit } from "./gameInit";
 import { checkIfNeighbors } from "../../common/checkIfNeighbors";
+import { arraysMatchQ } from "./arraysMatchQ";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
@@ -23,7 +24,6 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "addLetter") {
-    console.log(JSON.stringify(currentGameState.playedIndexes));
     // Don't add the letter if it isn't neighboring the current sequence
     const isNeighboring = checkIfNeighbors({
       indexA:
@@ -59,6 +59,7 @@ export function gameReducer(currentGameState, payload) {
     if (
       currentGameState.playedIndexes.length < currentGameState.minWordLength
     ) {
+      console.log("too short");
       return {
         ...currentGameState,
         letterAvailabilities: newLetterAvailabilities,
@@ -83,19 +84,24 @@ export function gameReducer(currentGameState, payload) {
     }
 
     // check if the word matches a pattern
-    const currentColors = currentGameState.playedIndexes
-      .map((index) => currentGameState.colors[index])
-      .join(" ");
+    const currentColors = currentGameState.playedIndexes.map(
+      (index) => currentGameState.colors[index]
+    );
     let clueMatches = [...currentGameState.clueMatches];
-
-    for (let index = 0; index < currentGameState.clues.length; index++) {
+    for (
+      let clueIndex = 0;
+      clueIndex < currentGameState.clueIndexes.length;
+      clueIndex++
+    ) {
       // go to the next iteration if we already have a match for the clue
-      if (clueMatches[index]) {
+      if (clueMatches[clueIndex]) {
         continue;
       }
-      const comparisonClue = currentGameState.clues[index].join(" ");
-      if (currentColors.includes(comparisonClue)) {
-        clueMatches[index] = true;
+      const comparisonColors = currentGameState.clueIndexes[clueIndex].map(
+        (index) => currentGameState.colors[index]
+      );
+      if (arraysMatchQ(currentColors, comparisonColors)) {
+        clueMatches[clueIndex] = true;
       }
     }
 
