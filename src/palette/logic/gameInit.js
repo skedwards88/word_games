@@ -89,7 +89,6 @@ export function gameInit() {
   });
   const letterAvailabilities = letters.map(() => true);
   const clueMatches = clueIndexes.map(() => false);
-  const clueReveals = clueIndexes.map(() => false);
 
   return {
     minWordLength: minWordLength,
@@ -97,11 +96,9 @@ export function gameInit() {
     colors: colors,
     clueIndexes: clueIndexes,
     clueMatches: clueMatches,
-    clueReveals: clueReveals,
     letterAvailabilities: letterAvailabilities,
     playedIndexes: [],
     easyMode: easyMode,
-
     hintLevel: 0,
   };
 }

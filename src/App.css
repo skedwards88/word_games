@@ -422,61 +422,6 @@ a {
   text-align: center;
 }
 
-/* Landscape */
-
-@media (orientation: landscape) {
-  #home {
-    grid-template-areas: "games controls";
-    grid-template-columns: 1fr auto;
-    grid-template-rows: 1fr;
-  }
-
-  #gribbles {
-    grid-template-areas:
-      "stats currentWord controls"
-      "foundWords board controls";
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto 1fr;
-  }
-
-  #thirdle {
-    grid-template-areas:
-      "pattern controls"
-      "result controls"
-      "guess controls"
-      "keyboard controls";
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto 1fr auto auto;
-  }
-
-  #thirdle #pattern {
-    font-size: 9vmin;
-  }
-
-  #thirdle #answers {
-    display: grid;
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  #keyboard .keyboardLetter {
-    font-size: 4vw;
-  }
-
-  #controls {
-    flex-direction: column;
-    border: solid white;
-    border-width: 0 0 0 2px;
-    align-items: center;
-    height: 100%;
-  }
-
-  #currentWord {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
 /* palette-specific */
 
 #palette {
@@ -564,7 +509,7 @@ a {
 }
 
 #palette .letter.unavailable {
-  color: darkgray;
+  opacity: 50%;
 }
 
 #palette .computerWord {
@@ -604,4 +549,68 @@ a {
   justify-content: center;
   align-items: center;
   font-weight: bold;
+}
+
+/* Landscape */
+
+@media (orientation: landscape) {
+  #home {
+    grid-template-areas: "games controls";
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr;
+  }
+
+  #gribbles {
+    grid-template-areas:
+      "stats currentWord controls"
+      "foundWords board controls";
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr;
+  }
+
+  #thirdle {
+    grid-template-areas:
+      "pattern controls"
+      "result controls"
+      "guess controls"
+      "keyboard controls";
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr auto auto;
+  }
+
+  #thirdle #pattern {
+    font-size: 9vmin;
+  }
+
+  #thirdle #answers {
+    display: grid;
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  #palette {
+    grid-template-areas:
+      "clues currentWord controls"
+      "clues board controls";
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: auto auto;
+  }
+
+
+  #keyboard .keyboardLetter {
+    font-size: 4vw;
+  }
+
+  #controls {
+    flex-direction: column;
+    border: solid white;
+    border-width: 0 0 0 2px;
+    align-items: center;
+    height: 100%;
+  }
+
+  #currentWord {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
