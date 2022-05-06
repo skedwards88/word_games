@@ -1,6 +1,10 @@
 /* General */
 html {
   height: 100%;
+  --gray: gray;
+  --blue: rgb(38 36 129);
+  --black: rgb(0, 0, 0);
+  --white: rgb(255, 255, 255);
 }
 
 .App {
@@ -179,6 +183,8 @@ a {
   width: 90%;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  overflow: scroll;
 }
 
 #home .gameButton {
@@ -416,6 +422,135 @@ a {
   text-align: center;
 }
 
+/* palette-specific */
+
+#palette {
+  display: grid;
+  grid-template-areas:
+    "clues"
+    "currentWord"
+    "board"
+    "controls";
+  grid-template-rows:
+    1fr
+    auto
+    auto
+    auto;
+}
+
+#palette #currentWord {
+  grid-area: currentWord;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-height: 10vmin;
+
+}
+
+#palette #currentWord > div{
+  height: 10vmin;
+  width: 10vmin;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#palette #wordResult {
+  grid-area: board;
+  background-color: rgb(38 36 129);
+  touch-action: none;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#palette #board {
+  grid-area: board;
+  display: grid;
+  background-color: rgb(38 36 129);
+  touch-action: none;
+  justify-content: center;
+}
+
+#palette #board.rows5 {
+  grid-template-columns: repeat(5, 16vmin);
+  grid-template-rows: repeat(5, 16vmin);
+}
+
+#palette #board.rows4 {
+  grid-template-columns: repeat(4, 20vmin);
+  grid-template-rows: repeat(4, 20vmin);
+}
+
+#palette .letter {
+  touch-action: none;
+  margin: min(4vmin, 0.4cm);
+  background-color: rgb(38 36 129);
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+#palette .red {
+  background-color: rgb(169 75 80);
+}
+
+#palette .green {
+  background-color: rgb(182 173 26);
+}
+
+#palette .blue {
+  background-color: rgb(39 144 109);
+}
+
+#palette .letter.unavailable {
+  opacity: 50%;
+}
+
+#palette .computerWord {
+  color: gray;
+}
+
+#palette #clues {
+  grid-area: clues;
+  display: flex;
+  color: black;
+  flex-direction: column;
+  min-height: 10vh;
+  overflow: scroll;
+  flex-wrap: wrap;
+  padding: 10px;
+  font-size: initial;
+  justify-content: space-evenly;
+}
+
+#palette .clue {
+  display: flex;
+  flex-direction: row;
+  margin: 2px;
+  justify-content: center;
+}
+
+#palette .clue.matched {
+  opacity: 50%;
+}
+
+#palette .clueBox {
+  min-height: 5vh;
+  min-width: 5vh;
+  border: 1px solid white;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
 /* Landscape */
 
 @media (orientation: landscape) {
@@ -451,6 +586,15 @@ a {
     display: grid;
     grid-template-columns:repeat(2,1fr);
   }
+
+  #palette {
+    grid-template-areas:
+      "clues currentWord controls"
+      "clues board controls";
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: auto auto;
+  }
+
 
   #keyboard .keyboardLetter {
     font-size: 4vw;
