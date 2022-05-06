@@ -27,13 +27,10 @@ export function gameReducer(currentGameState, payload) {
       break;
     }
 
-    const newResult = clueMatches.every((i) => i) ? "Game over" : "";
-
     return {
       ...currentGameState,
       clueReveals: clueReveals,
       clueMatches: clueMatches,
-      result: newResult,
     };
   }
 
@@ -48,7 +45,6 @@ export function gameReducer(currentGameState, payload) {
       ...currentGameState,
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: newPlayedIndexes,
-      result: "",
     };
   }
 
@@ -93,7 +89,6 @@ export function gameReducer(currentGameState, payload) {
         ...currentGameState,
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
-        result: currentGameState.playedIndexes.length <= 1 ? "" : "No match",
       };
     }
 
@@ -108,12 +103,10 @@ export function gameReducer(currentGameState, payload) {
         ...currentGameState,
         letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
-        result: "No match",
       };
     }
 
     // check if the word matches a pattern
-    let newResult = "";
     const currentColors = currentGameState.playedIndexes.map(
       (index) => currentGameState.colors[index]
     );
@@ -135,13 +128,6 @@ export function gameReducer(currentGameState, payload) {
         // there will only be one match, so exit early if we find one
         break;
       }
-      // If didn't find a match
-      newResult = "No match";
-    }
-
-    // Check if all matches found
-    if (clueMatches.every((i) => i)) {
-      newResult = "Game over";
     }
 
     return {
@@ -149,7 +135,6 @@ export function gameReducer(currentGameState, payload) {
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: [],
       clueMatches: clueMatches,
-      result: newResult,
     };
   }
 }

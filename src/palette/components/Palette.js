@@ -6,7 +6,6 @@ import { gameInit } from "../logic/gameInit";
 import { gameReducer } from "../logic/gameReducer";
 import Clues from "./Clues";
 import CurrentWord from "./CurrentWord";
-import { WordResult } from "./WordResult";
 
 function Palette({ setCurrentDisplay }) {
   const [gameState, dispatchGameState] = React.useReducer(
@@ -14,8 +13,6 @@ function Palette({ setCurrentDisplay }) {
     {},
     gameInit
   );
-
-  // todo if not using result other than "gameover", can simplify to just gameOver:bool
 
   return (
     <div className="App" id="palette">
@@ -29,13 +26,8 @@ function Palette({ setCurrentDisplay }) {
           clue.map((index) => gameState.letters[index])
         )}
       ></Clues>
-      {gameState.result === "Game over" ? (
-        <div
-          id="currentWord"
-          className={gameState.result === "Game over" ? "" : "fadeOut"}
-        >
-          {gameState.result}
-        </div>
+      {gameState.clueMatches.every((i) => i) ? (
+        <div id="currentWord">Complete!</div>
       ) : (
         <CurrentWord
           letters={gameState.playedIndexes.map(
@@ -44,14 +36,13 @@ function Palette({ setCurrentDisplay }) {
           colors={gameState.playedIndexes.map(
             (index) => gameState.colors[index]
           )}
-          result={gameState.result}
         ></CurrentWord>
       )}
       <Board
         letters={gameState.letters}
         colors={gameState.colors}
         letterAvailabilities={
-          gameState.result === "Game over"
+          gameState.clueMatches.every((i) => i)
             ? gameState.letters.map(() => false)
             : gameState.letterAvailabilities
         }

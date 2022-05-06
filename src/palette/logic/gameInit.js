@@ -100,7 +100,6 @@ export function gameInit() {
     clueReveals: clueReveals,
     letterAvailabilities: letterAvailabilities,
     playedIndexes: [],
-    result: "",
     easyMode: easyMode,
   };
 }

@@ -29,6 +29,7 @@
 - make icon
 - show result (word unknown, too short, mathes pattern, game over)
 - make sure at least 3 matches?
+- letter unavailable vs yellow contrast too low
 
 ## Other ideas
 
