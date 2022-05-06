@@ -9,28 +9,31 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "hint") {
-    let clueReveals = [...currentGameState.clueReveals];
-    let clueMatches = [...currentGameState.clueMatches];
+    let newHintLevel = currentGameState.hintLevel + 1;
 
-    for (let index = 0; index < clueReveals.length; index++) {
-      // If the player already found the clue, don't reveal
-      if (clueMatches[index]) {
+    // If the hit level exceeds the length of any of the clues, that clue is fully solved
+    // gameState.clueMatches.every((i) => i)
+    const currentClueMatches = currentGameState.clueMatches;
+    const currentClueIndexes = currentGameState.clueIndexes;
+    let newClueMatches = [];
+    for (let index = 0; index < currentClueIndexes.length; index++) {
+      // If the clue is already matched, skip
+      if (currentClueMatches[index]) {
+        newClueMatches.push(currentClueMatches[index]);
         continue;
       }
-      // If the clue is already revealed, skip
-      if (clueReveals[index]) {
-        continue;
-      }
 
-      clueReveals[index] = true;
-      clueMatches[index] = true;
-      break;
+      if (newHintLevel >= currentClueIndexes[index].length) {
+        newClueMatches.push(true);
+      } else {
+        newClueMatches.push(false);
+      }
     }
 
     return {
       ...currentGameState,
-      clueReveals: clueReveals,
-      clueMatches: clueMatches,
+      hintLevel: newHintLevel,
+      clueMatches: newClueMatches,
     };
   }
 
@@ -111,6 +114,9 @@ export function gameReducer(currentGameState, payload) {
       (index) => currentGameState.colors[index]
     );
     let clueMatches = [...currentGameState.clueMatches];
+    let clueIndexes = currentGameState.clueIndexes.map((indexes) => [
+      ...indexes,
+    ]);
     for (
       let clueIndex = 0;
       clueIndex < currentGameState.clueIndexes.length;
@@ -124,7 +130,11 @@ export function gameReducer(currentGameState, payload) {
         (index) => currentGameState.colors[index]
       );
       if (arraysMatchQ(currentColors, comparisonColors)) {
+        // If we found a match, indicate that the match is found
+        // And also replace the clue letters with the found word
         clueMatches[clueIndex] = true;
+        clueIndexes[clueIndex] = currentGameState.playedIndexes;
+
         // there will only be one match, so exit early if we find one
         break;
       }
@@ -135,6 +145,7 @@ export function gameReducer(currentGameState, payload) {
       letterAvailabilities: newLetterAvailabilities,
       playedIndexes: [],
       clueMatches: clueMatches,
+      clueIndexes: clueIndexes,
     };
   }
 }

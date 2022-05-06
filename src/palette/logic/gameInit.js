@@ -101,5 +101,7 @@ export function gameInit() {
     letterAvailabilities: letterAvailabilities,
     playedIndexes: [],
     easyMode: easyMode,
+
+    hintLevel: 0,
   };
 }

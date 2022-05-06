@@ -14,12 +14,13 @@ function Palette({ setCurrentDisplay }) {
     gameInit
   );
 
+  console.log(JSON.stringify(gameState));
   return (
     <div className="App" id="palette">
       <Clues
         clueMatches={gameState.clueMatches}
-        clueReveals={gameState.clueReveals}
-        clues={gameState.clueIndexes.map((clue) =>
+        hintLevel={gameState.hintLevel}
+        clueColors={gameState.clueIndexes.map((clue) =>
           clue.map((index) => gameState.colors[index])
         )}
         clueLetters={gameState.clueIndexes.map((clue) =>

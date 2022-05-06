@@ -1,9 +1,9 @@
 import React from "react";
 
-function Clue({ clue, clueMatch, letters, clueReveal }) {
-  const boxes = clue.map((color, index) => (
+function Clue({ clueColors, clueMatch, clueLetters, hintLevel }) {
+  const boxes = clueColors.map((color, index) => (
     <div className={`clueBox ${color}`} key={`${index}`}>
-      {clueReveal ? letters[index] : ""}
+      {index < hintLevel || clueMatch ? clueLetters[index] : ""}
     </div>
   ));
 
@@ -11,18 +11,18 @@ function Clue({ clue, clueMatch, letters, clueReveal }) {
 }
 
 export default function Clues({
-  clues,
+  clueColors,
   clueMatches,
   clueLetters,
-  clueReveals,
+  hintLevel,
 }) {
-  const clueDisplays = clues.map((clue, index) => (
+  const clueDisplays = clueColors.map((clue, index) => (
     <Clue
-      clue={clue}
+      clueColors={clueColors[index]}
       clueMatch={clueMatches[index]}
-      letters={clueLetters[index]}
-      clueReveal={clueReveals[index]}
+      clueLetters={clueLetters[index]}
       key={index}
+      hintLevel={hintLevel}
     ></Clue>
   ));
 
