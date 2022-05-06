@@ -1,17 +1,13 @@
 /* General */
 html {
   height: 100%;
-  --gray: gray;
-  --blue: rgb(38 36 129);
-  --black: rgb(0, 0, 0);
-  --white: rgb(255, 255, 255);
 }
 
 .App {
   background-color: rgb(38 36 129);
   color: rgb(255 255 255);
   font-family: sans-serif;
-  font-size: min(7vmin, 0.8cm);
+  font-size: min(4vmax,7vmin);
   display: grid;
   position: fixed;
   left: 0;
@@ -21,7 +17,7 @@ html {
 }
 
 h1 {
-  font-size: min(10vmin, 1cm);
+  font-size: min(5vmax,10vmin);
 }
 
 button {
@@ -30,8 +26,7 @@ button {
   text-align: center;
   -webkit-appearance: none;
   -moz-appearance: none;
-
-  font-size: min(5vmin, 0.5cm);
+  font-size: min(4vmax,7vmin);
   font-family: sans-serif;
   background-color: rgb(239, 239, 239);
   border: 1px solid rgb(239, 239, 239);
@@ -43,20 +38,22 @@ button {
 }
 
 select {
-  font-size: min(7vmin, 0.8cm);
+  font-size: min(4vmax,7vmin);
 }
 
 input {
-  min-width: min(7vmin, 0.8cm);
-  min-height: min(7vmin, 0.8cm);
+  min-width: min(4vmax,7vmin);
+  min-height: min(4vmax,7vmin);
 }
 
 #controls {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   grid-area: controls;
   border-top: 2px solid white;
   width: 100%;
+  height: 7vh;
 }
 
 #controls > button {
@@ -64,9 +61,8 @@ input {
   background-repeat: no-repeat;
   background-size: contain;
   border: 0;
-  width: min(10vmin, 1cm);
-  height: min(10vmin, 1cm);
-  margin: 5px;
+  width: 65%;
+  height: 65%;
   background-color: transparent;
 }
 
@@ -124,7 +120,7 @@ input {
   align-items: center;
   color: rgb(255 255 255);
   font-family: sans-serif;
-  font-size: min(7vmin, 0.8cm);
+  font-size: min(4vmax,7vmin);
 }
 
 #settings {
@@ -192,7 +188,7 @@ a {
   margin: 3px;
   background-color: transparent;
   color: white;
-  font-size: min(7vmin, 0.8cm);
+  font-size: min(4vmax,7vmin);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -246,6 +242,7 @@ a {
   align-items: center;
   grid-area: stats;
   padding: 10px;
+  font-size: min(3vmax,5vmin);
 }
 
 #gribbles #foundWords {
@@ -301,7 +298,7 @@ a {
 
 #gribbles .letter {
   touch-action: none;
-  margin: min(4vmin, 0.4cm);
+  margin: 4vmin;
   background-color: rgb(38 36 129);
   font-weight: bold;
   text-align: center;
@@ -404,7 +401,7 @@ a {
 
 #thirdle #guess {
   grid-area: guess;
-  font-size: 5vmin;
+  font-size: min(4vmax,7vmin);
 }
 
 #thirdle #keyboard {
@@ -416,7 +413,7 @@ a {
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  font-size: 5vmin;
+  font-size: min(4vmax,7vmin);
   height: 100%;
   justify-content: center;
   text-align: center;
@@ -443,18 +440,22 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  min-height: 10vmin;
-
+  align-items: center;
+  min-height: min(12vmax,20vmin);
+  overflow: hidden;
 }
 
 #palette #currentWord > div{
-  height: 10vmin;
-  width: 10vmin;
+  height: min(5vmax,10vmin);
+  width: min(5vmax,10vmin);
   text-align: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
+  font-size: min(3vmax,7vmin);
+
 }
 
 #palette #wordResult {
@@ -473,27 +474,20 @@ a {
   background-color: rgb(38 36 129);
   touch-action: none;
   justify-content: center;
-}
-
-#palette #board.rows5 {
-  grid-template-columns: repeat(5, 16vmin);
-  grid-template-rows: repeat(5, 16vmin);
-}
-
-#palette #board.rows4 {
-  grid-template-columns: repeat(4, 20vmin);
-  grid-template-rows: repeat(4, 20vmin);
+  grid-template-columns: repeat(4, min(15vmax,20vmin));
+  grid-template-rows: repeat(4, min(15vmax,20vmin));
 }
 
 #palette .letter {
   touch-action: none;
-  margin: min(4vmin, 0.4cm);
+  margin: 4vmin;
   background-color: rgb(38 36 129);
   font-weight: bold;
   text-align: center;
   justify-content: center;
   display: flex;
   align-items: center;
+  font-size: min(7vmax,7vmin);
 }
 
 #palette .red {
@@ -512,28 +506,23 @@ a {
   opacity: 50%;
 }
 
-#palette .computerWord {
-  color: gray;
-}
-
 #palette #clues {
   grid-area: clues;
   display: flex;
-  color: black;
   flex-direction: column;
-  min-height: 10vh;
   overflow: scroll;
   flex-wrap: wrap;
-  padding: 10px;
   font-size: initial;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 #palette .clue {
   display: flex;
   flex-direction: row;
-  margin: 2px;
   justify-content: center;
+  align-items: center;
+  margin: 3px;
 }
 
 #palette .clue.matched {
@@ -541,14 +530,15 @@ a {
 }
 
 #palette .clueBox {
-  min-height: 5vh;
-  min-width: 5vh;
+  min-height: min(5vmax,10vmin);
+  min-width: min(5vmax,10vmin);
   border: 1px solid white;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  font-size: min(3vmax,7vmin);
 }
 
 /* Landscape */
@@ -595,6 +585,9 @@ a {
     grid-template-rows: auto auto;
   }
 
+  #palette #currentWord {
+    max-width: min(45vmax,80vmin);
+  }
 
   #keyboard .keyboardLetter {
     font-size: 4vw;
@@ -606,6 +599,7 @@ a {
     border-width: 0 0 0 2px;
     align-items: center;
     height: 100%;
+    width: 6vw;
   }
 
   #currentWord {
