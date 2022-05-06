@@ -8,6 +8,35 @@ export function gameReducer(currentGameState, payload) {
     return gameInit(payload);
   }
 
+  if (payload.action === "hint") {
+    let clueReveals = [...currentGameState.clueReveals]
+    let clueMatches = [...currentGameState.clueMatches]
+
+    for (let index = 0; index < clueReveals.length; index++) {
+      // If the player already found the clue, don't reveal
+      if (clueMatches[index]) {
+        continue
+      }
+      // If the clue is already revealed, skip
+      if (clueReveals[index]) {
+        continue
+      }
+
+      clueReveals[index] = true
+      clueMatches[index] = true
+      break
+    }
+
+    const newResult = clueMatches.every((i) => i) ? "game over" : "";
+
+    return {
+      ...currentGameState,
+      clueReveals: clueReveals,
+      clueMatches: clueMatches,
+      newResult: newResult,
+    }
+  }
+
   if (payload.action === "startWord") {
     let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
     newLetterAvailabilities[currentGameState.letterIndex] = false;

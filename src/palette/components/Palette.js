@@ -18,8 +18,12 @@ function Palette({ setCurrentDisplay }) {
     <div className="App" id="palette">
       <Clues
         clueMatches={gameState.clueMatches}
+        clueReveals={gameState.clueReveals}
         clues={gameState.clueIndexes.map((clue) =>
           clue.map((index) => gameState.colors[index])
+        )}
+        clueLetters={gameState.clueIndexes.map((clue) =>
+          clue.map((index) => gameState.letters[index])
         )}
       ></Clues>
       <CurrentWord
@@ -45,6 +49,10 @@ function Palette({ setCurrentDisplay }) {
               easyMode: gameState.easyMode,
             });
           }}
+        ></button>
+        <button
+          id="helpButton"
+          onClick={() => dispatchGameState({ action: "hint" })}
         ></button>
         <Info
           info={

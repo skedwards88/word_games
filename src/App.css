@@ -599,4 +599,9 @@ a {
   min-height: 5vh;
   min-width: 5vh;
   border: 1px solid white;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
 }

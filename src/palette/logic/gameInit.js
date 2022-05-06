@@ -36,8 +36,10 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
       easyMode: easyMode,
     });
 
-    for (let index = 0; index < wordIndexes.length; index++) {
-      const currentClue = wordIndexes[index];
+    const shuffledWordIndexes = shuffleArray(wordIndexes)
+
+    for (let index = 0; index < shuffledWordIndexes.length; index++) {
+      const currentClue = shuffledWordIndexes[index];
 
       // If word is not 4-6 long, skip
       if (currentClue.length < 4 || currentClue.length > 6) {
@@ -87,6 +89,7 @@ export function gameInit() {
   });
   const letterAvailabilities = letters.map(() => true);
   const clueMatches = clueIndexes.map(() => false);
+  const clueReveals = clueIndexes.map(() => false);
 
   return {
     minWordLength: minWordLength,
@@ -94,6 +97,7 @@ export function gameInit() {
     colors: colors,
     clueIndexes: clueIndexes,
     clueMatches: clueMatches,
+    clueReveals: clueReveals,
     letterAvailabilities: letterAvailabilities,
     playedIndexes: [],
     result: "",
