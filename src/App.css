@@ -217,6 +217,10 @@ a {
   background-image: url("./images/thirdle.svg");
 }
 
+#palette_icon {
+  background-image: url("./images/palette.svg");
+}
+
 /* Gribbles-specific */
 
 #gribbles {
