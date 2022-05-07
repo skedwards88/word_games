@@ -69,7 +69,7 @@ function Palette({ setCurrentDisplay }) {
           info={
             <div>
               {<h1>Palette</h1>}
-              {`TODO`}
+              {`Connect adjacent letters to build words that match the given color patterns.`}
             </div>
           }
         ></Info>

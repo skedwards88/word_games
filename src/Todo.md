@@ -26,7 +26,7 @@
 ## Palette
 
 - save to local storage
-- make icon
+- tests
 - make sure at least 3 matches?
 
 ## Other ideas
