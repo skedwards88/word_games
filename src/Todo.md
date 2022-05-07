@@ -26,9 +26,7 @@
 
 ## Palette
 
-- save to local storage
 - tests
-- make sure at least 3 matches?
 
 ## Other ideas
 
@@ -39,3 +37,7 @@ spatial: arrange words into crossword. maybe have islands or irregular boundary.
 solichar (solitaire with letters)
 
 lettris (tetris with letters)
+
+blobbles: palette but with shapes instead
+
+word rush: colored letters, trying to get combos of colors to reach score before time ends

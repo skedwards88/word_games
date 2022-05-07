@@ -47,7 +47,7 @@ def getAllWords():
 
 def writeWords(path, words):
   with open(path, "w") as file:
-    json.dump(words, file)
+    json.dump(words, file, indent=2)
 
 common = getCommonWords()
 all = getAllWords()
