@@ -75,7 +75,26 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
   return [letters, colors, clueIndexes];
 }
 
-export function gameInit() {
+export function gameInit(useSaved = true) {
+  const savedState = useSaved
+    ? JSON.parse(localStorage.getItem("paletteState"))
+    : undefined;
+
+  if (
+    savedState &&
+    savedState.hasOwnProperty("minWordLength") &&
+    savedState.hasOwnProperty("letters") &&
+    savedState.hasOwnProperty("colors") &&
+    savedState.hasOwnProperty("clueIndexes") &&
+    savedState.hasOwnProperty("clueMatches") &&
+    savedState.hasOwnProperty("letterAvailabilities") &&
+    savedState.hasOwnProperty("playedIndexes") &&
+    savedState.hasOwnProperty("easyMode") &&
+    savedState.hasOwnProperty("hintLevel")
+  ) {
+    return savedState;
+  }
+
   const easyMode = true;
   const minWordLength = 4;
   const gridSize = 4;

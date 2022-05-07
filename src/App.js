@@ -2,13 +2,13 @@ import React from "react";
 import "./App.css";
 import Gribbles from "./gribbles/components/Gribbles";
 import Thirdle from "./thirdle/components/Thirdle";
-import Palette from "./palette/components/Palette"
+import Palette from "./palette/components/Palette";
 import Info from "./common/Info";
 import { gameIndex } from "./gameIndex";
-import packageJson from "../package.json"
+import packageJson from "../package.json";
 
 function App() {
-  const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.Home);  
+  const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.Home);
 
   function Home() {
     return (
@@ -37,21 +37,25 @@ function App() {
             <div className="gameIcon" id="palette_icon"></div>
             <div>Palette</div>
           </button>
-
         </div>
         <div id="controls">
           <Info
-           info={<div id="info">
-           {`Word Games (beta ${packageJson.version})\n\nMobile only. Install or add to home screen for offline play!\n\nWant more games?\nCheck `}
-           <a href="https://skedwards88.github.io/portfolio/">these</a>
-           {` out. `}
-           {<hr></hr>}
-           {`Thanks to `}
-           <a href="https://github.com/wordnik/wordlist">Wordnik</a>
-           {` for their open source word list and `}
-           <a href="https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists#English">Wiktionary</a>
-           {` and data therein for word frequency data.`}
-         </div>}/>
+            info={
+              <div id="info">
+                {`Word Games (beta ${packageJson.version})\n\nMobile only. Install or add to home screen for offline play!\n\nWant more games?\nCheck `}
+                <a href="https://skedwards88.github.io/portfolio/">these</a>
+                {` out. `}
+                {<hr></hr>}
+                {`Thanks to `}
+                <a href="https://github.com/wordnik/wordlist">Wordnik</a>
+                {` for their open source word list and `}
+                <a href="https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists#English">
+                  Wiktionary
+                </a>
+                {` and data therein for word frequency data.`}
+              </div>
+            }
+          />
         </div>
       </div>
     );

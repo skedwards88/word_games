@@ -1,5 +1,5 @@
 import { getLetterPool } from "./letterPool";
-import commonWords from "./wordLists/compiled/commonWords.json"
+import commonWords from "./wordLists/compiled/commonWords.json";
 import uncommonWords from "./wordLists/compiled/uncommonWords.json";
 
 jest.mock("./wordLists/compiled/uncommonWords.json");

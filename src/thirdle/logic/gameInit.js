@@ -1,13 +1,21 @@
 import { getClue } from "./getClue";
 
-export function gameInit(useSaved=true) {
-  const savedState = useSaved ? JSON.parse(localStorage.getItem("thirdleState")) : undefined;
+export function gameInit(useSaved = true) {
+  const savedState = useSaved
+    ? JSON.parse(localStorage.getItem("thirdleState"))
+    : undefined;
 
-  if (savedState) {
+  if (
+    savedState &&
+    savedState.hasOwnProperty("pattern") &&
+    savedState.hasOwnProperty("answers") &&
+    savedState.hasOwnProperty("currentGuess") &&
+    savedState.hasOwnProperty("result")
+  ) {
     return {
       ...savedState,
-      result: ""
-    }
+      result: "",
+    };
   }
 
   const { pattern, answers } = getClue();

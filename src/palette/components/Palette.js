@@ -14,7 +14,11 @@ function Palette({ setCurrentDisplay }) {
     gameInit
   );
 
-  console.log(JSON.stringify(gameState));
+  React.useEffect(() => {
+    window.localStorage.setItem("paletteState", JSON.stringify(gameState));
+  }, [gameState]);
+
+  // console.log(JSON.stringify(gameState));
   return (
     <div className="App" id="palette">
       <Clues

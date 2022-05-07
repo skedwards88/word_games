@@ -9,8 +9,9 @@
 - errors/error boundaries
 - works on desktop too?
 - curate common list
-- make styling subclassed
+- make styling per file
 - add install button https://web.dev/customize-install/
+- add test to maks sure common exclusion/additions don't share words
 
 ## Gribbles
 

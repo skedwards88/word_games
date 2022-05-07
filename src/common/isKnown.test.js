@@ -3,7 +3,6 @@ import { isKnown } from "./isKnown";
 jest.mock("./wordLists/compiled/uncommonWords.json");
 jest.mock("./wordLists/compiled/commonWords.json");
 
-
 test("Unknown word", () => {
   const result = isKnown("CAT");
   const expected = { isEasy: false, isPartial: false, isWord: false };

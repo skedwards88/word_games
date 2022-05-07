@@ -3,5 +3,5 @@ export function beautifyPattern(pattern) {
   return pattern
     .replaceAll("[A-Z]+", "...")
     .replaceAll("$", "")
-    .replaceAll("^", "")
+    .replaceAll("^", "");
 }

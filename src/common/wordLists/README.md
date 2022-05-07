@@ -14,9 +14,9 @@ All files were processed into files that contain words that also exist in the Wo
 
 `processed/gutenberg.txt` is `raw/gutenberg.txt` minus words that do not exist in `raw/wordnik.txt`. `processed/gutenberg_processor.py` is the script that generated this file.
 
-`processed/movies.txt` is `raw/movies.txt` minus  words that do not exist in `raw/wordnik.txt`. `processed/movies_processor.py` is the script that generated this file.
+`processed/movies.txt` is `raw/movies.txt` minus words that do not exist in `raw/wordnik.txt`. `processed/movies_processor.py` is the script that generated this file.
 
-`processed/wiki.txt` is `raw/wiki.txt`, minus words that  words that do not exist in `raw/wordnik.txt` or that are used < 1000 times on Wikipedia. `processed/wiki_frequency_processor.py` is the script that generated this file.
+`processed/wiki.txt` is `raw/wiki.txt`, minus words that words that do not exist in `raw/wordnik.txt` or that are used < 1000 times on Wikipedia. `processed/wiki_frequency_processor.py` is the script that generated this file.
 
 `raw/wordnik.txt` required no processing.
 

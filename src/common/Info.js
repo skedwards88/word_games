@@ -5,12 +5,12 @@ export default function Info({ info, sideEffectShow, sideEffectHide }) {
 
   function handleShowInfo() {
     if (!showInfo && sideEffectShow) {
-      sideEffectShow()
+      sideEffectShow();
     }
 
     if (showInfo && sideEffectHide) {
-      console.log('hide effect')
-      sideEffectHide()
+      console.log("hide effect");
+      sideEffectHide();
     }
 
     setShowInfo(!showInfo);
@@ -18,9 +18,7 @@ export default function Info({ info, sideEffectShow, sideEffectHide }) {
 
   return showInfo ? (
     <div className="modal">
-      <div id="info">
-        {info}
-      </div>
+      <div id="info">{info}</div>
       <button className="close" onClick={() => handleShowInfo()}>
         CLOSE
       </button>

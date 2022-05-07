@@ -8,8 +8,7 @@ function Key({ dispatchThirdleState, key }) {
         id="enter"
         key={key}
         onClick={() => dispatchThirdleState({ action: "guess" })}
-      >
-      </button>
+      ></button>
     );
   }
   if (key === "deleteLetter") {
@@ -19,8 +18,7 @@ function Key({ dispatchThirdleState, key }) {
         id="backspace"
         key={key}
         onClick={() => dispatchThirdleState({ action: "removeLetter" })}
-      >
-      </button>
+      ></button>
     );
   }
   if (key === "deleteWord") {
@@ -30,8 +28,7 @@ function Key({ dispatchThirdleState, key }) {
         id="delete"
         key={key}
         onClick={() => dispatchThirdleState({ action: "clearWord" })}
-      >
-      </button>
+      ></button>
     );
   }
   return (

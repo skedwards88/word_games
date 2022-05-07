@@ -143,11 +143,15 @@ function Gribbles({ setCurrentDisplay }) {
           timerState={timerState}
         />
         <Info
-          info={<div>{<h1>Gribbles</h1>}{`\n\nConnect adjacent letters to build words. Can you find all the words before time is up?`}</div>}
+          info={
+            <div>
+              {<h1>Gribbles</h1>}
+              {`\n\nConnect adjacent letters to build words. Can you find all the words before time is up?`}
+            </div>
+          }
           sideEffectShow={() => timerDispatch({ action: "pause" })}
-          sideEffectHide={() => timerDispatch({ action: "play"})}
-        >
-        </Info>
+          sideEffectHide={() => timerDispatch({ action: "play" })}
+        ></Info>
         {/* <Info
           info={`Gribbles!\n\nConnect adjacent letters to build words. Can you find all the words before time is up?`}
           sideEffect={() => console.log('yay')}
