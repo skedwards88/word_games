@@ -38,7 +38,7 @@ export function gameReducer(currentState, payload) {
       return {
         ...currentState,
         result: "giveUp",
-        guess: "",
+        currentGuess: "",
       };
 
     case "newGame":

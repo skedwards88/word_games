@@ -390,7 +390,6 @@ a {
 #thirdle #guess,
 #thirdle #result {
   text-align: center;
-  margin: 5px;
 }
 
 #thirdle #pattern {
@@ -417,7 +416,7 @@ a {
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  font-size: min(4vmax, 7vmin);
+  font-size: min(4vmax, 6vmin);
   height: 100%;
   justify-content: center;
   text-align: center;
