@@ -37,7 +37,7 @@ export function getLetterPool() {
   // The .11 comes from:
   //   There are ~168676 "s" total
   //   About 74442 words ends in "s"
-  //   Remove ~25% of that (18610)
+  //   Remove ~40% of that (18610)
   const numSs = letterDistribution["S"];
   letterDistribution["S"] = numSs - numSs * 0.11;
 

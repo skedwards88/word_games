@@ -464,7 +464,7 @@ a {
   justify-content: center;
   display: flex;
   align-items: center;
-  font-size: min(5vmax, 5vmin);
+  font-size: min(5vmax, 8vmin);
 }
 
 #palette .red {
