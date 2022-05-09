@@ -90,7 +90,8 @@ export function gameInit(useSaved = true) {
     savedState.hasOwnProperty("letterAvailabilities") &&
     savedState.hasOwnProperty("playedIndexes") &&
     savedState.hasOwnProperty("easyMode") &&
-    savedState.hasOwnProperty("hintLevel")
+    savedState.hasOwnProperty("hintLevel") &&
+    !savedState.clueMatches.every((i) => i)
   ) {
     return savedState;
   }
