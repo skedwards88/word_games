@@ -18,7 +18,6 @@ function Palette({ setCurrentDisplay }) {
     window.localStorage.setItem("paletteState", JSON.stringify(gameState));
   }, [gameState]);
 
-  // console.log(JSON.stringify(gameState));
   return (
     <div className="App" id="palette">
       <Clues

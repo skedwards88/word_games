@@ -441,34 +441,8 @@ a {
 
 #palette #currentWord {
   grid-area: currentWord;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  min-height: min(12vmax, 20vmin);
+  min-height: min(5vmax, 16vmin);
   overflow: hidden;
-}
-
-#palette #currentWord > div {
-  height: min(5vmax, 10vmin);
-  width: min(5vmax, 10vmin);
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  font-size: min(3vmax, 7vmin);
-}
-
-#palette #wordResult {
-  grid-area: board;
-  background-color: rgb(38 36 129);
-  touch-action: none;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 #palette #board {
@@ -490,7 +464,7 @@ a {
   justify-content: center;
   display: flex;
   align-items: center;
-  font-size: min(7vmax, 7vmin);
+  font-size: min(5vmax, 5vmin);
 }
 
 #palette .red {
@@ -508,35 +482,30 @@ a {
 #palette .letter.unavailable {
   opacity: 50%;
 }
+#palette #currentWord,.clue {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5vmax;
+}
 
 #palette #clues {
   grid-area: clues;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
-  flex-wrap: wrap;
-  font-size: initial;
   justify-content: space-evenly;
   align-items: center;
-}
-
-#palette .clue {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 3px;
 }
 
 #palette .clue.matched {
   opacity: 50%;
 }
 
-#palette .clueBox {
-  min-height: min(5vmax, 10vmin);
-  min-width: min(5vmax, 10vmin);
+#palette .clueBox,.guessBox {
+  min-height: min(4vmax, 16vmin);
+  min-width: min(4vmax, 16vmin);
   border: 1px solid white;
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -590,6 +559,8 @@ a {
 
   #palette #currentWord {
     max-width: min(45vmax, 80vmin);
+    align-self: center;
+    justify-self: center;
   }
 
   #keyboard .keyboardLetter {
@@ -602,7 +573,7 @@ a {
     border-width: 0 0 0 2px;
     align-items: center;
     height: 100%;
-    width: 6vw;
+    width: 7vw;
   }
 
   #currentWord {

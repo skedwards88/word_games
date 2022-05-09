@@ -3,7 +3,7 @@ import React from "react";
 function Clue({ clueColors, clueMatch, clueLetters, hintLevel }) {
   const boxes = clueColors.map((color, index) => (
     <div className={`clueBox ${color}`} key={`${index}`}>
-      {index < hintLevel || clueMatch ? clueLetters[index] : ""}
+      {index < hintLevel || clueMatch ? clueLetters[index].toUpperCase() : ""}
     </div>
   ));
 
