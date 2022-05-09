@@ -482,7 +482,8 @@ a {
 #palette .letter.unavailable {
   opacity: 50%;
 }
-#palette #currentWord,.clue {
+#palette #currentWord,
+.clue {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -502,7 +503,8 @@ a {
   opacity: 50%;
 }
 
-#palette .clueBox,.guessBox {
+#palette .clueBox,
+.guessBox {
   min-height: min(4vmax, 16vmin);
   min-width: min(4vmax, 16vmin);
   border: 1px solid white;

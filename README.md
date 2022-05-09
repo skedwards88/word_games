@@ -26,4 +26,4 @@ To run locally and register the service worker, run `npm start`.
 
 To deploy, run `npm run deploy`.
 
-To regenerate the word lists, run `npm run prebuild`. For information about the word lists, see `src/common/wordLists/README.md`. To add a word to "easy mode", add the word to `src/common/wordLists/compiled/notActuallyUncommon.txt`. To exclude a word from easy mode, add the word to `src/common/wordLists/compiled/notActuallyCommon.txt`.
+To regenerate the word lists, run `npm run prebuild`. For information about the word lists, see [`src/common/wordLists/README.md`](src/common/wordLists/README.md). To add a word to the list of common words that the code uses to generate clues, add the word to `src/common/wordLists/compiled/notActuallyUncommon.txt`. To exclude a word from the list of common words that the code uses to generate clues, add the word to `src/common/wordLists/compiled/notActuallyCommon.txt`.
