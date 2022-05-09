@@ -15,6 +15,7 @@ export function gameInit(useSaved = true) {
     return {
       ...savedState,
       result: "",
+      currentGuess: "",
     };
   }
 
