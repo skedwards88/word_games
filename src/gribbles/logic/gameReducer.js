@@ -9,8 +9,6 @@ export function gameReducer(currentGameState, payload) {
 
   if (payload.action === "startWord") {
     const newWord = payload.letter.toUpperCase();
-    let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
-    newLetterAvailabilities[currentGameState.letterIndex] = false;
     const newPlayedIndexes = [
       ...currentGameState.playedIndexes,
       payload.letterIndex,
@@ -18,7 +16,6 @@ export function gameReducer(currentGameState, payload) {
     return {
       ...currentGameState,
       currentWord: newWord,
-      letterAvailabilities: newLetterAvailabilities,
       playedIndexes: newPlayedIndexes,
       result: "",
     };
@@ -45,25 +42,19 @@ export function gameReducer(currentGameState, payload) {
 
     const newWord = (currentGameState.currentWord +=
       payload.letter.toUpperCase());
-    let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
-    newLetterAvailabilities[payload.letterIndex] = false;
     return {
       ...currentGameState,
       currentWord: newWord,
-      letterAvailabilities: newLetterAvailabilities,
       playedIndexes: newPlayedIndexes,
     };
   }
 
   if (payload.action === "endWord") {
-    const newLetterAvailabilities = currentGameState.letters.map(() => true);
-
     // if the word is below the min length, don't add the word
     if (currentGameState.currentWord.length < currentGameState.minWordLength) {
       return {
         ...currentGameState,
         currentWord: "",
-        letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
         result: currentGameState.currentWord.length <= 1 ? "" : "Too short",
       };
@@ -75,7 +66,6 @@ export function gameReducer(currentGameState, payload) {
       return {
         ...currentGameState,
         currentWord: "",
-        letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
         result: "Already found",
       };
@@ -90,7 +80,6 @@ export function gameReducer(currentGameState, payload) {
       return {
         ...currentGameState,
         currentWord: "",
-        letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
         result: "Unknown word",
       };
@@ -112,7 +101,6 @@ export function gameReducer(currentGameState, payload) {
       ...currentGameState,
       foundWords: newFoundWords,
       currentWord: "",
-      letterAvailabilities: newLetterAvailabilities,
       playedIndexes: [],
       bonusWordCount: newBonusWordCount,
     };

@@ -65,13 +65,14 @@ function Letter({ letter, letterAvailability, index, dispatchGameState }) {
 
 export default function Board({
   letters,
-  letterAvailabilities,
+  playedIndexes,
+  gameOver,
   dispatchGameState,
 }) {
   const board = letters.map((letter, index) => (
     <Letter
       letter={letter}
-      letterAvailability={letterAvailabilities[index]}
+      letterAvailability={gameOver ? false : !playedIndexes.includes(index)}
       index={index}
       draggable={false}
       dispatchGameState={dispatchGameState}

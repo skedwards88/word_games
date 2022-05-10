@@ -108,11 +108,8 @@ function Gribbles({ setCurrentDisplay }) {
       <WordResult result={gameState.result} />
       <Board
         letters={gameState.letters}
-        letterAvailabilities={
-          timerState.remainingTime <= 0
-            ? gameState.letters.map(() => false)
-            : gameState.letterAvailabilities
-        }
+        playedIndexes={gameState.playedIndexes}
+        gameOver={timerState.remainingTime <= 0}
         dispatchGameState={dispatchGameState}
       ></Board>
       <div id="controls">

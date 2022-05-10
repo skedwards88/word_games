@@ -38,15 +38,12 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "startWord") {
-    let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
-    newLetterAvailabilities[currentGameState.letterIndex] = false;
     const newPlayedIndexes = [
       ...currentGameState.playedIndexes,
       payload.letterIndex,
     ];
     return {
       ...currentGameState,
-      letterAvailabilities: newLetterAvailabilities,
       playedIndexes: newPlayedIndexes,
     };
   }
@@ -70,19 +67,13 @@ export function gameReducer(currentGameState, payload) {
       payload.letterIndex,
     ];
 
-    let newLetterAvailabilities = [...currentGameState.letterAvailabilities];
-    newLetterAvailabilities[payload.letterIndex] = false;
-
     return {
       ...currentGameState,
-      letterAvailabilities: newLetterAvailabilities,
       playedIndexes: newPlayedIndexes,
     };
   }
 
   if (payload.action === "endWord") {
-    const newLetterAvailabilities = currentGameState.letters.map(() => true);
-
     // if the word is below the min length, don't add the word
     if (
       currentGameState.playedIndexes.length < currentGameState.minWordLength
@@ -90,7 +81,6 @@ export function gameReducer(currentGameState, payload) {
       console.log("too short");
       return {
         ...currentGameState,
-        letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
       };
     }
@@ -104,7 +94,6 @@ export function gameReducer(currentGameState, payload) {
       console.log(`unknown word ${word}`);
       return {
         ...currentGameState,
-        letterAvailabilities: newLetterAvailabilities,
         playedIndexes: [],
       };
     }
@@ -142,7 +131,6 @@ export function gameReducer(currentGameState, payload) {
 
     return {
       ...currentGameState,
-      letterAvailabilities: newLetterAvailabilities,
       playedIndexes: [],
       clueMatches: clueMatches,
       clueIndexes: clueIndexes,

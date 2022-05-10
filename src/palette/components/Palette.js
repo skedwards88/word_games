@@ -45,11 +45,8 @@ function Palette({ setCurrentDisplay }) {
       <Board
         letters={gameState.letters}
         colors={gameState.colors}
-        letterAvailabilities={
-          gameState.clueMatches.every((i) => i)
-            ? gameState.letters.map(() => false)
-            : gameState.letterAvailabilities
-        }
+        playedIndexes={gameState.playedIndexes}
+        gameOver={gameState.clueMatches.every((i) => i)}
         dispatchGameState={dispatchGameState}
       ></Board>
       <div id="controls">

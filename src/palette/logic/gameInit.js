@@ -87,7 +87,6 @@ export function gameInit(useSaved = true) {
     savedState.hasOwnProperty("colors") &&
     savedState.hasOwnProperty("clueIndexes") &&
     savedState.hasOwnProperty("clueMatches") &&
-    savedState.hasOwnProperty("letterAvailabilities") &&
     savedState.hasOwnProperty("playedIndexes") &&
     savedState.hasOwnProperty("easyMode") &&
     savedState.hasOwnProperty("hintLevel") &&
@@ -107,7 +106,6 @@ export function gameInit(useSaved = true) {
     easyMode,
     numClues,
   });
-  const letterAvailabilities = letters.map(() => true);
   const clueMatches = clueIndexes.map(() => false);
 
   return {
@@ -116,7 +114,6 @@ export function gameInit(useSaved = true) {
     colors: colors,
     clueIndexes: clueIndexes,
     clueMatches: clueMatches,
-    letterAvailabilities: letterAvailabilities,
     playedIndexes: [],
     easyMode: easyMode,
     hintLevel: 0,

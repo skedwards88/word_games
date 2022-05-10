@@ -48,15 +48,12 @@ export function gameInit({ gridSize, minWordLength, easyMode }) {
     easyMode: easyMode,
   });
 
-  const letterAvailabilities = letters.map(() => true);
-
   return {
     foundWords: [],
     bonusWordCount: 0,
     currentWord: "",
     minWordLength: minWordLength,
     letters: letters,
-    letterAvailabilities: letterAvailabilities,
     playedIndexes: [],
     result: "",
     allWords: allWords,

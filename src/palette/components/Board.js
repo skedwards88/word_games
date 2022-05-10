@@ -10,9 +10,6 @@ function Letter({
   const myRef = React.useRef();
 
   React.useLayoutEffect(() => {
-    // return early if letter is available
-    // if (letterAvailability) {return}
-
     const myDiv = myRef.current;
     const currentClasses = myDiv.className
       .split(" ")
@@ -28,13 +25,6 @@ function Letter({
   function handlePointerDown(e, letter, index) {
     e.preventDefault();
     e.target.releasePointerCapture(e.pointerId);
-
-    // Start a new word
-    // dispatchGameState({
-    //   action: "startWord",
-    //   letter: letter,
-    //   letterIndex: index,
-    // });
   }
 
   function handlePointerEnter(e, letter, index, letterAvailability) {
@@ -79,14 +69,15 @@ function Letter({
 export default function Board({
   letters,
   colors,
-  letterAvailabilities,
+  playedIndexes,
+  gameOver,
   dispatchGameState,
 }) {
   const board = letters.map((letter, index) => (
     <Letter
       letter={letter}
       color={colors[index]}
-      letterAvailability={letterAvailabilities[index]}
+      letterAvailability={gameOver ? false : !playedIndexes.includes(index)}
       index={index}
       draggable={false}
       dispatchGameState={dispatchGameState}
