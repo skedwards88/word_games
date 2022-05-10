@@ -22,7 +22,7 @@ function Letter({
     myDiv.className = newClass;
   }, [letterAvailability]);
 
-  function handlePointerDown(e, letter, index) {
+  function handlePointerDown(e) {
     e.preventDefault();
     e.target.releasePointerCapture(e.pointerId);
   }
@@ -48,12 +48,13 @@ function Letter({
       action: "endWord",
     });
   }
+
   return (
     <div
       className={`letter ${color}`}
       ref={myRef}
       key={index.toString() + letter}
-      onPointerDown={(e) => handlePointerDown(e, letter, index)}
+      onPointerDown={(e) => handlePointerDown(e)}
       onPointerEnter={(e) =>
         handlePointerEnter(e, letter, index, letterAvailability)
       }

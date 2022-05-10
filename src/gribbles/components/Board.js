@@ -5,22 +5,20 @@ function Letter({ letter, letterAvailability, index, dispatchGameState }) {
 
   React.useLayoutEffect(() => {
     const myDiv = myRef.current;
+    const currentClasses = myDiv.className
+      .split(" ")
+      .filter((entry) => entry !== "unavailable");
 
-    const newClass = letterAvailability ? "letter" : "letter unavailable";
+    const newClass = letterAvailability
+      ? currentClasses.join(" ")
+      : [...currentClasses, "unavailable"].join(" ");
 
     myDiv.className = newClass;
   }, [letterAvailability]);
 
-  function handlePointerDown(e, letter, index) {
+  function handlePointerDown(e) {
     e.preventDefault();
     e.target.releasePointerCapture(e.pointerId);
-
-    // Start a new word
-    dispatchGameState({
-      action: "startWord",
-      letter: letter,
-      letterIndex: index,
-    });
   }
 
   function handlePointerEnter(e, letter, index, letterAvailability) {
@@ -50,7 +48,7 @@ function Letter({ letter, letterAvailability, index, dispatchGameState }) {
       className="letter"
       ref={myRef}
       key={index.toString() + letter}
-      onPointerDown={(e) => handlePointerDown(e, letter, index)}
+      onPointerDown={(e) => handlePointerDown(e)}
       onPointerEnter={(e) =>
         handlePointerEnter(e, letter, index, letterAvailability)
       }

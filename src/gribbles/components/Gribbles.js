@@ -103,7 +103,11 @@ function Gribbles({ setCurrentDisplay }) {
         />
       )}
       <div id="currentWord">
-        {gameState.currentWord ? gameState.currentWord : " "}
+        {gameState.playedIndexes.length > 0
+          ? gameState.playedIndexes
+              .map((index) => gameState.letters[index])
+              .join("")
+          : " "}
       </div>
       <WordResult result={gameState.result} />
       <Board

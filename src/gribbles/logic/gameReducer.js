@@ -8,20 +8,19 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "startWord") {
-    const newWord = payload.letter.toUpperCase();
     const newPlayedIndexes = [
       ...currentGameState.playedIndexes,
       payload.letterIndex,
     ];
     return {
       ...currentGameState,
-      currentWord: newWord,
       playedIndexes: newPlayedIndexes,
       result: "",
     };
   }
 
   if (payload.action === "addLetter") {
+    // Don't add the letter if it isn't neighboring the current sequence
     const isNeighboring = checkIfNeighbors({
       indexA:
         currentGameState.playedIndexes[
@@ -30,7 +29,6 @@ export function gameReducer(currentGameState, payload) {
       indexB: payload.letterIndex,
       gridSize: Math.sqrt(currentGameState.letters.length),
     });
-
     if (!isNeighboring) {
       return currentGameState;
     }
@@ -40,46 +38,45 @@ export function gameReducer(currentGameState, payload) {
       payload.letterIndex,
     ];
 
-    const newWord = (currentGameState.currentWord +=
-      payload.letter.toUpperCase());
     return {
       ...currentGameState,
-      currentWord: newWord,
       playedIndexes: newPlayedIndexes,
     };
   }
 
   if (payload.action === "endWord") {
     // if the word is below the min length, don't add the word
-    if (currentGameState.currentWord.length < currentGameState.minWordLength) {
+    if (
+      currentGameState.playedIndexes.length < currentGameState.minWordLength
+    ) {
       return {
         ...currentGameState,
-        currentWord: "",
         playedIndexes: [],
-        result: currentGameState.currentWord.length <= 1 ? "" : "Too short",
+        result: currentGameState.playedIndexes.length <= 1 ? "" : "Too short",
       };
     }
 
+    const newWord = currentGameState.playedIndexes
+      .map((index) => currentGameState.letters[index])
+      .join("")
+      .toUpperCase();
+
     // if we already have the word, don't add the word
-    if (currentGameState.foundWords.includes(currentGameState.currentWord)) {
+    if (currentGameState.foundWords.includes(newWord)) {
       console.log("already found");
       return {
         ...currentGameState,
-        currentWord: "",
         playedIndexes: [],
         result: "Already found",
       };
     }
 
     // check if word is a real word
-    const { isPartialWord, isWord, isEasy } = isKnown(
-      currentGameState.currentWord.toUpperCase()
-    );
+    const { isPartialWord, isWord, isEasy } = isKnown(newWord);
     if (!isWord) {
-      console.log(`unknown word ${currentGameState.currentWord}`);
+      console.log(`unknown word ${newWord}`);
       return {
         ...currentGameState,
-        currentWord: "",
         playedIndexes: [],
         result: "Unknown word",
       };
@@ -93,14 +90,10 @@ export function gameReducer(currentGameState, payload) {
         ? currentGameState.bonusWordCount + 1
         : currentGameState.bonusWordCount;
 
-    const newFoundWords = [
-      ...currentGameState.foundWords,
-      currentGameState.currentWord,
-    ];
+    const newFoundWords = [...currentGameState.foundWords, newWord];
     return {
       ...currentGameState,
       foundWords: newFoundWords,
-      currentWord: "",
       playedIndexes: [],
       bonusWordCount: newBonusWordCount,
     };
