@@ -39,6 +39,7 @@ button {
 
 select {
   font-size: min(4vmax, 7vmin);
+  height: fit-content;
 }
 
 input {
@@ -141,6 +142,9 @@ input {
 
 .setting-description {
   padding: 0 5px 0 0;
+}
+.setting-info {
+  font-size: min(2vmax, 4vmin);
 }
 
 #setting-buttons {
