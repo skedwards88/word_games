@@ -58,6 +58,22 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
         continue;
       }
 
+      // If the same word (including plurals) is already used, skip
+      const currentWord = currentClue.map((index) => letters[index]).join("");
+      const foundCluesWords = clueIndexes.map((clue) =>
+        clue.map((index) => letters[index]).join("")
+      );
+      let duplicateWord = false
+      for (let comparisonIndex = 0; comparisonIndex < foundCluesWords.length; comparisonIndex++) {
+        if (foundCluesWords[comparisonIndex] === currentWord || foundCluesWords[comparisonIndex]+"S" === currentWord || foundCluesWords[comparisonIndex] === currentWord+"S") {
+          duplicateWord = true
+          break
+        }
+      }
+      if (duplicateWord){
+        continue
+      }
+
       clueIndexes.push(currentClue);
 
       // If found numClues, exit

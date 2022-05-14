@@ -15,7 +15,8 @@
 
 ## Gribbles
 
-- derive letter availablilties and current word from played indexes
+- easy: The computer knows 20,000 words. See if you can find all the words that the computer finds, and rack up bonus points for extra words.
+- standard: The computer knows 200,000 words.
 
 ## Thirdle
 
