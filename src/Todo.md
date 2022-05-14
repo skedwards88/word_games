@@ -11,12 +11,11 @@
 - curate common list
 - make styling per file
 - add install button https://web.dev/customize-install/
-- add test to maks sure common exclusion/additions don't share words
+- add test to make sure common exclusion/additions don't share words
+- add way to share app url
+- add way to share url with specific game settings
 
 ## Gribbles
-
-- easy: The computer knows 20,000 words. See if you can find all the words that the computer finds, and rack up bonus points for extra words.
-- standard: The computer knows 200,000 words.
 
 ## Thirdle
 
