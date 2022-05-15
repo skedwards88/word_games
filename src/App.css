@@ -38,26 +38,44 @@ button {
 }
 
 select {
-  all: unset;
+  /* all: unset;
   text-decoration: none;
   text-align: center;
   -webkit-appearance: none;
-  -moz-appearance: none;
+  -moz-appearance: none; */
   font-size: min(4vmax, 7vmin);
   font-family: sans-serif;
   background-color: rgb(239, 239, 239);
   border: 1px solid rgb(239, 239, 239);
   border-radius: 2px;
   text-align: center;
-  color: black;
+  fill: black;
   margin: 0;
   padding: 1px 6px;
   height: fit-content;
 }
 
-input {
+input[type="checkbox" i] {
+  all: unset;
+  text-decoration: none;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   min-width: min(4vmax, 7vmin);
   min-height: min(4vmax, 7vmin);
+  border-radius: 2px;
+  background-color: rgb(38 36 129);
+  border: 3px solid rgb(239, 239, 239);
+  margin: 0;
+  padding: 1px 6px;
+  height: fit-content;
+}
+
+input[type="checkbox" i]:checked {
+  background-image: url("./images/checkmark.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 #controls {
