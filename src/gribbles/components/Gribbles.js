@@ -66,12 +66,12 @@ function Gribbles({ setCurrentDisplay }) {
 
   function handleVisibilityChange() {
     // Pause the timer if the page is hidden
-    // if (
-    //   (document.hidden || document.msHidden || document.webkitHidden) &&
-    //   timerState.isRunning
-    // ) {
-    //   timerDispatch({ action: "pause" });
-    // }
+    if (
+      (document.hidden || document.msHidden || document.webkitHidden) &&
+      timerState.isRunning
+    ) {
+      timerDispatch({ action: "pause" });
+    }
   }
 
   React.useEffect(() => {
