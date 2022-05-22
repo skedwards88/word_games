@@ -1,7 +1,7 @@
 import { letterPool } from "../../common/letterPool";
 import { shuffleArray } from "../../common/shuffleArray";
 import { findAllWordIndexes } from "../../common/findAllWords";
-import { arraysMatchQ } from "./arraysMatchQ";
+import { arraysMatchQ } from "../../common/arraysMatchQ";
 
 function getLetters(gridSize) {
   // Given the distribution of letters in the word list

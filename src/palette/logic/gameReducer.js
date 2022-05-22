@@ -1,7 +1,7 @@
 import { isKnown } from "../../common/isKnown";
 import { gameInit } from "./gameInit";
 import { checkIfNeighbors } from "../../common/checkIfNeighbors";
-import { arraysMatchQ } from "./arraysMatchQ";
+import { arraysMatchQ } from "../../common/arraysMatchQ";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
