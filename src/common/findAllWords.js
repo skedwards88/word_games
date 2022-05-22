@@ -1,36 +1,37 @@
-import { getSurroundingIndexes } from "../../common/getSurroundingIndexes";
-import { isKnown } from "../../common/isKnown";
+import { getSurroundingIndexes } from "./getSurroundingIndexes";
+import { isKnown } from "./isKnown";
 
-export function findAllWords({ grid, minWordLength, easyMode }) {
-  let foundWords = [];
+export function findAllWordIndexes({ grid, minWordLength, easyMode }) {
+  let foundWordIndexes = [];
 
   const neighborIndexes = grid.map((_, index) =>
     getSurroundingIndexes({ index: index, gridSize: Math.sqrt(grid.length) })
   );
 
-  function checkSurrounding(currentIndex, currentWord, visitedIndexes) {
+  function checkSurrounding(currentIndex, wordIndexes, visitedIndexes) {
     let surroundingIndexes = neighborIndexes[currentIndex];
     for (let surroundingIndex of surroundingIndexes) {
       // if the index has already been used, skip
       if (visitedIndexes.includes(surroundingIndex)) {
         continue;
       }
-      const newWord = currentWord + grid[surroundingIndex];
+      const newWordIndexes = [...wordIndexes, surroundingIndex];
+      const newWord = newWordIndexes.map((index) => grid[index]).join("");
       const { isPartial, isWord, isEasy } = isKnown(newWord);
 
       if (easyMode) {
         if (isEasy && newWord.length >= minWordLength) {
-          foundWords.push(newWord);
+          foundWordIndexes.push(newWordIndexes);
         }
       } else {
         if (isWord && newWord.length >= minWordLength) {
-          foundWords.push(newWord);
+          foundWordIndexes.push(newWordIndexes);
         }
       }
       if (isPartial) {
         checkSurrounding(
           surroundingIndex,
-          newWord,
+          newWordIndexes,
           visitedIndexes.concat(surroundingIndex)
         );
       }
@@ -38,9 +39,21 @@ export function findAllWords({ grid, minWordLength, easyMode }) {
   }
 
   for (let startingIndex = 0; startingIndex < grid.length; startingIndex++) {
-    checkSurrounding(startingIndex, grid[startingIndex], [startingIndex]);
+    checkSurrounding(startingIndex, [startingIndex], [startingIndex]);
   }
 
+  return foundWordIndexes;
+}
+
+export function findAllWords({ grid, minWordLength, easyMode }) {
+  const foundWordIndexes = findAllWordIndexes({
+    grid: grid,
+    minWordLength: minWordLength,
+    easyMode: easyMode,
+  });
+  const foundWords = foundWordIndexes.map((indexList) =>
+    indexList.map((index) => grid[index]).join("")
+  );
   const uniqueFoundWords = new Set(foundWords);
 
   return Array.from(uniqueFoundWords).sort();

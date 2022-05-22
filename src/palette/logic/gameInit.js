@@ -1,6 +1,6 @@
 import { letterPool } from "../../common/letterPool";
 import { shuffleArray } from "../../common/shuffleArray";
-import { findAllWordIndexes } from "./findAllWords";
+import { findAllWordIndexes } from "../../common/findAllWords";
 import { arraysMatchQ } from "./arraysMatchQ";
 
 function getLetters(gridSize) {
