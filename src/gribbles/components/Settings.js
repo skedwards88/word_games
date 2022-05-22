@@ -85,7 +85,9 @@ export default function Settings({
         <div className="setting">
           <div className="setting-description">
             <label htmlFor="bonusTime">Added time/word</label>
-            <div className="setting-info">Increase the remaining time when you find a word.</div>
+            <div className="setting-info">
+              Increase the remaining time when you find a word.
+            </div>
           </div>
           <select id="bonusTime" defaultValue={timerState.bonusTime}>
             <option value="0">0 sec</option>
@@ -97,7 +99,10 @@ export default function Settings({
         <div className="setting">
           <div className="setting-description">
             <label htmlFor="easyMode">Easy mode</label>
-              <div className="setting-info">In easy mode, the computer only finds common words. You get bonus points for finding extra words.</div>
+            <div className="setting-info">
+              In easy mode, the computer only finds common words. You get bonus
+              points for finding extra words.
+            </div>
           </div>
           <input
             id="easyMode"

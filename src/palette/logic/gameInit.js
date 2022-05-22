@@ -63,15 +63,23 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
       const foundCluesWords = clueIndexes.map((clue) =>
         clue.map((index) => letters[index]).join("")
       );
-      let duplicateWord = false
-      for (let comparisonIndex = 0; comparisonIndex < foundCluesWords.length; comparisonIndex++) {
-        if (foundCluesWords[comparisonIndex] === currentWord || foundCluesWords[comparisonIndex]+"S" === currentWord || foundCluesWords[comparisonIndex] === currentWord+"S") {
-          duplicateWord = true
-          break
+      let duplicateWord = false;
+      for (
+        let comparisonIndex = 0;
+        comparisonIndex < foundCluesWords.length;
+        comparisonIndex++
+      ) {
+        if (
+          foundCluesWords[comparisonIndex] === currentWord ||
+          foundCluesWords[comparisonIndex] + "S" === currentWord ||
+          foundCluesWords[comparisonIndex] === currentWord + "S"
+        ) {
+          duplicateWord = true;
+          break;
         }
       }
-      if (duplicateWord){
-        continue
+      if (duplicateWord) {
+        continue;
       }
 
       clueIndexes.push(currentClue);
