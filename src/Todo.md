@@ -26,8 +26,6 @@
 
 ## Palette
 
-- tests
-
 ## Other ideas
 
 Interword: Make cross word, but only show letters at intersections. player needs to fill in remaining letters. Any known word that matches intersection letters works. Alternative: instead of showing grid spaces to fill, just show number of letters/blanks in that row like nonagrams.
@@ -41,3 +39,11 @@ lettris (tetris with letters)
 blobbles: palette but with shapes instead
 
 word rush: colored letters, trying to get combos of colors to reach score before time ends
+
+scramble: 5-7 letters in a row or circle, connect subset of letters in any order (no repeats) to form words. See if can find all words in list.
+
+word search: grid of letters + list of words. cross of words from list as find in grid.
+
+have N letters. need to arrange into crossword within grid size
+
+have a grid of scrambled letters (or maybe start with letters off screen and need to fill in grid). reorganize letters so that every row and column forms a word.
