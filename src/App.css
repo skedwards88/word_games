@@ -24,14 +24,12 @@ button {
   all: unset;
   text-decoration: none;
   text-align: center;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   font-size: min(4vmax, 7vmin);
   font-family: sans-serif;
-  background-color: rgb(239, 239, 239);
-  border: 1px solid rgb(239, 239, 239);
+  background-color: rgb(239 239 239);
+  border: 1px solid rgb(239 239 239);
   border-radius: 2px;
-  text-align: center;
   color: black;
   margin: 0;
   padding: 1px 6px;
@@ -45,8 +43,8 @@ select {
   -moz-appearance: none; */
   font-size: min(4vmax, 7vmin);
   font-family: sans-serif;
-  background-color: rgb(239, 239, 239);
-  border: 1px solid rgb(239, 239, 239);
+  background-color: rgb(239 239 239);
+  border: 1px solid rgb(239 239 239);
   border-radius: 2px;
   text-align: center;
   color: black;
@@ -59,13 +57,12 @@ input[type="checkbox" i] {
   all: unset;
   text-decoration: none;
   text-align: center;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   min-width: min(4vmax, 7vmin);
   min-height: min(4vmax, 7vmin);
   border-radius: 2px;
   background-color: rgb(38 36 129);
-  border: 3px solid rgb(239, 239, 239);
+  border: 3px solid rgb(239 239 239);
   margin: 0;
   padding: 1px 6px;
   height: fit-content;
@@ -174,6 +171,7 @@ input[type="checkbox" i]:checked {
 .setting-description {
   padding: 0 5px 0 0;
 }
+
 .setting-info {
   font-size: min(2vmax, 4vmin);
 }
@@ -381,17 +379,15 @@ a {
   all: unset;
   text-decoration: none;
   text-align: center;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-color: rgb(239, 239, 239);
+  appearance: none;
+  background-color: rgb(239 239 239);
   font-size: 7vw;
   width: 8vw;
-  text-align: center;
   padding: 3px 0;
   color: black;
   font-family: sans-serif;
   margin: 0;
-  border: 1px solid rgb(239, 239, 239);
+  border: 1px solid rgb(239 239 239);
   border-radius: 2px;
 }
 
@@ -514,8 +510,9 @@ a {
 }
 
 #palette .letter.unavailable {
-  opacity: 50%;
+  opacity: 0.5;
 }
+
 #palette #currentWord,
 .clue {
   display: flex;
@@ -534,7 +531,7 @@ a {
 }
 
 #palette .clue.matched {
-  opacity: 50%;
+  opacity: 0.5;
 }
 
 #palette .clueBox,
@@ -593,6 +590,12 @@ a {
     grid-template-rows: auto auto;
   }
 
+  #currentWord {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   #palette #currentWord {
     max-width: min(45vmax, 80vmin);
     align-self: center;
@@ -610,11 +613,5 @@ a {
     align-items: center;
     height: 100%;
     width: 7vw;
-  }
-
-  #currentWord {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
