@@ -7,18 +7,6 @@ export function gameReducer(currentGameState, payload) {
     return gameInit(payload);
   }
 
-  if (payload.action === "startWord") {
-    const newPlayedIndexes = [
-      ...currentGameState.playedIndexes,
-      payload.letterIndex,
-    ];
-    return {
-      ...currentGameState,
-      playedIndexes: newPlayedIndexes,
-      result: "",
-    };
-  }
-
   if (payload.action === "addLetter") {
     // Don't add the letter if it isn't neighboring the current sequence
     const isNeighboring = checkIfNeighbors({
@@ -41,6 +29,7 @@ export function gameReducer(currentGameState, payload) {
     return {
       ...currentGameState,
       playedIndexes: newPlayedIndexes,
+      result: "",
     };
   }
 
