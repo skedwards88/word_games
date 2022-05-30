@@ -3,4 +3,5 @@ export const gameIndex = {
   Gribbles: "gribbles",
   Thirdle: "thirdle",
   Palette: "palette",
+  TwoD: "twod",
 };
