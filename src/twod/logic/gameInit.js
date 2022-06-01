@@ -1,11 +1,11 @@
 import commonWords from "../../common/wordLists/compiled/commonWords.json";
-import {shuffleArray} from "../../common/shuffleArray.js";
+import { shuffleArray } from "../../common/shuffleArray.js";
 
 function getTrieOfLength(wordLength) {
   let trie = {};
   for (let word of commonWords) {
     if (word.length !== wordLength) {
-      continue
+      continue;
     }
     let current = trie;
     for (let letter of word) {
@@ -19,88 +19,90 @@ function getTrieOfLength(wordLength) {
   return trie;
 }
 
-const trieOfThree = getTrieOfLength(3)
-const trieOfFour = getTrieOfLength(4)
+const trieOfThree = getTrieOfLength(3);
+const trieOfFour = getTrieOfLength(4);
 
-function getWordThatStartsWith(wordLength, starting="") {
-
-  let choices
+function getWordThatStartsWith(wordLength, starting = "") {
+  let choices;
   if (wordLength === 3) {
-    choices = trieOfThree
+    choices = trieOfThree;
   } else if (wordLength === 4) {
-    choices = trieOfFour
+    choices = trieOfFour;
   }
 
-  let chosen = starting
+  let chosen = starting;
 
   for (let index = 0; index < starting.length; index++) {
-    choices = choices[starting[index]]
+    choices = choices[starting[index]];
     if (!choices) {
-      return
+      return;
     }
   }
 
   while (!choices["endOfWord"]) {
-    const possibleKeys = Object.keys(choices)
-    const randomKey = possibleKeys[Math.floor(Math.random() * possibleKeys.length)]
-    choices = choices[randomKey]
-    chosen += randomKey
+    const possibleKeys = Object.keys(choices);
+    const randomKey =
+      possibleKeys[Math.floor(Math.random() * possibleKeys.length)];
+    choices = choices[randomKey];
+    chosen += randomKey;
   }
-  return chosen
+  return chosen;
 }
 
 function attemptToGetGame(gridSize) {
-  let words = [
-  ]
+  let words = [];
   for (let index = 0; index < gridSize; index++) {
-    let word
+    let word;
     // row
-    word = getWordThatStartsWith(gridSize, words[index])
+    word = getWordThatStartsWith(gridSize, words[index]);
     if (word) {
-      words[index] = word
+      words[index] = word;
     } else {
       // return if could't find a word to fit
-      return
+      return;
     }
     // col
-    word = getWordThatStartsWith(gridSize, words.map(word => word[index]).join(""))
+    word = getWordThatStartsWith(
+      gridSize,
+      words.map((word) => word[index]).join("")
+    );
     if (word) {
       for (let subIndex = index + 1; subIndex < gridSize; subIndex++) {
-        const currentWord = words[subIndex] ? words[subIndex] : ""
-        words[subIndex] = currentWord + word[subIndex]
+        const currentWord = words[subIndex] ? words[subIndex] : "";
+        words[subIndex] = currentWord + word[subIndex];
       }
     } else {
       // return if could't find a word to fit
-      return
+      return;
     }
   }
-  return words
+  return words;
 }
 
 function getGame(gridSize) {
-  let count = 0
-  let found = false
-  let game
+  let count = 0;
+  let found = false;
+  let game;
   while (!found) {
-    count += 1
-    console.log(`round ${count}`)
-    game = attemptToGetGame(gridSize)
+    count += 1;
+    console.log(`round ${count}`);
+    game = attemptToGetGame(gridSize);
     if (game) {
-      found = true
-      console.log(game)
+      found = true;
+      console.log(game);
     }
   }
-  return game
+  return game;
 }
 
 export function gameInit() {
   // todo pull grid size from settings
-  const gridSize = 3
-  const solution = getGame(gridSize)
+  const gridSize = 3;
+  const solution = getGame(gridSize);
 
   return {
     solution: solution,
-    placed: Array(gridSize*gridSize).fill(""),
-    pool: shuffleArray(solution.join("").split(""))
-  }
+    board: Array(gridSize * gridSize).fill(""),
+    pool: shuffleArray(solution.join("").split("")),
+  };
 }

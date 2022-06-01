@@ -615,3 +615,24 @@ a {
     width: 7vw;
   }
 }
+
+#pool {
+  border: 2px solid green;
+}
+
+.poolLetter {
+  border: 2px solid green;
+  width: 40px;
+  height: 40px;
+
+}
+
+#board {
+  border: 2px solid pink;
+  white-space: pre;
+}
+.boardLetter {
+  border: 2px solid pink;
+  width: 40px;
+  height: 40px;
+}
