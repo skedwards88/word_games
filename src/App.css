@@ -616,23 +616,54 @@ a {
   }
 }
 
-#pool {
-  border: 2px solid green;
+/* twod-specific */
+
+#twod {
+  display: grid;
+  grid-template-areas:
+    "board"
+    "pool"
+    "controls";
+  grid-template-rows:
+    1fr
+    auto
+    auto;
 }
 
-.poolLetter {
-  border: 2px solid green;
-  width: 40px;
-  height: 40px;
-
+#twod #board {
+  grid-area: board;
+  display: grid;
+  background-color: rgb(239 239 239);
+  touch-action: none;
+  justify-content: center;
+  grid-template-columns: repeat(3, min(15vmax, 20vmin));
+  grid-template-rows: repeat(3, min(15vmax, 20vmin));
+  width: fit-content;
+  height: fit-content;
+  align-self: center;
+  justify-self: center;
+  color: black;
 }
 
-#board {
-  border: 2px solid pink;
-  white-space: pre;
+#twod .boardLetter {
+  border: 2px solid rgb(38 36 129);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.boardLetter {
-  border: 2px solid pink;
-  width: 40px;
-  height: 40px;
+
+#twod #pool {
+  grid-area: pool;
+  display: grid;
+  background-color: rgb(38 36 129);
+  touch-action: none;
+  justify-content: center;
+  grid-template-columns: repeat(3, min(15vmax, 20vmin));
+  grid-template-rows: repeat(3, min(15vmax, 20vmin));
+}
+
+#twod .poolLetter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
