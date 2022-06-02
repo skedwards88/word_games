@@ -652,6 +652,10 @@ a {
   justify-content: center;
 }
 
+#twod .boardLetter.locked {
+  font-weight: bold;
+}
+
 #twod #pool {
   grid-area: pool;
   display: grid;

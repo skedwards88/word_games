@@ -26,6 +26,13 @@
 
 ## Palette
 
+## Packed
+
+- change name from twod
+- add logic for game complete
+- add logic to show invalid word?
+- add logic to give hint. clears rest of board? style is bold to show locked into place?
+
 ## Other ideas
 
 Interword: Make cross word, but only show letters at intersections. player needs to fill in remaining letters. Any known word that matches intersection letters works. Alternative: instead of showing grid spaces to fill, just show number of letters/blanks in that row like nonagrams.

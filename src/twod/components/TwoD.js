@@ -48,12 +48,12 @@ function Pool({ letters, dropToken }) {
   return <div id="pool">{pool}</div>;
 }
 
-function Board({ letters, dropToken }) {
+function Board({ letters, locked, dropToken }) {
   const board = letters.map((letter, index) => (
     <div
-      className="boardLetter"
+    className={locked[index] ? "boardLetter locked" : "boardLetter"}
       key={index}
-      draggable="true"
+      draggable={!locked[index]}
       onDragStart={(event) =>
         dragToken({
           event: event,
@@ -108,7 +108,7 @@ function TwoD({ setCurrentDisplay }) {
     <div className="App" id="twod">
       <div></div>
 
-      <Board letters={gameState.board} dropToken={dropToken}></Board>
+      <Board letters={gameState.board} locked={gameState.locked} dropToken={dropToken}></Board>
       <Pool letters={gameState.pool} dropToken={dropToken}></Pool>
       <div id="controls">
         <button
@@ -122,7 +122,7 @@ function TwoD({ setCurrentDisplay }) {
         ></button>
         <button
           id="helpButton"
-          onClick={() => dispatchGameState({ action: "giveUp" })}
+          onClick={() => dispatchGameState({ action: "getHint" })}
         ></button>
         <Info
           info={

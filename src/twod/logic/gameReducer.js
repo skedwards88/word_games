@@ -3,10 +3,14 @@ export function gameReducer(currentGameState, payload) {
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
 
-    // If the area where you want to drop a letter already includes a letter, don't allow it
+    // Don't allow a hinted letter to be moved
+    if (payload.dragArea === "board" && currentGameState.locked[payload.dragIndex]) {
+      return {...currentGameState };
+    }
 
     // from pool to board
     if (payload.dragArea === "pool" && payload.dropArea === "board") {
+      // If the area where you drop a letter already includes a letter, don't allow it
       if (!newBoard[payload.dropIndex]) {
         newPool[payload.dragIndex] = "";
         newBoard[payload.dropIndex] = payload.letter;
@@ -44,5 +48,42 @@ export function gameReducer(currentGameState, payload) {
     };
   }
 
-  return { ...currentGameState };
+  if (payload.action === "getHint") {
+    let newLocked = [...currentGameState.locked];
+    let newBoard = [...currentGameState.board];
+    let newPool = [];
+
+    // If there are no more hints to give, do nothing
+    if (newLocked.every(i=>i)) {
+      console.log('no more hints')
+    }
+
+    // todo make random hint instead
+    const firstFalse = newLocked.findIndex((i)=>i===false)
+    newLocked[firstFalse] = true
+
+    // clear the board except for the hints
+    for (let index = 0; index < newBoard.length; index++) {
+      // reset the board to nothing except the solution that has been hinted
+      if (newLocked[index]) {
+        newBoard[index] = currentGameState.solution[index]
+      } else {
+        newBoard[index] = ""
+        newPool.push(currentGameState.solution[index])
+      }
+    }
+
+    // The pool is just the solution minus what has been hinted
+    // todo is it a nicer experience to respect the current pool order?
+
+
+    return {
+      ...currentGameState,
+      locked: newLocked,
+      board: newBoard,
+      pool: newPool,
+    };
+  }
+
+  return {...currentGameState };
 }

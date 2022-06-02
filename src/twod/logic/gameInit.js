@@ -92,17 +92,19 @@ function getGame(gridSize) {
       console.log(game);
     }
   }
-  return game;
+  return game.join("").split("");
 }
 
 export function gameInit() {
   // todo pull grid size from settings
   const gridSize = 3;
   const solution = getGame(gridSize);
+  console.log(solution)
 
   return {
     solution: solution,
     board: Array(gridSize * gridSize).fill(""),
-    pool: shuffleArray(solution.join("").split("")),
+    pool: shuffleArray(solution),
+    locked: Array(gridSize * gridSize).fill(false),
   };
 }
