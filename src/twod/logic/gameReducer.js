@@ -1,3 +1,5 @@
+import { gameInit } from "./gameInit";
+
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "droppedLetter") {
     let newBoard = [...currentGameState.board];
@@ -83,6 +85,10 @@ export function gameReducer(currentGameState, payload) {
       board: newBoard,
       pool: newPool,
     };
+  }
+
+  if (payload.action === "newGame") {
+    return gameInit();
   }
 
   return {...currentGameState };
