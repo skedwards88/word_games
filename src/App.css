@@ -621,10 +621,12 @@ a {
 #twod {
   display: grid;
   grid-template-areas:
+    "result"
     "board"
     "pool"
     "controls";
   grid-template-rows:
+    auto
     1fr
     auto
     auto;
@@ -633,7 +635,6 @@ a {
 #twod #board {
   grid-area: board;
   display: grid;
-  background-color: rgb(239 239 239);
   touch-action: none;
   justify-content: center;
   grid-template-columns: repeat(3, min(15vmax, 20vmin));
@@ -642,11 +643,12 @@ a {
   height: fit-content;
   align-self: center;
   justify-self: center;
-  color: black;
+  color: rgb(239 239 239);
+  border: 1px solid rgb(239 239 239);
 }
 
 #twod .boardLetter {
-  border: 2px solid rgb(38 36 129);
+  border: 2px solid rgb(239 239 239);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -659,15 +661,24 @@ a {
 #twod #pool {
   grid-area: pool;
   display: grid;
-  background-color: rgb(38 36 129);
   touch-action: none;
   justify-content: center;
-  grid-template-columns: repeat(3, min(15vmax, 20vmin));
-  grid-template-rows: repeat(3, min(15vmax, 20vmin));
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
 }
 
 #twod .poolLetter {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: min(5vmax, 8vmin);
+}
+
+#twod .poolLetter:active {
+}
+
+#twod #result {
+  grid-area: result;
+  height: 10vh;
+  text-align: center;
 }

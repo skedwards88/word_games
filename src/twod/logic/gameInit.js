@@ -95,16 +95,51 @@ function getGame(gridSize) {
   return game.join("").split("");
 }
 
+
+function dispersePool(undispersedPool, endSize) {
+  let dispersedPool = []
+  for (let index = 0; index < undispersedPool.length; index += 1) {
+    let section = Array(Math.floor(endSize / undispersedPool.length)).fill("")
+    
+    section[Math.floor(Math.random() * (section.length - 2))] = undispersedPool[index]
+    dispersedPool = dispersedPool.concat(section)
+  }
+return dispersedPool
+}
+
+function partitionArray(array, partitionSize) {
+
+  let partitioned = []
+  for (let i = 0; i < array.length; i += partitionSize) {
+    partitioned.push(array.slice(i, i + partitionSize))
+  }
+return partitioned
+}
+
+function padPool(pool, endDiameter) {
+  // const full = Array(endDiameter * endDiameter).fill("")
+  // const partitioned = partitionArray(pool, Math.sqrt(pool.length))
+  // const padSize = endDiameter -  Math.sqrt(pool.length)
+  // let padded = []
+  // for (let i = 0; i < partitioned.length; i += 1) {
+  //   padded = padded.concat(Array(3).fill("").concat(partitioned[i]).concat(Array(3).fill("")))
+  // }
+  // return padded
+  // todo better centralize
+  return Array(45).fill("").concat(pool).concat(Array(46).fill(""))
+}
+
 export function gameInit() {
   // todo pull grid size from settings
   const gridSize = 3;
   const solution = getGame(gridSize);
+  const pool = padPool(shuffleArray(solution), 10)
   console.log(solution)
 
   return {
     solution: solution,
     board: Array(gridSize * gridSize).fill(""),
-    pool: shuffleArray(solution),
+    pool: pool,
     locked: Array(gridSize * gridSize).fill(false),
   };
 }

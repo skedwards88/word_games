@@ -74,6 +74,8 @@ export function gameReducer(currentGameState, payload) {
         newPool.push(currentGameState.solution[index])
       }
     }
+    // todo use padding function
+    newPool = Array(45).fill("").concat(newPool).concat(Array(55-(newPool.length)).fill(""))
 
     // The pool is just the solution minus what has been hinted
     // todo is it a nicer experience to respect the current pool order?

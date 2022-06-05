@@ -17,6 +17,8 @@
 
 ## Gribbles
 
+- bug where qu doesn't count as 2 letters
+
 ## Thirdle
 
 - allow to control whether one or multi space?
@@ -33,6 +35,9 @@
 - add logic to show invalid word?
 - add logic to give hint. clears rest of board? style is bold to show locked into place?
 - local storage
+- icon
+- rules
+- better starting arrangement
 
 ## Other ideas
 
