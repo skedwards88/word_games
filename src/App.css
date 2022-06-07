@@ -660,11 +660,14 @@ a {
 
 #twod #pool {
   grid-area: pool;
-  display: grid;
+  /* display: grid; */
   touch-action: none;
   justify-content: center;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  /* grid-template-columns: repeat(10, 1fr); */
+  /* grid-template-rows: repeat(10, 1fr); */
+  /* position: relative; */
+  height: 40vh;
+  width: 100vw;
 }
 
 #twod .poolLetter {
@@ -672,6 +675,7 @@ a {
   align-items: center;
   justify-content: center;
   min-height: min(5vmax, 8vmin);
+  position: absolute;
 }
 
 #twod .poolLetter:active {

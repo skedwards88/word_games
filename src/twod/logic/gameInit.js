@@ -95,46 +95,33 @@ function getGame(gridSize) {
   return game.join("").split("");
 }
 
-
-function dispersePool(undispersedPool, endSize) {
-  let dispersedPool = []
-  for (let index = 0; index < undispersedPool.length; index += 1) {
-    let section = Array(Math.floor(endSize / undispersedPool.length)).fill("")
-    
-    section[Math.floor(Math.random() * (section.length - 2))] = undispersedPool[index]
-    dispersedPool = dispersedPool.concat(section)
-  }
-return dispersedPool
-}
-
-function partitionArray(array, partitionSize) {
-
-  let partitioned = []
-  for (let i = 0; i < array.length; i += partitionSize) {
-    partitioned.push(array.slice(i, i + partitionSize))
-  }
-return partitioned
-}
-
-function padPool(pool, endDiameter) {
-  // const full = Array(endDiameter * endDiameter).fill("")
-  // const partitioned = partitionArray(pool, Math.sqrt(pool.length))
-  // const padSize = endDiameter -  Math.sqrt(pool.length)
-  // let padded = []
-  // for (let i = 0; i < partitioned.length; i += 1) {
-  //   padded = padded.concat(Array(3).fill("").concat(partitioned[i]).concat(Array(3).fill("")))
-  // }
-  // return padded
-  // todo better centralize
-  return Array(45).fill("").concat(pool).concat(Array(46).fill(""))
-}
-
 export function gameInit() {
   // todo pull grid size from settings
   const gridSize = 3;
   const solution = getGame(gridSize);
-  const pool = padPool(shuffleArray(solution), 10)
-  console.log(solution)
+  console.log(solution);
+
+  // const shuffledSolution = ["1","2","3","4","5","6","7","8","9","10","11","12","13","1","2"]
+  const shuffledSolution = shuffleArray(solution);
+  const root = Math.floor(Math.sqrt(shuffledSolution.length));
+  const startingX = 50;
+  const startingY = 70;
+  const pool = [];
+  for (let index = 0; index < shuffledSolution.length; index++) {
+    const xOffsetFactor = Math.floor(index / root) - Math.floor((root - 1) / 2);
+    const yOffsetFactor = (index % root) - Math.floor((root - 1) / 2);
+    console.log(
+      `${xOffsetFactor}, ${yOffsetFactor}; ${xOffsetFactor * 5}, ${
+        yOffsetFactor * 5
+      }`
+    );
+    const obj = new Object({
+      letter: shuffledSolution[index],
+      x: `${xOffsetFactor * 8 + startingX}vw`,
+      y: `${yOffsetFactor * 8 + startingY}vh`, //todo better center
+    });
+    pool.push(obj);
+  }
 
   return {
     solution: solution,
