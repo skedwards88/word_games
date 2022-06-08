@@ -8,7 +8,7 @@ export function gameReducer(currentGameState, payload) {
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
 
-    // from board
+    // from the board
     if (payload.dragArea === "board") {
       // Don't allow a hinted letter to be moved
       if (currentGameState.locked[payload.dragIndex]) {
@@ -28,8 +28,9 @@ export function gameReducer(currentGameState, payload) {
       );
     }
 
-    // from pool
+    // from the pool
     if (payload.dragArea === "pool") {
+      // Update the position of the dragged letter
       newPool[payload.dragIndex] = new Object({
         letter: payload.letter,
         x: payload.dropX,
@@ -47,18 +48,22 @@ export function gameReducer(currentGameState, payload) {
   if (payload.action === "dropOnBoard") {
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
+    const initialLetterAtDrag = payload.letter;
+    const initialLetterAtDrop = newBoard[payload.dropIndex];
 
-    // from pool
+    // from the pool
     if (payload.dragArea === "pool") {
-      // If the area where you drop a letter already includes a letter, don't allow it
-      //todo swap instead
-      if (newBoard[payload.dropIndex]) {
-        return { ...currentGameState };
-      }
-      newPool = newPool
+      newBoard[payload.dropIndex] = initialLetterAtDrag;
+
+      if (initialLetterAtDrop) {
+        // If there was a letter in the board space already, swap that letter to the pool
+        newPool[payload.dragIndex].letter = initialLetterAtDrop;  
+      } else {
+        // otherwise just remove the letter from the pool
+        newPool = newPool
         .slice(0, payload.dragIndex)
         .concat(newPool.slice(parseInt(payload.dragIndex) + 1, newPool.length));
-      newBoard[payload.dropIndex] = payload.letter;
+      }
     }
 
     // from board
@@ -68,10 +73,7 @@ export function gameReducer(currentGameState, payload) {
         return { ...currentGameState };
       }
 
-      // todo if drag from board to board, swap letters at positions
-      const initialLetterAtDrag = newBoard[payload.dragIndex];
-      const initialLetterAtDrop = newBoard[payload.dropIndex];
-
+      // swap letters at positions
       newBoard[payload.dragIndex] = initialLetterAtDrop;
       newBoard[payload.dropIndex] = initialLetterAtDrag;
     }
@@ -88,14 +90,17 @@ export function gameReducer(currentGameState, payload) {
     let newBoard = [...currentGameState.board];
     let newPool = [];
 
+    // Get all possible hints indexes
+    const falseIndexes = newLocked.reduce((accumulator, item, index) => item ? accumulator : [...accumulator, index], []);
+
     // If there are no more hints to give, do nothing
-    if (newLocked.every((i) => i)) {
-      console.log("no more hints");
+    if (!falseIndexes.length) {
+      return { ...currentGameState };
     }
 
-    // todo make random hint instead
-    const firstFalse = newLocked.findIndex((i) => i === false);
-    newLocked[firstFalse] = true;
+    // Choose a random hin to give
+    const hintIndex = falseIndexes[Math.floor(Math.random() * falseIndexes.length)]
+    newLocked[hintIndex] = true;
 
     // clear the board except for the hints
     let poolLetters = [];
