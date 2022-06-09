@@ -23,24 +23,45 @@ function dragToken({ event, letter, index, dragArea }) {
 }
 
 function Pool({ pool, dropToken }) {
-  const letters = pool.map((obj, index) => (
-    <div
-      style={{ top: obj.y, left: obj.x }}
+  let letters = []
+  // todo calc offset adj
+  for (let index = 0; index < pool.length; index++) {
+    let xPosition
+    if (pool[index].xPosition) {
+      xPosition = pool[index].xPosition
+    } else if (typeof(pool[index].xOffsetFactor ) === 'number') {
+      xPosition = `${pool[index].xOffsetFactor * 8 + 50}vw`
+    } else {
+      console.log('todo error or have safe fallback?')
+    }
+
+    let yPosition
+    if (pool[index].yPosition) {
+      yPosition = pool[index].yPosition
+    } else if (typeof(pool[index].yOffsetFactor ) === 'number') {
+      yPosition = `${pool[index].yOffsetFactor * 8 + 70}vh`
+    } else {
+      console.log('todo error or have safe fallback?')
+    }
+
+    letters.push(<div
+      style={{ top: yPosition, left: xPosition }}
       className="poolLetter"
       key={index}
       draggable="true"
       onDragStart={(event) =>
         dragToken({
           event: event,
-          letter: obj.letter,
+          letter: pool[index].letter,
           index: index,
           dragArea: "pool",
         })
       }
     >
-      {obj.letter}
-    </div>
-  ));
+      {pool[index].letter}
+    </div>)
+  }
+
   return (
     <div
       id="pool"

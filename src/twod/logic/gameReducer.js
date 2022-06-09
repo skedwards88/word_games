@@ -1,5 +1,6 @@
 import { shuffleArray } from "../../common/shuffleArray";
 import { gameInit } from "./gameInit";
+import { getOffsets } from "./getOffsets";
 
 export function gameReducer(currentGameState, payload) {
   // todo add way to swap by click one then click another?
@@ -22,8 +23,8 @@ export function gameReducer(currentGameState, payload) {
       newPool.push(
         new Object({
           letter: payload.letter,
-          x: payload.dropX,
-          y: payload.dropY,
+          xPosition: payload.dropX,
+          yPosition: payload.dropY,
         })
       );
     }
@@ -33,8 +34,8 @@ export function gameReducer(currentGameState, payload) {
       // Update the position of the dragged letter
       newPool[payload.dragIndex] = new Object({
         letter: payload.letter,
-        x: payload.dropX,
-        y: payload.dropY,
+        xPosition: payload.dropX,
+        yPosition: payload.dropY,
       });
     }
 
@@ -98,7 +99,7 @@ export function gameReducer(currentGameState, payload) {
       return { ...currentGameState };
     }
 
-    // Choose a random hin to give
+    // Choose a random hint to give
     const hintIndex = falseIndexes[Math.floor(Math.random() * falseIndexes.length)]
     newLocked[hintIndex] = true;
 
@@ -114,27 +115,13 @@ export function gameReducer(currentGameState, payload) {
       }
     }
 
-    poolLetters = shuffleArray(poolLetters);
-    // todo reuse the positinoing script from init
-    const root = Math.floor(Math.sqrt(poolLetters.length));
-    const startingX = 50;
-    const startingY = 70;
-    for (let index = 0; index < poolLetters.length; index++) {
-      const xOffsetFactor =
-        Math.floor(index / root) - Math.floor((root - 1) / 2);
-      const yOffsetFactor = (index % root) - Math.floor((root - 1) / 2);
-      console.log(
-        `${xOffsetFactor}, ${yOffsetFactor}; ${xOffsetFactor * 5}, ${
-          yOffsetFactor * 5
-        }`
-      );
-      const obj = new Object({
-        letter: poolLetters[index],
-        x: `${xOffsetFactor * 8 + startingX}vw`,
-        y: `${yOffsetFactor * 8 + startingY}vh`, //todo better center
-      });
-      newPool.push(obj);
-    }
+    const offsets = getOffsets(poolLetters)
+    newPool = shuffleArray(poolLetters).map((letter, index) => new Object({
+      letter: letter,
+      xOffsetFactor: offsets[index].x,
+      yOffsetFactor: offsets[index].y,
+    }))
+
     return {
       ...currentGameState,
       locked: newLocked,

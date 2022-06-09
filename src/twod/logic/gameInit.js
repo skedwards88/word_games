@@ -1,5 +1,6 @@
 import commonWords from "../../common/wordLists/compiled/commonWords.json";
 import { shuffleArray } from "../../common/shuffleArray.js";
+import { getOffsets } from "./getOffsets";
 
 function getTrieOfLength(wordLength) {
   let trie = {};
@@ -101,27 +102,12 @@ export function gameInit() {
   const solution = getGame(gridSize);
   console.log(solution);
 
-  // const shuffledSolution = ["1","2","3","4","5","6","7","8","9","10","11","12","13","1","2"]
-  const shuffledSolution = shuffleArray(solution);
-  const root = Math.floor(Math.sqrt(shuffledSolution.length));
-  const startingX = 50;
-  const startingY = 70;
-  const pool = [];
-  for (let index = 0; index < shuffledSolution.length; index++) {
-    const xOffsetFactor = Math.floor(index / root) - Math.floor((root - 1) / 2);
-    const yOffsetFactor = (index % root) - Math.floor((root - 1) / 2);
-    console.log(
-      `${xOffsetFactor}, ${yOffsetFactor}; ${xOffsetFactor * 5}, ${
-        yOffsetFactor * 5
-      }`
-    );
-    const obj = new Object({
-      letter: shuffledSolution[index],
-      x: `${xOffsetFactor * 8 + startingX}vw`,
-      y: `${yOffsetFactor * 8 + startingY}vh`, //todo better center
-    });
-    pool.push(obj);
-  }
+  const offsets = getOffsets(solution)
+  const pool = shuffleArray(solution).map((letter, index) => new Object({
+    letter: letter,
+    xOffsetFactor: offsets[index].x,
+    yOffsetFactor: offsets[index].y,
+  }))
 
   return {
     solution: solution,
