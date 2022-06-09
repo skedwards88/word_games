@@ -58,12 +58,14 @@ export function gameReducer(currentGameState, payload) {
 
       if (initialLetterAtDrop) {
         // If there was a letter in the board space already, swap that letter to the pool
-        newPool[payload.dragIndex].letter = initialLetterAtDrop;  
+        newPool[payload.dragIndex].letter = initialLetterAtDrop;
       } else {
         // otherwise just remove the letter from the pool
         newPool = newPool
-        .slice(0, payload.dragIndex)
-        .concat(newPool.slice(parseInt(payload.dragIndex) + 1, newPool.length));
+          .slice(0, payload.dragIndex)
+          .concat(
+            newPool.slice(parseInt(payload.dragIndex) + 1, newPool.length)
+          );
       }
     }
 
@@ -92,7 +94,11 @@ export function gameReducer(currentGameState, payload) {
     let newPool = [];
 
     // Get all possible hints indexes
-    const falseIndexes = newLocked.reduce((accumulator, item, index) => item ? accumulator : [...accumulator, index], []);
+    const falseIndexes = newLocked.reduce(
+      (accumulator, item, index) =>
+        item ? accumulator : [...accumulator, index],
+      []
+    );
 
     // If there are no more hints to give, do nothing
     if (!falseIndexes.length) {
@@ -100,7 +106,8 @@ export function gameReducer(currentGameState, payload) {
     }
 
     // Choose a random hint to give
-    const hintIndex = falseIndexes[Math.floor(Math.random() * falseIndexes.length)]
+    const hintIndex =
+      falseIndexes[Math.floor(Math.random() * falseIndexes.length)];
     newLocked[hintIndex] = true;
 
     // clear the board except for the hints
@@ -115,12 +122,15 @@ export function gameReducer(currentGameState, payload) {
       }
     }
 
-    const offsets = getOffsets(poolLetters)
-    newPool = shuffleArray(poolLetters).map((letter, index) => new Object({
-      letter: letter,
-      xOffsetFactor: offsets[index].x,
-      yOffsetFactor: offsets[index].y,
-    }))
+    const offsets = getOffsets(poolLetters);
+    newPool = shuffleArray(poolLetters).map(
+      (letter, index) =>
+        new Object({
+          letter: letter,
+          xOffsetFactor: offsets[index].x,
+          yOffsetFactor: offsets[index].y,
+        })
+    );
 
     return {
       ...currentGameState,

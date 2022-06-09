@@ -1,14 +1,13 @@
 import React from "react";
 import Info from "../../common/Info";
-// import Board from "./Board";
+import Pool from "./Pool";
+import Board from "./Board";
+import { Result } from "./Result";
 import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
 import { gameReducer } from "../logic/gameReducer";
-import { isKnown } from "../../common/isKnown";
 
-function dragToken({ event, letter, index, dragArea }) {
-  console.log(event);
-
+export function dragToken({ event, letter, index, dragArea }) {
   event.dataTransfer.setData("letter", letter);
   event.dataTransfer.setData("dragIndex", index);
   event.dataTransfer.setData("dragArea", dragArea);
@@ -20,90 +19,6 @@ function dragToken({ event, letter, index, dragArea }) {
   // if (!/iPad|iPhone|iPod|Android/.test(navigator.userAgent)) {
   //   event.dataTransfer.setDragImage(event.target, 50, 50);
   // }
-}
-
-function Pool({ pool, dropToken }) {
-  let letters = []
-  // todo calc offset adj
-  for (let index = 0; index < pool.length; index++) {
-    let xPosition
-    if (pool[index].xPosition) {
-      xPosition = pool[index].xPosition
-    } else if (typeof(pool[index].xOffsetFactor ) === 'number') {
-      xPosition = `${pool[index].xOffsetFactor * 8 + 50}vw`
-    } else {
-      console.log('todo error or have safe fallback?')
-    }
-
-    let yPosition
-    if (pool[index].yPosition) {
-      yPosition = pool[index].yPosition
-    } else if (typeof(pool[index].yOffsetFactor ) === 'number') {
-      yPosition = `${pool[index].yOffsetFactor * 8 + 70}vh`
-    } else {
-      console.log('todo error or have safe fallback?')
-    }
-
-    letters.push(<div
-      style={{ top: yPosition, left: xPosition }}
-      className="poolLetter"
-      key={index}
-      draggable="true"
-      onDragStart={(event) =>
-        dragToken({
-          event: event,
-          letter: pool[index].letter,
-          index: index,
-          dragArea: "pool",
-        })
-      }
-    >
-      {pool[index].letter}
-    </div>)
-  }
-
-  return (
-    <div
-      id="pool"
-      onDrop={(event) => dropToken({ event: event })}
-      onDragOver={(event) => {
-        event.preventDefault();
-      }}
-      onDragEnter={(event) => {
-        event.preventDefault();
-      }}
-    >
-      {letters}
-    </div>
-  );
-}
-
-function Board({ letters, locked, dropToken }) {
-  const board = letters.map((letter, index) => (
-    <div
-      className={locked[index] ? "boardLetter locked" : "boardLetter"}
-      key={index}
-      draggable={!locked[index]}
-      onDragStart={(event) =>
-        dragToken({
-          event: event,
-          letter: letter,
-          index: index,
-          dragArea: "board",
-        })
-      }
-      onDragOver={(event) => {
-        event.preventDefault();
-      }}
-      onDrop={(event) => dropToken({ event: event, index: index })}
-      onDragEnter={(event) => {
-        event.preventDefault();
-      }}
-    >
-      {letter}
-    </div>
-  ));
-  return <div id="board">{board}</div>;
 }
 
 function TwoD({ setCurrentDisplay }) {
@@ -149,60 +64,6 @@ function TwoD({ setCurrentDisplay }) {
   React.useEffect(() => {
     //todo set local storage
   }, [gameState]);
-
-  function partitionArray(array, partitionSize) {
-    let partitioned = [];
-    for (let i = 0; i < array.length; i += partitionSize) {
-      partitioned.push(array.slice(i, i + partitionSize));
-    }
-    return partitioned;
-  }
-
-  function getBoardIsFull(board) {
-    return !board.some((i) => !i);
-  }
-
-  function getGameOver(board) {
-    // If the board isn't full, return early
-    if (!getBoardIsFull(board)) {
-      return false;
-    }
-
-    // todo
-    const rows = partitionArray(board, Math.sqrt(board.length));
-    console.log(rows);
-    for (let index = 0; index < rows.length; index += 1) {
-      const { isWord } = isKnown(rows[index].join(""));
-      if (!isWord) {
-        console.log(`unknown ${rows[index].join("")}`);
-        return false;
-      }
-    }
-
-    const columns = rows.map((_, index) => rows.map((row) => row[index]));
-    console.log(columns);
-    for (let index = 0; index < columns.length; index += 1) {
-      const { isWord } = isKnown(columns[index].join(""));
-      if (!isWord) {
-        console.log(`unknown ${columns[index].join("")}`);
-        return false;
-      }
-    }
-    return true;
-  }
-
-  function Result({ board }) {
-    let resultText = "";
-    if (getBoardIsFull(board)) {
-      if (getGameOver(board)) {
-        resultText = "Complete!";
-      } else {
-        resultText = "Not all rows and columns are known words. Try again!";
-      }
-    }
-
-    return <div id="result">{resultText}</div>;
-  }
 
   return (
     <div className="App" id="twod">

@@ -102,12 +102,15 @@ export function gameInit() {
   const solution = getGame(gridSize);
   console.log(solution);
 
-  const offsets = getOffsets(solution)
-  const pool = shuffleArray(solution).map((letter, index) => new Object({
-    letter: letter,
-    xOffsetFactor: offsets[index].x,
-    yOffsetFactor: offsets[index].y,
-  }))
+  const offsets = getOffsets(solution);
+  const pool = shuffleArray(solution).map(
+    (letter, index) =>
+      new Object({
+        letter: letter,
+        xOffsetFactor: offsets[index].x,
+        yOffsetFactor: offsets[index].y,
+      })
+  );
 
   return {
     solution: solution,

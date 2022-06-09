@@ -10,5 +10,5 @@ export function getOffsets(pool) {
     });
     offsets.push(offset);
   }
-  return offsets
+  return offsets;
 }
