@@ -11,9 +11,7 @@ export function getGameOver(board) {
     return false;
   }
 
-  // todo
   const rows = partitionArray(board, Math.sqrt(board.length));
-  console.log(rows);
   for (let index = 0; index < rows.length; index += 1) {
     const { isWord } = isKnown(rows[index].join(""));
     if (!isWord) {
@@ -23,7 +21,6 @@ export function getGameOver(board) {
   }
 
   const columns = rows.map((_, index) => rows.map((row) => row[index]));
-  console.log(columns);
   for (let index = 0; index < columns.length; index += 1) {
     const { isWord } = isKnown(columns[index].join(""));
     if (!isWord) {

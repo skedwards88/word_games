@@ -616,9 +616,9 @@ a {
   }
 }
 
-/* twod-specific */
+/* packed-specific */
 
-#twod {
+#packed {
   display: grid;
   grid-template-areas:
     "result"
@@ -632,7 +632,7 @@ a {
     auto;
 }
 
-#twod #board {
+#packed #board {
   grid-area: board;
   display: grid;
   touch-action: none;
@@ -647,18 +647,18 @@ a {
   border: 1px solid rgb(239 239 239);
 }
 
-#twod .boardLetter {
+#packed .boardLetter {
   border: 2px solid rgb(239 239 239);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#twod .boardLetter.locked {
+#packed .boardLetter.locked {
   font-weight: bold;
 }
 
-#twod #pool {
+#packed #pool {
   grid-area: pool;
   /* display: grid; */
   touch-action: none;
@@ -670,7 +670,7 @@ a {
   width: 100vw;
 }
 
-#twod .poolLetter {
+#packed .poolLetter {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -678,10 +678,10 @@ a {
   position: absolute;
 }
 
-#twod .poolLetter:active {
+#packed .poolLetter:active {
 }
 
-#twod #result {
+#packed #result {
   grid-area: result;
   height: 10vh;
   text-align: center;

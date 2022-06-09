@@ -3,13 +3,13 @@ import "./App.css";
 import Gribbles from "./gribbles/components/Gribbles";
 import Thirdle from "./thirdle/components/Thirdle";
 import Palette from "./palette/components/Palette";
-import TwoD from "./twod/components/TwoD";
+import Packed from "./packed/components/Packed";
 import Info from "./common/Info";
 import { gameIndex } from "./gameIndex";
 import packageJson from "../package.json";
 
 function App() {
-  const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.TwoD);
+  const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.Packed);
 
   function Home() {
     return (
@@ -41,10 +41,10 @@ function App() {
           
           <button
             className="gameButton"
-            onClick={() => setCurrentDisplay(gameIndex.TwoD)}
+            onClick={() => setCurrentDisplay(gameIndex.Packed)}
           >
-            <div className="gameIcon" id="twod_icon"></div>
-            <div>TwoD</div>
+            <div className="gameIcon" id="packed_icon"></div>
+            <div>Packed</div>
           </button>
         </div>
         <div id="controls">
@@ -79,8 +79,8 @@ function App() {
       return <Thirdle setCurrentDisplay={setCurrentDisplay} />;
     case "palette":
       return <Palette setCurrentDisplay={setCurrentDisplay} />;
-    case "twod":
-      return <TwoD setCurrentDisplay={setCurrentDisplay} />;
+    case "packed":
+      return <Packed setCurrentDisplay={setCurrentDisplay} />;
     default:
       return <Home />;
   }

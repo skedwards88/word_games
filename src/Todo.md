@@ -30,7 +30,6 @@
 
 ## Packed
 
-- change name from twod
 - add logic for game complete
 - add logic to show invalid word?
 - add logic to give hint. clears rest of board? style is bold to show locked into place?

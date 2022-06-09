@@ -21,7 +21,7 @@ export function dragToken({ event, letter, index, dragArea }) {
   // }
 }
 
-function TwoD({ setCurrentDisplay }) {
+function Packed({ setCurrentDisplay }) {
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
     {},
@@ -66,7 +66,7 @@ function TwoD({ setCurrentDisplay }) {
   }, [gameState]);
 
   return (
-    <div className="App" id="twod">
+    <div className="App" id="packed">
       <Result board={gameState.board}></Result>
       <Board
         letters={gameState.board}
@@ -91,7 +91,7 @@ function TwoD({ setCurrentDisplay }) {
         <Info
           info={
             <div>
-              {<h1>TwoD</h1>}
+              {<h1>Packed</h1>}
               {`TODO`}
             </div>
           }
@@ -105,4 +105,4 @@ function TwoD({ setCurrentDisplay }) {
   );
 }
 
-export default TwoD;
+export default Packed;

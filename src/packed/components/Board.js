@@ -1,5 +1,5 @@
 import React from "react";
-import { dragToken } from "./TwoD";
+import { dragToken } from "./Packed";
 
 export default function Board({ letters, locked, dropToken }) {
   const board = letters.map((letter, index) => (
