@@ -28,6 +28,15 @@ function Packed({ setCurrentDisplay }) {
     gameInit
   );
 
+  React.useEffect(() => {
+    function handleResize() {
+      console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
+      dispatchGameState({ action: "windowResize" });
+    }
+
+    window.addEventListener("resize", handleResize);
+  });
+
   function dropOnPool({ event }) {
     const letter = event.dataTransfer.getData("letter");
     const dragIndex = event.dataTransfer.getData("dragIndex");
@@ -92,7 +101,7 @@ function Packed({ setCurrentDisplay }) {
           info={
             <div>
               {<h1>Packed</h1>}
-              {`TODO`}
+              {`Arrange the letters to make every column and every row a word`}
             </div>
           }
         ></Info>

@@ -1,47 +1,38 @@
 import React from "react";
 import { dragToken } from "./Packed";
 
+function PoolLetter({ letterProperties, index }) {
+  // todo todo not reactive to resize or rotation
+
+  return (
+    <div
+      style={{
+        top: `${letterProperties.yPosition}px`,
+        left: `${letterProperties.xPosition}px`,
+      }}
+      className="poolLetter"
+      key={index}
+      draggable="true"
+      onDragStart={(event) =>
+        dragToken({
+          event: event,
+          letter: letterProperties.letter,
+          index: index,
+          dragArea: "pool",
+        })
+      }
+    >
+      {letterProperties.letter}
+    </div>
+  );
+}
+
 export default function Pool({ pool, dropToken }) {
   let letters = [];
-  // todo calc offset adj
-  for (let index = 0; index < pool.length; index++) {
-    let xPosition;
-    if (pool[index].xPosition) {
-      xPosition = pool[index].xPosition;
-    } else if (typeof pool[index].xOffsetFactor === "number") {
-      xPosition = `${pool[index].xOffsetFactor * 8 + 50}vw`;
-    } else {
-      console.log("todo error or have safe fallback?");
-    }
 
-    let yPosition;
-    if (pool[index].yPosition) {
-      yPosition = pool[index].yPosition;
-    } else if (typeof pool[index].yOffsetFactor === "number") {
-      yPosition = `${pool[index].yOffsetFactor * 8 + 70}vh`;
-    } else {
-      console.log("todo error or have safe fallback?");
-    }
-
-    letters.push(
-      <div
-        style={{ top: yPosition, left: xPosition }}
-        className="poolLetter"
-        key={index}
-        draggable="true"
-        onDragStart={(event) =>
-          dragToken({
-            event: event,
-            letter: pool[index].letter,
-            index: index,
-            dragArea: "pool",
-          })
-        }
-      >
-        {pool[index].letter}
-      </div>
-    );
-  }
+  letters = pool.map((letterProperties, index) =>
+    PoolLetter({ letterProperties: letterProperties, index: index })
+  );
 
   return (
     <div

@@ -14,6 +14,8 @@ html {
   top: 0;
   height: 100%;
   width: 100%;
+
+  --font-size: min(4vmax, 7vmin);
 }
 
 h1 {
@@ -676,6 +678,12 @@ a {
   justify-content: center;
   min-height: min(5vmax, 8vmin);
   position: absolute;
+  font-size: min(4vmax, 7vmin);
+  /* --offsetCalcX: calc(50vmin - (var(--font-size) / 3) + (var(--offsetX) * 8vmin));
+  --offsetCalcY: calc(100vmin - 7vmax - (var(--font-size) / 3) + (var(--offsetY) * 8vmin));
+  left: var(--offsetCalcX);
+  left: var(--positionX);
+  top: var(--offsetCalcY, 500px); */
 }
 
 #packed .poolLetter:active {

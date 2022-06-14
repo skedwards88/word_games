@@ -30,12 +30,9 @@
 
 ## Packed
 
-- add logic for game complete
-- add logic to show invalid word?
-- add logic to give hint. clears rest of board? style is bold to show locked into place?
 - local storage
 - icon
-- rules
+- works on mobile
 - better starting arrangement
 
 ## Other ideas

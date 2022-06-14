@@ -1,6 +1,6 @@
 import commonWords from "../../common/wordLists/compiled/commonWords.json";
 import { shuffleArray } from "../../common/shuffleArray.js";
-import { getOffsets } from "./getOffsets";
+import { getPositions } from "./getOffsets";
 
 function getTrieOfLength(wordLength) {
   let trie = {};
@@ -102,13 +102,14 @@ export function gameInit() {
   const solution = getGame(gridSize);
   console.log(solution);
 
-  const offsets = getOffsets(solution);
+  const positions = getPositions(solution);
+
   const pool = shuffleArray(solution).map(
     (letter, index) =>
       new Object({
         letter: letter,
-        xOffsetFactor: offsets[index].x,
-        yOffsetFactor: offsets[index].y,
+        xPosition: positions[index].x,
+        yPosition: positions[index].y,
       })
   );
 

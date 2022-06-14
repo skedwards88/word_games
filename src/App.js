@@ -38,7 +38,7 @@ function App() {
             <div className="gameIcon" id="palette_icon"></div>
             <div>Palette</div>
           </button>
-          
+
           <button
             className="gameButton"
             onClick={() => setCurrentDisplay(gameIndex.Packed)}

@@ -1,6 +1,6 @@
 import { shuffleArray } from "../../common/shuffleArray";
 import { gameInit } from "./gameInit";
-import { getOffsets } from "./getOffsets";
+import { getPositions } from "./getOffsets";
 
 export function gameReducer(currentGameState, payload) {
   // todo add way to swap by click one then click another?
@@ -122,13 +122,13 @@ export function gameReducer(currentGameState, payload) {
       }
     }
 
-    const offsets = getOffsets(poolLetters);
+    const positions = getPositions(poolLetters);
     newPool = shuffleArray(poolLetters).map(
       (letter, index) =>
         new Object({
           letter: letter,
-          xOffsetFactor: offsets[index].x,
-          yOffsetFactor: offsets[index].y,
+          xPosition: positions[index].x,
+          yPosition: positions[index].y,
         })
     );
 
@@ -142,6 +142,17 @@ export function gameReducer(currentGameState, payload) {
 
   if (payload.action === "newGame") {
     return gameInit();
+  }
+
+  if (payload.action === "windowResize") {
+    console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
+    let newPool = [...currentGameState.pool];
+
+    for (let index = 0; index < newPool.length; index++) {
+      const oldX = newPool[index].xPosition;
+      const oldY = newPool[index].yPosition;
+    }
+    return { ...currentGameState };
   }
 
   return { ...currentGameState };
