@@ -7,8 +7,8 @@ function PoolLetter({ letterProperties, index }) {
   return (
     <div
       style={{
-        top: `${letterProperties.yPosition}px`,
-        left: `${letterProperties.xPosition}px`,
+        top: `${letterProperties.yFractionalPosition}%`,
+        left: `${letterProperties.xFractionalPosition}%`,
       }}
       className="poolLetter"
       key={index}

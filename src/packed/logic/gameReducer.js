@@ -1,6 +1,6 @@
 import { shuffleArray } from "../../common/shuffleArray";
 import { gameInit } from "./gameInit";
-import { getPositions } from "./getOffsets";
+import { getPositionalFractions } from "./getOffsets";
 
 export function gameReducer(currentGameState, payload) {
   // todo add way to swap by click one then click another?
@@ -8,6 +8,13 @@ export function gameReducer(currentGameState, payload) {
   if (payload.action === "dropOnPool") {
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
+
+    const vhInPx =
+      Math.max(document.documentElement.clientHeight, window.innerHeight || 0) /
+      100;
+    const vwInPx =
+      Math.max(document.documentElement.clientWidth, window.innerWidth || 0) /
+      100;
 
     // from the board
     if (payload.dragArea === "board") {
@@ -23,8 +30,8 @@ export function gameReducer(currentGameState, payload) {
       newPool.push(
         new Object({
           letter: payload.letter,
-          xPosition: payload.dropX,
-          yPosition: payload.dropY,
+          xFractionalPosition: payload.dropX / vwInPx,
+          yFractionalPosition: payload.dropY / vhInPx,
         })
       );
     }
@@ -34,8 +41,8 @@ export function gameReducer(currentGameState, payload) {
       // Update the position of the dragged letter
       newPool[payload.dragIndex] = new Object({
         letter: payload.letter,
-        xPosition: payload.dropX,
-        yPosition: payload.dropY,
+        xFractionalPosition: payload.dropX / vwInPx,
+        yFractionalPosition: payload.dropY / vhInPx,
       });
     }
 
@@ -122,13 +129,13 @@ export function gameReducer(currentGameState, payload) {
       }
     }
 
-    const positions = getPositions(poolLetters);
+    const positions = getPositionalFractions(poolLetters);
     newPool = shuffleArray(poolLetters).map(
       (letter, index) =>
         new Object({
           letter: letter,
-          xPosition: positions[index].x,
-          yPosition: positions[index].y,
+          xFractionalPosition: positions[index].x,
+          yFractionalPosition: positions[index].y,
         })
     );
 
@@ -144,16 +151,16 @@ export function gameReducer(currentGameState, payload) {
     return gameInit();
   }
 
-  if (payload.action === "windowResize") {
-    console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
-    let newPool = [...currentGameState.pool];
+  // if (payload.action === "windowResize") {
+  //   console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
+  //   let newPool = [...currentGameState.pool];
 
-    for (let index = 0; index < newPool.length; index++) {
-      const oldX = newPool[index].xPosition;
-      const oldY = newPool[index].yPosition;
-    }
-    return { ...currentGameState };
-  }
+  //   for (let index = 0; index < newPool.length; index++) {
+  //     const oldX = newPool[index].xFractionalPosition;
+  //     const oldY = newPool[index].yFractionalPosition;
+  //   }
+  //   return { ...currentGameState };
+  // }
 
   return { ...currentGameState };
 }

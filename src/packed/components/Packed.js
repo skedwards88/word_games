@@ -28,14 +28,14 @@ function Packed({ setCurrentDisplay }) {
     gameInit
   );
 
-  React.useEffect(() => {
-    function handleResize() {
-      console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
-      dispatchGameState({ action: "windowResize" });
-    }
+  // React.useEffect(() => {
+  //   function handleResize() {
+  //     console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
+  //     dispatchGameState({ action: "windowResize" });
+  //   }
 
-    window.addEventListener("resize", handleResize);
-  });
+  //   window.addEventListener("resize", handleResize);
+  // });
 
   function dropOnPool({ event }) {
     const letter = event.dataTransfer.getData("letter");
