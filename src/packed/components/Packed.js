@@ -76,13 +76,17 @@ function Packed({ setCurrentDisplay }) {
 
   return (
     <div className="App" id="packed">
-      <Result board={gameState.board}></Result>
       <Board
         letters={gameState.board}
         locked={gameState.locked}
         dropToken={dropOnBoard}
       ></Board>
-      <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
+      {!gameState.board.some((i) => !i) ? (
+        <Result board={gameState.board}></Result>
+      ) : (
+        <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
+      )}
+
       <div id="controls">
         <button
           id="newGameButton"

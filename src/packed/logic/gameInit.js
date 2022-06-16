@@ -100,9 +100,10 @@ export function gameInit() {
   // todo pull grid size from settings
   const gridSize = 3;
   const solution = getGame(gridSize);
+  // const solution = [1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,10,12,13,14,15,16,17,10,12,13,14,15,16,17]
   console.log(solution);
 
-  const positions = getPositionalFractions(solution);
+  const positions = getPositionalFractions(solution, solution.length);
 
   const pool = shuffleArray(solution).map(
     (letter, index) =>

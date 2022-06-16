@@ -548,6 +548,58 @@ a {
   font-size: min(3vmax, 7vmin);
 }
 
+
+/* packed-specific */
+
+#packed {
+  display: grid;
+  grid-template-areas:
+    "board"
+    "pool"
+    "controls";
+  grid-template-rows:
+    1fr
+    auto
+    auto;
+}
+
+#packed #board {
+  grid-area: board;
+  display: grid;
+  touch-action: none;
+  justify-content: center;
+  grid-template-columns: repeat(3, min(15vmax, 20vmin));
+  grid-template-rows: repeat(3, min(15vmax, 20vmin));
+  width: fit-content;
+  height: fit-content;
+  justify-self: center;
+  color: rgb(239 239 239);
+  border: 1px solid rgb(239 239 239);
+  margin: 10vmin 0 0 0;
+}
+
+#packed .boardLetter {
+  border: 2px solid rgb(239 239 239);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#packed .boardLetter.locked {
+  font-weight: bold;
+}
+
+#packed #pool {
+  grid-area: pool;
+  touch-action: none;
+}
+
+#packed .poolLetter {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+}
+
 /* Landscape */
 
 @media (orientation: landscape) {
@@ -564,6 +616,31 @@ a {
     grid-template-columns: 1fr auto;
     grid-template-rows: auto 1fr;
   }
+  
+  #packed {
+    grid-template-areas:
+      "board pool controls";
+    grid-template-columns: 1fr auto auto;
+    grid-template-columns: 1fr 30vw auto;
+    grid-template-rows: 1fr;
+  }
+
+  #packed #board {
+    align-self: center;
+    justify-self: auto;
+    margin: 0 0 0 10vmin;
+  }
+
+  #packed #pool  {
+    /* transform: rotate(90deg);
+    transform-origin: top left; */
+  }
+  #packed .poolLetter {
+    position: absolute;
+    top: var(--x);
+    left: var(--y);
+  }
+  
 
   #thirdle {
     grid-template-areas:
@@ -616,81 +693,4 @@ a {
     height: 100%;
     width: 7vw;
   }
-}
-
-/* packed-specific */
-
-#packed {
-  display: grid;
-  grid-template-areas:
-    "result"
-    "board"
-    "pool"
-    "controls";
-  grid-template-rows:
-    auto
-    1fr
-    auto
-    auto;
-}
-
-#packed #board {
-  grid-area: board;
-  display: grid;
-  touch-action: none;
-  justify-content: center;
-  grid-template-columns: repeat(3, min(15vmax, 20vmin));
-  grid-template-rows: repeat(3, min(15vmax, 20vmin));
-  width: fit-content;
-  height: fit-content;
-  align-self: center;
-  justify-self: center;
-  color: rgb(239 239 239);
-  border: 1px solid rgb(239 239 239);
-}
-
-#packed .boardLetter {
-  border: 2px solid rgb(239 239 239);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#packed .boardLetter.locked {
-  font-weight: bold;
-}
-
-#packed #pool {
-  grid-area: pool;
-  /* display: grid; */
-  touch-action: none;
-  justify-content: center;
-  /* grid-template-columns: repeat(10, 1fr); */
-  /* grid-template-rows: repeat(10, 1fr); */
-  /* position: relative; */
-  height: 40vh;
-  width: 100vw;
-}
-
-#packed .poolLetter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: min(5vmax, 8vmin);
-  position: absolute;
-  font-size: min(4vmax, 7vmin);
-  /* --offsetCalcX: calc(50vmin - (var(--font-size) / 3) + (var(--offsetX) * 8vmin));
-  --offsetCalcY: calc(100vmin - 7vmax - (var(--font-size) / 3) + (var(--offsetY) * 8vmin));
-  left: var(--offsetCalcX);
-  left: var(--positionX);
-  top: var(--offsetCalcY, 500px); */
-}
-
-#packed .poolLetter:active {
-}
-
-#packed #result {
-  grid-area: result;
-  height: 10vh;
-  text-align: center;
 }

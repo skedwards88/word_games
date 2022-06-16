@@ -129,7 +129,10 @@ export function gameReducer(currentGameState, payload) {
       }
     }
 
-    const positions = getPositionalFractions(poolLetters);
+    const positions = getPositionalFractions(
+      poolLetters,
+      currentGameState.solution.length
+    );
     newPool = shuffleArray(poolLetters).map(
       (letter, index) =>
         new Object({

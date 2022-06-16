@@ -2,13 +2,11 @@ import React from "react";
 import { dragToken } from "./Packed";
 
 function PoolLetter({ letterProperties, index }) {
-  // todo todo not reactive to resize or rotation
-
   return (
     <div
       style={{
-        top: `${letterProperties.yFractionalPosition}%`,
-        left: `${letterProperties.xFractionalPosition}%`,
+        "--y": `${letterProperties.yFractionalPosition}%`,
+        "--x": `${letterProperties.xFractionalPosition}%`,
       }}
       className="poolLetter"
       key={index}
