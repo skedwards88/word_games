@@ -32,8 +32,9 @@
 
 - local storage
 - icon
-- works on mobile
-- better starting arrangement
+- works on touch screen
+- make way to swap letters by clicking one then another?
+- change home to default to home instead of packed
 
 ## Other ideas
 

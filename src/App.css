@@ -103,7 +103,7 @@ input[type="checkbox" i]:checked {
 
 #info {
   white-space: pre-line;
-  padding: 10px;
+  padding: 5vmin;
 }
 
 #settingsButton {
@@ -559,7 +559,7 @@ a {
     "controls";
   grid-template-rows:
     1fr
-    auto
+    1fr
     auto;
 }
 
@@ -600,6 +600,13 @@ a {
   top: var(--y);
 }
 
+#packed #result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 /* Landscape */
 
 @media (orientation: landscape) {
@@ -620,8 +627,7 @@ a {
   #packed {
     grid-template-areas:
       "board pool controls";
-    grid-template-columns: 1fr auto auto;
-    grid-template-columns: 1fr 30vw auto;
+    grid-template-columns: 1fr 1fr auto;
     grid-template-rows: 1fr;
   }
 
