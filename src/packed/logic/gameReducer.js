@@ -3,7 +3,6 @@ import { gameInit } from "./gameInit";
 import { getPositionalFractions } from "./getOffsets";
 
 export function gameReducer(currentGameState, payload) {
-  // todo add way to swap by click one then click another?
 
   if (payload.action === "dropOnPool") {
     let newBoard = [...currentGameState.board];
@@ -24,7 +23,7 @@ export function gameReducer(currentGameState, payload) {
       }
 
       // remove the letter at the dragged board index
-      newBoard[payload.dragIndex] = "";
+      newBoard[payload[dragIndex]] = "";
 
       // Add the letter to the pool with the dropped position
       newPool.push(

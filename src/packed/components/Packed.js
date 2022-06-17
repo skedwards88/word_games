@@ -9,16 +9,10 @@ import { gameReducer } from "../logic/gameReducer";
 
 export function dragToken({ event, letter, index, dragArea }) {
   event.dataTransfer.setData("letter", letter);
-  event.dataTransfer.setData("dragIndex", index);
+  event.dataTransfer.setData("dragIndex", `${index}`); // touch screen set 0 as undefinde
   event.dataTransfer.setData("dragArea", dragArea);
   event.dataTransfer.setData("width", event.target.clientWidth);
   event.dataTransfer.setData("height", event.target.clientHeight);
-
-  // If not on a device on which the mobile-drag-drop pollyfill applies,
-  // center the drag image on the cursor
-  // if (!/iPad|iPhone|iPod|Android/.test(navigator.userAgent)) {
-  //   event.dataTransfer.setDragImage(event.target, 50, 50);
-  // }
 }
 
 function Packed({ setCurrentDisplay }) {
@@ -27,15 +21,6 @@ function Packed({ setCurrentDisplay }) {
     {},
     gameInit
   );
-
-  // React.useEffect(() => {
-  //   function handleResize() {
-  //     console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
-  //     dispatchGameState({ action: "windowResize" });
-  //   }
-
-  //   window.addEventListener("resize", handleResize);
-  // });
 
   function dropOnPool({ event }) {
     const letter = event.dataTransfer.getData("letter");

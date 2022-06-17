@@ -558,7 +558,7 @@ a {
     "pool"
     "controls";
   grid-template-rows:
-    1fr
+    auto
     1fr
     auto;
 }
@@ -627,7 +627,7 @@ a {
   #packed {
     grid-template-areas:
       "board pool controls";
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
   }
 

@@ -1,5 +1,10 @@
 import React from "react";
 import { dragToken } from "./Packed";
+import { polyfill } from "mobile-drag-drop";
+
+polyfill({
+  dragImageCenterOnTouch: true,
+});
 
 function PoolLetter({ letterProperties, index }) {
   return (
