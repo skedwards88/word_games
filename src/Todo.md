@@ -31,10 +31,7 @@
 ## Packed
 
 - local storage
-- icon
-- works on touch screen
 - make way to swap letters by clicking one then another?
-- change home to default to home instead of packed
 
 ## Other ideas
 

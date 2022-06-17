@@ -256,6 +256,10 @@ a {
   background-image: url("./images/palette.svg");
 }
 
+#packed_icon {
+  background-image: url("./images/packed.svg");
+}
+
 /* Gribbles-specific */
 
 #gribbles {
