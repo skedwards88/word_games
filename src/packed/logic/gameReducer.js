@@ -57,6 +57,11 @@ export function gameReducer(currentGameState, payload) {
     const initialLetterAtDrag = payload.letter;
     const initialLetterAtDrop = newBoard[payload.dropIndex];
 
+    // Don't allow a hinted letter to be replaced
+    if (currentGameState.locked[payload.dropIndex]) {
+      return { ...currentGameState };
+    }
+
     // from the pool
     if (payload.dragArea === "pool") {
       newBoard[payload.dropIndex] = initialLetterAtDrag;
