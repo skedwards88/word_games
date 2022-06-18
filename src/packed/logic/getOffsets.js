@@ -29,10 +29,10 @@ export function getPositionalFractions(pool, maxLength) {
     const yOffset = offsets[index].y;
 
     const xFractionalPosition =
-      (48 * vwInPx + xOffset * Math.floor(50 / Math.sqrt(maxLength)) * vwInPx) /
+      (46 * vwInPx + xOffset * Math.floor(54 / Math.sqrt(maxLength)) * vwInPx) /
       vwInPx;
     const yFractionalPosition =
-      (68 * vhInPx + yOffset * Math.floor(30 / Math.sqrt(maxLength)) * vhInPx) /
+      (68 * vhInPx + yOffset * Math.floor(32 / Math.sqrt(maxLength)) * vhInPx) /
       vhInPx;
 
     const fractionalPosition = new Object({

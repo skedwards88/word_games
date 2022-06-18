@@ -605,6 +605,11 @@ a {
   position: absolute;
   left: var(--x);
   top: var(--y);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: min(6vmax, 9vmin);
+  height: min(6vmax, 9vmin);
 }
 
 #packed #result {
