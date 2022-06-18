@@ -14,7 +14,6 @@ export function dragToken({ event, letter, index, dragArea }) {
   event.dataTransfer.setData("width", event.target.clientWidth);
   event.dataTransfer.setData("height", event.target.clientHeight);
   event.target.classList.add('dragging')
-  event.dataTransfer.setData("draggedElement", event.target);
 }
 
 function Packed({ setCurrentDisplay }) {
@@ -29,9 +28,6 @@ function Packed({ setCurrentDisplay }) {
   }, [gameState]);
 
   function dropOnPool({ event }) {
-    const draggedElement = event.dataTransfer.getData("draggedElement");
-    draggedElement.classList.remove('dragging')
-
     const letter = event.dataTransfer.getData("letter");
     const dragIndex = event.dataTransfer.getData("dragIndex");
     const dragArea = event.dataTransfer.getData("dragArea");
@@ -49,9 +45,6 @@ function Packed({ setCurrentDisplay }) {
   }
 
   function dropOnBoard({ event, index }) {
-    const draggedElement = event.dataTransfer.getData("draggedElement");
-    draggedElement.classList.remove('dragging')
-
     const letter = event.dataTransfer.getData("letter");
     const dragIndex = event.dataTransfer.getData("dragIndex");
     const dragArea = event.dataTransfer.getData("dragArea");

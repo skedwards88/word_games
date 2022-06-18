@@ -24,6 +24,7 @@ function PoolLetter({ letterProperties, index }) {
           dragArea: "pool",
         })
       }
+      onDragEnd={(event => event.target.classList.remove("dragging"))}
     >
       {letterProperties.letter}
     </div>
