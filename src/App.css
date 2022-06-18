@@ -619,6 +619,10 @@ a {
   text-align: center;
 }
 
+#packed .dragging {
+  opacity: 0.5;
+}
+
 /* Landscape */
 
 @media (orientation: landscape) {
