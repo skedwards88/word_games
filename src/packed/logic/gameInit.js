@@ -95,8 +95,22 @@ function getGame(gridSize) {
   return game.join("").split("");
 }
 
-export function gameInit() {
-  // todo pull grid size from settings
+export function gameInit({useSaved}) {
+  const savedState = useSaved ?? true
+    ? JSON.parse(localStorage.getItem("packedState"))
+    : undefined;
+
+  if (
+    savedState &&
+    savedState.hasOwnProperty("solution") &&
+    savedState.hasOwnProperty("board") &&
+    savedState.hasOwnProperty("pool") &&
+    savedState.hasOwnProperty("locked") &&
+    savedState.board.some((i) => !i)
+  ) {
+    return savedState;
+  }
+  
   const gridSize = 3;
   const solution = getGame(gridSize);
 

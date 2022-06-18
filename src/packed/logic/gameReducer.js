@@ -23,7 +23,7 @@ export function gameReducer(currentGameState, payload) {
       }
 
       // remove the letter at the dragged board index
-      newBoard[payload[dragIndex]] = "";
+      newBoard[payload.dragIndex] = "";
 
       // Add the letter to the pool with the dropped position
       newPool.push(
@@ -150,19 +150,8 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "newGame") {
-    return gameInit();
+    return gameInit({useSaved: false});
   }
-
-  // if (payload.action === "windowResize") {
-  //   console.log("resized to: ", window.innerWidth, "x", window.innerHeight);
-  //   let newPool = [...currentGameState.pool];
-
-  //   for (let index = 0; index < newPool.length; index++) {
-  //     const oldX = newPool[index].xFractionalPosition;
-  //     const oldY = newPool[index].yFractionalPosition;
-  //   }
-  //   return { ...currentGameState };
-  // }
 
   return { ...currentGameState };
 }

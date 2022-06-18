@@ -9,7 +9,7 @@ import { gameReducer } from "../logic/gameReducer";
 
 export function dragToken({ event, letter, index, dragArea }) {
   event.dataTransfer.setData("letter", letter);
-  event.dataTransfer.setData("dragIndex", `${index}`); // touch screen set 0 as undefinde
+  event.dataTransfer.setData("dragIndex", `${index}`); // touch screen sets 0 as undefined, so convert to string
   event.dataTransfer.setData("dragArea", dragArea);
   event.dataTransfer.setData("width", event.target.clientWidth);
   event.dataTransfer.setData("height", event.target.clientHeight);
@@ -21,6 +21,10 @@ function Packed({ setCurrentDisplay }) {
     {},
     gameInit
   );
+
+  React.useEffect(() => {
+    window.localStorage.setItem("packedState", JSON.stringify(gameState));
+  }, [gameState]);
 
   function dropOnPool({ event }) {
     const letter = event.dataTransfer.getData("letter");
@@ -54,10 +58,6 @@ function Packed({ setCurrentDisplay }) {
       dropY: event.clientY,
     });
   }
-
-  React.useEffect(() => {
-    //todo set local storage
-  }, [gameState]);
 
   return (
     <div className="App" id="packed">
