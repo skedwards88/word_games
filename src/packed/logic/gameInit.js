@@ -95,10 +95,11 @@ function getGame(gridSize) {
   return game.join("").split("");
 }
 
-export function gameInit({useSaved}) {
-  const savedState = useSaved ?? true
-    ? JSON.parse(localStorage.getItem("packedState"))
-    : undefined;
+export function gameInit({ useSaved }) {
+  const savedState =
+    useSaved ?? true
+      ? JSON.parse(localStorage.getItem("packedState"))
+      : undefined;
 
   if (
     savedState &&
@@ -110,7 +111,7 @@ export function gameInit({useSaved}) {
   ) {
     return savedState;
   }
-  
+
   const gridSize = 3;
   const solution = getGame(gridSize);
 

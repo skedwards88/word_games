@@ -552,7 +552,6 @@ a {
   font-size: min(3vmax, 7vmin);
 }
 
-
 /* packed-specific */
 
 #packed {
@@ -579,7 +578,7 @@ a {
   justify-self: center;
   color: rgb(239 239 239);
   border: 1px solid rgb(239 239 239);
-  margin: 10vmin 0 0 0;
+  margin: 10vmin 0 0;
 }
 
 #packed .boardLetter {
@@ -593,9 +592,9 @@ a {
   font-weight: bold;
 }
 
-/* #packed .boardLetter:active {
+#packed .boardLetter:active {
   border: 0;
-} */
+}
 
 #packed #pool {
   grid-area: pool;
@@ -624,6 +623,10 @@ a {
     grid-template-rows: 1fr;
   }
 
+  #home #games {
+    flex-direction: column;
+  }
+
   #gribbles {
     grid-template-areas:
       "stats currentWord controls"
@@ -631,10 +634,9 @@ a {
     grid-template-columns: 1fr auto;
     grid-template-rows: auto 1fr;
   }
-  
+
   #packed {
-    grid-template-areas:
-      "board pool controls";
+    grid-template-areas: "board pool controls";
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
   }
@@ -645,16 +647,11 @@ a {
     margin: 0 0 0 10vmin;
   }
 
-  #packed #pool  {
-    /* transform: rotate(90deg);
-    transform-origin: top left; */
-  }
   #packed .poolLetter {
     position: absolute;
     top: var(--x);
     left: var(--y);
   }
-  
 
   #thirdle {
     grid-template-areas:

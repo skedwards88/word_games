@@ -3,7 +3,6 @@ import { gameInit } from "./gameInit";
 import { getPositionalFractions } from "./getOffsets";
 
 export function gameReducer(currentGameState, payload) {
-
   if (payload.action === "dropOnPool") {
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
@@ -150,7 +149,7 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "newGame") {
-    return gameInit({useSaved: false});
+    return gameInit({ useSaved: false });
   }
 
   return { ...currentGameState };
