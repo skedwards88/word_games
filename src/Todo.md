@@ -17,6 +17,8 @@
 
 ## Gribbles
 
+- bug where qu doesn't count as 2 letters
+
 ## Thirdle
 
 - allow to control whether one or multi space?
@@ -25,6 +27,10 @@
 - allow to specify number of letters given in clue
 
 ## Palette
+
+## Packed
+
+- make way to swap letters by clicking one then another?
 
 ## Other ideas
 

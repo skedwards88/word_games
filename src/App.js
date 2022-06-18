@@ -3,6 +3,7 @@ import "./App.css";
 import Gribbles from "./gribbles/components/Gribbles";
 import Thirdle from "./thirdle/components/Thirdle";
 import Palette from "./palette/components/Palette";
+import Packed from "./packed/components/Packed";
 import Info from "./common/Info";
 import { gameIndex } from "./gameIndex";
 import packageJson from "../package.json";
@@ -37,6 +38,14 @@ function App() {
             <div className="gameIcon" id="palette_icon"></div>
             <div>Palette</div>
           </button>
+
+          <button
+            className="gameButton"
+            onClick={() => setCurrentDisplay(gameIndex.Packed)}
+          >
+            <div className="gameIcon" id="packed_icon"></div>
+            <div>Packed</div>
+          </button>
         </div>
         <div id="controls">
           <Info
@@ -70,6 +79,8 @@ function App() {
       return <Thirdle setCurrentDisplay={setCurrentDisplay} />;
     case "palette":
       return <Palette setCurrentDisplay={setCurrentDisplay} />;
+    case "packed":
+      return <Packed setCurrentDisplay={setCurrentDisplay} />;
     default:
       return <Home />;
   }

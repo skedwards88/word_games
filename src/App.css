@@ -14,6 +14,8 @@ html {
   top: 0;
   height: 100%;
   width: 100%;
+
+  --font-size: min(4vmax, 7vmin);
 }
 
 h1 {
@@ -101,7 +103,7 @@ input[type="checkbox" i]:checked {
 
 #info {
   white-space: pre-line;
-  padding: 10px;
+  padding: 5vmin;
 }
 
 #settingsButton {
@@ -252,6 +254,10 @@ a {
 
 #palette_icon {
   background-image: url("./images/palette.svg");
+}
+
+#packed_icon {
+  background-image: url("./images/packed.svg");
 }
 
 /* Gribbles-specific */
@@ -546,6 +552,68 @@ a {
   font-size: min(3vmax, 7vmin);
 }
 
+/* packed-specific */
+
+#packed {
+  display: grid;
+  grid-template-areas:
+    "board"
+    "pool"
+    "controls";
+  grid-template-rows:
+    auto
+    1fr
+    auto;
+}
+
+#packed #board {
+  grid-area: board;
+  display: grid;
+  touch-action: none;
+  justify-content: center;
+  grid-template-columns: repeat(3, min(15vmax, 20vmin));
+  grid-template-rows: repeat(3, min(15vmax, 20vmin));
+  width: fit-content;
+  height: fit-content;
+  justify-self: center;
+  color: rgb(239 239 239);
+  border: 1px solid rgb(239 239 239);
+  margin: 10vmin 0 0;
+}
+
+#packed .boardLetter {
+  border: 2px solid rgb(239 239 239);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#packed .boardLetter.locked {
+  font-weight: bold;
+}
+
+#packed .boardLetter:active {
+  border: 0;
+}
+
+#packed #pool {
+  grid-area: pool;
+  touch-action: none;
+}
+
+#packed .poolLetter {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+}
+
+#packed #result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 /* Landscape */
 
 @media (orientation: landscape) {
@@ -555,12 +623,34 @@ a {
     grid-template-rows: 1fr;
   }
 
+  #home #games {
+    flex-direction: column;
+  }
+
   #gribbles {
     grid-template-areas:
       "stats currentWord controls"
       "foundWords board controls";
     grid-template-columns: 1fr auto;
     grid-template-rows: auto 1fr;
+  }
+
+  #packed {
+    grid-template-areas: "board pool controls";
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+  }
+
+  #packed #board {
+    align-self: center;
+    justify-self: auto;
+    margin: 0 0 0 10vmin;
+  }
+
+  #packed .poolLetter {
+    position: absolute;
+    top: var(--x);
+    left: var(--y);
   }
 
   #thirdle {
