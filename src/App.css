@@ -4,18 +4,17 @@ html {
 }
 
 .App {
+  --default-font-size: min(4vmax, 7vmin);
   background-color: rgb(38 36 129);
   color: rgb(255 255 255);
   font-family: sans-serif;
-  font-size: min(4vmax, 7vmin);
+  font-size: var(--default-font-size);
   display: grid;
   position: fixed;
   left: 0;
   top: 0;
   height: 100%;
   width: 100%;
-
-  --font-size: min(4vmax, 7vmin);
 }
 
 h1 {
@@ -27,7 +26,7 @@ button {
   text-decoration: none;
   text-align: center;
   appearance: none;
-  font-size: min(4vmax, 7vmin);
+  font-size: var(--default-font-size);
   font-family: sans-serif;
   background-color: rgb(239 239 239);
   border: 1px solid rgb(239 239 239);
@@ -43,7 +42,7 @@ select {
   text-align: center;
   -webkit-appearance: none;
   -moz-appearance: none; */
-  font-size: min(4vmax, 7vmin);
+  font-size: var(--default-font-size);
   font-family: sans-serif;
   background-color: rgb(239 239 239);
   border: 1px solid rgb(239 239 239);
@@ -60,8 +59,8 @@ input[type="checkbox" i] {
   text-decoration: none;
   text-align: center;
   appearance: none;
-  min-width: min(4vmax, 7vmin);
-  min-height: min(4vmax, 7vmin);
+  min-width: var(--default-font-size);
+  min-height: var(--default-font-size);
   border-radius: 2px;
   background-color: rgb(239 239 239);
   border: 3px solid rgb(239 239 239);
@@ -151,7 +150,7 @@ input[type="checkbox" i]:checked {
   align-items: center;
   color: rgb(255 255 255);
   font-family: sans-serif;
-  font-size: min(4vmax, 7vmin);
+  font-size: var(--default-font-size);
 }
 
 #settings {
@@ -175,7 +174,7 @@ input[type="checkbox" i]:checked {
 }
 
 .setting-info {
-  font-size: min(2vmax, 4vmin);
+  font-size: calc(var(--default-font-size) / 2);
 }
 
 #setting-buttons {
@@ -223,7 +222,7 @@ a {
   margin: 3px;
   background-color: transparent;
   color: white;
-  font-size: min(4vmax, 7vmin);
+  font-size: var(--default-font-size);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -285,7 +284,7 @@ a {
   align-items: center;
   grid-area: stats;
   padding: 10px;
-  font-size: min(3vmax, 5vmin);
+  font-size: calc(var(--default-font-size) * 2 / 3);
 }
 
 #gribbles #foundWords {
@@ -298,7 +297,7 @@ a {
   overflow: scroll;
   flex-wrap: wrap;
   padding: 10px;
-  font-size: initial;
+  font-size: calc(var(--default-font-size) / 2);
 }
 
 #gribbles #foundWords > div {
@@ -441,7 +440,7 @@ a {
 
 #thirdle #guess {
   grid-area: guess;
-  font-size: min(4vmax, 7vmin);
+  font-size: var(--default-font-size);
 }
 
 #thirdle #keyboard {
@@ -586,10 +585,12 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: calc(var(--default-font-size) * 3 / 2);
 }
 
 #packed .boardLetter.locked {
   font-weight: bold;
+  color: lightgray;
 }
 
 #packed .boardLetter:active {
@@ -610,6 +611,7 @@ a {
   align-items: center;
   width: min(6vmax, 9vmin);
   height: min(6vmax, 9vmin);
+  font-size: calc(var(--default-font-size) * 3 / 2);
 }
 
 #packed #result {
