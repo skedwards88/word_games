@@ -6,6 +6,7 @@ import { Result } from "./Result";
 import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
 import { gameReducer } from "../logic/gameReducer";
+import { getGameOver, getBoardIsFull } from "../logic/getGameOver";
 
 export function dragToken({ event, letter, index, dragArea }) {
   event.dataTransfer.setData("letter", letter);
@@ -60,6 +61,9 @@ function Packed({ setCurrentDisplay }) {
     });
   }
 
+  const boardIsFull = getBoardIsFull(gameState.board)
+  const gameIsOver = getGameOver(gameState.board)
+  
   return (
     <div className="App" id="packed">
       <Board
@@ -67,8 +71,8 @@ function Packed({ setCurrentDisplay }) {
         locked={gameState.locked}
         dropToken={dropOnBoard}
       ></Board>
-      {!gameState.board.some((i) => !i) ? (
-        <Result board={gameState.board}></Result>
+      {boardIsFull ? (
+        <Result boardIsFull={boardIsFull} gameIsOver={gameIsOver} dropToken={dropOnPool}></Result>
       ) : (
         <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
       )}
@@ -85,6 +89,7 @@ function Packed({ setCurrentDisplay }) {
         ></button>
         <button
           id="helpButton"
+          disabled={gameIsOver}
           onClick={() => dispatchGameState({ action: "getHint" })}
         ></button>
         <Info
