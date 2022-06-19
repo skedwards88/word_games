@@ -34,21 +34,21 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "endWord") {
+    const newWord = currentGameState.playedIndexes
+      .map((index) => currentGameState.letters[index])
+      .join("")
+      .toUpperCase();
+
     // if the word is below the min length, don't add the word
     if (
-      currentGameState.playedIndexes.length < currentGameState.minWordLength
+      newWord.length < currentGameState.minWordLength
     ) {
       return {
         ...currentGameState,
         playedIndexes: [],
         result: currentGameState.playedIndexes.length <= 1 ? "" : "Too short",
-      };
-    }
-
-    const newWord = currentGameState.playedIndexes
-      .map((index) => currentGameState.letters[index])
-      .join("")
-      .toUpperCase();
+      };  
+    }  
 
     // if we already have the word, don't add the word
     if (currentGameState.foundWords.includes(newWord)) {

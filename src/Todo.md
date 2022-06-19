@@ -17,8 +17,6 @@
 
 ## Gribbles
 
-- bug where qu doesn't count as 2 letters
-
 ## Thirdle
 
 - allow to control whether one or multi space?
