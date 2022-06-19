@@ -2,7 +2,7 @@
 
 A collection of word games.
 
-**Intended for mobile only; does not work on desktop.**
+**Intended for touch screen only; does not work on desktop.**
 
 **Players:** 1
 
