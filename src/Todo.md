@@ -28,7 +28,8 @@
 
 ## Packed
 
-- make way to swap letters by clicking one then another?
+- eliminate symmetrical solutions? Or make a setting?
+- allow 4 letter also?
 
 ## Other ideas
 
@@ -49,5 +50,3 @@ scramble: 5-7 letters in a row or circle, connect subset of letters in any order
 word search: grid of letters + list of words. cross of words from list as find in grid.
 
 have N letters. need to arrange into crossword within grid size
-
-have a grid of scrambled letters (or maybe start with letters off screen and need to fill in grid). reorganize letters so that every row and column forms a word.
