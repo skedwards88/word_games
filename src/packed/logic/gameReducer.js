@@ -155,7 +155,7 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "newGame") {
-    return gameInit({ useSaved: false });
+    return gameInit({...payload, useSaved: false });
   }
 
   return { ...currentGameState };

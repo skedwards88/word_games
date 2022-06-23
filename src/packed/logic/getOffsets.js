@@ -1,20 +1,4 @@
-export function getOffsets(pool, maxLength) {
-  const root = Math.floor(Math.sqrt(maxLength));
-  const offsets = [];
-  for (let index = 0; index < pool.length; index++) {
-    const yOffsetFactor = Math.floor(index / root) - Math.floor((root - 1) / 2);
-    const xOffsetFactor = (index % root) - Math.floor((root - 1) / 2);
-    const offset = new Object({
-      x: xOffsetFactor,
-      y: yOffsetFactor,
-    });
-    offsets.push(offset);
-  }
-  return offsets;
-}
-
 export function getPositionalFractions(pool, maxLength) {
-  const offsets = getOffsets(pool, maxLength);
 
   const vhInPx =
     Math.max(document.documentElement.clientHeight, window.innerHeight || 0) /
@@ -22,18 +6,34 @@ export function getPositionalFractions(pool, maxLength) {
   const vwInPx =
     Math.max(document.documentElement.clientWidth, window.innerWidth || 0) /
     100;
+  const vMin = Math.min(vhInPx, vwInPx);
+  const vMax = Math.max(vhInPx, vwInPx);
+  // Font size is min(6vmax, 9vmin)
+  // Determine which is smaller in px, then use the corresponding percentage.
+  const letterWidth = 6 * vMax < 9 * vMin ? 6 : 9;
+
+  // the number of items in the row/column
+  const root = Math.floor(Math.sqrt(maxLength));
 
   const fractionalPositions = [];
   for (let index = 0; index < pool.length; index++) {
-    const xOffset = offsets[index].x;
-    const yOffset = offsets[index].y;
+    const xOffset = index % root;
+    const yOffset = Math.floor(index / root);
 
+    const xSpan = 80; // Span across this percentage of the screen
     const xFractionalPosition =
-      (46 * vwInPx + xOffset * Math.floor(54 / Math.sqrt(maxLength)) * vwInPx) /
-      vwInPx;
+      xOffset * (xSpan / root) + // Divide the span by the number of elements, times offset
+      xSpan / root / 2 + // Center the element in the area
+      (100 - xSpan) / 2 - // Adjust for not spanning across whole screen
+      letterWidth / 2; // Adjust for width of the letter
+
+    const ySpan = 35; // Span across this percentage of the screen
     const yFractionalPosition =
-      (68 * vhInPx + yOffset * Math.floor(32 / Math.sqrt(maxLength)) * vhInPx) /
-      vhInPx;
+      yOffset * (ySpan / root) + // Divide the span by the number of elements, times offset
+      ySpan / root / 2 + // Center the element in the area
+      (100 - ySpan) / 2 - // Adjust for not spanning across whole screen
+      letterWidth / 2 + // Adjust for width of the letter
+      25; // Offset to be lower on the screen
 
     const fractionalPosition = new Object({
       x: xFractionalPosition,
