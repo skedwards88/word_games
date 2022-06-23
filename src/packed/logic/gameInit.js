@@ -112,7 +112,7 @@ export function gameInit({ useSaved, gridSize }) {
     return savedState;
   }
 
-  gridSize = gridSize || 3;
+  gridSize = gridSize || (savedState?.solution && Math.sqrt(savedState.solution.length)) || 3;
 
   const solution = getGame(gridSize);
 
