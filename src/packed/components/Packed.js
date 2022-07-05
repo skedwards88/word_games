@@ -2,6 +2,7 @@ import React from "react";
 import Info from "../../common/Info";
 import Pool from "./Pool";
 import Board from "./Board";
+import Settings from "./Settings";
 import { Result } from "./Result";
 import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
@@ -83,7 +84,7 @@ function Packed({ setCurrentDisplay }) {
           onClick={() => {
             dispatchGameState({
               action: "newGame",
-              gridSize: gameState.solution.length,
+              gridSize: Math.sqrt(gameState.solution.length),
             });
           }}
         ></button>
@@ -92,6 +93,10 @@ function Packed({ setCurrentDisplay }) {
           disabled={gameIsOver}
           onClick={() => dispatchGameState({ action: "getHint" })}
         ></button>
+        <Settings
+          dispatchGameState={dispatchGameState}
+          gameState={gameState}
+        />
         <Info
           info={
             <div>

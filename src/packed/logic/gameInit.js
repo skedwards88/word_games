@@ -95,7 +95,7 @@ function getGame(gridSize) {
   return game.join("").split("");
 }
 
-export function gameInit({ useSaved }) {
+export function gameInit({ useSaved, gridSize }) {
   const savedState =
     useSaved ?? true
       ? JSON.parse(localStorage.getItem("packedState"))
@@ -112,7 +112,8 @@ export function gameInit({ useSaved }) {
     return savedState;
   }
 
-  const gridSize = 3;
+  gridSize = gridSize || (savedState?.solution && Math.sqrt(savedState.solution.length)) || 3;
+
   const solution = getGame(gridSize);
 
   const positions = getPositionalFractions(solution, solution.length);

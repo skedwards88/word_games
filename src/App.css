@@ -570,14 +570,22 @@ a {
   display: grid;
   touch-action: none;
   justify-content: center;
-  grid-template-columns: repeat(3, min(15vmax, 20vmin));
-  grid-template-rows: repeat(3, min(15vmax, 20vmin));
   width: fit-content;
   height: fit-content;
   justify-self: center;
   color: rgb(239 239 239);
   border: 1px solid rgb(239 239 239);
   margin: 10vmin 0 0;
+}
+
+#packed #board.size_9 {
+  grid-template-columns: repeat(3, min(15vmax, 20vmin));
+  grid-template-rows: repeat(3, min(15vmax, 20vmin));
+}
+
+#packed #board.size_16 {
+  grid-template-columns: repeat(4, min(10vmax, 15vmin));
+  grid-template-rows: repeat(4, min(10vmax, 15vmin));
 }
 
 #packed .boardLetter {
