@@ -1,7 +1,6 @@
 export default function getPatternsForRow(grid, rowIndex, minLength) {
   let patterns = [];
   const row = grid[rowIndex]
-  console.log(row)
 
   for (
     let startPosition = 0;
@@ -20,12 +19,9 @@ export default function getPatternsForRow(grid, rowIndex, minLength) {
       currentPosition++
     ) {
       if (!row[currentPosition].match("^[A-Z]$") && grid?.[rowIndex - 1]?.[currentPosition]) {
-        console.log(`something at prev ${grid?.[rowIndex - 1]?.[currentPosition]}`)
         break
       }
       if (!row[currentPosition].match("^[A-Z]$") && grid?.[rowIndex + 1]?.[currentPosition]) {
-        console.log(`something at next ${grid?.[rowIndex + 1]?.[currentPosition]}`)
-
         break
       }
       // Add the element to the pattern
