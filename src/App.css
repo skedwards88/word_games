@@ -625,6 +625,80 @@ a {
   opacity: 0.5;
 }
 
+/* packed-specific */
+
+#ngrid {
+  display: grid;
+  grid-template-areas:
+    "board"
+    "pool"
+    "controls";
+  grid-template-rows:
+    auto
+    1fr
+    auto;
+}
+
+#ngrid #board {
+  grid-area: board;
+  display: grid;
+  touch-action: none;
+  justify-content: center;
+  grid-template-columns: repeat(8, min(15vmax, 10vmin));
+  grid-template-rows: repeat(8, min(15vmax, 10vmin));
+  width: fit-content;
+  height: fit-content;
+  justify-self: center;
+  color: rgb(239 239 239);
+  border: 1px solid rgb(239 239 239);
+  margin: 10vmin 0 0;
+}
+
+#ngrid .boardLetter {
+  border: 1px solid rgb(239 239 239);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--default-font-size) * 3 / 2);
+}
+
+#ngrid .boardLetter.locked {
+  font-weight: bold;
+  color: lightgray;
+}
+
+#ngrid .boardLetter:active {
+  border: 0;
+}
+
+#ngrid #pool {
+  grid-area: pool;
+  touch-action: none;
+}
+
+#ngrid .poolLetter {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: min(6vmax, 9vmin);
+  height: min(6vmax, 9vmin);
+  font-size: calc(var(--default-font-size) * 3 / 2);
+}
+
+#ngrid #result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#ngrid .dragging {
+  opacity: 0.5;
+}
+
 /* Landscape */
 
 @media (orientation: landscape) {

@@ -50,12 +50,3 @@ export default function getPatternsForRow(grid, rowIndex, minLength) {
   }
   return patterns;
 }
-
-function convertPatternsToRegex(patterns) {
-  return `^(${patterns.join("|")})$`;
-}
-
-function getRegexesForRow(row, minLength) {
-  const patterns = getPatternsForRow(row, minLength);
-  return convertPatternsToRegex(patterns);
-}

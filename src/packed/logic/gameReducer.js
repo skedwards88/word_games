@@ -1,6 +1,6 @@
 import { shuffleArray } from "../../common/shuffleArray";
 import { gameInit } from "./gameInit";
-import { getPositionalFractions } from "./getOffsets";
+import { getPositionalFractions } from "../../common/getPositionalFractions";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "dropOnPool") {
