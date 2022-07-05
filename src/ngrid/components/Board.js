@@ -11,6 +11,8 @@ export default function Board({ letters, dropToken }) {
     <div
       className="boardLetter"
       key={index}
+      draggable
+      onDoubleClick={(event) => console.log("double")}
       onDragStart={(event) =>
         dragToken({
           event: event,

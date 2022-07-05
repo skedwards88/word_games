@@ -40,6 +40,7 @@ export function gameInit({ useSaved }) {
   return {
     solution: solution,
     board: Array(gridSize * gridSize).fill(""),
+    // board: solution.flatMap(i=>i),
     pool: pool
   };
 }

@@ -15,6 +15,13 @@
 - add way to share app url
 - add way to share url with specific game settings
 
+## NGrid
+
+- better name
+- make icon
+- change to default to home insted of ngrid
+- add instructions
+
 ## Gribbles
 
 ## Thirdle

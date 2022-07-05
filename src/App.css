@@ -652,8 +652,8 @@ a {
   display: grid;
   touch-action: none;
   justify-content: center;
-  grid-template-columns: repeat(8, min(15vmax, 10vmin));
-  grid-template-rows: repeat(8, min(15vmax, 10vmin));
+  grid-template-columns: repeat(8, min(10vmax, 10vmin));
+  grid-template-rows: repeat(8, min(10vmax, 10vmin));
   width: fit-content;
   height: fit-content;
   justify-self: center;
@@ -663,11 +663,11 @@ a {
 }
 
 #ngrid .boardLetter {
-  border: 1px solid rgb(239 239 239);
+  border: 0.5px solid rgb(239 239 239);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(var(--default-font-size) * 3 / 2);
+  font-size: var(--default-font-size);
 }
 
 #ngrid .boardLetter.locked {
@@ -693,7 +693,7 @@ a {
   align-items: center;
   width: min(6vmax, 9vmin);
   height: min(6vmax, 9vmin);
-  font-size: calc(var(--default-font-size) * 3 / 2);
+  font-size: var(--default-font-size);
 }
 
 #ngrid #result {
