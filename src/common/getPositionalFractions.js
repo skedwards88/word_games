@@ -1,6 +1,5 @@
 export function getPositionalFractions({poolLetters, maxLettersAcross}) {
 
-  console.log(`max across ${maxLettersAcross}`)
   const vhInPx =
     Math.max(document.documentElement.clientHeight, window.innerHeight || 0) /
     100;
@@ -29,7 +28,7 @@ export function getPositionalFractions({poolLetters, maxLettersAcross}) {
     const yFractionalPosition =
       yOffset * (ySpan / maxLettersAcross) + // Divide the span by the number of elements, times offset
       ySpan / maxLettersAcross / 2 + // Center the element in the area
-      (100 - maxLettersAcross) / 2 - // Adjust for not spanning across whole screen
+      (100 - ySpan) / 2 - // Adjust for not spanning across whole screen
       letterWidth / 2 + // Adjust for width of the letter
       25; // Offset to be lower on the screen
 
