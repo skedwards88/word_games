@@ -81,7 +81,7 @@ function NGrid({ setCurrentDisplay }) {
           onClick={() => {
             dispatchGameState({
               action: "newGame",
-              gridSize: gameState.solution.length,
+              gridSize: Math.sqrt(gameState.board.length),
             });
           }}
         ></button>

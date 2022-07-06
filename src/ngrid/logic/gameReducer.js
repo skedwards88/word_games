@@ -2,6 +2,14 @@ import { shuffleArray } from "../../common/shuffleArray";
 import { gameInit } from "./gameInit";
 import { getPositionalFractions } from "../../common/getPositionalFractions";
 
+function subtractArrays(baseArray, itemsToRemove) {
+  for (let index = 0; index < itemsToRemove.length; index++) {
+    let indexToDelete = baseArray.findIndex(i => i === itemsToRemove[index])
+    baseArray.splice(indexToDelete, 1)
+  }
+  return baseArray
+}
+
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "dropOnPool") {
     let newBoard = [...currentGameState.board];
@@ -16,7 +24,6 @@ export function gameReducer(currentGameState, payload) {
 
     // from the board
     if (payload.dragArea === "board") {
-
       // remove the letter at the dragged board index
       newBoard[payload.dragIndex] = "";
 
@@ -86,6 +93,64 @@ export function gameReducer(currentGameState, payload) {
 
   if (payload.action === "newGame") {
     return gameInit({ useSaved: false });
+  }
+
+  if (payload.action === "getHint") {
+
+    const hints = [...currentGameState.hints];
+    const newHintIndex = currentGameState.hintIndex + 1;
+
+    // populate the board with the hints
+    const gridSize = Math.sqrt(currentGameState.board.length);
+    let newBoard = Array.from({ length: gridSize }, () =>
+      Array.from({ length: gridSize }, () => "")
+    );
+    for (let currentHintIndex = 0; currentHintIndex < Math.min(newHintIndex, hints.length); currentHintIndex++) {
+      const hint = hints[currentHintIndex];
+
+      if (!hint.orientationIsRows) {
+        newBoard = newBoard.map((_, index) => newBoard.map((row) => row[index]));
+      }
+
+      for (
+        let index = hint.colIndex;
+        index < hint.colIndex + hint.word.length;
+        index++
+      ) {
+        newBoard[hint.rowIndex][index] = hint.word[index - hint.colIndex];
+      }
+
+      if (!hint.orientationIsRows) {
+        newBoard = newBoard.map((_, index) => newBoard.map((row) => row[index]));
+      }
+
+    }
+
+    // remove the board letters from the pool
+    let oldBoardLetters = [...currentGameState.board].filter(i=>i)
+    let oldPoolLetters = [...currentGameState.pool.map(i=>i.letter)]
+    let allLetters = [...oldBoardLetters, ...oldPoolLetters]
+    let newPoolLetters = subtractArrays(allLetters, newBoard.flatMap(i=>i).filter(i=>i))
+
+    // Generate the new pool
+    const positions = getPositionalFractions(
+      newPoolLetters,
+      currentGameState.board.length
+    );
+    const newPool = shuffleArray(newPoolLetters).map(
+      (letter, index) =>
+        new Object({
+          letter: letter,
+          xFractionalPosition: positions[index].x,
+          yFractionalPosition: positions[index].y,
+        })
+    );
+    return {
+      ...currentGameState,
+      hintIndex: newHintIndex,
+      board: newBoard.flatMap((i) => i),
+      pool: newPool,
+    };
   }
 
   return { ...currentGameState };
