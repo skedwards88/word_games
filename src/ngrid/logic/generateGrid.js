@@ -28,7 +28,7 @@ function removeWordThatMatches(pattern, wordList) {
   }
 }
 
-export function generateGrid(gridSize, minLetters, minWordLength) {
+export function generateGrid({gridSize, minLetters, minWordLength}) {
   let wordList = getCommonWordsForLenRange(minWordLength, gridSize);
 
   let letterCount = 0;

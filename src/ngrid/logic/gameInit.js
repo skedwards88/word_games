@@ -2,7 +2,7 @@ import { generateGrid } from "./generateGrid";
 import { shuffleArray } from "../../common/shuffleArray";
 import { getPositionalFractions } from "../../common/getPositionalFractions";
 
-function getIndexesWithWords(grid, minWordLength) {
+function getIndexesWithWords({grid, minWordLength}) {
   
   const transposedGrid = grid.map((_, index) => grid.map((row) => row[index]));
   const jointGrid = [...grid, ...transposedGrid];
@@ -64,15 +64,16 @@ export function gameInit({ useSaved }) {
   const gridSize = 8;
   const minLetters = 25;
   const minWordLength = 4;
-  const grid = generateGrid(gridSize, minLetters, minWordLength);
+  const grid = generateGrid({gridSize:gridSize, minLetters:minLetters, minWordLength:minWordLength});
 
-  const hints = getIndexesWithWords(grid, minWordLength);
+  // Since we may overwrite words as we generate the grid (e.g. "game" -> "games"),
+  // determine the final words from the grid instead of during the grid building process
+  const hints = getIndexesWithWords({grid: grid, minWordLength:minWordLength});
 
-  const gridLetters = grid.flatMap((i) => i).filter((i) => i);
-
-  const positions = getPositionalFractions(gridLetters, gridSize*gridSize);
-
-  const pool = shuffleArray(gridLetters).map(
+  // Generate the pool
+  const poolLetters = grid.flatMap((i) => i).filter((i) => i);
+  const positions = getPositionalFractions({poolLetters: poolLetters, maxLettersAcross: gridSize});
+  const pool = shuffleArray(poolLetters).map(
     (letter, index) =>
       new Object({
         letter: letter,
@@ -85,7 +86,6 @@ export function gameInit({ useSaved }) {
     hints: hints,
     hintIndex: 0,
     board: Array(gridSize * gridSize).fill(""),
-    // board: grid.flatMap((i) => i),
     pool: pool,
     hintIndex: 0,
   };

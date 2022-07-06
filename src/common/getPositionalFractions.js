@@ -1,5 +1,6 @@
-export function getPositionalFractions(pool, maxLength) {
+export function getPositionalFractions({poolLetters, maxLettersAcross}) {
 
+  console.log(`max across ${maxLettersAcross}`)
   const vhInPx =
     Math.max(document.documentElement.clientHeight, window.innerHeight || 0) /
     100;
@@ -12,26 +13,23 @@ export function getPositionalFractions(pool, maxLength) {
   // Determine which is smaller in px, then use the corresponding percentage.
   const letterWidth = 6 * vMax < 9 * vMin ? 6 : 9;
 
-  // the number of items in the row/column
-  const root = Math.floor(Math.sqrt(maxLength));
-
   const fractionalPositions = [];
-  for (let index = 0; index < pool.length; index++) {
-    const xOffset = index % root;
-    const yOffset = Math.floor(index / root);
+  for (let index = 0; index < poolLetters.length; index++) {
+    const xOffset = index % maxLettersAcross;
+    const yOffset = Math.floor(index / maxLettersAcross);
 
     const xSpan = 80; // Span across this percentage of the screen
     const xFractionalPosition =
-      xOffset * (xSpan / root) + // Divide the span by the number of elements, times offset
-      xSpan / root / 2 + // Center the element in the area
+      xOffset * (xSpan / maxLettersAcross) + // Divide the span by the number of elements, times offset
+      xSpan / maxLettersAcross / 2 + // Center the element in the area
       (100 - xSpan) / 2 - // Adjust for not spanning across whole screen
       letterWidth / 2; // Adjust for width of the letter
 
     const ySpan = 35; // Span across this percentage of the screen
     const yFractionalPosition =
-      yOffset * (ySpan / root) + // Divide the span by the number of elements, times offset
-      ySpan / root / 2 + // Center the element in the area
-      (100 - ySpan) / 2 - // Adjust for not spanning across whole screen
+      yOffset * (ySpan / maxLettersAcross) + // Divide the span by the number of elements, times offset
+      ySpan / maxLettersAcross / 2 + // Center the element in the area
+      (100 - maxLettersAcross) / 2 - // Adjust for not spanning across whole screen
       letterWidth / 2 + // Adjust for width of the letter
       25; // Offset to be lower on the screen
 
