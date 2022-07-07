@@ -746,6 +746,24 @@ a {
     left: var(--y);
   }
 
+  #ngrid {
+    grid-template-areas: "board pool controls";
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+  }
+
+  #ngrid #board {
+    align-self: center;
+    justify-self: auto;
+    margin: 0 0 0 10vmin;
+  }
+
+  #ngrid .poolLetter {
+    position: absolute;
+    top: var(--x);
+    left: var(--y);
+  }
+
   #thirdle {
     grid-template-areas:
       "pattern controls"
