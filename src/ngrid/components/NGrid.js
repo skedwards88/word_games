@@ -1,6 +1,7 @@
 import React from "react";
 import Info from "../../common/Info";
 import Pool from "./Pool";
+import Result from "./Result";
 import Board from "./Board";
 import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
@@ -68,12 +69,7 @@ function NGrid({ setCurrentDisplay }) {
         letters={gameState.board}
         dropToken={dropOnBoard}
       ></Board>
-      {/* {boardIsFull ? (
-        <Result boardIsFull={boardIsFull} gameIsOver={gameIsOver} dropToken={dropOnPool}></Result>
-      ) : (
-        <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
-      )} */}
-<Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
+      {gameState.pool.length ? <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool> : <Result board={gameState.board} dropToken={dropOnPool}></Result>}
 
       <div id="controls">
         <button
