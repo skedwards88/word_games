@@ -45,21 +45,21 @@ function getIndexesWithWords({grid, minWordLength}) {
 }
 
 export function gameInit({ useSaved }) {
-  // const savedState =
-  //   useSaved ?? true
-  //     ? JSON.parse(localStorage.getItem("ngridState"))
-  //     : undefined;
+  const savedState =
+    useSaved ?? true
+      ? JSON.parse(localStorage.getItem("ngridState"))
+      : undefined;
 
-  // if (
-  //   savedState &&
-  //   savedState.hasOwnProperty("solution") &&
-  //   savedState.hasOwnProperty("board") &&
-  //   savedState.hasOwnProperty("pool") &&
-  //   savedState.hasOwnProperty("locked") &&
-  //   savedState.board.some((i) => !i)
-  // ) {
-  //   return savedState;
-  // }
+  if (
+    savedState &&
+    savedState.hasOwnProperty("pool") &&
+    savedState.hasOwnProperty("board") &&
+    savedState.hasOwnProperty("hints") &&
+    savedState.hasOwnProperty("hintIndex") &&
+    savedState.pool.length
+  ) {
+    return savedState;
+  }
 
   const gridSize = 8;
   const minLetters = 25;
@@ -87,6 +87,5 @@ export function gameInit({ useSaved }) {
     hintIndex: 0,
     board: Array(gridSize * gridSize).fill(""),
     pool: pool,
-    hintIndex: 0,
   };
 }

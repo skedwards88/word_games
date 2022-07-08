@@ -23,9 +23,9 @@ function NGrid({ setCurrentDisplay }) {
     gameInit
   );
 
-  // React.useEffect(() => {
-  //   window.localStorage.setItem("ngridState", JSON.stringify(gameState));
-  // }, [gameState]);
+  React.useEffect(() => {
+    window.localStorage.setItem("ngridState", JSON.stringify(gameState));
+  }, [gameState]);
 
   function dropOnPool({ event }) {
     const letter = event.dataTransfer.getData("letter");
@@ -60,9 +60,6 @@ function NGrid({ setCurrentDisplay }) {
     });
   }
 
-  // const boardIsFull = getBoardIsFull(gameState.board)
-  // const gameIsOver = getGameOver(gameState.board)
-  
   return (
     <div className="App" id="ngrid">
       <Board
@@ -90,7 +87,7 @@ function NGrid({ setCurrentDisplay }) {
           info={
             <div>
               {<h1>NGrid</h1>}
-              {`todo`}
+              {`Arrange the letters to make words vertically and horizontally. All words must connect.`}
             </div>
           }
         ></Info>

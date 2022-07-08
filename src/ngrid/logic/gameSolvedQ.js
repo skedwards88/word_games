@@ -84,7 +84,7 @@ export function gameSolvedQ({ board }) {
   if (!isSingleGrouping) {
     return {
       gameIsSolved: false,
-      reason: `Try again! All of the letters must connect.`,
+      reason: `All of the letters must connect`,
     };
   }
 
