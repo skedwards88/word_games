@@ -21,7 +21,6 @@
 - make icon
 - change to default to home insted of ngrid
 - add instructions
-- game over text
 - add way to move whole board or group of words
 - save state
 

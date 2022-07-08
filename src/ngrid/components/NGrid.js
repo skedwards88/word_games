@@ -83,7 +83,7 @@ function NGrid({ setCurrentDisplay }) {
         ></button>
         <button
           id="helpButton"
-          // disabled={gameIsOver}
+          disabled={!gameState.pool.length}
           onClick={() => dispatchGameState({ action: "getHint" })}
         ></button>
         <Info

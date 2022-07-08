@@ -63,6 +63,7 @@ function Palette({ setCurrentDisplay }) {
         ></button>
         <button
           id="helpButton"
+          disabled={gameState.clueMatches.every((i) => i)}
           onClick={() => dispatchGameState({ action: "hint" })}
         ></button>
         <Info
