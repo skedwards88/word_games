@@ -15,7 +15,7 @@ export function dragToken({ event, letter, index, dragArea }) {
   event.dataTransfer.setData("dragArea", dragArea);
   event.dataTransfer.setData("width", event.target.clientWidth);
   event.dataTransfer.setData("height", event.target.clientHeight);
-  event.target.classList.add('dragging')
+  event.target.classList.add("dragging");
 }
 
 function Packed({ setCurrentDisplay }) {
@@ -62,9 +62,9 @@ function Packed({ setCurrentDisplay }) {
     });
   }
 
-  const boardIsFull = getBoardIsFull(gameState.board)
-  const gameIsOver = getGameOver(gameState.board)
-  
+  const boardIsFull = getBoardIsFull(gameState.board);
+  const gameIsOver = getGameOver(gameState.board);
+
   return (
     <div className="App" id="packed">
       <Board
@@ -73,7 +73,11 @@ function Packed({ setCurrentDisplay }) {
         dropToken={dropOnBoard}
       ></Board>
       {boardIsFull ? (
-        <Result boardIsFull={boardIsFull} gameIsOver={gameIsOver} dropToken={dropOnPool}></Result>
+        <Result
+          boardIsFull={boardIsFull}
+          gameIsOver={gameIsOver}
+          dropToken={dropOnPool}
+        ></Result>
       ) : (
         <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
       )}
@@ -93,10 +97,7 @@ function Packed({ setCurrentDisplay }) {
           disabled={gameIsOver}
           onClick={() => dispatchGameState({ action: "getHint" })}
         ></button>
-        <Settings
-          dispatchGameState={dispatchGameState}
-          gameState={gameState}
-        />
+        <Settings dispatchGameState={dispatchGameState} gameState={gameState} />
         <Info
           info={
             <div>

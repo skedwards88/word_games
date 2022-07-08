@@ -20,7 +20,7 @@ export default function Board({ letters, locked, dropToken }) {
           dragArea: "board",
         })
       }
-      onDragEnd={(event => event.target.classList.remove("dragging"))}
+      onDragEnd={(event) => event.target.classList.remove("dragging")}
       onDragOver={(event) => {
         event.preventDefault();
       }}
@@ -32,5 +32,9 @@ export default function Board({ letters, locked, dropToken }) {
       {letter}
     </div>
   ));
-  return <div id="board" className={`size_${letters.length}`}>{board}</div>;
+  return (
+    <div id="board" className={`size_${letters.length}`}>
+      {board}
+    </div>
+  );
 }

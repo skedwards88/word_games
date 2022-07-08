@@ -2,8 +2,7 @@ import { generateGrid } from "./generateGrid";
 import { shuffleArray } from "../../common/shuffleArray";
 import { getPositionalFractions } from "../../common/getPositionalFractions";
 
-function getIndexesWithWords({grid, minWordLength}) {
-  
+function getIndexesWithWords({ grid, minWordLength }) {
   const transposedGrid = grid.map((_, index) => grid.map((row) => row[index]));
   const jointGrid = [...grid, ...transposedGrid];
   let solution = [];
@@ -20,7 +19,7 @@ function getIndexesWithWords({grid, minWordLength}) {
       if (character.match("^[A-Z]$")) {
         currentWord += character;
       }
-      
+
       // if we have a word
       // and
       // this is the last index in the row
@@ -28,11 +27,17 @@ function getIndexesWithWords({grid, minWordLength}) {
       // the character is not a letter
       // then
       // add the word (if it is long enough)
-      if (currentWord && ((characterIndex === jointGrid[rowIndex].length - 1) || !character.match("^[A-Z]$")) ) {
+      if (
+        currentWord &&
+        (characterIndex === jointGrid[rowIndex].length - 1 ||
+          !character.match("^[A-Z]$"))
+      ) {
         if (currentWord.length >= minWordLength) {
           solution.push({
             word: currentWord,
-            colIndex: character.match("^[A-Z]$") ? characterIndex - currentWord.length + 1 : characterIndex - currentWord.length,
+            colIndex: character.match("^[A-Z]$")
+              ? characterIndex - currentWord.length + 1
+              : characterIndex - currentWord.length,
             rowIndex: rowIndex % grid.length,
             orientationIsRows: rowIndex < grid.length,
           });
@@ -64,15 +69,25 @@ export function gameInit({ useSaved }) {
   const gridSize = 8;
   const minLetters = 25;
   const minWordLength = 4;
-  const grid = generateGrid({gridSize:gridSize, minLetters:minLetters, minWordLength:minWordLength});
+  const grid = generateGrid({
+    gridSize: gridSize,
+    minLetters: minLetters,
+    minWordLength: minWordLength,
+  });
 
   // Since we may overwrite words as we generate the grid (e.g. "game" -> "games"),
   // determine the final words from the grid instead of during the grid building process
-  const hints = getIndexesWithWords({grid: grid, minWordLength:minWordLength});
+  const hints = getIndexesWithWords({
+    grid: grid,
+    minWordLength: minWordLength,
+  });
 
   // Generate the pool
   const poolLetters = grid.flatMap((i) => i).filter((i) => i);
-  const positions = getPositionalFractions({poolLetters: poolLetters, maxLettersAcross: gridSize});
+  const positions = getPositionalFractions({
+    poolLetters: poolLetters,
+    maxLettersAcross: gridSize,
+  });
   const pool = shuffleArray(poolLetters).map(
     (letter, index) =>
       new Object({

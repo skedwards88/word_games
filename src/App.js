@@ -10,7 +10,7 @@ import { gameIndex } from "./gameIndex";
 import packageJson from "../package.json";
 
 function App() {
-  const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.NGrid);
+  const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.Home);
 
   function Home() {
     return (

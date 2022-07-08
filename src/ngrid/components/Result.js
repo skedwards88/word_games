@@ -1,8 +1,8 @@
 import React from "react";
 import { gameSolvedQ } from "../logic/gameSolvedQ";
 
-export default function Result({  dropToken, board }) {
-  const {gameIsSolved, reason} = gameSolvedQ({board: board})
+export default function Result({ dropToken, board }) {
+  const { gameIsSolved, reason } = gameSolvedQ({ board: board });
 
   return (
     <div

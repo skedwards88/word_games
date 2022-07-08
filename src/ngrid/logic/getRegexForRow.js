@@ -1,6 +1,6 @@
 export default function getPatternsForRow(grid, rowIndex, minLength) {
   let patterns = [];
-  const row = grid[rowIndex]
+  const row = grid[rowIndex];
 
   for (
     let startPosition = 0;
@@ -12,17 +12,23 @@ export default function getPatternsForRow(grid, rowIndex, minLength) {
       continue;
     }
     let pattern = "";
-    let includesLetter = false
+    let includesLetter = false;
     for (
       let currentPosition = startPosition;
       currentPosition < row.length;
       currentPosition++
     ) {
-      if (!row[currentPosition].match("^[A-Z]$") && grid?.[rowIndex - 1]?.[currentPosition]) {
-        break
+      if (
+        !row[currentPosition].match("^[A-Z]$") &&
+        grid?.[rowIndex - 1]?.[currentPosition]
+      ) {
+        break;
       }
-      if (!row[currentPosition].match("^[A-Z]$") && grid?.[rowIndex + 1]?.[currentPosition]) {
-        break
+      if (
+        !row[currentPosition].match("^[A-Z]$") &&
+        grid?.[rowIndex + 1]?.[currentPosition]
+      ) {
+        break;
       }
       // Add the element to the pattern
       const element = row[currentPosition].match("^[A-Z]$")
@@ -31,7 +37,7 @@ export default function getPatternsForRow(grid, rowIndex, minLength) {
       pattern += element;
 
       if (row[currentPosition].match("^[A-Z]$")) {
-        includesLetter = true
+        includesLetter = true;
       }
 
       if (
@@ -44,7 +50,7 @@ export default function getPatternsForRow(grid, rowIndex, minLength) {
         row[currentPosition + 1]?.match("^[A-Z]$")
       ) {
       } else {
-        patterns.push([pattern,startPosition]);
+        patterns.push([pattern, startPosition]);
       }
     }
   }

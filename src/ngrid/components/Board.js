@@ -21,7 +21,7 @@ export default function Board({ letters, dropToken }) {
           dragArea: "board",
         })
       }
-      onDragEnd={(event => event.target.classList.remove("dragging"))}
+      onDragEnd={(event) => event.target.classList.remove("dragging")}
       onDragOver={(event) => {
         event.preventDefault();
       }}

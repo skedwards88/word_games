@@ -4,10 +4,10 @@ import { getPositionalFractions } from "../../common/getPositionalFractions";
 
 function subtractArrays(baseArray, itemsToRemove) {
   for (let index = 0; index < itemsToRemove.length; index++) {
-    let indexToDelete = baseArray.findIndex(i => i === itemsToRemove[index])
-    baseArray.splice(indexToDelete, 1)
+    let indexToDelete = baseArray.findIndex((i) => i === itemsToRemove[index]);
+    baseArray.splice(indexToDelete, 1);
   }
-  return baseArray
+  return baseArray;
 }
 
 export function gameReducer(currentGameState, payload) {
@@ -96,7 +96,6 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "getHint") {
-
     const hints = [...currentGameState.hints];
     const newHintIndex = currentGameState.hintIndex + 1;
 
@@ -105,11 +104,17 @@ export function gameReducer(currentGameState, payload) {
     let newBoard = Array.from({ length: gridSize }, () =>
       Array.from({ length: gridSize }, () => "")
     );
-    for (let currentHintIndex = 0; currentHintIndex < Math.min(newHintIndex, hints.length); currentHintIndex++) {
+    for (
+      let currentHintIndex = 0;
+      currentHintIndex < Math.min(newHintIndex, hints.length);
+      currentHintIndex++
+    ) {
       const hint = hints[currentHintIndex];
 
       if (!hint.orientationIsRows) {
-        newBoard = newBoard.map((_, index) => newBoard.map((row) => row[index]));
+        newBoard = newBoard.map((_, index) =>
+          newBoard.map((row) => row[index])
+        );
       }
 
       for (
@@ -121,24 +126,26 @@ export function gameReducer(currentGameState, payload) {
       }
 
       if (!hint.orientationIsRows) {
-        newBoard = newBoard.map((_, index) => newBoard.map((row) => row[index]));
+        newBoard = newBoard.map((_, index) =>
+          newBoard.map((row) => row[index])
+        );
       }
-
     }
 
     // remove the board letters from the pool
-    let oldBoardLetters = [...currentGameState.board].filter(i=>i)
-    let oldPoolLetters = [...currentGameState.pool.map(i=>i.letter)]
-    let allLetters = [...oldBoardLetters, ...oldPoolLetters]
-    let newPoolLetters = subtractArrays(allLetters, newBoard.flatMap(i=>i).filter(i=>i))
+    let oldBoardLetters = [...currentGameState.board].filter((i) => i);
+    let oldPoolLetters = [...currentGameState.pool.map((i) => i.letter)];
+    let allLetters = [...oldBoardLetters, ...oldPoolLetters];
+    let newPoolLetters = subtractArrays(
+      allLetters,
+      newBoard.flatMap((i) => i).filter((i) => i)
+    );
 
     // Generate the new pool
-    const positions = getPositionalFractions(
-      {
-        poolLetters: newPoolLetters,
-        maxLettersAcross: newBoard.length
-      }
-    );
+    const positions = getPositionalFractions({
+      poolLetters: newPoolLetters,
+      maxLettersAcross: newBoard.length,
+    });
     const newPool = shuffleArray(newPoolLetters).map(
       (letter, index) =>
         new Object({

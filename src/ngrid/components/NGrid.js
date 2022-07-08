@@ -13,7 +13,7 @@ export function dragToken({ event, letter, index, dragArea }) {
   event.dataTransfer.setData("dragArea", dragArea);
   event.dataTransfer.setData("width", event.target.clientWidth);
   event.dataTransfer.setData("height", event.target.clientHeight);
-  event.target.classList.add('dragging')
+  event.target.classList.add("dragging");
 }
 
 function NGrid({ setCurrentDisplay }) {
@@ -62,11 +62,12 @@ function NGrid({ setCurrentDisplay }) {
 
   return (
     <div className="App" id="ngrid">
-      <Board
-        letters={gameState.board}
-        dropToken={dropOnBoard}
-      ></Board>
-      {gameState.pool.length ? <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool> : <Result board={gameState.board} dropToken={dropOnPool}></Result>}
+      <Board letters={gameState.board} dropToken={dropOnBoard}></Board>
+      {gameState.pool.length ? (
+        <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
+      ) : (
+        <Result board={gameState.board} dropToken={dropOnPool}></Result>
+      )}
 
       <div id="controls">
         <button

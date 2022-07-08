@@ -4,7 +4,7 @@ import { getPositionalFractions } from "../../common/getPositionalFractions";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "dropOnPool") {
-    console.log('drop on pool')
+    console.log("drop on pool");
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
 
@@ -133,12 +133,10 @@ export function gameReducer(currentGameState, payload) {
       }
     }
 
-    const positions = getPositionalFractions(
-      {
-        poolLetters: poolLetters,
-        maxLettersAcross: Math.floor(Math.sqrt(newBoard.length))
-      }
-    );
+    const positions = getPositionalFractions({
+      poolLetters: poolLetters,
+      maxLettersAcross: Math.floor(Math.sqrt(newBoard.length)),
+    });
     newPool = shuffleArray(poolLetters).map(
       (letter, index) =>
         new Object({
@@ -157,7 +155,7 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "newGame") {
-    return gameInit({...payload, useSaved: false });
+    return gameInit({ ...payload, useSaved: false });
   }
 
   return { ...currentGameState };
