@@ -17,7 +17,7 @@
 
 ## Crossle
 
-- add way to move whole board or group of words
+- when would drag off board, move as far as possible instead?
 
 ## Gribbles
 

@@ -1,6 +1,7 @@
 import { shuffleArray } from "../../common/shuffleArray";
 import { gameInit } from "./gameInit";
 import { getPositionalFractions } from "../../common/getPositionalFractions";
+import { partitionArray } from "../../common/partitionArray";
 
 function subtractArrays(baseArray, itemsToRemove) {
   for (let index = 0; index < itemsToRemove.length; index++) {
@@ -8,6 +9,40 @@ function subtractArrays(baseArray, itemsToRemove) {
     baseArray.splice(indexToDelete, 1);
   }
   return baseArray;
+}
+
+function shiftRow({ row, shift }) {
+  if (shift > 0) {
+    return [...Array(shift).fill(""), ...row.slice(0, row.length - shift)];
+  } else {
+    return [
+      ...row.slice(shift * -1, row.length),
+      ...Array(shift * -1).fill(""),
+    ];
+  }
+}
+
+function shiftBoard({ board, rowShift, colShift }) {
+  // partition the flat board into a grid
+  let grid = partitionArray(board, Math.sqrt(board.length));
+
+  // shift left/right
+  grid = grid.map((row) => shiftRow({ row: row, shift: colShift }));
+
+  // transpose, shift left/right (formerly up/down), untranspose
+  grid = grid.map((_, index) => grid.map((row) => row[index]));
+  grid = grid.map((row) => shiftRow({ row: row, shift: rowShift }));
+  grid = grid.map((_, index) => grid.map((row) => row[index]));
+
+  // if we cut off any letters, return the board unchanged
+  if (
+    grid.flatMap((i) => i).filter((i) => i).length ===
+    board.flatMap((i) => i).filter((i) => i).length
+  ) {
+    return grid.flatMap((i) => i);
+  } else {
+    return board;
+  }
 }
 
 export function gameReducer(currentGameState, payload) {
@@ -80,9 +115,25 @@ export function gameReducer(currentGameState, payload) {
 
     // from board
     if (payload.dragArea === "board") {
-      // swap letters at positions
-      newBoard[payload.dragIndex] = initialLetterAtDrop;
-      newBoard[payload.dropIndex] = initialLetterAtDrag;
+      if (newBoard[payload.dragIndex]) {
+        // if we dragged a letter, swap letters at positions
+        newBoard[payload.dragIndex] = initialLetterAtDrop;
+        newBoard[payload.dropIndex] = initialLetterAtDrag;
+      } else {
+        // if we dragged and empty spot, move the entire board
+        const boardDiameter = Math.sqrt(newBoard.length);
+        const oldRowIndex = Math.floor(payload.dragIndex / boardDiameter);
+        const newRowIndex = Math.floor(payload.dropIndex / boardDiameter);
+        const rowShift = newRowIndex - oldRowIndex;
+        const oldColIndex = payload.dragIndex % boardDiameter;
+        const newColIndex = payload.dropIndex % boardDiameter;
+        const colShift = newColIndex - oldColIndex;
+        newBoard = shiftBoard({
+          board: newBoard,
+          rowShift: rowShift,
+          colShift: colShift,
+        });
+      }
     }
 
     return {
