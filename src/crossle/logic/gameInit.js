@@ -52,7 +52,7 @@ function getIndexesWithWords({ grid, minWordLength }) {
 export function gameInit({ useSaved }) {
   const savedState =
     useSaved ?? true
-      ? JSON.parse(localStorage.getItem("ngridState"))
+      ? JSON.parse(localStorage.getItem("crossleState"))
       : undefined;
 
   if (

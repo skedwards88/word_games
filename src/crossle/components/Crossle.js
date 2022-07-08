@@ -16,7 +16,7 @@ export function dragToken({ event, letter, index, dragArea }) {
   event.target.classList.add("dragging");
 }
 
-function NGrid({ setCurrentDisplay }) {
+function Crossle({ setCurrentDisplay }) {
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
     {},
@@ -24,7 +24,7 @@ function NGrid({ setCurrentDisplay }) {
   );
 
   React.useEffect(() => {
-    window.localStorage.setItem("ngridState", JSON.stringify(gameState));
+    window.localStorage.setItem("crossleState", JSON.stringify(gameState));
   }, [gameState]);
 
   function dropOnPool({ event }) {
@@ -61,7 +61,7 @@ function NGrid({ setCurrentDisplay }) {
   }
 
   return (
-    <div className="App" id="ngrid">
+    <div className="App" id="crossle">
       <Board letters={gameState.board} dropToken={dropOnBoard}></Board>
       {gameState.pool.length ? (
         <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
@@ -87,7 +87,7 @@ function NGrid({ setCurrentDisplay }) {
         <Info
           info={
             <div>
-              {<h1>NGrid</h1>}
+              {<h1>Crossle</h1>}
               {`Arrange the letters to make words vertically and horizontally. All words must connect.`}
             </div>
           }
@@ -101,4 +101,4 @@ function NGrid({ setCurrentDisplay }) {
   );
 }
 
-export default NGrid;
+export default Crossle;

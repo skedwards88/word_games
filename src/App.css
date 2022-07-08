@@ -259,6 +259,10 @@ a {
   background-image: url("./images/packed.svg");
 }
 
+#crossle_icon {
+  background-image: url("./images/crossle.svg");
+}
+
 /* Gribbles-specific */
 
 #gribbles {
@@ -635,7 +639,7 @@ a {
 
 /* packed-specific */
 
-#ngrid {
+#crossle {
   display: grid;
   grid-template-areas:
     "board"
@@ -647,7 +651,7 @@ a {
     auto;
 }
 
-#ngrid #board {
+#crossle #board {
   grid-area: board;
   display: grid;
   touch-action: none;
@@ -662,7 +666,7 @@ a {
   margin: 10vmin 0 0;
 }
 
-#ngrid .boardLetter {
+#crossle .boardLetter {
   border: 0.5px solid rgb(239 239 239);
   display: flex;
   align-items: center;
@@ -670,21 +674,21 @@ a {
   font-size: var(--default-font-size);
 }
 
-#ngrid .boardLetter.locked {
+#crossle .boardLetter.locked {
   font-weight: bold;
   color: lightgray;
 }
 
-#ngrid .boardLetter:active {
+#crossle .boardLetter:active {
   border: 0;
 }
 
-#ngrid #pool {
+#crossle #pool {
   grid-area: pool;
   touch-action: none;
 }
 
-#ngrid .poolLetter {
+#crossle .poolLetter {
   position: absolute;
   left: var(--x);
   top: var(--y);
@@ -696,14 +700,14 @@ a {
   font-size: var(--default-font-size);
 }
 
-#ngrid #result {
+#crossle #result {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-#ngrid .dragging {
+#crossle .dragging {
   opacity: 0.5;
 }
 
@@ -746,19 +750,19 @@ a {
     left: var(--y);
   }
 
-  #ngrid {
+  #crossle {
     grid-template-areas: "board pool controls";
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
   }
 
-  #ngrid #board {
+  #crossle #board {
     align-self: center;
     justify-self: auto;
     margin: 0 0 0 10vmin;
   }
 
-  #ngrid .poolLetter {
+  #crossle .poolLetter {
     position: absolute;
     top: var(--x);
     left: var(--y);

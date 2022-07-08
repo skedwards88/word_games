@@ -4,7 +4,7 @@ import Gribbles from "./gribbles/components/Gribbles";
 import Thirdle from "./thirdle/components/Thirdle";
 import Palette from "./palette/components/Palette";
 import Packed from "./packed/components/Packed";
-import NGrid from "./ngrid/components/NGrid";
+import Crossle from "./crossle/components/Crossle";
 import Info from "./common/Info";
 import { gameIndex } from "./gameIndex";
 import packageJson from "../package.json";
@@ -50,10 +50,10 @@ function App() {
 
           <button
             className="gameButton"
-            onClick={() => setCurrentDisplay(gameIndex.NGrid)}
+            onClick={() => setCurrentDisplay(gameIndex.Crossle)}
           >
-            <div className="gameIcon" id="ngrid_icon"></div>
-            <div>NGrid</div>
+            <div className="gameIcon" id="crossle_icon"></div>
+            <div>Crossle</div>
           </button>
         </div>
         <div id="controls">
@@ -90,8 +90,8 @@ function App() {
       return <Palette setCurrentDisplay={setCurrentDisplay} />;
     case "packed":
       return <Packed setCurrentDisplay={setCurrentDisplay} />;
-    case "ngrid":
-      return <NGrid setCurrentDisplay={setCurrentDisplay} />;
+    case "crossle":
+      return <Crossle setCurrentDisplay={setCurrentDisplay} />;
     default:
       return <Home />;
   }

@@ -4,5 +4,5 @@ export const gameIndex = {
   Thirdle: "thirdle",
   Palette: "palette",
   Packed: "packed",
-  NGrid: "ngrid",
+  Crossle: "crossle",
 };

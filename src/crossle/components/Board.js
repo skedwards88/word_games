@@ -1,5 +1,5 @@
 import React from "react";
-import { dragToken } from "./NGrid";
+import { dragToken } from "./Crossle";
 import { polyfill } from "mobile-drag-drop";
 
 polyfill({
