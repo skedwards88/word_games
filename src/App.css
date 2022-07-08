@@ -36,10 +36,6 @@ button {
   padding: 1px 6px;
 }
 
-button:disabled {
-  opacity: 0.5;
-}
-
 select {
   /* all: unset;
   text-decoration: none;
