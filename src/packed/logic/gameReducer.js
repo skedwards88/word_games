@@ -8,12 +8,13 @@ export function gameReducer(currentGameState, payload) {
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
 
-    const vhInPx =
-      Math.max(document.documentElement.clientHeight, window.innerHeight || 0) /
-      100;
-    const vwInPx =
-      Math.max(document.documentElement.clientWidth, window.innerWidth || 0) /
-      100;
+    // Convert the pixels where the letter was dropped to a percentage of the pool dimensions.
+    // We do this instead of keeping relative to the screen dimensions so that we can more accurately distribute the starting letters.
+    // And we use percentage instead of pixels so that screen rotation/resizing is seamless
+    const xFractionalPosition =
+      ((payload.dropX - payload.poolLeft) / payload.poolWidth) * 100;
+    const yFractionalPosition =
+      ((payload.dropY - payload.poolTop) / payload.poolHeight) * 100;
 
     // from the board
     if (payload.dragArea === "board") {
@@ -29,8 +30,8 @@ export function gameReducer(currentGameState, payload) {
       newPool.push(
         new Object({
           letter: payload.letter,
-          xFractionalPosition: payload.dropX / vwInPx,
-          yFractionalPosition: payload.dropY / vhInPx,
+          xFractionalPosition: xFractionalPosition,
+          yFractionalPosition: yFractionalPosition,
         })
       );
     }
@@ -40,8 +41,8 @@ export function gameReducer(currentGameState, payload) {
       // Update the position of the dragged letter
       newPool[payload.dragIndex] = new Object({
         letter: payload.letter,
-        xFractionalPosition: payload.dropX / vwInPx,
-        yFractionalPosition: payload.dropY / vhInPx,
+        xFractionalPosition: xFractionalPosition,
+        yFractionalPosition: yFractionalPosition,
       });
     }
 

@@ -612,6 +612,9 @@ a {
 #packed #pool {
   grid-area: pool;
   touch-action: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 #packed .poolLetter {
@@ -656,8 +659,8 @@ a {
   display: grid;
   touch-action: none;
   justify-content: center;
-  grid-template-columns: repeat(8, min(10vmax, 10vmin));
-  grid-template-rows: repeat(8, min(10vmax, 10vmin));
+  grid-template-columns: repeat(8, min(10vmax, 8vmin));
+  grid-template-rows: repeat(8, min(10vmax, 8vmin));
   width: fit-content;
   height: fit-content;
   justify-self: center;
@@ -686,6 +689,9 @@ a {
 #crossle #pool {
   grid-area: pool;
   touch-action: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 #crossle .poolLetter {

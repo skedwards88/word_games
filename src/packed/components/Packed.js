@@ -36,6 +36,26 @@ function Packed({ setCurrentDisplay }) {
     const width = event.dataTransfer.getData("width");
     const height = event.dataTransfer.getData("height");
 
+    // If you drop on another letter in the pool, that letter is considered the target
+    // So we need to make sure to get the parent dimensions instead of the target dimensions in that case
+    // in order to later calculate the position relative to the pool
+    let poolStats = {};
+    if (event.target.id === "pool") {
+      poolStats = {
+        poolWidth: event.target.offsetWidth,
+        poolHeight: event.target.offsetHeight,
+        poolLeft: event.target.offsetLeft,
+        poolTop: event.target.offsetTop,
+      };
+    } else {
+      poolStats = {
+        poolWidth: event.target.parentElement.offsetWidth,
+        poolHeight: event.target.parentElement.offsetHeight,
+        poolLeft: event.target.parentElement.offsetLeft,
+        poolTop: event.target.parentElement.offsetTop,
+      };
+    }
+
     dispatchGameState({
       action: "dropOnPool",
       letter: letter,
@@ -43,6 +63,7 @@ function Packed({ setCurrentDisplay }) {
       dragArea: dragArea,
       dropX: event.clientX - width / 2,
       dropY: event.clientY - height / 2,
+      ...poolStats,
     });
   }
 
