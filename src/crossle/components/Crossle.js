@@ -109,7 +109,7 @@ function Crossle({ setCurrentDisplay }) {
           info={
             <div>
               {<h1>Crossle</h1>}
-              {`Arrange the letters to make words vertically and horizontally. All words must connect.\n\nDrag a blank space to move the whole board.`}
+              {`Arrange the letters to make words vertically and horizontally. All words must connect.\n\nDrag a blank space to move all of the words.`}
             </div>
           }
         ></Info>

@@ -17,8 +17,6 @@
 
 ## Crossle
 
-- when would drag off board, move as far as possible instead?
-
 ## Gribbles
 
 ## Thirdle

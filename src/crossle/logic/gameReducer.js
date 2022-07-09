@@ -26,12 +26,48 @@ function shiftBoard({ board, rowShift, colShift }) {
   // partition the flat board into a grid
   let grid = partitionArray(board, Math.sqrt(board.length));
 
+  // If any letters would move off the board, adjust the shift so that they stay on the board
+  let adjustedRowShift = rowShift;
+  if (rowShift < 0) {
+    for (let index = 0; index < Math.abs(rowShift); index++) {
+      if (grid[index].some(i=>i)) {
+        adjustedRowShift = (-1) * index
+        break
+      }
+    }
+  } else {
+    for (let index = grid.length - 1; index >= grid.length - rowShift; index--) {
+      if (grid[index].some(i=>i)) {
+        adjustedRowShift = grid.length - 1 - index
+        break
+      }
+    }
+  }
+
+  let adjustedColShift = colShift;
+  const transposedGrid = grid.map((_, index) => grid.map((row) => row[index]));
+  if (colShift < 0) {
+    for (let index = 0; index < Math.abs(colShift); index++) {
+      if (transposedGrid[index].some(i=>i)) {
+        adjustedColShift = (-1) * index
+        break
+      }
+    }
+  } else {
+    for (let index = transposedGrid.length - 1; index >= transposedGrid.length - colShift; index--) {
+      if (transposedGrid[index].some(i=>i)) {
+        adjustedColShift = transposedGrid.length - 1 - index
+        break
+      }
+    }
+  }
+
   // shift left/right
-  grid = grid.map((row) => shiftRow({ row: row, shift: colShift }));
+  grid = grid.map((row) => shiftRow({ row: row, shift: adjustedColShift }));
 
   // transpose, shift left/right (formerly up/down), untranspose
   grid = grid.map((_, index) => grid.map((row) => row[index]));
-  grid = grid.map((row) => shiftRow({ row: row, shift: rowShift }));
+  grid = grid.map((row) => shiftRow({ row: row, shift: adjustedRowShift }));
   grid = grid.map((_, index) => grid.map((row) => row[index]));
 
   // if we cut off any letters, return the board unchanged
