@@ -259,6 +259,10 @@ a {
   background-image: url("./images/packed.svg");
 }
 
+#crossle_icon {
+  background-image: url("./images/crossle.svg");
+}
+
 /* Gribbles-specific */
 
 #gribbles {
@@ -608,6 +612,9 @@ a {
 #packed #pool {
   grid-area: pool;
   touch-action: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 #packed .poolLetter {
@@ -630,6 +637,83 @@ a {
 }
 
 #packed .dragging {
+  opacity: 0.5;
+}
+
+/* packed-specific */
+
+#crossle {
+  display: grid;
+  grid-template-areas:
+    "board"
+    "pool"
+    "controls";
+  grid-template-rows:
+    auto
+    1fr
+    auto;
+}
+
+#crossle #board {
+  grid-area: board;
+  display: grid;
+  touch-action: none;
+  justify-content: center;
+  grid-template-columns: repeat(8, min(10vmax, 8vmin));
+  grid-template-rows: repeat(8, min(10vmax, 8vmin));
+  width: fit-content;
+  height: fit-content;
+  justify-self: center;
+  color: rgb(239 239 239);
+  border: 1px solid rgb(239 239 239);
+  margin: 10vmin 0 0;
+}
+
+#crossle .boardLetter {
+  border: 0.5px solid rgb(239 239 239);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--default-font-size);
+}
+
+#crossle .boardLetter.locked {
+  font-weight: bold;
+  color: lightgray;
+}
+
+#crossle .boardLetter:active {
+  border: 0;
+}
+
+#crossle #pool {
+  grid-area: pool;
+  touch-action: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#crossle .poolLetter {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: min(6vmax, 9vmin);
+  height: min(6vmax, 9vmin);
+  font-size: var(--default-font-size);
+}
+
+#crossle #result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#crossle .dragging {
   opacity: 0.5;
 }
 
@@ -667,6 +751,24 @@ a {
   }
 
   #packed .poolLetter {
+    position: absolute;
+    top: var(--x);
+    left: var(--y);
+  }
+
+  #crossle {
+    grid-template-areas: "board pool controls";
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+  }
+
+  #crossle #board {
+    align-self: center;
+    justify-self: auto;
+    margin: 0 0 0 10vmin;
+  }
+
+  #crossle .poolLetter {
     position: absolute;
     top: var(--x);
     left: var(--y);

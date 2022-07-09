@@ -1,9 +1,6 @@
 import React from "react";
 
-export default function Settings({
-  dispatchGameState,
-  gameState,
-}) {
+export default function Settings({ dispatchGameState, gameState }) {
   const [showSettings, setShowSettings] = React.useState(false);
 
   function handleShowSettings() {
@@ -36,7 +33,6 @@ export default function Settings({
             <option value="4">4</option>
           </select>
         </div>
-
       </div>
       <div id="setting-buttons">
         <button type="submit" aria-label="new game">

@@ -1,17 +1,18 @@
 import React from "react";
-import { dragToken } from "./Packed";
+import { dragToken } from "./Crossle";
 import { polyfill } from "mobile-drag-drop";
 
 polyfill({
   dragImageCenterOnTouch: true,
 });
 
-export default function Board({ letters, locked, dropToken }) {
+export default function Board({ letters, dropToken }) {
   const board = letters.map((letter, index) => (
     <div
-      className={locked[index] ? "boardLetter locked" : "boardLetter"}
+      className="boardLetter"
       key={index}
-      draggable={!locked[index]}
+      draggable
+      onDoubleClick={(event) => console.log("double")}
       onDragStart={(event) =>
         dragToken({
           event: event,
@@ -32,9 +33,5 @@ export default function Board({ letters, locked, dropToken }) {
       {letter}
     </div>
   ));
-  return (
-    <div id="board" className={`size_${letters.length}`}>
-      {board}
-    </div>
-  );
+  return <div id="board">{board}</div>;
 }

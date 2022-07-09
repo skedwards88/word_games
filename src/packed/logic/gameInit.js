@@ -1,6 +1,6 @@
 import commonWords from "../../common/wordLists/compiled/commonWords.json";
 import { shuffleArray } from "../../common/shuffleArray.js";
-import { getPositionalFractions } from "./getOffsets";
+import { getPositionalFractions } from "../../common/getPositionalFractions";
 
 function getTrieOfLength(wordLength) {
   let trie = {};
@@ -112,11 +112,17 @@ export function gameInit({ useSaved, gridSize }) {
     return savedState;
   }
 
-  gridSize = gridSize || (savedState?.solution && Math.sqrt(savedState.solution.length)) || 3;
+  gridSize =
+    gridSize ||
+    (savedState?.solution && Math.sqrt(savedState.solution.length)) ||
+    3;
 
   const solution = getGame(gridSize);
 
-  const positions = getPositionalFractions(solution, solution.length);
+  const positions = getPositionalFractions({
+    poolLetters: solution,
+    maxLettersAcross: gridSize,
+  });
 
   const pool = shuffleArray(solution).map(
     (letter, index) =>

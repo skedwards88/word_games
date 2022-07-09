@@ -1,13 +1,11 @@
 import React from "react";
 import Info from "../../common/Info";
 import Pool from "./Pool";
+import Result from "./Result";
 import Board from "./Board";
-import Settings from "./Settings";
-import { Result } from "./Result";
 import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
 import { gameReducer } from "../logic/gameReducer";
-import { getGameOver, getBoardIsFull } from "../logic/getGameOver";
 
 export function dragToken({ event, letter, index, dragArea }) {
   event.dataTransfer.setData("letter", letter);
@@ -18,7 +16,7 @@ export function dragToken({ event, letter, index, dragArea }) {
   event.target.classList.add("dragging");
 }
 
-function Packed({ setCurrentDisplay }) {
+function Crossle({ setCurrentDisplay }) {
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
     {},
@@ -26,7 +24,7 @@ function Packed({ setCurrentDisplay }) {
   );
 
   React.useEffect(() => {
-    window.localStorage.setItem("packedState", JSON.stringify(gameState));
+    window.localStorage.setItem("crossleState", JSON.stringify(gameState));
   }, [gameState]);
 
   function dropOnPool({ event }) {
@@ -83,24 +81,13 @@ function Packed({ setCurrentDisplay }) {
     });
   }
 
-  const boardIsFull = getBoardIsFull(gameState.board);
-  const gameIsOver = getGameOver(gameState.board);
-
   return (
-    <div className="App" id="packed">
-      <Board
-        letters={gameState.board}
-        locked={gameState.locked}
-        dropToken={dropOnBoard}
-      ></Board>
-      {boardIsFull ? (
-        <Result
-          boardIsFull={boardIsFull}
-          gameIsOver={gameIsOver}
-          dropToken={dropOnPool}
-        ></Result>
-      ) : (
+    <div className="App" id="crossle">
+      <Board letters={gameState.board} dropToken={dropOnBoard}></Board>
+      {gameState.pool.length ? (
         <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
+      ) : (
+        <Result board={gameState.board} dropToken={dropOnPool}></Result>
       )}
 
       <div id="controls">
@@ -109,21 +96,20 @@ function Packed({ setCurrentDisplay }) {
           onClick={() => {
             dispatchGameState({
               action: "newGame",
-              gridSize: Math.sqrt(gameState.solution.length),
+              gridSize: Math.sqrt(gameState.board.length),
             });
           }}
         ></button>
         <button
           id="helpButton"
-          disabled={gameIsOver}
+          disabled={!gameState.pool.length}
           onClick={() => dispatchGameState({ action: "getHint" })}
         ></button>
-        <Settings dispatchGameState={dispatchGameState} gameState={gameState} />
         <Info
           info={
             <div>
-              {<h1>Packed</h1>}
-              {`Arrange the letters to make every column and every row a word`}
+              {<h1>Crossle</h1>}
+              {`Arrange the letters to make words vertically and horizontally. All words must connect.\n\nDrag a blank space to move all of the words.`}
             </div>
           }
         ></Info>
@@ -136,4 +122,4 @@ function Packed({ setCurrentDisplay }) {
   );
 }
 
-export default Packed;
+export default Crossle;

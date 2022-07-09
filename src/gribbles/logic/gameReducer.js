@@ -40,15 +40,13 @@ export function gameReducer(currentGameState, payload) {
       .toUpperCase();
 
     // if the word is below the min length, don't add the word
-    if (
-      newWord.length < currentGameState.minWordLength
-    ) {
+    if (newWord.length < currentGameState.minWordLength) {
       return {
         ...currentGameState,
         playedIndexes: [],
         result: currentGameState.playedIndexes.length <= 1 ? "" : "Too short",
-      };  
-    }  
+      };
+    }
 
     // if we already have the word, don't add the word
     if (currentGameState.foundWords.includes(newWord)) {

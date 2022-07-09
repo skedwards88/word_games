@@ -4,6 +4,7 @@ import Gribbles from "./gribbles/components/Gribbles";
 import Thirdle from "./thirdle/components/Thirdle";
 import Palette from "./palette/components/Palette";
 import Packed from "./packed/components/Packed";
+import Crossle from "./crossle/components/Crossle";
 import Info from "./common/Info";
 import { gameIndex } from "./gameIndex";
 import packageJson from "../package.json";
@@ -46,6 +47,14 @@ function App() {
             <div className="gameIcon" id="packed_icon"></div>
             <div>Packed</div>
           </button>
+
+          <button
+            className="gameButton"
+            onClick={() => setCurrentDisplay(gameIndex.Crossle)}
+          >
+            <div className="gameIcon" id="crossle_icon"></div>
+            <div>Crossle</div>
+          </button>
         </div>
         <div id="controls">
           <Info
@@ -81,6 +90,8 @@ function App() {
       return <Palette setCurrentDisplay={setCurrentDisplay} />;
     case "packed":
       return <Packed setCurrentDisplay={setCurrentDisplay} />;
+    case "crossle":
+      return <Crossle setCurrentDisplay={setCurrentDisplay} />;
     default:
       return <Home />;
   }

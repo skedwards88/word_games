@@ -15,6 +15,8 @@
 - add way to share app url
 - add way to share url with specific game settings
 
+## Crossle
+
 ## Gribbles
 
 ## Thirdle
