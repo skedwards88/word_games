@@ -66,13 +66,15 @@ export function gameInit({ useSaved }) {
     return savedState;
   }
 
-  const gridSize = 8;
+  const gridSize = 9;
   const minLetters = 25;
   const minWordLength = 4;
+  const maxWordLength = 7;
   const grid = generateGrid({
     gridSize: gridSize,
     minLetters: minLetters,
     minWordLength: minWordLength,
+    maxWordLength: maxWordLength,
   });
 
   // Since we may overwrite words as we generate the grid (e.g. "game" -> "games"),

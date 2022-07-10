@@ -28,8 +28,8 @@ function removeWordThatMatches(pattern, wordList) {
   }
 }
 
-export function generateGrid({ gridSize, minLetters, minWordLength }) {
-  let wordList = getCommonWordsForLenRange(minWordLength, gridSize);
+export function generateGrid({ gridSize, minLetters, minWordLength, maxWordLength }) {
+  let wordList = getCommonWordsForLenRange(minWordLength, maxWordLength);
 
   let letterCount = 0;
   let grid;

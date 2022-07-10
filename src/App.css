@@ -659,14 +659,14 @@ a {
   display: grid;
   touch-action: none;
   justify-content: center;
-  grid-template-columns: repeat(8, min(10vmax, 8vmin));
-  grid-template-rows: repeat(8, min(10vmax, 8vmin));
+  grid-template-columns: repeat(9, 8vmin);
+  grid-template-rows: repeat(9, 8vmin);
   width: fit-content;
   height: fit-content;
   justify-self: center;
   color: rgb(239 239 239);
   border: 1px solid rgb(239 239 239);
-  margin: 10vmin 0 0;
+  margin: 3vmin 0 0;
 }
 
 #crossle .boardLetter {
