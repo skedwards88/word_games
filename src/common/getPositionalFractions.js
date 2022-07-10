@@ -1,4 +1,4 @@
-export function getPositionalFractions({ poolLetters, maxLettersAcross }) {
+export function getPositionalFractions({ poolLetters, maxLettersAcross, stagger=false }) {
   // Span across this percentage of the screen
   const xSpan = 80;
   const ySpan = 80;
@@ -21,6 +21,9 @@ export function getPositionalFractions({ poolLetters, maxLettersAcross }) {
   for (let index = 0; index < poolLetters.length; index++) {
     const xOffset = index % maxLettersAcross;
     const yOffset = Math.floor(index / maxLettersAcross);
+    if (stagger && yOffset % 2) {
+      xOffset = xOffset + .5
+    }
 
     const xFractionalPosition =
       xOffset * (xSpan / maxLettersAcross) + // Divide the span by the number of elements, times offset

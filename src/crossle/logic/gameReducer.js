@@ -233,6 +233,7 @@ export function gameReducer(currentGameState, payload) {
     const positions = getPositionalFractions({
       poolLetters: newPoolLetters,
       maxLettersAcross: newBoard.length,
+      stagger: true,
     });
     const newPool = shuffleArray(newPoolLetters).map(
       (letter, index) =>

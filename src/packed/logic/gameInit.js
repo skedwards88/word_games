@@ -122,6 +122,7 @@ export function gameInit({ useSaved, gridSize }) {
   const positions = getPositionalFractions({
     poolLetters: solution,
     maxLettersAcross: gridSize,
+    stagger: false,
   });
 
   const pool = shuffleArray(solution).map(

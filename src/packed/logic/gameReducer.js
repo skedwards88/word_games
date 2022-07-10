@@ -137,6 +137,7 @@ export function gameReducer(currentGameState, payload) {
     const positions = getPositionalFractions({
       poolLetters: poolLetters,
       maxLettersAcross: Math.floor(Math.sqrt(newBoard.length)),
+      stagger: false,
     });
     newPool = shuffleArray(poolLetters).map(
       (letter, index) =>
