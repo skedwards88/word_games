@@ -77,10 +77,10 @@ export function gameInit({ useSaved }) {
 
   // Since we may overwrite words as we generate the grid (e.g. "game" -> "games"),
   // determine the final words from the grid instead of during the grid building process
-  const hints = getIndexesWithWords({
+  const hints = shuffleArray(getIndexesWithWords({
     grid: grid,
     minWordLength: minWordLength,
-  });
+  }));
 
   // Generate the pool
   const poolLetters = grid.flatMap((i) => i).filter((i) => i);
