@@ -49,7 +49,20 @@ function getIndexesWithWords({ grid, minWordLength }) {
   return solution;
 }
 
-export function gameInit({ useSaved }) {
+function sortVowels(letters) {
+  let vowels = [];
+  let consonants = [];
+  for (let index = 0; index < letters.length; index++) {
+    ["A", "E", "I", "O", "U"].includes(letters[index])
+      ? vowels.push(letters[index])
+      : consonants.push(letters[index]);
+  }
+  vowels.sort();
+  consonants.sort();
+  return [...vowels, ...consonants];
+}
+
+export function gameInit({ useSaved, sortBy }) {
   const savedState =
     useSaved ?? true
       ? JSON.parse(localStorage.getItem("crossleState"))
@@ -61,6 +74,7 @@ export function gameInit({ useSaved }) {
     savedState.hasOwnProperty("board") &&
     savedState.hasOwnProperty("hints") &&
     savedState.hasOwnProperty("hintIndex") &&
+    savedState.hasOwnProperty("sortBy") &&
     savedState.pool.length
   ) {
     return savedState;
@@ -79,19 +93,28 @@ export function gameInit({ useSaved }) {
 
   // Since we may overwrite words as we generate the grid (e.g. "game" -> "games"),
   // determine the final words from the grid instead of during the grid building process
-  const hints = shuffleArray(getIndexesWithWords({
-    grid: grid,
-    minWordLength: minWordLength,
-  }));
+  const hints = shuffleArray(
+    getIndexesWithWords({
+      grid: grid,
+      minWordLength: minWordLength,
+    })
+  );
 
   // Generate the pool
-  const poolLetters = grid.flatMap((i) => i).filter((i) => i);
+  let poolLetters = grid.flatMap((i) => i).filter((i) => i);
+  if (sortBy === "Alphabetical") {
+    poolLetters = poolLetters.sort();
+  } else if (sortBy === "Vowels") {
+    poolLetters = sortVowels(poolLetters);
+  } else {
+    poolLetters = shuffleArray(poolLetters);
+  }
   const positions = getPositionalFractions({
     poolLetters: poolLetters,
     maxLettersAcross: gridSize,
     stagger: true,
   });
-  const pool = shuffleArray(poolLetters).map(
+  const pool = poolLetters.map(
     (letter, index) =>
       new Object({
         letter: letter,
@@ -105,5 +128,6 @@ export function gameInit({ useSaved }) {
     hintIndex: 0,
     board: Array(gridSize * gridSize).fill(""),
     pool: pool,
+    sortBy: sortBy,
   };
 }

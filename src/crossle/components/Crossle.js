@@ -3,6 +3,7 @@ import Info from "../../common/Info";
 import Pool from "./Pool";
 import Result from "./Result";
 import Board from "./Board";
+import Settings from "./Settings";
 import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
 import { gameReducer } from "../logic/gameReducer";
@@ -105,6 +106,7 @@ function Crossle({ setCurrentDisplay }) {
           disabled={!gameState.pool.length}
           onClick={() => dispatchGameState({ action: "getHint" })}
         ></button>
+        <Settings dispatchGameState={dispatchGameState} gameState={gameState} />
         <Info
           info={
             <div>

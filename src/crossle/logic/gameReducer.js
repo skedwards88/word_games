@@ -30,16 +30,20 @@ function shiftBoard({ board, rowShift, colShift }) {
   let adjustedRowShift = rowShift;
   if (rowShift < 0) {
     for (let index = 0; index < Math.abs(rowShift); index++) {
-      if (grid[index].some(i=>i)) {
-        adjustedRowShift = (-1) * index
-        break
+      if (grid[index].some((i) => i)) {
+        adjustedRowShift = -1 * index;
+        break;
       }
     }
   } else {
-    for (let index = grid.length - 1; index >= grid.length - rowShift; index--) {
-      if (grid[index].some(i=>i)) {
-        adjustedRowShift = grid.length - 1 - index
-        break
+    for (
+      let index = grid.length - 1;
+      index >= grid.length - rowShift;
+      index--
+    ) {
+      if (grid[index].some((i) => i)) {
+        adjustedRowShift = grid.length - 1 - index;
+        break;
       }
     }
   }
@@ -48,16 +52,20 @@ function shiftBoard({ board, rowShift, colShift }) {
   const transposedGrid = grid.map((_, index) => grid.map((row) => row[index]));
   if (colShift < 0) {
     for (let index = 0; index < Math.abs(colShift); index++) {
-      if (transposedGrid[index].some(i=>i)) {
-        adjustedColShift = (-1) * index
-        break
+      if (transposedGrid[index].some((i) => i)) {
+        adjustedColShift = -1 * index;
+        break;
       }
     }
   } else {
-    for (let index = transposedGrid.length - 1; index >= transposedGrid.length - colShift; index--) {
-      if (transposedGrid[index].some(i=>i)) {
-        adjustedColShift = transposedGrid.length - 1 - index
-        break
+    for (
+      let index = transposedGrid.length - 1;
+      index >= transposedGrid.length - colShift;
+      index--
+    ) {
+      if (transposedGrid[index].some((i) => i)) {
+        adjustedColShift = transposedGrid.length - 1 - index;
+        break;
       }
     }
   }
@@ -180,7 +188,7 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "newGame") {
-    return gameInit({ useSaved: false });
+    return gameInit({ ...payload, useSaved: false });
   }
 
   if (payload.action === "getHint") {
