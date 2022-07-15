@@ -36,23 +36,12 @@ function Crossle({ setCurrentDisplay }) {
     const height = event.dataTransfer.getData("height");
 
     // If you drop on another letter in the pool, that letter is considered the target
-    // So we need to make sure to get the parent dimensions instead of the target dimensions in that case
-    // in order to later calculate the position relative to the pool
-    let poolStats = {};
-    if (event.target.id === "pool") {
-      poolStats = {
-        poolWidth: event.target.offsetWidth,
-        poolHeight: event.target.offsetHeight,
-        poolLeft: event.target.offsetLeft,
-        poolTop: event.target.offsetTop,
-      };
-    } else {
-      poolStats = {
-        poolWidth: event.target.parentElement.offsetWidth,
-        poolHeight: event.target.parentElement.offsetHeight,
-        poolLeft: event.target.parentElement.offsetLeft,
-        poolTop: event.target.parentElement.offsetTop,
-      };
+    // and the drop calculation is thrown off.
+    // We could get the parent dimensions instead of the target dimensions in that case
+    // in order to later calculate the position relative to the pool, but it is hacky/may have unaccounted edge cases.
+    // Instead, only allow the drop if the target is the pool.
+    if (event.target.id !== "pool") {
+      return
     }
 
     dispatchGameState({
@@ -62,8 +51,11 @@ function Crossle({ setCurrentDisplay }) {
       dragArea: dragArea,
       dropX: event.clientX - width / 2,
       dropY: event.clientY - height / 2,
-      ...poolStats,
-    });
+      poolWidth: event.target.offsetWidth,
+      poolHeight: event.target.offsetHeight,
+      poolLeft: event.target.offsetLeft,
+      poolTop: event.target.offsetTop,
+  });
   }
 
   function dropOnBoard({ event, index }) {
