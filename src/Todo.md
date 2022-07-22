@@ -17,6 +17,10 @@
 
 ## Crossle
 
+- tests
+- rename to "spatial" if want to keep crossle for jigsaw?
+- add islands or irregular boundary option?
+
 ## Gribbles
 
 ## Thirdle
@@ -50,5 +54,3 @@ word rush: colored letters, trying to get combos of colors to reach score before
 scramble: 5-7 letters in a row or circle, connect subset of letters in any order (no repeats) to form words. See if can find all words in list.
 
 word search: grid of letters + list of words. cross of words from list as find in grid.
-
-have N letters. need to arrange into crossword within grid size
