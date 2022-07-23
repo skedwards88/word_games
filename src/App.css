@@ -717,6 +717,66 @@ a {
   opacity: 0.5;
 }
 
+
+/* jigsaw-specific */
+
+#jigsaw {
+  display: grid;
+  grid-template-areas:
+    "board"
+    "pool"
+    "controls";
+  grid-template-rows:
+    1fr
+    auto
+    auto;
+}
+
+#crojigsawssle #board {
+  grid-area: board;
+  touch-action: none;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  justify-self: center;
+  color: rgb(239 239 239);
+  border: 1px solid rgb(239 239 239);
+}
+
+
+
+#jigsaw #pool {
+  grid-area: pool;
+  touch-action: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: scroll;
+  flex-direction: row;
+  border: 1px solid rgb(239 239 239);
+}
+
+#jigsaw .poolLetter {
+  display: grid;
+  grid-template-columns: repeat(3, 8vmin);
+  grid-template-rows: repeat(3, 8vmin);
+  justify-content: center;
+  align-items: center;
+  /* width: min(6vmax, 9vmin); */
+  /* height: min(6vmax, 9vmin); */
+  font-size: var(--default-font-size);
+}
+
+#jigsaw #result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#jigsaw .dragging {
+  opacity: 0.5;
+}
 /* Landscape */
 
 @media (orientation: landscape) {
