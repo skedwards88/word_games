@@ -1,6 +1,7 @@
 import { generateGrid } from "./generateGrid";
 import { shuffleArray } from "../../common/shuffleArray";
 import { getPositionalFractions } from "../../common/getPositionalFractions";
+import { sortLettersBy } from "../../common/sortLetters";
 
 function getIndexesWithWords({ grid, minWordLength }) {
   const transposedGrid = grid.map((_, index) => grid.map((row) => row[index]));
@@ -49,19 +50,6 @@ function getIndexesWithWords({ grid, minWordLength }) {
   return solution;
 }
 
-function sortVowels(letters) {
-  let vowels = [];
-  let consonants = [];
-  for (let index = 0; index < letters.length; index++) {
-    ["A", "E", "I", "O", "U"].includes(letters[index])
-      ? vowels.push(letters[index])
-      : consonants.push(letters[index]);
-  }
-  vowels.sort();
-  consonants.sort();
-  return [...vowels, ...consonants];
-}
-
 export function gameInit({ useSaved, sortBy }) {
   const savedState =
     useSaved ?? true
@@ -102,13 +90,7 @@ export function gameInit({ useSaved, sortBy }) {
 
   // Generate the pool
   let poolLetters = grid.flatMap((i) => i).filter((i) => i);
-  if (sortBy === "Alphabetical") {
-    poolLetters = poolLetters.sort();
-  } else if (sortBy === "Vowels") {
-    poolLetters = sortVowels(poolLetters);
-  } else {
-    poolLetters = shuffleArray(poolLetters);
-  }
+  poolLetters = sortLettersBy(poolLetters, sortBy)
   const positions = getPositionalFractions({
     poolLetters: poolLetters,
     maxLettersAcross: gridSize,

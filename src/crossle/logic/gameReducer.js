@@ -1,7 +1,7 @@
-import { shuffleArray } from "../../common/shuffleArray";
 import { gameInit } from "./gameInit";
 import { getPositionalFractions } from "../../common/getPositionalFractions";
 import { partitionArray } from "../../common/partitionArray";
+import { sortLettersBy } from "../../common/sortLetters";
 
 function subtractArrays(baseArray, itemsToRemove) {
   for (let index = 0; index < itemsToRemove.length; index++) {
@@ -238,12 +238,14 @@ export function gameReducer(currentGameState, payload) {
     );
 
     // Generate the new pool
+    newPoolLetters = sortLettersBy(newPoolLetters, currentGameState.sortBy)
     const positions = getPositionalFractions({
       poolLetters: newPoolLetters,
       maxLettersAcross: newBoard.length,
       stagger: true,
     });
-    const newPool = shuffleArray(newPoolLetters).map(
+
+    const newPool = newPoolLetters.map(
       (letter, index) =>
         new Object({
           letter: letter,

@@ -90,6 +90,7 @@ function Crossle({ setCurrentDisplay }) {
             dispatchGameState({
               action: "newGame",
               gridSize: Math.sqrt(gameState.board.length),
+              sortBy: gameState.sortBy,
             });
           }}
         ></button>
