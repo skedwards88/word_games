@@ -7,13 +7,12 @@ polyfill({
 });
 
 function Piece({letters, index}) {
-  console.log(JSON.stringify(letters))
-  console.log(letters)
   return (
     <div
       className="poolLetter"
       key={index}
       draggable="true"
+      data-pool-position={index}
       onDragStart={(event) =>
         dragToken({
           event: event,

@@ -10,12 +10,8 @@ import { gameReducer } from "../logic/gameReducer";
 
 export function dragToken({ event, letter, index, dragArea }) {
   console.log(JSON.stringify('in drag...'))
-  console.log(JSON.stringify(letter))
-  event.dataTransfer.setData("letter", letter);
   event.dataTransfer.setData("dragIndex", `${index}`); // touch screen sets 0 as undefined, so convert to string
   event.dataTransfer.setData("dragArea", dragArea);
-  event.dataTransfer.setData("width", event.target.clientWidth);
-  event.dataTransfer.setData("height", event.target.clientHeight);
   event.target.classList.add("dragging");
 }
 
@@ -31,32 +27,16 @@ function Jigsaw({ setCurrentDisplay }) {
   }, [gameState]);
 
   function dropOnPool({ event }) {
-    const letter = event.dataTransfer.getData("letter").split(",");
     const dragIndex = event.dataTransfer.getData("dragIndex");
     const dragArea = event.dataTransfer.getData("dragArea");
-    const width = event.dataTransfer.getData("width");
-    const height = event.dataTransfer.getData("height");
-
-    // If you drop on another letter in the pool, that letter is considered the target
-    // and the drop calculation is thrown off.
-    // We could get the parent dimensions instead of the target dimensions in that case
-    // in order to later calculate the position relative to the pool, but it is hacky/may have unaccounted edge cases.
-    // Instead, only allow the drop if the target is the pool.
-    // if (event.target.id !== "pool") {
-    //   return
-    // }
+    const dropIndex = event.target.getAttribute("data-pool-position")
+    console.log(`drop index: ${dropIndex}`)
 
     dispatchGameState({
       action: "dropOnPool",
-      letter: letter,
       dragIndex: dragIndex,
       dragArea: dragArea,
-      dropX: event.clientX - width / 2,
-      dropY: event.clientY - height / 2,
-      poolWidth: event.target.offsetWidth,
-      poolHeight: event.target.offsetHeight,
-      poolLeft: event.target.offsetLeft,
-      poolTop: event.target.offsetTop,
+      dropIndex: dropIndex,
   });
   }
 
