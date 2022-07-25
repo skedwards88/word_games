@@ -6,7 +6,7 @@ polyfill({
   dragImageCenterOnTouch: true,
 });
 
-function Piece({letters, index}) {
+function Piece({ letters, index }) {
   return (
     <div
       className="poolLetter"
@@ -23,13 +23,14 @@ function Piece({letters, index}) {
       }
       onDragEnd={(event) => event.target.classList.remove("dragging")}
     >
-      {letters.map((letter, index) => <div key={index}>{letter}</div>)}
+      {letters.map((letter, index) => (
+        <div key={index}>{letter}</div>
+      ))}
     </div>
   );
 }
 
 export default function Pool({ pool, dropToken }) {
-
   const pieces = pool.map((letters, index) =>
     Piece({ letters: letters, index: index })
   );

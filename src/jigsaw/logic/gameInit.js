@@ -3,12 +3,12 @@ import { generateGrid } from "./generateGrid";
 function getPiecesFromBoard(grid) {
   // todo
   return [
-    ["A","B","","","","","","",""],
-    ["W","X","","Y","","","Z","",""],
-    ["","","","C","D","E","","Q",""],
+    ["A", "B", "", "", "", "", "", "", ""],
+    ["W", "X", "", "Y", "", "", "Z", "", ""],
+    ["", "", "", "C", "D", "E", "", "Q", ""],
     // ["","","","C","D","E","","Q",""],
     // ["A","B","C","Z","","","","",""]
-  ]
+  ];
 }
 
 export function gameInit({ useSaved, sortBy }) {
@@ -40,10 +40,9 @@ export function gameInit({ useSaved, sortBy }) {
     maxWordLength: maxWordLength,
   });
 
+  const pieces = getPiecesFromBoard(grid);
 
-  const pieces = getPiecesFromBoard(grid)
-
-  console.log(pieces)
+  console.log(pieces);
   return {
     board: [],
     sortBy: sortBy,
