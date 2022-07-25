@@ -5,7 +5,7 @@ function getPiecesFromBoard(grid) {
   return [
     ["A","B","","","","","","",""],
     ["W","X","","Y","","","Z","",""],
-    // ["","","","C","D","E","","Q",""],
+    ["","","","C","D","E","","Q",""],
     // ["","","","C","D","E","","Q",""],
     // ["A","B","C","Z","","","","",""]
   ]
@@ -45,9 +45,7 @@ export function gameInit({ useSaved, sortBy }) {
 
   console.log(pieces)
   return {
-    board: [
-      ["P","P","","S","","","Z","",""]
-    ],
+    board: [],
     sortBy: sortBy,
 
     pool: pieces,

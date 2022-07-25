@@ -40,15 +40,13 @@ function Jigsaw({ setCurrentDisplay }) {
   });
   }
 
-  function dropOnBoard({ event, index }) {
-    const letter = event.dataTransfer.getData("letter");
+  function dropOnBoard({ event }) {
     const dragIndex = event.dataTransfer.getData("dragIndex");
     const dragArea = event.dataTransfer.getData("dragArea");
 
+
     dispatchGameState({
       action: "dropOnBoard",
-      dropIndex: index,
-      letter: letter,
       dragIndex: dragIndex,
       dragArea: dragArea,
       dropX: event.clientX,
@@ -58,7 +56,7 @@ function Jigsaw({ setCurrentDisplay }) {
 
   return (
     <div className="App" id="jigsaw">
-      <Board letters={gameState.board} dropToken={dropOnBoard}></Board>
+      <Board pieces={gameState.board} dropToken={dropOnBoard}></Board>
       {gameState.pool.length ? (
         <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
       ) : (

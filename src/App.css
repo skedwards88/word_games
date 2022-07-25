@@ -732,7 +732,7 @@ a {
     auto;
 }
 
-#crojigsawssle #board {
+#jigsaw #board {
   grid-area: board;
   touch-action: none;
   justify-content: center;
@@ -743,7 +743,15 @@ a {
   border: 1px solid rgb(239 239 239);
 }
 
+#jigsaw .boardLetter {
+  left: var(--x);
+  top: var(--y);
+  position: fixed;
+  display: grid;
+  grid-template-columns: repeat(3, 8vmin);
+  grid-template-rows: repeat(3, 8vmin);
 
+}
 
 #jigsaw #pool {
   grid-area: pool;

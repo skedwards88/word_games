@@ -6,32 +6,38 @@ polyfill({
   dragImageCenterOnTouch: true,
 });
 
-export default function Board({ letters, dropToken }) {
-  const board = letters.map((letter, index) => (
+export default function Board({ pieces, dropToken }) {
+  const board = pieces.map((piece, index) => (
     <div
       className="boardLetter"
       key={index}
       draggable
+      style={{
+        "--x": `${piece.x}px`,
+        "--y": `${piece.y}px`,
+      }}
       onDoubleClick={(event) => console.log("double")}
       onDragStart={(event) =>
         dragToken({
           event: event,
-          letter: letter,
+          letter: piece.letters,
           index: index,
           dragArea: "board",
         })
       }
       onDragEnd={(event) => event.target.classList.remove("dragging")}
-      onDragOver={(event) => {
-        event.preventDefault();
-      }}
-      onDrop={(event) => dropToken({ event: event, index: index })}
-      onDragEnter={(event) => {
-        event.preventDefault();
-      }}
+
     >
-      {letter}
+      {piece.letters.map((letter, index) => <div key={index}>{letter}</div>)}
     </div>
   ));
-  return <div id="board">{board}</div>;
+  return <div id="board"
+  onDragOver={(event) => {
+    event.preventDefault();
+  }}
+  onDrop={(event) => dropToken({ event: event })}
+  onDragEnter={(event) => {
+    event.preventDefault();
+  }}
+  >{board}</div>;
 }
