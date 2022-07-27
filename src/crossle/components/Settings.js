@@ -1,4 +1,5 @@
 import React from "react";
+import { sortMethods } from "../../common/sortLetters";
 
 export default function Settings({ dispatchGameState, gameState }) {
   const [showSettings, setShowSettings] = React.useState(false);
@@ -6,8 +7,6 @@ export default function Settings({ dispatchGameState, gameState }) {
   function handleShowSettings() {
     setShowSettings(!showSettings);
   }
-
-  console.log(gameState.sortBy);
 
   function handleNewGame(event) {
     event.preventDefault();
@@ -28,9 +27,9 @@ export default function Settings({ dispatchGameState, gameState }) {
             <label htmlFor="sortBy">Sort</label>
           </div>
           <select id="sortBy" defaultValue={gameState.sortBy ?? "None"}>
-            <option value="Alphabetical">Alphabetical</option>
-            <option value="Vowels">Vowels</option>
-            <option value="None">None</option>
+            <option value={sortMethods.Alphabetical}>{sortMethods.Alphabetical}</option>
+            <option value={sortMethods.Vowels}>{sortMethods.Vowels}</option>
+            <option value={sortMethods.None}>{sortMethods.None}</option>
           </select>
         </div>
       </div>
