@@ -13,8 +13,8 @@ export default function Board({ pieces, dropToken }) {
       key={index}
       draggable
       style={{
-        "--x": `${piece.x}px`,
-        "--y": `${piece.y}px`,
+        "--x": `${piece.x}%`,
+        "--y": `${piece.y}%`,
       }}
       onDoubleClick={(event) => console.log("double")}
       onDragStart={(event) =>

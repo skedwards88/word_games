@@ -12,6 +12,8 @@ export function dragToken({ event, letter, index, dragArea }) {
   console.log(JSON.stringify("in drag..."));
   event.dataTransfer.setData("dragIndex", `${index}`); // touch screen sets 0 as undefined, so convert to string
   event.dataTransfer.setData("dragArea", dragArea);
+  event.dataTransfer.setData("width", event.target.clientWidth);
+  event.dataTransfer.setData("height", event.target.clientHeight);
   event.target.classList.add("dragging");
 }
 
@@ -43,13 +45,28 @@ function Jigsaw({ setCurrentDisplay }) {
   function dropOnBoard({ event }) {
     const dragIndex = event.dataTransfer.getData("dragIndex");
     const dragArea = event.dataTransfer.getData("dragArea");
+    const width = event.dataTransfer.getData("width");
+    const height = event.dataTransfer.getData("height");
+
+    // Don't use event.target since you can drop on board, piece, or letter
+    const boardElement = document.getElementById("board")
+    const boardWidth = boardElement.offsetWidth
+    const boardHeight = boardElement.offsetHeight
+    const boardLeft = boardElement.offsetLeft
+    const boardTop = boardElement.offsetTop
 
     dispatchGameState({
       action: "dropOnBoard",
       dragIndex: dragIndex,
       dragArea: dragArea,
-      dropX: event.clientX,
-      dropY: event.clientY,
+      dropX: event.clientX  - width / 2,
+      dropY: event.clientY - height / 2,
+      pieceWidth: width,
+      pieceHeight: height,
+      boardWidth: boardWidth,
+      boardHeight: boardHeight,
+      boardLeft: boardLeft,
+      boardTop: boardTop,
     });
   }
 
