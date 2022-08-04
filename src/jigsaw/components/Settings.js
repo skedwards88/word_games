@@ -7,8 +7,6 @@ export default function Settings({ dispatchGameState, gameState }) {
     setShowSettings(!showSettings);
   }
 
-  console.log(gameState.sortBy);
-
   function handleNewGame(event) {
     event.preventDefault();
     const newSortBy = event.target.elements.sortBy.value;

@@ -734,23 +734,26 @@ a {
 
 #jigsaw #board {
   grid-area: board;
+  display: grid;
   touch-action: none;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  grid-template-columns: repeat(9, 8vmin);
+  grid-template-rows: repeat(9, 8vmin);
+  width: fit-content;
+  height: fit-content;
   justify-self: center;
   color: rgb(239 239 239);
   border: 1px solid rgb(239 239 239);
-  position: absolute;
+  margin: 3vmin 0 0;
+
 }
 
 #jigsaw .boardLetter {
-  left: var(--x);
-  top: var(--y);
-  position: absolute;
-  display: grid;
-  grid-template-columns: repeat(3, 8vmin);
-  grid-template-rows: repeat(3, 8vmin);
+  border: 0.5px solid rgb(239 239 239);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--default-font-size);
 }
 
 #jigsaw #pool {

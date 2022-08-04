@@ -8,13 +8,30 @@ import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
 import { gameReducer } from "../logic/gameReducer";
 
-export function dragToken({ event, letter, index, dragArea }) {
-  console.log(JSON.stringify("in drag..."));
-  event.dataTransfer.setData("dragIndex", `${index}`); // touch screen sets 0 as undefined, so convert to string
+export function dragToken({ event, letter, rowIndex, colIndex, dragArea, dragIndex,relativeTop,relativeLeft }) {
+  console.log("dragToken")
+  event.dataTransfer.setDragImage(document.createElement('img'), 0, 0);
+  event.dataTransfer.setData("letter", letter);
+  event.dataTransfer.setData("dragRowIndex", `${rowIndex}`); // touch screen sets 0 as undefined, so convert to string //todo for other ints
+  event.dataTransfer.setData("dragColIndex", `${colIndex}`); // touch screen sets 0 as undefined, so convert to string //todo for other ints
   event.dataTransfer.setData("dragArea", dragArea);
   event.dataTransfer.setData("width", event.target.clientWidth);
   event.dataTransfer.setData("height", event.target.clientHeight);
-  event.target.classList.add("dragging");
+
+  event.dataTransfer.setData("dragIndex", `${dragIndex}`);
+  event.dataTransfer.setData("relativeTop", relativeTop);
+  event.dataTransfer.setData("relativeLeft", relativeLeft);
+
+}
+
+export function dragPoolToken({ event, letter, dragIndex, dragArea }) {
+  console.log("dragpoolToken")
+
+  event.dataTransfer.setDragImage(document.createElement('img'), 0, 0);
+  event.dataTransfer.setData("letter", letter);
+  event.dataTransfer.setData("dragIndex", `${dragIndex}`); // touch screen sets 0 as undefined, so convert to string //todo for other ints
+  event.dataTransfer.setData("dragArea", dragArea);
+
 }
 
 function Jigsaw({ setCurrentDisplay }) {
@@ -29,10 +46,10 @@ function Jigsaw({ setCurrentDisplay }) {
   }, [gameState]);
 
   function dropOnPool({ event }) {
+    console.log('drop on pool')
     const dragIndex = event.dataTransfer.getData("dragIndex");
     const dragArea = event.dataTransfer.getData("dragArea");
     const dropIndex = event.target.getAttribute("data-pool-position");
-    console.log(`drop index: ${dropIndex}`);
 
     dispatchGameState({
       action: "dropOnPool",
@@ -42,37 +59,48 @@ function Jigsaw({ setCurrentDisplay }) {
     });
   }
 
-  function dropOnBoard({ event }) {
-    const dragIndex = event.dataTransfer.getData("dragIndex");
-    const dragArea = event.dataTransfer.getData("dragArea");
-    const width = event.dataTransfer.getData("width");
-    const height = event.dataTransfer.getData("height");
-
-    // Don't use event.target since you can drop on board, piece, or letter
-    const boardElement = document.getElementById("board")
-    const boardWidth = boardElement.offsetWidth
-    const boardHeight = boardElement.offsetHeight
-    const boardLeft = boardElement.offsetLeft
-    const boardTop = boardElement.offsetTop
-
+  function handleBoardDrop ({event}) {
+    console.log("handleBoardDrop")
     dispatchGameState({
       action: "dropOnBoard",
+    }
+    )
+  }
+
+  function handleBoardDragEnd () {
+    console.log("handleBoardDragEnd")
+    dispatchGameState({
+      action: "dropOnBoard",
+    }
+    )
+  }
+
+  function handleBoardDragEnter({ event, rowIndex, colIndex }) {
+
+    console.log(`handleBoardDragEnter ${rowIndex} ${colIndex}`)
+    const dragIndex = event.dataTransfer.t.data.dragIndex;
+    const relativeTop = event.dataTransfer.t.data.relativeTop;
+    const relativeLeft = event.dataTransfer.t.data.relativeLeft;
+    const dragRowIndex = event.dataTransfer.t.data.dragRowIndex;
+    const dragColIndex = event.dataTransfer.t.data.dragColIndex;
+    const dragArea = event.dataTransfer.t.data.dragArea;
+
+    dispatchGameState({
+      action: "dragOverBoard",
       dragIndex: dragIndex,
+      relativeTop: relativeTop,
+      relativeLeft: relativeLeft,
+      dropRowIndex: rowIndex,
+      dropColIndex: colIndex,
+      dragRowIndex: dragRowIndex,
+      dragColIndex: dragColIndex,
       dragArea: dragArea,
-      dropX: event.clientX  - width / 2,
-      dropY: event.clientY - height / 2,
-      pieceWidth: width,
-      pieceHeight: height,
-      boardWidth: boardWidth,
-      boardHeight: boardHeight,
-      boardLeft: boardLeft,
-      boardTop: boardTop,
     });
   }
 
   return (
     <div className="App" id="jigsaw">
-      <Board pieces={gameState.board} dropToken={dropOnBoard}></Board>
+      <Board board={gameState.board} handleBoardDragEnter={handleBoardDragEnter} handleBoardDragEnd={handleBoardDragEnd} handleBoardDrop={handleBoardDrop}></Board>
       {gameState.pool.length ? (
         <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
       ) : (

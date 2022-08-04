@@ -1,8 +1,8 @@
 export function gameReducer(currentGameState, payload) {
+  console.log('in reducer')
   if (payload.action === "dropOnPool") {
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
-    console.log(JSON.stringify(newPool));
 
     // from the pool
     if (payload.dragArea === "pool") {
@@ -23,8 +23,7 @@ export function gameReducer(currentGameState, payload) {
 
     // from the board
     if (payload.dragArea === "board") {
-      console.log(`drag from board to pool. ${payload.dragIndex}`);
-      const movedPiece = newBoard[payload.dragIndex];
+      const movedPiece = newBoard[payload.dragIndex].letters;
       // delete the letter from the old position
       newBoard.splice(payload.dragIndex, 1);
       // add the letter to the new position
@@ -38,66 +37,108 @@ export function gameReducer(currentGameState, payload) {
         newPool = [...newPool, movedPiece];
       }
     }
-
     return {
       ...currentGameState,
       pool: newPool,
       board: newBoard,
+    };
+  }
+
+  if (payload.action === "dragOverBoard" && payload.dragArea === "board") {
+    console.log('in correct action')
+    let newBoard = [...currentGameState.board];
+    let newPool = [...currentGameState.pool];
+
+    const draggedBoardPieceIndex = payload.dragIndex;
+    const newTop =
+      newBoard[draggedBoardPieceIndex].top -
+      ((currentGameState.dragRowIndex
+        ? currentGameState.dragRowIndex
+        : payload.dragRowIndex) -
+        payload.dropRowIndex);
+
+        console.log(`raw ${payload.dropColIndex}. rel ${newBoard[draggedBoardPieceIndex].left}. adj ${currentGameState.dragColIndex
+          ? currentGameState.dragColIndex
+          : payload.dragColIndex}. new ${newBoard[draggedBoardPieceIndex].left -
+            ((currentGameState.dragColIndex
+              ? currentGameState.dragColIndex
+              : payload.dragColIndex) -
+              payload.dropColIndex)}`)
+    const newLeft =
+      newBoard[draggedBoardPieceIndex].left -
+      ((currentGameState.dragColIndex
+        ? currentGameState.dragColIndex
+        : payload.dragColIndex) -
+        payload.dropColIndex);
+
+    // if top or left is off grid, return early
+    if (newTop < 0 || newLeft < 0) {
+      console.log(`early return for top left. ${newTop < 0} (${newTop}) ||  ${newLeft < 0} ${newLeft}`)
+      return {
+        ...currentGameState,
+        dragColIndex: payload.dropColIndex,
+        dragRowIndex: payload.dropRowIndex,  
+      };
+    }
+    // if bottom or right would go off grid, return early
+    const letters = newBoard[draggedBoardPieceIndex].letters;
+    if ((newTop + letters.length) > (currentGameState.gridSize)) {
+      return {
+        ...currentGameState,
+        dragColIndex: payload.dropColIndex,
+        dragRowIndex: payload.dropRowIndex,  
+      };
+    }
+      if ((newLeft + letters[0].length) > (currentGameState.gridSize)) {
+      return {
+        ...currentGameState,
+        dragColIndex: payload.dropColIndex,
+        dragRowIndex: payload.dropRowIndex,  
+      };
+    }
+
+    newBoard[draggedBoardPieceIndex].top = newTop;
+    newBoard[draggedBoardPieceIndex].left = newLeft;
+
+    return {
+      ...currentGameState,
+      board: newBoard,
+      pool: newPool,
+      dragColIndex: payload.dropColIndex,
+      dragRowIndex: payload.dropRowIndex,
+    };
+  }
+
+  if (payload.action === "dragOverBoard" && payload.dragArea === "pool") {
+    let newBoard = [...currentGameState.board];
+    let newPool = [...currentGameState.pool];
+
+    const newLetters = newPool[payload.dragIndex];
+    const newPiece = {
+      letters: newLetters,
+      top: payload.dropRowIndex,
+      left: payload.dropColIndex,
+    };
+    newBoard.push(newPiece);
+    // delete the letter from the old position in the pool
+    newPool.splice(payload.dragIndex, 1);
+
+    return {
+      ...currentGameState,
+      board: newBoard,
+      pool: newPool,
+      dragColIndex: payload.dropColIndex,
+      dragRowIndex: payload.dropRowIndex,
     };
   }
 
   if (payload.action === "dropOnBoard") {
-    console.log(`drop on board`);
-    console.log(JSON.stringify(payload));
-
-    let newBoard = [...currentGameState.board];
-    let newPool = [...currentGameState.pool];
-
-    // from the pool
-    if (payload.dragArea === "pool") {
-    // Convert the pixels where the letter was dropped to a percentage of the board dimensions.
-    // We do this instead of keeping relative to the screen dimensions so that we can snap the piece to a virtual grid.
-    // And we use percentage instead of pixels so that screen rotation/resizing is seamless todo need to do this part
-    const xFractionalPosition =
-    ((payload.dropX - payload.boardLeft) / payload.boardWidth) * 100;
-    const yFractionalPosition =
-    ((payload.dropY - payload.boardTop) / payload.boardHeight) * 100;
-
-    const letterHeightPercent = (payload.pieceHeight / payload.boardHeight ) / 3 * 100;
-    const letterWidthPercent = (payload.pieceWidth / payload.boardWidth ) / 3 * 100;
-
-    const snappedY = (Math.round(yFractionalPosition / letterHeightPercent) * letterHeightPercent);
-    const snappedX = (Math.round(xFractionalPosition / letterWidthPercent) * letterWidthPercent);
-
-    console.log(payload.boardHeight)
-    console.log(payload.pieceHeight)
-    console.log(letterHeightPercent)
-    console.log(yFractionalPosition)
-    console.log(snappedY)
-
-      const movedPiece = newPool[payload.dragIndex];
-      // delete the letter from the old position in the pool
-      newPool.splice(payload.dragIndex, 1);
-
-      // add the letter at the correct position on the board
-      const newBoardPiece = {
-        letters: movedPiece,
-        x: snappedX,
-        y: snappedY,
-      };
-      newBoard.push(newBoardPiece);
-    }
-
-    // from the board
-    if (payload.dragArea === "board") {
-      newBoard[payload.dragIndex].x = payload.dropX;
-      newBoard[payload.dragIndex].y = payload.dropY;
-    }
     return {
       ...currentGameState,
-      pool: newPool,
-      board: newBoard,
+      dragColIndex: undefined,
+      dragRowIndex: undefined,
     };
   }
+
   return { ...currentGameState };
 }

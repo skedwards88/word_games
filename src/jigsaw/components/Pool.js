@@ -1,5 +1,5 @@
 import React from "react";
-import { dragToken } from "./Jigsaw";
+import { dragPoolToken } from "./Jigsaw";
 import { polyfill } from "mobile-drag-drop";
 
 polyfill({
@@ -14,16 +14,15 @@ function Piece({ letters, index }) {
       draggable="true"
       data-pool-position={index}
       onDragStart={(event) =>
-        dragToken({
+        dragPoolToken({
           event: event,
           letter: letters,
-          index: index,
+          dragIndex: index,
           dragArea: "pool",
         })
       }
-      onDragEnd={(event) => event.target.classList.remove("dragging")}
     >
-      {letters.map((letter, index) => (
+      {letters.flatMap(i=>i).map((letter, index) => (
         <div key={index}>{letter}</div>
       ))}
     </div>
