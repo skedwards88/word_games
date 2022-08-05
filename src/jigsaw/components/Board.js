@@ -83,7 +83,7 @@ polyfill({
 //   );
 // }
 
-export default function Board({ board, handleBoardDragEnter, handleBoardDrop, handleBoardDragEnd }) {
+export default function Board({ board, handleBoardDragEnter, handleBoardDrop }) {
   // 
   const gridSize = 9; // todo get, and build grid smarter
   let grid = [
@@ -142,9 +142,9 @@ export default function Board({ board, handleBoardDragEnter, handleBoardDrop, ha
       onDragOver={(event) => {
         event.preventDefault();
       }}
-      onDrop={() => handleBoardDrop()}
-      onDragEnd={() => handleBoardDragEnd()}
-      onDragEnter={(event) => {
+      onDrop={(event) => handleBoardDrop({event: event})}
+      // onDragEnd={(event) => handleBoardDragEnd({event: event})}
+        onDragEnter={(event) => {
         handleBoardDragEnter({ event: event, rowIndex: rowIndex,
           colIndex: colIndex });
       }}
@@ -154,8 +154,8 @@ export default function Board({ board, handleBoardDragEnter, handleBoardDrop, ha
     onDragOver={(event) => {
       event.preventDefault();
     }}
-    onDrop={() => handleBoardDrop()}
-    onDragEnd={() => handleBoardDragEnd()}
+    onDrop={(event) => handleBoardDrop({event: event})}
+    // onDragEnd={(event) => handleBoardDragEnd({event: event})}
     onDragEnter={(event) => {
       handleBoardDragEnter({ event: event, rowIndex: rowIndex,
         colIndex: colIndex });

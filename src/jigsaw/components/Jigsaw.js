@@ -60,22 +60,21 @@ function Jigsaw({ setCurrentDisplay }) {
   }
 
   function handleBoardDrop ({event}) {
-    console.log("handleBoardDrop")
-    dispatchGameState({
-      action: "dropOnBoard",
-    }
-    )
-  }
+    event.preventDefault();
 
-  function handleBoardDragEnd () {
-    console.log("handleBoardDragEnd")
+    const dragArea = event.dataTransfer.t.data.dragArea;
+    const dragIndex = event.dataTransfer.t.data.dragIndex;
+
     dispatchGameState({
       action: "dropOnBoard",
+      dragArea: dragArea,
+      dragIndex: dragIndex,
     }
     )
   }
 
   function handleBoardDragEnter({ event, rowIndex, colIndex }) {
+    event.preventDefault();
 
     console.log(`handleBoardDragEnter ${rowIndex} ${colIndex}`)
     const dragIndex = event.dataTransfer.t.data.dragIndex;
@@ -100,7 +99,7 @@ function Jigsaw({ setCurrentDisplay }) {
 
   return (
     <div className="App" id="jigsaw">
-      <Board board={gameState.board} handleBoardDragEnter={handleBoardDragEnter} handleBoardDragEnd={handleBoardDragEnd} handleBoardDrop={handleBoardDrop}></Board>
+      <Board board={gameState.board} handleBoardDragEnter={handleBoardDragEnter} handleBoardDrop={handleBoardDrop}></Board>
       {gameState.pool.length ? (
         <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
       ) : (

@@ -1,5 +1,4 @@
 export function gameReducer(currentGameState, payload) {
-  console.log('in reducer')
   if (payload.action === "dropOnPool") {
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
@@ -45,11 +44,11 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "dragOverBoard" && payload.dragArea === "board") {
-    console.log('in correct action')
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
 
     const draggedBoardPieceIndex = payload.dragIndex;
+
     const newTop =
       newBoard[draggedBoardPieceIndex].top -
       ((currentGameState.dragRowIndex
@@ -57,13 +56,6 @@ export function gameReducer(currentGameState, payload) {
         : payload.dragRowIndex) -
         payload.dropRowIndex);
 
-        console.log(`raw ${payload.dropColIndex}. rel ${newBoard[draggedBoardPieceIndex].left}. adj ${currentGameState.dragColIndex
-          ? currentGameState.dragColIndex
-          : payload.dragColIndex}. new ${newBoard[draggedBoardPieceIndex].left -
-            ((currentGameState.dragColIndex
-              ? currentGameState.dragColIndex
-              : payload.dragColIndex) -
-              payload.dropColIndex)}`)
     const newLeft =
       newBoard[draggedBoardPieceIndex].left -
       ((currentGameState.dragColIndex
@@ -73,27 +65,31 @@ export function gameReducer(currentGameState, payload) {
 
     // if top or left is off grid, return early
     if (newTop < 0 || newLeft < 0) {
-      console.log(`early return for top left. ${newTop < 0} (${newTop}) ||  ${newLeft < 0} ${newLeft}`)
+      console.log(
+        `early return for top left. ${newTop < 0} (${newTop}) ||  ${
+          newLeft < 0
+        } ${newLeft}`
+      );
       return {
         ...currentGameState,
         dragColIndex: payload.dropColIndex,
-        dragRowIndex: payload.dropRowIndex,  
+        dragRowIndex: payload.dropRowIndex,
       };
     }
     // if bottom or right would go off grid, return early
     const letters = newBoard[draggedBoardPieceIndex].letters;
-    if ((newTop + letters.length) > (currentGameState.gridSize)) {
+    if (newTop + letters.length > currentGameState.gridSize) {
       return {
         ...currentGameState,
         dragColIndex: payload.dropColIndex,
-        dragRowIndex: payload.dropRowIndex,  
+        dragRowIndex: payload.dropRowIndex,
       };
     }
-      if ((newLeft + letters[0].length) > (currentGameState.gridSize)) {
+    if (newLeft + letters[0].length > currentGameState.gridSize) {
       return {
         ...currentGameState,
         dragColIndex: payload.dropColIndex,
-        dragRowIndex: payload.dropRowIndex,  
+        dragRowIndex: payload.dropRowIndex,
       };
     }
 
@@ -120,24 +116,33 @@ export function gameReducer(currentGameState, payload) {
       left: payload.dropColIndex,
     };
     newBoard.push(newPiece);
-    // delete the letter from the old position in the pool
-    newPool.splice(payload.dragIndex, 1);
 
     return {
       ...currentGameState,
       board: newBoard,
-      pool: newPool,
       dragColIndex: payload.dropColIndex,
       dragRowIndex: payload.dropRowIndex,
     };
   }
 
   if (payload.action === "dropOnBoard") {
-    return {
-      ...currentGameState,
-      dragColIndex: undefined,
-      dragRowIndex: undefined,
-    };
+    if (payload.dragArea === "pool") {
+      let newPool = [...currentGameState.pool];
+      // delete the letter from the old position in the pool
+      newPool.splice(payload.dragIndex, 1);
+      return {
+        ...currentGameState,
+        dragColIndex: undefined,
+        dragRowIndex: undefined,
+        pool: newPool,
+      };
+    } else {
+      return {
+        ...currentGameState,
+        dragColIndex: undefined,
+        dragRowIndex: undefined,
+      };
+    }
   }
 
   return { ...currentGameState };
