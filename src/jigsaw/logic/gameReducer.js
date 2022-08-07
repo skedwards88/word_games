@@ -3,6 +3,9 @@ export function gameReducer(currentGameState, payload) {
   // todo handle case where drag off pool but get early return from board...piece disappears
   if (payload.action === "dropOnPool") {
     console.log(JSON.stringify(payload));
+    //todo update while drag enter, not just on drop so you get feedback (need to make sure works in reverse too)
+    // todo scrolling wont work?
+    // todo eliminate space between board and pool
 
     let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
 

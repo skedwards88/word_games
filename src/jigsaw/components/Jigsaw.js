@@ -18,7 +18,7 @@ export function dragToken({
   relativeTop,
   relativeLeft,
 }) {
-  // event.dataTransfer.setDragImage(document.createElement('img'), 0, 0);
+  event.dataTransfer.setDragImage(document.createElement("img"), 0, 0);
   event.dataTransfer.setData("letter", letter);
   event.dataTransfer.setData("dragRowIndex", `${rowIndex}`); // touch screen sets 0 as undefined, so convert to string //todo for other ints
   event.dataTransfer.setData("dragColIndex", `${colIndex}`); // touch screen sets 0 as undefined, so convert to string //todo for other ints
@@ -32,7 +32,7 @@ export function dragToken({
 }
 
 export function dragPoolToken({ event, letter, pieceID, dragArea }) {
-  // event.dataTransfer.setDragImage(document.createElement('img'), 0, 0);
+  event.dataTransfer.setDragImage(document.createElement("img"), 0, 0);
   event.dataTransfer.setData("letter", letter);
   event.dataTransfer.setData("pieceID", `${pieceID}`);
   event.dataTransfer.setData("dragArea", dragArea);
