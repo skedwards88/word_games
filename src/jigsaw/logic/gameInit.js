@@ -6,22 +6,22 @@ function getPiecesFromBoard(grid) {
     [
       ["A", "B", ""],
       ["", "F", ""],
-      ["", "C", ""]
+      ["", "C", ""],
     ],
     [
       ["Q", "B", ""],
       ["", "W", ""],
-      ["", "", "E"]
+      ["", "", "E"],
     ],
     [
       ["Z", "B", ""],
       ["", "X", ""],
-      ["", "T", ""]
+      ["", "T", ""],
     ],
     [
       ["M", "", ""],
       ["", "U", ""],
-      ["", "", "P"]
+      ["", "", "P"],
     ],
   ];
 }
@@ -37,7 +37,7 @@ export function gameInit({ useSaved, sortBy }) {
   //   savedState.hasOwnProperty("pool") &&
   //   savedState.hasOwnProperty("board") &&
   //   savedState.hasOwnProperty("hints") &&
-  //   savedState.hasOwnProperty("hintIndex") &&
+  //   savedState.hasOwnProperty("hintindex") &&
   //   savedState.hasOwnProperty("sortBy") &&
   //   savedState.pool.length
   // ) {
@@ -55,33 +55,79 @@ export function gameInit({ useSaved, sortBy }) {
     maxWordLength: maxWordLength,
   });
 
-
   const pieces = getPiecesFromBoard(grid);
 
   //todo trim off excess whitespace row/col on edge
   return {
-    board: [
+    pieces: [
       {
+        id: 0,
         letters: [
-          ["A","",""],
-          ["","A","C"],
-          ["","A","B"],
+          ["Z", "Z", ""],
+          ["", "", ""],
+          ["", "", ""],
         ],
-        top: 0,
-        left: 0,
+        boardTop: 3,
+        boardLeft: 3,
+        poolIndex: undefined,
       },
-            {
+      {
+        id: 1,
         letters: [
-          ["","",""],
-          ["","A",""],
-          ["","B",""],
+          ["A", "", ""],
+          ["", "A", ""],
+          ["", "A", "A"],
         ],
-        top: 0,
-        left: 4,
+        boardTop: 0,
+        boardLeft: 0,
+        poolIndex: undefined,
+      },
+      {
+        id: 2,
+        letters: [
+          ["", "", ""],
+          ["", "B", ""],
+          ["", "B", ""],
+        ],
+        boardTop: 0,
+        boardLeft: 4,
+        poolIndex: undefined,
+      },
+      {
+        id: 3,
+        letters: [
+          ["C", "", ""],
+          ["", "C", "C"],
+          ["", "C", ""],
+        ],
+        boardTop: undefined,
+        boardLeft: undefined,
+        poolIndex: 0,
+      },
+      {
+        id: 4,
+        letters: [
+          ["D", "D", ""],
+          ["", "D", "D"],
+          ["", "", ""],
+        ],
+        boardTop: undefined,
+        boardLeft: undefined,
+        poolIndex: 1,
+      },
+      {
+        id: 5,
+        letters: [
+          ["E", "E", ""],
+          ["", "E", ""],
+          ["", "E", "E"],
+        ],
+        boardTop: undefined,
+        boardLeft: undefined,
+        poolIndex: 2,
       },
     ],
     sortBy: sortBy,
-    pool: pieces,
     gridSize: gridSize, // todo any way to derive?
   };
 }

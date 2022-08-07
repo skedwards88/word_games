@@ -1,149 +1,158 @@
 export function gameReducer(currentGameState, payload) {
+  // todo make pool min height so can always drag on to
+  // todo handle case where drag off pool but get early return from board...piece disappears
   if (payload.action === "dropOnPool") {
-    let newBoard = [...currentGameState.board];
-    let newPool = [...currentGameState.pool];
+    console.log(JSON.stringify(payload));
 
-    // from the pool
-    if (payload.dragArea === "pool") {
-      const movedPiece = newPool[payload.dragIndex];
-      // delete the letter from the old position
-      newPool.splice(payload.dragIndex, 1);
-      // add the letter to the new position
-      if (payload.dropIndex) {
-        newPool = [
-          ...newPool.slice(0, payload.dropIndex),
-          movedPiece,
-          ...newPool.slice(payload.dropIndex, newPool.length),
-        ];
-      } else {
-        newPool = [...newPool, movedPiece];
+    let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
+
+    const allPoolIndexes = newPieces
+      .filter((i) => i.poolIndex >= 0)
+      .map((i) => i.poolIndex);
+    console.log(JSON.stringify(allPoolIndexes));
+    const maxPoolIndex = allPoolIndexes.reduce(
+      (currentMax, comparison) =>
+        currentMax > comparison ? currentMax : comparison,
+      0
+    );
+
+    // if dragging pool to pool and dropping on another piece,
+    // swap the positions of those pieces
+    if (payload.dragArea === "pool" && payload.targetPieceID) {
+      console.log(`CASE A`);
+      const oldPoolIndex = newPieces[payload.pieceID].poolIndex;
+      const newPoolIndex = newPieces[payload.targetPieceID].poolIndex;
+      newPieces[payload.pieceID].poolIndex = newPoolIndex;
+      newPieces[payload.targetPieceID].poolIndex = oldPoolIndex;
+    }
+    // if dragging pool to pool and dropping at end,
+    // move the piece to the end and downshift everything that was after
+    else if (payload.dragArea === "pool" && !payload.targetPieceID) {
+      console.log(`CASE B`);
+      console.log(`${newPieces[payload.pieceID].poolIndex} was dragged`);
+      console.log(`new will be ${maxPoolIndex}`);
+      for (let index = 0; index < newPieces.length; index++) {
+        console.log(`piece index ${newPieces[index].poolIndex}...`);
+        const piece = newPieces[index];
+        if (piece.poolIndex > newPieces[payload.pieceID].poolIndex) {
+          console.log(`was updated`);
+          piece.poolIndex = piece.poolIndex - 1;
+        }
       }
+      newPieces[payload.pieceID].poolIndex = maxPoolIndex;
+    }
+    // if dragging board to pool and dropping at end,
+    // just add the piece to the end
+    else if (payload.dragArea === "board" && !payload.targetPieceID) {
+      console.log(`CASE C`);
+      newPieces[payload.pieceID].poolIndex = allPoolIndexes.length
+        ? maxPoolIndex + 1
+        : 0;
+      newPieces[payload.pieceID].boardTop = undefined;
+      newPieces[payload.pieceID].boardLeft = undefined;
+    }
+    // if dragging board to pool and dropping on another piece,
+    // insert the piece and upshift everything after
+    else if (payload.dragArea === "board" && payload.targetPieceID) {
+      console.log(`CASE D`);
+      const newPoolIndex = newPieces[payload.targetPieceID].poolIndex;
+      for (let index = 0; index < newPieces.length; index++) {
+        const piece = newPieces[index];
+        if (piece.poolIndex >= newPoolIndex) {
+          console.log(`updating from ${piece.poolIndex}`);
+          piece.poolIndex = piece.poolIndex + 1;
+        }
+      }
+      newPieces[payload.pieceID].poolIndex = newPoolIndex;
+      newPieces[payload.pieceID].boardTop = undefined;
+      newPieces[payload.pieceID].boardLeft = undefined;
     }
 
-    // from the board
-    if (payload.dragArea === "board") {
-      const movedPiece = newBoard[payload.dragIndex].letters;
-      // delete the letter from the old position
-      newBoard.splice(payload.dragIndex, 1);
-      // add the letter to the new position
-      if (payload.dropIndex) {
-        newPool = [
-          ...newPool.slice(0, payload.dropIndex),
-          movedPiece,
-          ...newPool.slice(payload.dropIndex, newPool.length),
-        ];
-      } else {
-        newPool = [...newPool, movedPiece];
-      }
-    }
+    console.log(
+      JSON.stringify(
+        newPieces.filter((i) => i.poolIndex >= 0).map((i) => i.poolIndex)
+      )
+    );
     return {
       ...currentGameState,
-      pool: newPool,
-      board: newBoard,
+      pieces: newPieces,
     };
   }
 
-  if (payload.action === "dragOverBoard" && payload.dragArea === "board") {
-    let newBoard = [...currentGameState.board];
-    let newPool = [...currentGameState.pool];
+  if (payload.action === "dragOverBoard") {
+    let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces)); // todo not sure if this will be a deep copy/if that's ok
 
-    const draggedBoardPieceIndex = payload.dragIndex;
+    let newTop;
+    if (payload.dragArea === "pool") {
+      newTop = payload.dropRowIndex;
+    } else {
+      newTop =
+        newPieces[payload.pieceID].boardTop -
+        ((currentGameState.dragRowIndex
+          ? currentGameState.dragRowIndex
+          : payload.dragRowIndex) -
+          payload.dropRowIndex);
+    }
 
-    const newTop =
-      newBoard[draggedBoardPieceIndex].top -
-      ((currentGameState.dragRowIndex
-        ? currentGameState.dragRowIndex
-        : payload.dragRowIndex) -
-        payload.dropRowIndex);
-
-    const newLeft =
-      newBoard[draggedBoardPieceIndex].left -
-      ((currentGameState.dragColIndex
-        ? currentGameState.dragColIndex
-        : payload.dragColIndex) -
-        payload.dropColIndex);
+    let newLeft;
+    if (payload.dragArea === "pool") {
+      newLeft = payload.dropColIndex;
+    } else {
+      newLeft =
+        newPieces[payload.pieceID].boardLeft -
+        ((currentGameState.dragColIndex
+          ? currentGameState.dragColIndex
+          : payload.dragColIndex) -
+          payload.dropColIndex);
+    }
 
     // if top or left is off grid, return early
     if (newTop < 0 || newLeft < 0) {
-      console.log(
-        `early return for top left. ${newTop < 0} (${newTop}) ||  ${
-          newLeft < 0
-        } ${newLeft}`
-      );
+      console.log(`early return for top left off grid`);
       return {
         ...currentGameState,
-        dragColIndex: payload.dropColIndex,
-        dragRowIndex: payload.dropRowIndex,
       };
     }
+
     // if bottom or right would go off grid, return early
-    const letters = newBoard[draggedBoardPieceIndex].letters;
+    const letters = newPieces[payload.pieceID].letters;
     if (newTop + letters.length > currentGameState.gridSize) {
+      console.log(`early return for bottom off grid`);
       return {
         ...currentGameState,
-        dragColIndex: payload.dropColIndex,
-        dragRowIndex: payload.dropRowIndex,
       };
     }
     if (newLeft + letters[0].length > currentGameState.gridSize) {
+      console.log(`early return for right off grid`);
       return {
         ...currentGameState,
-        dragColIndex: payload.dropColIndex,
-        dragRowIndex: payload.dropRowIndex,
       };
     }
 
-    newBoard[draggedBoardPieceIndex].top = newTop;
-    newBoard[draggedBoardPieceIndex].left = newLeft;
+    newPieces[payload.pieceID].boardTop = newTop;
+    newPieces[payload.pieceID].boardLeft = newLeft;
 
     return {
       ...currentGameState,
-      board: newBoard,
-      pool: newPool,
-      dragColIndex: payload.dropColIndex,
-      dragRowIndex: payload.dropRowIndex,
-    };
-  }
-
-  if (payload.action === "dragOverBoard" && payload.dragArea === "pool") {
-    let newBoard = [...currentGameState.board];
-    let newPool = [...currentGameState.pool];
-
-    const newLetters = newPool[payload.dragIndex];
-    const newPiece = {
-      letters: newLetters,
-      top: payload.dropRowIndex,
-      left: payload.dropColIndex,
-    };
-    newBoard.push(newPiece);
-
-    return {
-      ...currentGameState,
-      board: newBoard,
+      pieces: newPieces,
       dragColIndex: payload.dropColIndex,
       dragRowIndex: payload.dropRowIndex,
     };
   }
 
   if (payload.action === "dropOnBoard") {
-    if (payload.dragArea === "pool") {
-      let newPool = [...currentGameState.pool];
-      // delete the letter from the old position in the pool
-      newPool.splice(payload.dragIndex, 1);
-      return {
-        ...currentGameState,
-        dragColIndex: undefined,
-        dragRowIndex: undefined,
-        pool: newPool,
-      };
-    } else {
-      return {
-        ...currentGameState,
-        dragColIndex: undefined,
-        dragRowIndex: undefined,
-      };
-    }
+    let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces)); // todo not sure if this will be a deep copy/if that's ok
+    newPieces[payload.pieceID].poolIndex = undefined;
+
+    return {
+      ...currentGameState,
+      dragColIndex: undefined,
+      dragRowIndex: undefined,
+      pieces: newPieces,
+    };
   }
 
   return { ...currentGameState };
 }
+
+// todo gray out pool piece when dragging
