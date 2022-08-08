@@ -10,24 +10,14 @@ export default function Board({
   pieces,
   handleBoardDragEnter,
   handleBoardDrop,
+  gridSize,
 }) {
   // const boardPieces = pieces
   const boardPieces = pieces.filter(
     (piece) => piece.boardTop >= 0 && piece.boardLeft >= 0
   );
 
-  const gridSize = 9; // todo get, and build grid smarter
-  let grid = [
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null],
-  ];
+  let grid = JSON.parse(JSON.stringify(Array(gridSize).fill(Array(gridSize).fill(""))))
 
   for (let index = 0; index < boardPieces.length; index++) {
     const letters = boardPieces[index].letters;
@@ -42,6 +32,10 @@ export default function Board({
             relativeTop: rowIndex,
             relativeLeft: colIndex,
             pieceID: id,
+            borderTop: !Boolean(letters[rowIndex - 1]?.[colIndex]),
+            borderBottom: !Boolean(letters[rowIndex + 1]?.[colIndex]),
+            borderLeft: !Boolean(letters[rowIndex][colIndex - 1]),
+            borderRight: !Boolean(letters[rowIndex][colIndex + 1]),
           }; /// todo handle the case where something already there //todo handle case where off grid
         }
         left += 1;
@@ -49,17 +43,15 @@ export default function Board({
       top += 1;
     }
   }
-
   let boardElements = [];
   for (let rowIndex = 0; rowIndex < grid.length; rowIndex++) {
     for (let colIndex = 0; colIndex < grid[rowIndex].length; colIndex++) {
       const element = grid[rowIndex][colIndex]?.letter ? (
         <div
-          className="boardLetter"
+          className={`boardLetter${grid[rowIndex][colIndex].borderTop ? " borderTop" :""}${grid[rowIndex][colIndex].borderBottom ? " borderBottom" :""}${grid[rowIndex][colIndex].borderLeft ? " borderLeft" :""}${grid[rowIndex][colIndex].borderRight ? " borderRight" :""}`}
           key={`${rowIndex}-${colIndex}`}
           draggable
           onDragStart={(event) => {
-            // console.log("1! onDragStart board letter");
             dragToken({
               event: event,
               letter: grid[rowIndex][colIndex]?.letter,
@@ -73,11 +65,9 @@ export default function Board({
             });
           }}
           onDrop={(event) => {
-            // console.log("3b! onDrop board letter");
             handleBoardDrop({ event: event });
           }}
           onDragEnter={(event) => {
-            // console.log("2! onDragEnter board letter");
             handleBoardDragEnter({
               event: event,
               rowIndex: rowIndex,
@@ -86,24 +76,10 @@ export default function Board({
           }}
           onDragEnd={(event) => {
             event.preventDefault();
-            // console.log("3a onDragEnd board letter");
           }}
-          // onDragEnter={(event)=> {
-          //   event.preventDefault();
-          // console.log("2 onDragEnter board letter");
-          // }}
           onDragOver={(event) => {
             event.preventDefault();
-            // console.log("onDragOver board letter");
           }}
-          // onDragStart={(event)=> {
-          //   // event.preventDefault();
-          // console.log("1 onDragStart board letter");
-          // }}
-          // onDrop={(event)=> {
-          //   event.preventDefault();
-          // console.log("3b onDrop board letter");
-          // }}
         >
           {grid[rowIndex][colIndex]?.letter}
         </div>
@@ -111,16 +87,10 @@ export default function Board({
         <div
           className="boardLetter"
           key={`${rowIndex}-${colIndex}`}
-          // onDragOver={(event) => {
-          //   event.preventDefault();
-          // }}
           onDrop={(event) => {
-            // console.log("3b! onDrop board empty");
             handleBoardDrop({ event: event });
           }}
-          // onDragEnd={()=> console.log("ondragend board b")}
           onDragEnter={(event) => {
-            // console.log("2! onDragEnter board empty");
             handleBoardDragEnter({
               event: event,
               rowIndex: rowIndex,
@@ -129,24 +99,12 @@ export default function Board({
           }}
           onDragEnd={(event) => {
             event.preventDefault();
-            // console.log("3a onDragEnd board empty");
           }}
-          // onDragEnter={(event)=> {
-          //   event.preventDefault();
-          // console.log("2 onDragEnter board empty");
-          // }}
           onDragOver={(event) => {
             event.preventDefault();
-            // console.log("onDragOver board empty");
           }}
           onDragStart={(event) => {
-            // event.preventDefault();
-            // console.log("1 onDragStart board empty");
           }}
-          // onDrop={(event)=> {
-          //   event.preventDefault();
-          // console.log("3b onDrop board empty");
-          // }}
         >
           {""}
         </div>

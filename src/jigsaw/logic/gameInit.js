@@ -2,16 +2,15 @@ import { generateGrid } from "./generateGrid";
 import { partitionArray } from "../../common/partitionArray";
 import { shuffleArray } from "../../common/shuffleArray";
 
-function getPiecesFromBoard(grid) {
+function getPiecesFromBoard(grid, pieceSize) {
   console.log(JSON.stringify(grid))
-  // break the board into 3x3 subgrids
-  const partitionSize = 3;
-  const partitionedRows = grid.map((row) => partitionArray(row, partitionSize));
+  // break the board into subgrids
+  const partitionedRows = grid.map((row) => partitionArray(row, pieceSize));
   let pieces = [];
   for (
     let startRow = 0;
-    startRow <= partitionedRows.length - partitionSize;
-    startRow = startRow + partitionSize
+    startRow <= partitionedRows.length - pieceSize;
+    startRow = startRow + pieceSize
   ) {
     for (
       let colIndex = 0;
@@ -21,7 +20,7 @@ function getPiecesFromBoard(grid) {
       let piece = [];
       for (
         let rowIndex = startRow;
-        rowIndex < startRow + partitionSize;
+        rowIndex < startRow + pieceSize;
         rowIndex++
       ) {
         piece.push(partitionedRows[rowIndex][colIndex]);
@@ -54,8 +53,9 @@ export function gameInit({ useSaved, sortBy }) {
   //   return savedState;
   // }
 
-  const gridSize = 9;
-  const minLetters = 20;
+  const gridSize = 12;
+  let pieceSize = 3;
+  const minLetters = 40;
   const minWordLength = 4;
   const maxWordLength = 7;
   const grid = generateGrid({
@@ -65,7 +65,7 @@ export function gameInit({ useSaved, sortBy }) {
     maxWordLength: maxWordLength,
   });
 
-  const pieces = getPiecesFromBoard(grid);
+  const pieces = getPiecesFromBoard(grid, pieceSize);
 
   const pieceData = pieces.map((piece, index) => ({
     letters: piece,
@@ -75,76 +75,27 @@ export function gameInit({ useSaved, sortBy }) {
     poolIndex: index,
   }));
 
+  // let pieceData = []
+  // let currentTop = gridSize - pieceSize;
+  // let currentLeft = gridSize - pieceSize;
+  // for (let pieceIndex = 0; pieceIndex < pieces.length; pieceIndex++) {
+  //   const piece = {
+  //     letters: pieces[pieceIndex],
+  //     id: pieceIndex,
+  //     boardTop: currentTop,
+  //     boardLeft: currentLeft,
+  //   }
+  //   pieceData.push(piece)
+  //   if (currentLeft === 0) {
+  //     currentLeft = gridSize - pieceSize;
+  //     currentTop = currentTop - pieceSize
+  //   } else {
+  //     currentLeft = currentLeft - pieceSize
+  //   }
+  // }
+
   //todo trim off excess whitespace row/col on edge
   return {
-    // pieces: [
-    //   {
-    //     id: 0,
-    //     letters: [
-    //       ["Z", "Z", ""],
-    //       ["", "", ""],
-    //       ["", "", ""],
-    //     ],
-    //     boardTop: 3,
-    //     boardLeft: 3,
-    //     poolIndex: undefined,
-    //   },
-    //   {
-    //     id: 1,
-    //     letters: [
-    //       ["A", "", ""],
-    //       ["", "A", ""],
-    //       ["", "A", "A"],
-    //     ],
-    //     boardTop: 0,
-    //     boardLeft: 0,
-    //     poolIndex: undefined,
-    //   },
-    //   {
-    //     id: 2,
-    //     letters: [
-    //       ["", "", ""],
-    //       ["", "B", ""],
-    //       ["", "B", ""],
-    //     ],
-    //     boardTop: 0,
-    //     boardLeft: 4,
-    //     poolIndex: undefined,
-    //   },
-    //   {
-    //     id: 3,
-    //     letters: [
-    //       ["C", "", ""],
-    //       ["", "C", "C"],
-    //       ["", "C", ""],
-    //     ],
-    //     boardTop: undefined,
-    //     boardLeft: undefined,
-    //     poolIndex: 0,
-    //   },
-    //   {
-    //     id: 4,
-    //     letters: [
-    //       ["D", "D", ""],
-    //       ["", "D", "D"],
-    //       ["", "", ""],
-    //     ],
-    //     boardTop: undefined,
-    //     boardLeft: undefined,
-    //     poolIndex: 1,
-    //   },
-    //   {
-    //     id: 5,
-    //     letters: [
-    //       ["E", "E", ""],
-    //       ["", "E", ""],
-    //       ["", "E", "E"],
-    //     ],
-    //     boardTop: undefined,
-    //     boardLeft: undefined,
-    //     poolIndex: 2,
-    //   },
-    // ],
     pieces: pieceData,
     sortBy: sortBy,
     gridSize: gridSize, // todo any way to derive?

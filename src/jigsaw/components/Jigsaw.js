@@ -106,6 +106,7 @@ function Jigsaw({ setCurrentDisplay }) {
         pieces={gameState.pieces}
         handleBoardDragEnter={handleBoardDragEnter}
         handleBoardDrop={handleBoardDrop}
+        gridSize={gameState.gridSize}
       ></Board>
       <Pool pieces={gameState.pieces} dropOnPool={dropOnPool}></Pool>
 
