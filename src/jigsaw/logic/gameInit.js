@@ -3,14 +3,14 @@ import { partitionArray } from "../../common/partitionArray";
 import { shuffleArray } from "../../common/shuffleArray";
 
 function getPiecesFromBoard(grid) {
+  console.log(JSON.stringify(grid))
   // break the board into 3x3 subgrids
   const partitionSize = 3;
   const partitionedRows = grid.map((row) => partitionArray(row, partitionSize));
-
   let pieces = [];
   for (
     let startRow = 0;
-    startRow < partitionedRows.length - partitionSize;
+    startRow <= partitionedRows.length - partitionSize;
     startRow = startRow + partitionSize
   ) {
     for (
@@ -32,7 +32,7 @@ function getPiecesFromBoard(grid) {
       }
     }
   }
-
+  console.log(`${grid.flatMap(i=>i).join("").length} - ${pieces.flatMap(i=>i.flatMap(i=>i)).join("").length}`)
   return shuffleArray(pieces);
 }
 

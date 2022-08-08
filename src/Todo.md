@@ -21,6 +21,21 @@
 - rename to "spatial" if want to keep crossle for jigsaw?
 - add islands or irregular boundary option?
 
+## Jigsaw
+
+- game over logic (can use crossle logic)
+- add border (or color?) to pieces, remove border from grid
+- pool should not collapse when empty
+- will scrolling on pool work?
+- show when letters overlapped
+
+- make work horizontal and with resize/rotate during play
+- icon
+
+- allow to lock/unlock piece
+- piece rotation
+- center pieces in pool to make less obvious that 3x3?
+
 ## Gribbles
 
 ## Thirdle
