@@ -42,6 +42,10 @@ function Piece({ letters, pieceID }) {
     <div
       className="poolPiece"
       key={pieceID}
+      style={{
+        "--numRows": `${letters.length}`,
+        "--numCols": `${letters[0].length}`,
+      }}
       draggable="true"
       data-piece-id={pieceID}
       onDragStart={(event) => {

@@ -263,6 +263,10 @@ a {
   background-image: url("./images/crossle.svg");
 }
 
+#jigsaw_icon {
+  background-color: rgb(38 36 129) !important;
+  border: 0 !important;
+}
 /* Gribbles-specific */
 
 #gribbles {
@@ -737,8 +741,8 @@ a {
   display: grid;
   touch-action: none;
   justify-content: center;
-  grid-template-columns: repeat(9, 8vmin);
-  grid-template-rows: repeat(9, 8vmin);
+  grid-template-columns: repeat(12, 8vmin);
+  grid-template-rows: repeat(12, 8vmin);
   width: fit-content;
   height: fit-content;
   justify-self: center;
@@ -749,11 +753,27 @@ a {
 }
 
 #jigsaw .boardLetter {
-  border: 0.5px solid rgb(239 239 239);
+  /* border: 0.5px solid rgb(239 239 239); */
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--default-font-size);
+}
+
+#jigsaw .borderTop {
+  border-top: 0.5px solid rgb(239 239 239);
+}
+
+#jigsaw .borderLeft {
+  border-left: 0.5px solid rgb(239 239 239);
+}
+
+#jigsaw .borderRight {
+  border-right: 0.5px solid rgb(239 239 239);
+}
+
+#jigsaw .borderBottom {
+  border-bottom: 0.5px solid rgb(239 239 239);
 }
 
 #jigsaw #pool {
@@ -765,14 +785,24 @@ a {
   overflow: scroll;
   flex-direction: row;
   border: 1px solid rgb(239 239 239);
+  min-height: 30vmin;
+}
+
+#jigsaw .poolPiece {
+  display: grid;
+  grid-template-columns: repeat(var(--numCols), 8vmin);
+  grid-template-rows: repeat(var(--numRows), 8vmin);
+  justify-content: center;
+  font-size: var(--default-font-size);
+  width: fit-content;
+  height: fit-content;
+  margin: 3vmin;
 }
 
 #jigsaw .poolLetter {
-  display: grid;
-  grid-template-columns: repeat(3, 8vmin);
-  grid-template-rows: repeat(3, 8vmin);
-  justify-content: center;
+  display: flex;
   align-items: center;
+  justify-content: center;
   font-size: var(--default-font-size);
 }
 
