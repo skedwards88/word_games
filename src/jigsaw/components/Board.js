@@ -17,7 +17,9 @@ export default function Board({
     (piece) => piece.boardTop >= 0 && piece.boardLeft >= 0
   );
 
-  let grid = JSON.parse(JSON.stringify(Array(gridSize).fill(Array(gridSize).fill(""))))
+  let grid = JSON.parse(
+    JSON.stringify(Array(gridSize).fill(Array(gridSize).fill("")))
+  );
 
   for (let index = 0; index < boardPieces.length; index++) {
     const letters = boardPieces[index].letters;
@@ -48,7 +50,11 @@ export default function Board({
     for (let colIndex = 0; colIndex < grid[rowIndex].length; colIndex++) {
       const element = grid[rowIndex][colIndex]?.letter ? (
         <div
-          className={`boardLetter${grid[rowIndex][colIndex].borderTop ? " borderTop" :""}${grid[rowIndex][colIndex].borderBottom ? " borderBottom" :""}${grid[rowIndex][colIndex].borderLeft ? " borderLeft" :""}${grid[rowIndex][colIndex].borderRight ? " borderRight" :""}`}
+          className={`boardLetter${
+            grid[rowIndex][colIndex].borderTop ? " borderTop" : ""
+          }${grid[rowIndex][colIndex].borderBottom ? " borderBottom" : ""}${
+            grid[rowIndex][colIndex].borderLeft ? " borderLeft" : ""
+          }${grid[rowIndex][colIndex].borderRight ? " borderRight" : ""}`}
           key={`${rowIndex}-${colIndex}`}
           draggable
           onDragStart={(event) => {
@@ -103,8 +109,7 @@ export default function Board({
           onDragOver={(event) => {
             event.preventDefault();
           }}
-          onDragStart={(event) => {
-          }}
+          onDragStart={(event) => {}}
         >
           {""}
         </div>
