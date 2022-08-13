@@ -11,7 +11,7 @@ import { gameIndex } from "./gameIndex";
 import packageJson from "../package.json";
 
 function App() {
-  const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.Jigsaw);
+  const [currentDisplay, setCurrentDisplay] = React.useState(gameIndex.Home);
 
   function Home() {
     return (
