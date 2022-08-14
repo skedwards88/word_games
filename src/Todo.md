@@ -23,13 +23,7 @@
 
 ## Jigsaw
 
-- make dragging more error proof for state getting out of sync
-- handle case where drag off pool but get early return from board...piece disappears
-- show when letters overlapped
-- gray out pool piece when dragging
-- make scrolling work
 - game over logic (can use crossle logic)
-- will scrolling on pool work?
 - eliminate space between board and pool/make board fit free space
 - separate unjoined pieces. or maybe make a different way to make pieces.
 - tests

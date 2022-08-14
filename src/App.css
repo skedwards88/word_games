@@ -749,15 +749,17 @@ a {
   color: rgb(239 239 239);
   border: 1px solid rgb(239 239 239);
   margin: 3vmin 0 0;
-
 }
 
 #jigsaw .boardLetter {
-  /* border: 0.5px solid rgb(239 239 239); */
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--default-font-size);
+}
+
+#jigsaw .boardLetter.overlapping {
+  color: rgb(226 88 88);
 }
 
 #jigsaw .borderTop {

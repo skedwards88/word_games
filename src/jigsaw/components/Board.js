@@ -28,6 +28,7 @@ export default function Board({
       let left = boardPieces[index].boardLeft;
       for (let colIndex = 0; colIndex < letters[rowIndex].length; colIndex++) {
         if (letters[rowIndex][colIndex]) {
+          const overlapping = Boolean(grid[top][left].letter);
           grid[top][left] = {
             letter: letters[rowIndex][colIndex],
             relativeTop: rowIndex,
@@ -37,7 +38,8 @@ export default function Board({
             borderBottom: !Boolean(letters[rowIndex + 1]?.[colIndex]),
             borderLeft: !Boolean(letters[rowIndex][colIndex - 1]),
             borderRight: !Boolean(letters[rowIndex][colIndex + 1]),
-          }; /// todo handle the case where something already there //todo handle case where off grid
+            overlapping: overlapping,
+          };
         }
         left += 1;
       }
@@ -53,7 +55,7 @@ export default function Board({
             grid[rowIndex][colIndex].borderTop ? " borderTop" : ""
           }${grid[rowIndex][colIndex].borderBottom ? " borderBottom" : ""}${
             grid[rowIndex][colIndex].borderLeft ? " borderLeft" : ""
-          }${grid[rowIndex][colIndex].borderRight ? " borderRight" : ""}`}
+          }${grid[rowIndex][colIndex].borderRight ? " borderRight" : ""}${grid[rowIndex][colIndex].overlapping ? " overlapping" : ""}`}
           key={`${rowIndex}-${colIndex}`}
           draggable
           onDragStart={(event) => {
