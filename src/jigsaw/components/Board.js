@@ -1,5 +1,4 @@
 import React from "react";
-import { dragToken } from "./Jigsaw";
 import { polyfill } from "mobile-drag-drop";
 
 polyfill({
@@ -11,6 +10,7 @@ export default function Board({
   handleBoardDragEnter,
   handleBoardDrop,
   gridSize,
+  dragToken,
 }) {
   const boardPieces = pieces.filter(
     (piece) => piece.boardTop >= 0 && piece.boardLeft >= 0
@@ -69,7 +69,10 @@ export default function Board({
           }}
           onDrop={(event) => {
             event.preventDefault();
-            handleBoardDrop({ event: event });
+            handleBoardDrop({ event: event,
+              rowIndex: rowIndex,
+              colIndex: colIndex,
+ });
           }}
           onDragEnter={(event) => {
             event.preventDefault();
@@ -95,7 +98,10 @@ export default function Board({
           onDrop={(event) => {
             event.preventDefault();
 
-            handleBoardDrop({ event: event });
+            handleBoardDrop({ event: event,
+              rowIndex: rowIndex,
+              colIndex: colIndex,
+ });
           }}
           onDragEnter={(event) => {
             event.preventDefault();

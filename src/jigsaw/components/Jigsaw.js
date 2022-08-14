@@ -8,40 +8,6 @@ import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
 import { gameReducer } from "../logic/gameReducer";
 
-export function newDrag({event, pieceID}) {
-  event.dataTransfer.setDragImage(document.createElement("img"), 0, 0);
-  event.dataTransfer.setData("pieceID", `${pieceID}`);
-
-}
-
-export function dragToken({
-  event,
-  dragArea,
-  pieceID,
-  relativeTop,
-  relativeLeft,
-}) {
-  console.log("drag board");
-
-  event.dataTransfer.setDragImage(document.createElement("img"), 0, 0);
-  event.dataTransfer.setData("dragArea", dragArea);
-  event.dataTransfer.setData("pieceID", `${pieceID}`);
-  event.dataTransfer.setData("relativeTop", relativeTop);
-  event.dataTransfer.setData("relativeLeft", relativeLeft);
-}
-
-export function dragPoolToken({ event, pieceID, dragArea,
-  relativeTop,
-  relativeLeft, }) {
-    console.log('drag pool')
-  event.dataTransfer.setDragImage(document.createElement("img"), 0, 0);
-  event.dataTransfer.setData("pieceID", `${pieceID}`);
-  event.dataTransfer.setData("dragArea", dragArea);
-  event.dataTransfer.setData("relativeTop", relativeTop);
-  event.dataTransfer.setData("relativeLeft", relativeLeft);
-
-}
-
 function Jigsaw({ setCurrentDisplay }) {
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
@@ -53,49 +19,54 @@ function Jigsaw({ setCurrentDisplay }) {
     window.localStorage.setItem("jigsawState", JSON.stringify(gameState));
   }, [gameState]);
 
+  function dragToken({
+    event,
+    dragArea,
+    pieceID,
+    relativeTop,
+    relativeLeft,
+  }) {
+    console.log("drag token");
+    event.dataTransfer.setDragImage(document.createElement("img"), 0, 0);
+
+    dispatchGameState({
+      action: "startDrag",
+      pieceID: pieceID,
+      dragArea: dragArea,
+      relativeTop: relativeTop,
+      relativeLeft: relativeLeft,
+    });
+  }
+
   function dropOnPool({ event }) {
     event.preventDefault();
     console.log("drop on pool");
-    const pieceID = event.dataTransfer.getData("pieceID");
-    const dragArea = event.dataTransfer.getData("dragArea");
     const targetPieceID = event.target.getAttribute("data-piece-id");
 
     dispatchGameState({
       action: "dropOnPool",
-      pieceID: pieceID,
-      dragArea: dragArea,
       targetPieceID: targetPieceID,
     });
   }
 
-  function handleBoardDrop({ event }) {
-    console.log("drop on board");
-
+  function handleBoardDrop({ event, rowIndex, colIndex }) {
     event.preventDefault();
-    const dragArea = event.dataTransfer.t.data.dragArea;
-    const pieceID = event.dataTransfer.t.data.pieceID;
+    console.log("drop on board");
 
     dispatchGameState({
       action: "dropOnBoard",
-      dragArea: dragArea,
-      pieceID: pieceID,
+      dropRowIndex: rowIndex,
+      dropColIndex: colIndex,
     });
   }
 
   function handlePoolDragEnter({event}) {
     console.log('drag pool enter')
     event.preventDefault();
-    const pieceID = event.dataTransfer.t.data.pieceID;
-    const dragArea = event.dataTransfer.t.data.dragArea;
-
-    // const pieceID = event.dataTransfer.getData("pieceID");
-    // const dragArea = event.dataTransfer.getData("dragArea");
     const targetPieceID = event.target.getAttribute("data-piece-id");
 
     dispatchGameState({
-      action: "dropOnPool",
-      pieceID: pieceID,
-      dragArea: dragArea,
+      action: "dropOverPool",
       targetPieceID: targetPieceID,
     });
   }
@@ -103,20 +74,11 @@ function Jigsaw({ setCurrentDisplay }) {
   function handleBoardDragEnter({ event, rowIndex, colIndex }) {
     console.log('drag board enter')
     event.preventDefault();
-    console.log(event.dataTransfer.types)
-    const pieceID = event.dataTransfer.t.data.pieceID;
-    const relativeTop = event.dataTransfer.t.data.relativeTop;
-    const relativeLeft = event.dataTransfer.t.data.relativeLeft;
-    const dragArea = event.dataTransfer.t.data.dragArea;
 
     dispatchGameState({
       action: "dragOverBoard",
-      pieceID: pieceID,
-      relativeTop: relativeTop,
-      relativeLeft: relativeLeft,
       dropRowIndex: rowIndex,
       dropColIndex: colIndex,
-      dragArea: dragArea,
     });
   }
 
@@ -127,8 +89,9 @@ function Jigsaw({ setCurrentDisplay }) {
         handleBoardDragEnter={handleBoardDragEnter}
         handleBoardDrop={handleBoardDrop}
         gridSize={gameState.gridSize}
+        dragToken={dragToken}
       ></Board>
-      <Pool pieces={gameState.pieces} dropOnPool={dropOnPool} handlePoolDragEnter={handlePoolDragEnter}></Pool>
+      <Pool pieces={gameState.pieces} dropOnPool={dropOnPool} handlePoolDragEnter={handlePoolDragEnter} dragToken={dragToken}></Pool>
 
       <div id="controls">
         <button

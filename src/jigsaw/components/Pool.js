@@ -1,12 +1,11 @@
 import React from "react";
-import { dragPoolToken } from "./Jigsaw";
 import { polyfill } from "mobile-drag-drop";
 
 polyfill({
   dragImageCenterOnTouch: true,
 });
 
-function Letter({pieceID, rowIndex, colIndex, letters}) {
+function Letter({pieceID, rowIndex, colIndex, letters, dragToken}) {
   let className = "poolLetter";
   if (letters[rowIndex][colIndex]) {
     if (!letters[rowIndex - 1]?.[colIndex]) {
@@ -28,7 +27,7 @@ function Letter({pieceID, rowIndex, colIndex, letters}) {
   className={className}
   draggable="true"
   onDragStart={(event) => {
-    dragPoolToken({
+    dragToken({
       event: event,
       pieceID: pieceID,
       dragArea: "pool",
@@ -54,11 +53,11 @@ function Letter({pieceID, rowIndex, colIndex, letters}) {
 </div>
 }
 
-function Piece({ letters, pieceID, handlePoolDragEnter }) {
+function Piece({ letters, pieceID, handlePoolDragEnter, dragToken }) {
   let letterElements = [];
   for (let rowIndex = 0; rowIndex < letters.length; rowIndex++) {
     for (let colIndex = 0; colIndex < letters[rowIndex].length; colIndex++) {
-      letterElements.push(<Letter pieceID={pieceID} rowIndex={rowIndex} colIndex={colIndex} letters={letters} key={`${pieceID}-${rowIndex}-${colIndex}`}></Letter>)
+      letterElements.push(<Letter pieceID={pieceID} rowIndex={rowIndex} colIndex={colIndex} letters={letters} key={`${pieceID}-${rowIndex}-${colIndex}`} dragToken={dragToken}></Letter>)
     }
   }
   return (
@@ -90,12 +89,12 @@ function Piece({ letters, pieceID, handlePoolDragEnter }) {
   );
 }
 
-export default function Pool({ pieces, dropOnPool, handlePoolDragEnter }) {
+export default function Pool({ pieces, dropOnPool, handlePoolDragEnter, dragToken }) {
   const poolPieces = pieces.filter((piece) => piece.poolIndex >= 0);
   poolPieces.sort((a, b) => a.poolIndex - b.poolIndex);
 
   const pieceElements = poolPieces.map((piece) =>
-    <Piece letters={piece.letters} pieceID={piece.id} handlePoolDragEnter={handlePoolDragEnter} key={piece.id}></Piece>
+    <Piece letters={piece.letters} pieceID={piece.id} handlePoolDragEnter={handlePoolDragEnter} key={piece.id} dragToken={dragToken}></Piece>
   );
 
   return (
