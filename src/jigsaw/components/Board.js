@@ -57,7 +57,6 @@ export default function Board({
           key={`${rowIndex}-${colIndex}`}
           draggable
           onDragStart={(event) => {
-
             dragToken({
               event: event,
               dragArea: "board",
@@ -69,10 +68,11 @@ export default function Board({
           }}
           onDrop={(event) => {
             event.preventDefault();
-            handleBoardDrop({ event: event,
+            handleBoardDrop({
+              event: event,
               rowIndex: rowIndex,
               colIndex: colIndex,
- });
+            });
           }}
           onDragEnter={(event) => {
             event.preventDefault();
@@ -98,10 +98,11 @@ export default function Board({
           onDrop={(event) => {
             event.preventDefault();
 
-            handleBoardDrop({ event: event,
+            handleBoardDrop({
+              event: event,
               rowIndex: rowIndex,
               colIndex: colIndex,
- });
+            });
           }}
           onDragEnter={(event) => {
             event.preventDefault();

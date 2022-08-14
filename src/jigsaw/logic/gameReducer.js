@@ -1,6 +1,6 @@
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "startDrag") {
-    console.log(`setting drag data as ${JSON.stringify(payload)}`)
+    console.log(`setting drag data as ${JSON.stringify(payload)}`);
 
     return {
       ...currentGameState,
@@ -8,14 +8,14 @@ export function gameReducer(currentGameState, payload) {
         pieceID: payload.pieceID,
         dragArea: payload.dragArea,
         relativeTop: payload.relativeTop,
-        relativeLeft: payload.relativeLeft  
-      }
-    }
+        relativeLeft: payload.relativeLeft,
+      },
+    };
   }
 
   if (payload.action === "dropOnPool" || payload.action === "dropOverPool") {
     const dragData = currentGameState.dragData;
-    console.log(JSON.stringify(dragData))
+    console.log(JSON.stringify(dragData));
 
     let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
     const allPoolIndexes = newPieces
@@ -115,10 +115,9 @@ export function gameReducer(currentGameState, payload) {
       ...currentGameState,
       pieces: newPieces,
       dragData: payload.action === "dropOnBoard" ? {} : dragData,
-
     };
   }
-  
+
   // if (payload.action === "dropOnBoard") {
   //   let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
   //   const dragData = currentGameState.dragData;

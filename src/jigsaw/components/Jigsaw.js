@@ -19,13 +19,7 @@ function Jigsaw({ setCurrentDisplay }) {
     window.localStorage.setItem("jigsawState", JSON.stringify(gameState));
   }, [gameState]);
 
-  function dragToken({
-    event,
-    dragArea,
-    pieceID,
-    relativeTop,
-    relativeLeft,
-  }) {
+  function dragToken({ event, dragArea, pieceID, relativeTop, relativeLeft }) {
     console.log("drag token");
     event.dataTransfer.setDragImage(document.createElement("img"), 0, 0);
 
@@ -66,8 +60,8 @@ function Jigsaw({ setCurrentDisplay }) {
     });
   }
 
-  function handlePoolDragEnter({event}) {
-    console.log('drag pool enter')
+  function handlePoolDragEnter({ event }) {
+    console.log("drag pool enter");
     event.preventDefault();
     const targetPieceID = event.target.getAttribute("data-piece-id");
 
@@ -78,7 +72,7 @@ function Jigsaw({ setCurrentDisplay }) {
   }
 
   function handleBoardDragEnter({ event, rowIndex, colIndex }) {
-    console.log('drag board enter')
+    console.log("drag board enter");
     event.preventDefault();
 
     dispatchGameState({
@@ -97,7 +91,12 @@ function Jigsaw({ setCurrentDisplay }) {
         gridSize={gameState.gridSize}
         dragToken={dragToken}
       ></Board>
-      <Pool pieces={gameState.pieces} dropOnPool={dropOnPool} handlePoolDragEnter={handlePoolDragEnter} dragToken={dragToken}></Pool>
+      <Pool
+        pieces={gameState.pieces}
+        dropOnPool={dropOnPool}
+        handlePoolDragEnter={handlePoolDragEnter}
+        dragToken={dragToken}
+      ></Pool>
 
       <div id="controls">
         <button
