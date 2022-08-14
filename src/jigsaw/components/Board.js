@@ -12,7 +12,6 @@ export default function Board({
   handleBoardDrop,
   gridSize,
 }) {
-  // const boardPieces = pieces
   const boardPieces = pieces.filter(
     (piece) => piece.boardTop >= 0 && piece.boardLeft >= 0
   );
@@ -58,11 +57,9 @@ export default function Board({
           key={`${rowIndex}-${colIndex}`}
           draggable
           onDragStart={(event) => {
+
             dragToken({
               event: event,
-              letter: grid[rowIndex][colIndex]?.letter,
-              rowIndex: rowIndex,
-              colIndex: colIndex,
               dragArea: "board",
 
               pieceID: grid[rowIndex][colIndex]?.pieceID,
@@ -71,9 +68,11 @@ export default function Board({
             });
           }}
           onDrop={(event) => {
+            event.preventDefault();
             handleBoardDrop({ event: event });
           }}
           onDragEnter={(event) => {
+            event.preventDefault();
             handleBoardDragEnter({
               event: event,
               rowIndex: rowIndex,
@@ -94,9 +93,13 @@ export default function Board({
           className="boardLetter"
           key={`${rowIndex}-${colIndex}`}
           onDrop={(event) => {
+            event.preventDefault();
+
             handleBoardDrop({ event: event });
           }}
           onDragEnter={(event) => {
+            event.preventDefault();
+
             handleBoardDragEnter({
               event: event,
               rowIndex: rowIndex,

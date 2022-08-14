@@ -6,59 +6,76 @@ polyfill({
   dragImageCenterOnTouch: true,
 });
 
-function Piece({ letters, pieceID }) {
+function Letter({pieceID, rowIndex, colIndex, letters}) {
+  let className = "poolLetter";
+  if (letters[rowIndex][colIndex]) {
+    if (!letters[rowIndex - 1]?.[colIndex]) {
+      className = `${className} borderTop`;
+    }
+    if (!letters[rowIndex + 1]?.[colIndex]) {
+      className = `${className} borderBottom`;
+    }
+    if (!letters[rowIndex][colIndex - 1]) {
+      className = `${className} borderLeft`;
+    }
+    if (!letters[rowIndex][colIndex + 1]) {
+      className = `${className} borderRight`;
+    }
+  }
+
+  return <div
+  data-piece-id={pieceID}
+  className={className}
+  draggable="true"
+  onDragStart={(event) => {
+    dragPoolToken({
+      event: event,
+      pieceID: pieceID,
+      dragArea: "pool",
+      relativeTop: rowIndex,
+      relativeLeft: colIndex,  
+    });
+  }}
+
+  onDragEnd={(event) => {
+    event.preventDefault();
+  }}
+  onDragEnter={(event) => {
+    event.preventDefault();
+  }}
+  onDragOver={(event) => {
+    event.preventDefault();
+  }}
+  onDrop={(event) => {
+    event.preventDefault();
+  }}
+>
+  {letters[rowIndex][colIndex]}
+</div>
+}
+
+function Piece({ letters, pieceID, handlePoolDragEnter }) {
   let letterElements = [];
   for (let rowIndex = 0; rowIndex < letters.length; rowIndex++) {
     for (let colIndex = 0; colIndex < letters[rowIndex].length; colIndex++) {
-      let className = "poolLetter";
-      if (letters[rowIndex][colIndex]) {
-        if (!letters[rowIndex - 1]?.[colIndex]) {
-          className = `${className} borderTop`;
-        }
-        if (!letters[rowIndex + 1]?.[colIndex]) {
-          className = `${className} borderBottom`;
-        }
-        if (!letters[rowIndex][colIndex - 1]) {
-          className = `${className} borderLeft`;
-        }
-        if (!letters[rowIndex][colIndex + 1]) {
-          className = `${className} borderRight`;
-        }
-      }
-      const letterElement = (
-        <div
-          key={`${pieceID}-${rowIndex}-${colIndex}`}
-          data-piece-id={pieceID}
-          className={className}
-        >
-          {letters[rowIndex][colIndex]}
-        </div>
-      );
-      letterElements.push(letterElement);
+      letterElements.push(<Letter pieceID={pieceID} rowIndex={rowIndex} colIndex={colIndex} letters={letters} key={`${pieceID}-${rowIndex}-${colIndex}`}></Letter>)
     }
   }
   return (
     <div
       className="poolPiece"
-      key={pieceID}
       style={{
         "--numRows": `${letters.length}`,
         "--numCols": `${letters[0].length}`,
       }}
-      draggable="true"
       data-piece-id={pieceID}
-      onDragStart={(event) => {
-        dragPoolToken({
+
+      onDragEnter={(event) => {
+        handlePoolDragEnter({
           event: event,
-          letter: letters,
-          pieceID: pieceID,
-          dragArea: "pool",
         });
       }}
       onDragEnd={(event) => {
-        event.preventDefault();
-      }}
-      onDragEnter={(event) => {
         event.preventDefault();
       }}
       onDragOver={(event) => {
@@ -73,18 +90,19 @@ function Piece({ letters, pieceID }) {
   );
 }
 
-export default function Pool({ pieces, dropOnPool }) {
-  const poolPieces = pieces.filter((piece) => piece.poolIndex >= 0); //todo order by index
+export default function Pool({ pieces, dropOnPool, handlePoolDragEnter }) {
+  const poolPieces = pieces.filter((piece) => piece.poolIndex >= 0);
   poolPieces.sort((a, b) => a.poolIndex - b.poolIndex);
 
   const pieceElements = poolPieces.map((piece) =>
-    Piece({ letters: piece.letters, pieceID: piece.id })
+    <Piece letters={piece.letters} pieceID={piece.id} handlePoolDragEnter={handlePoolDragEnter} key={piece.id}></Piece>
   );
 
   return (
     <div
       id="pool"
       onDrop={(event) => {
+        event.preventDefault();
         dropOnPool({ event: event });
       }}
       onDragEnd={(event) => {
