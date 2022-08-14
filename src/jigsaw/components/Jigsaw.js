@@ -29,6 +29,10 @@ function Jigsaw({ setCurrentDisplay }) {
     console.log("drag token");
     event.dataTransfer.setDragImage(document.createElement("img"), 0, 0);
 
+    if (dragArea === "pool") {
+      event.target.parentElement.classList.add("dragging");
+    }
+
     dispatchGameState({
       action: "startDrag",
       pieceID: pieceID,
@@ -42,6 +46,7 @@ function Jigsaw({ setCurrentDisplay }) {
     event.preventDefault();
     console.log("drop on pool");
     const targetPieceID = event.target.getAttribute("data-piece-id");
+    event.target.classList.remove("dragging");
 
     dispatchGameState({
       action: "dropOnPool",
@@ -52,6 +57,7 @@ function Jigsaw({ setCurrentDisplay }) {
   function handleBoardDrop({ event, rowIndex, colIndex }) {
     event.preventDefault();
     console.log("drop on board");
+    event.target.classList.remove("dragging");
 
     dispatchGameState({
       action: "dropOnBoard",
