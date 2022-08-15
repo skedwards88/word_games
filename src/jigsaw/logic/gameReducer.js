@@ -1,6 +1,5 @@
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "startDrag") {
-    console.log(`setting drag data as ${JSON.stringify(payload)}`);
 
     return {
       ...currentGameState,
@@ -15,7 +14,6 @@ export function gameReducer(currentGameState, payload) {
 
   if (payload.action === "dropOnPool" || payload.action === "dropOverPool") {
     const dragData = currentGameState.dragData;
-    console.log(JSON.stringify(dragData));
 
     let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
     const allPoolIndexes = newPieces

@@ -1,5 +1,4 @@
-import { isKnown } from "../../common/isKnown";
-import { partitionArray } from "../../common/partitionArray";
+import { isKnown } from "./isKnown";
 
 function getSurroundingLetterIndexes({
   startingIndex,
@@ -77,8 +76,7 @@ function isSingleGroupingQ(grid) {
   return numLetters === connectedIndexes.length;
 }
 
-export function gameSolvedQ({ board }) {
-  const grid = partitionArray(board, Math.sqrt(board.length));
+export function crosswordValidQ({ grid }) {
 
   const isSingleGrouping = isSingleGroupingQ(grid);
   if (!isSingleGrouping) {

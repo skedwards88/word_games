@@ -36,6 +36,7 @@
   - more or fewer pieces
   - rotation
 - icon
+- transpose grid/gamesolve logic will only work for square grid
 
 ## Gribbles
 

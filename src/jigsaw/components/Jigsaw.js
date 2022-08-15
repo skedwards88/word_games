@@ -91,12 +91,14 @@ function Jigsaw({ setCurrentDisplay }) {
         gridSize={gameState.gridSize}
         dragToken={dragToken}
       ></Board>
-      <Pool
+      {gameState.pieces.filter((piece) => piece.poolIndex >= 0).length ? <Pool
         pieces={gameState.pieces}
         dropOnPool={dropOnPool}
         handlePoolDragEnter={handlePoolDragEnter}
         dragToken={dragToken}
-      ></Pool>
+      ></Pool> : <Result pieces={gameState.pieces} gridSize={gameState.gridSize} dropToken={dropOnPool}></Result>}
+      
+      
 
       <div id="controls">
         <button

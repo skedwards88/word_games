@@ -83,6 +83,7 @@ function getPiecesFromBoard(grid, pieceSize) {
       }
     }
   }
+  return pieces
   return shuffleArray(pieces);
 }
 

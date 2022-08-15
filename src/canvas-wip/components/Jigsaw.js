@@ -1,7 +1,6 @@
 import React from "react";
 import Info from "../../common/Info";
 import Pool from "./Pool";
-import Result from "./Result";
 import Board from "./Board";
 import Settings from "./Settings";
 import { gameIndex } from "../../gameIndex";
@@ -71,11 +70,7 @@ function Jigsaw({ setCurrentDisplay }) {
   return (
     <div className="App" id="jigsaw">
       <Board pieces={gameState.board} dropToken={dropOnBoard}></Board>
-      {gameState.pool.length ? (
-        <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
-      ) : (
-        <Result board={gameState.board} dropToken={dropOnPool}></Result>
-      )}
+      <Pool pool={gameState.pool} dropToken={dropOnPool}></Pool>
 
       <div id="controls">
         <button
