@@ -23,9 +23,7 @@
 
 ## Jigsaw
 
-- game over logic (can use crossle logic)
 - eliminate space between board and pool/make board fit free space
-- separate unjoined pieces. or maybe make a different way to make pieces.
 - tests
 - make work horizontal and with resize/rotate during play
 - allow to lock/unlock joined pieces

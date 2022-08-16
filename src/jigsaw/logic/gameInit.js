@@ -84,49 +84,72 @@ function getPiecesFromBoard(grid, pieceSize) {
       }
     }
   }
-  return pieces
+  // return pieces;
   return shuffleArray(pieces);
 }
 
-
-function assemblePiece(pieceData) {
-  const maxTop = pieceData.map(data => data.top).reduce(
-    (currentMax, comparison) =>
-      currentMax > comparison ? currentMax : comparison,
-    0
-  )
-  const minTop = pieceData.map(data => data.top).reduce(
-    (currentMin, comparison) =>
-    currentMin < comparison ? currentMin : comparison,
-    0
-  )
+function getPieceDimension(pieceData) {
+  const maxTop = pieceData
+    .map((data) => data.top)
+    .reduce(
+      (currentMax, comparison) =>
+        currentMax > comparison ? currentMax : comparison,
+      0
+    );
+  const minTop = pieceData
+    .map((data) => data.top)
+    .reduce(
+      (currentMin, comparison) =>
+        currentMin < comparison ? currentMin : comparison,
+      0
+    );
   const numRows = maxTop - minTop + 1;
 
-  const maxLeft = pieceData.map(data => data.left).reduce(
-    (currentMax, comparison) =>
-      currentMax > comparison ? currentMax : comparison,
-    0
-  )
-  const minLeft = pieceData.map(data => data.left).reduce(
-    (currentMin, comparison) =>
-    currentMin < comparison ? currentMin : comparison,
-    0
-  )
+  const maxLeft = pieceData
+    .map((data) => data.left)
+    .reduce(
+      (currentMax, comparison) =>
+        currentMax > comparison ? currentMax : comparison,
+      0
+    );
+  const minLeft = pieceData
+    .map((data) => data.left)
+    .reduce(
+      (currentMin, comparison) =>
+        currentMin < comparison ? currentMin : comparison,
+      0
+    );
   const numCols = maxLeft - minLeft + 1;
 
+  return {
+    numCols: numCols,
+    numRows: numRows,
+    maxTop: maxTop,
+    minTop: minTop,
+    maxLeft: maxLeft,
+    minLeft: minLeft,
+  };
+}
+
+function assemblePiece(pieceData) {
+  const { numCols, numRows, minTop, minLeft } = getPieceDimension(pieceData);
+  const topAdjust = Math.abs(Math.min(0, minTop));
+  const leftAdjust = Math.abs(Math.min(0, minLeft));
+
   let grid = Array.from({ length: numRows }, () =>
-  Array.from({ length: numCols }, () => "")
-);
-for (let pieceIndex = 0; pieceIndex < pieceData.length; pieceIndex++) {
-  grid[pieceData[pieceIndex].top][pieceData[pieceIndex].left] = pieceData[pieceIndex].letter
-  
+    Array.from({ length: numCols }, () => "")
+  );
+  for (let pieceIndex = 0; pieceIndex < pieceData.length; pieceIndex++) {
+    grid[pieceData[pieceIndex].top + topAdjust][
+      pieceData[pieceIndex].left + leftAdjust
+    ] = pieceData[pieceIndex].letter;
+  }
+  return grid;
 }
-return grid
-
-}
-
 
 function makePieces(grid) {
+  const maxPieceLetters = 5; //todo can randomize num letters
+  const maxPieceDimension = 3;
   const remainingGrid = JSON.parse(JSON.stringify(grid));
   const piecesData = [];
 
@@ -141,49 +164,75 @@ function makePieces(grid) {
             letter: letter,
             top: 0,
             left: 0,
-          }
-        ]
-        remainingGrid[rowIndex][colIndex] = ""
-        // console.log(`there is a letter ${letter} at ${rowIndex},${colIndex}`)
+          },
+        ];
+        remainingGrid[rowIndex][colIndex] = "";
 
         // from this starting point, look in each direction for a letter
-        // todo adj for outward
         let pieceLevel = 0;
-        const directions = [[0, 1], [0, -1], [1, 0], [-1, 0]]; //todo can randomize order
-        while (pieceData.length < 5 && pieceLevel < pieceData.length) {//todo can randomize num letters
-          // console.log(`START WHILE ${rowIndex}/${colIndex}: pieceLevel: ${pieceLevel}, piece.length: ${pieceData.length}`)
+        const directions = [
+          [0, 1],
+          [0, -1],
+          [1, 0],
+          [-1, 0],
+        ]; //todo can randomize order
+        // Keep adding letters to the piece
+        // until the piece has the max number of letters
+        // or until we have searched around all of the letters in the piece
+        while (
+          pieceData.length < maxPieceLetters &&
+          pieceLevel < pieceData.length
+        ) {
           let surroundedPieceRow = pieceData[pieceLevel].top;
           let surroundedPieceCol = pieceData[pieceLevel].left;
-          // console.log(`surroundedPieceRow ${surroundedPieceRow}, surroundedPieceCol ${surroundedPieceCol}`)
-          for (let directionIndex = 0; directionIndex < directions.length; directionIndex++) {
+          for (
+            let directionIndex = 0;
+            directionIndex < directions.length;
+            directionIndex++
+          ) {
             const [rowOffset, colOffset] = directions[directionIndex];
-            // console.log(`check row ${rowIndex + surroundedPieceRow + rowOffset} from ${rowIndex}+${surroundedPieceRow}+${rowOffset}/check col ${colIndex + surroundedPieceCol + colOffset} from ${colIndex}+${surroundedPieceCol}+${colOffset}`)
-            // if there is a letter, remove the letter from the remaining grid and add it to the piece
-            if (remainingGrid?.[rowIndex + surroundedPieceRow + rowOffset]?.[colIndex + surroundedPieceCol + colOffset]) {
-              const surroundingLetter = remainingGrid[rowIndex + surroundedPieceRow + rowOffset][colIndex + surroundedPieceCol + colOffset]
-              // console.log(`found a letter ${surroundingLetter}`)
-              pieceData.push({
-                letter: surroundingLetter,
-                top: surroundedPieceRow + rowOffset,
-                left: surroundedPieceCol + colOffset,
-              })
-              remainingGrid[rowIndex + surroundedPieceRow + rowOffset][colIndex + surroundedPieceCol + colOffset] = ""
-            } else {
-              // console.log('no letter here')
+            // if there is a letter
+            if (
+              remainingGrid?.[rowIndex + surroundedPieceRow + rowOffset]?.[
+                colIndex + surroundedPieceCol + colOffset
+              ]
+            ) {
+              // and if adding this letter to the piece won't exceed the max piece dimension
+              const { numCols, numRows } = getPieceDimension([
+                ...pieceData,
+                {
+                  top: surroundedPieceRow + rowOffset,
+                  left: surroundedPieceCol + colOffset,
+                },
+              ]);
+              if (
+                numCols <= maxPieceDimension &&
+                numRows <= maxPieceDimension
+              ) {
+                // remove the letter from the remaining grid and add it to the piece
+                const surroundingLetter =
+                  remainingGrid[rowIndex + surroundedPieceRow + rowOffset][
+                    colIndex + surroundedPieceCol + colOffset
+                  ];
+                pieceData.push({
+                  letter: surroundingLetter,
+                  top: surroundedPieceRow + rowOffset,
+                  left: surroundedPieceCol + colOffset,
+                });
+                remainingGrid[rowIndex + surroundedPieceRow + rowOffset][
+                  colIndex + surroundedPieceCol + colOffset
+                ] = "";
+              }
             }
           }
-          pieceLevel++
+          pieceLevel++;
         }
-        piecesData.push(pieceData)
+        piecesData.push(pieceData);
       }
-      // then look in all directions around the second letter
-      // continue until [3-4] letter in the piece
-      // or until there are no more surrounding pieces
     }
-
   }
-  const pieces = piecesData.map(data => assemblePiece(data))
-  return pieces
+  const pieces = piecesData.map((data) => assemblePiece(data));
+  return pieces;
 }
 
 export function gameInit({ useSaved, sortBy }) {
@@ -216,9 +265,9 @@ export function gameInit({ useSaved, sortBy }) {
     maxWordLength: maxWordLength,
   });
 
+  console.log(JSON.stringify(grid));
   // const pieces = getPiecesFromBoard(grid, pieceSize);
   const pieces = makePieces(grid);
-  console.log(JSON.stringify(pieces))
   const pieceData = pieces.map((piece, index) => ({
     letters: piece,
     id: index,
