@@ -5,17 +5,7 @@ polyfill({
   dragImageCenterOnTouch: true,
 });
 
-export default function Board({
-  pieces,
-  handleBoardDragEnter,
-  handleBoardDrop,
-  gridSize,
-  dragToken,
-}) {
-  const boardPieces = pieces.filter(
-    (piece) => piece.boardTop >= 0 && piece.boardLeft >= 0
-  );
-
+function generateGridFromBoardPieces(boardPieces, gridSize) {
   let grid = JSON.parse(
     JSON.stringify(Array(gridSize).fill(Array(gridSize).fill("")))
   );
@@ -46,86 +36,78 @@ export default function Board({
       top += 1;
     }
   }
+  return grid;
+}
+
+export default function Board({
+  pieces,
+  handleBoardDragEnter,
+  handleBoardDrop,
+  gridSize,
+  dragToken,
+}) {
+  const boardPieces = pieces.filter(
+    (piece) => piece.boardTop >= 0 && piece.boardLeft >= 0
+  );
+
+  const grid = generateGridFromBoardPieces(boardPieces, gridSize);
+
   let boardElements = [];
   for (let rowIndex = 0; rowIndex < grid.length; rowIndex++) {
     for (let colIndex = 0; colIndex < grid[rowIndex].length; colIndex++) {
-      const element = grid[rowIndex][colIndex]?.letter ? (
+      const isLetter = Boolean(grid[rowIndex][colIndex]?.letter);
+      const element = (
         <div
-          className={`boardLetter${
-            grid[rowIndex][colIndex].borderTop ? " borderTop" : ""
-          }${grid[rowIndex][colIndex].borderBottom ? " borderBottom" : ""}${
-            grid[rowIndex][colIndex].borderLeft ? " borderLeft" : ""
-          }${grid[rowIndex][colIndex].borderRight ? " borderRight" : ""}${grid[rowIndex][colIndex].overlapping ? " overlapping" : ""}`}
-          key={`${rowIndex}-${colIndex}`}
+          className={
+            isLetter
+              ? `boardLetter${
+                  grid[rowIndex][colIndex].borderTop ? " borderTop" : ""
+                }${
+                  grid[rowIndex][colIndex].borderBottom ? " borderBottom" : ""
+                }${grid[rowIndex][colIndex].borderLeft ? " borderLeft" : ""}${
+                  grid[rowIndex][colIndex].borderRight ? " borderRight" : ""
+                }${grid[rowIndex][colIndex].overlapping ? " overlapping" : ""}`
+              : "boardLetter"
+          }
           draggable
+          key={`${rowIndex}-${colIndex}`}
+          onDrop={(event) => {
+            event.preventDefault();
+            handleBoardDrop({
+              event: event,
+              rowIndex: rowIndex,
+              colIndex: colIndex,
+            });
+          }}
+          onDragEnd={(event) => {
+            event.preventDefault();
+          }}
+          onDragOver={(event) => {
+            event.preventDefault();
+          }}
+          onDragEnter={(event) => {
+            event.preventDefault();
+            handleBoardDragEnter({
+              event: event,
+              rowIndex: rowIndex,
+              colIndex: colIndex,
+            });
+          }}
           onDragStart={(event) => {
             dragToken({
               event: event,
               dragArea: "board",
-
               pieceID: grid[rowIndex][colIndex]?.pieceID,
               relativeTop: grid[rowIndex][colIndex]?.relativeTop,
               relativeLeft: grid[rowIndex][colIndex]?.relativeLeft,
+              boardTop: rowIndex,
+              boardLeft: colIndex,
             });
-          }}
-          onDrop={(event) => {
-            event.preventDefault();
-            handleBoardDrop({
-              event: event,
-              rowIndex: rowIndex,
-              colIndex: colIndex,
-            });
-          }}
-          onDragEnter={(event) => {
-            event.preventDefault();
-            handleBoardDragEnter({
-              event: event,
-              rowIndex: rowIndex,
-              colIndex: colIndex,
-            });
-          }}
-          onDragEnd={(event) => {
-            event.preventDefault();
-          }}
-          onDragOver={(event) => {
-            event.preventDefault();
           }}
         >
           {grid[rowIndex][colIndex]?.letter}
         </div>
-      ) : (
-        <div
-          className="boardLetter"
-          key={`${rowIndex}-${colIndex}`}
-          onDrop={(event) => {
-            event.preventDefault();
-
-            handleBoardDrop({
-              event: event,
-              rowIndex: rowIndex,
-              colIndex: colIndex,
-            });
-          }}
-          onDragEnter={(event) => {
-            event.preventDefault();
-
-            handleBoardDragEnter({
-              event: event,
-              rowIndex: rowIndex,
-              colIndex: colIndex,
-            });
-          }}
-          onDragEnd={(event) => {
-            event.preventDefault();
-          }}
-          onDragOver={(event) => {
-            event.preventDefault();
-          }}
-          onDragStart={(event) => {}}
-        >
-          {""}
-        </div>
-      ); //todo make blank spaces draggable?
+      );
       boardElements.push(element);
     }
   }

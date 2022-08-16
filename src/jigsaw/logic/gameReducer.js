@@ -1,6 +1,8 @@
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "startDrag") {
-
+    // store drag data in the game state
+    // since drag event data is only available to
+    // the drag start and drop events (not drag enter)
     return {
       ...currentGameState,
       dragData: {
@@ -8,12 +10,22 @@ export function gameReducer(currentGameState, payload) {
         dragArea: payload.dragArea,
         relativeTop: payload.relativeTop,
         relativeLeft: payload.relativeLeft,
+        boardLeft: payload.boardLeft,
+        boardTop: payload.boardTop,
       },
     };
-  }
-
-  if (payload.action === "dropOnPool" || payload.action === "dropOverPool") {
+  } else if (
+    payload.action === "dropOnPool" ||
+    payload.action === "dragOverPool"
+  ) {
     const dragData = currentGameState.dragData;
+
+    // if dragging a blank space from the pool, return early
+    if (!dragData.pieceID) {
+      return {
+        ...currentGameState,
+      };
+    }
 
     let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
     const allPoolIndexes = newPieces
@@ -74,7 +86,72 @@ export function gameReducer(currentGameState, payload) {
     };
   }
 
-  if (payload.action === "dragOverBoard" || payload.action === "dropOnBoard") {
+  // if dragging a blank spot on the board
+  else if (
+    currentGameState.dragData.pieceID === undefined &&
+    (payload.action === "dragOverBoard" || payload.action === "dropOnBoard")
+  ) {
+    let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
+
+    let boardPieces = newPieces.filter(
+      (piece) => piece.boardTop >= 0 && piece.boardLeft >= 0
+    );
+
+    if (!boardPieces.length) {
+      // return early if the board is empty
+      return { ...currentGameState };
+    }
+    const dragData = currentGameState.dragData;
+    const oldRowIndex = dragData.boardTop;
+    const newRowIndex = payload.dropRowIndex;
+    const rowShift = newRowIndex - oldRowIndex;
+    const oldColIndex = dragData.boardLeft;
+    const newColIndex = payload.dropColIndex;
+    const colShift = newColIndex - oldColIndex;
+
+    // shift the pieces
+    for (let pieceIndex = 0; pieceIndex < newPieces.length; pieceIndex++) {
+      // skip the piece if not on the board
+      if (newPieces[pieceIndex].boardTop === undefined) {
+        continue;
+      }
+      // return early if any piece would go off board
+      if (
+        newPieces[pieceIndex].boardTop + rowShift < 0 ||
+        newPieces[pieceIndex].boardLeft + colShift < 0 ||
+        newPieces[pieceIndex].boardTop + newPieces[pieceIndex].letters.length + rowShift > currentGameState.gridSize ||
+        newPieces[pieceIndex].boardLeft +  newPieces[pieceIndex].letters[0].length + colShift > currentGameState.gridSize
+      ) {
+        return {
+          ...currentGameState,
+          dragData: {
+            ...dragData,
+            boardTop: payload.dropRowIndex,
+            boardLeft: payload.dropColIndex,
+          },
+        };
+      }
+      newPieces[pieceIndex].boardTop =
+        newPieces[pieceIndex].boardTop + rowShift;
+      newPieces[pieceIndex].boardLeft =
+        newPieces[pieceIndex].boardLeft + colShift;
+    }
+    return {
+      ...currentGameState,
+      pieces: newPieces,
+      dragData: {
+        ...dragData,
+        boardTop: payload.dropRowIndex,
+        boardLeft: payload.dropColIndex,
+      },
+    };
+  }
+
+  // dragging/dropping a piece over the board
+  else if (
+    currentGameState.dragData.pieceID !== undefined &&
+    (payload.action === "dragOverBoard" || payload.action === "dropOnBoard")
+  ) {
     let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
     const dragData = currentGameState.dragData;
 
@@ -115,18 +192,6 @@ export function gameReducer(currentGameState, payload) {
       dragData: payload.action === "dropOnBoard" ? {} : dragData,
     };
   }
-
-  // if (payload.action === "dropOnBoard") {
-  //   let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
-  //   const dragData = currentGameState.dragData;
-  //   newPieces[dragData.pieceID].poolIndex = undefined;
-
-  //   return {
-  //     ...currentGameState,
-  //     pieces: newPieces,
-  //     dragData: {},
-  //   };
-  // }
 
   return { ...currentGameState };
 }

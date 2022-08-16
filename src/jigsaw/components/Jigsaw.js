@@ -19,20 +19,20 @@ function Jigsaw({ setCurrentDisplay }) {
     window.localStorage.setItem("jigsawState", JSON.stringify(gameState));
   }, [gameState]);
 
-  function dragToken({ event, dragArea, pieceID, relativeTop, relativeLeft }) {
-    console.log("drag token");
+  function dragToken({ event, dragArea, pieceID, relativeTop, relativeLeft, boardTop, boardLeft }) {
     event.dataTransfer.setDragImage(document.createElement("img"), 0, 0);
     event.dataTransfer.setData("draggedElementID", event.target.parentElement.id)
     if (dragArea === "pool") {
       event.target.parentElement.classList.add("dragging");
     }
-
     dispatchGameState({
       action: "startDrag",
       pieceID: pieceID,
       dragArea: dragArea,
       relativeTop: relativeTop,
       relativeLeft: relativeLeft,
+      boardLeft: boardLeft,
+      boardTop: boardTop,
     });
   }
 
@@ -67,7 +67,7 @@ function Jigsaw({ setCurrentDisplay }) {
     const targetPieceID = event.target.getAttribute("data-piece-id");
 
     dispatchGameState({
-      action: "dropOverPool",
+      action: "dragOverPool",
       targetPieceID: targetPieceID,
     });
   }

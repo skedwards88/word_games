@@ -20,21 +20,24 @@
 - tests
 - rename to "spatial" if want to keep crossle for jigsaw?
 - add islands or irregular boundary option?
+- sort setting is not saved
 
 ## Jigsaw
 
 - eliminate space between board and pool/make board fit free space
 - tests
 - make work horizontal and with resize/rotate during play
+- if drop on pool below letter, goes to end
 - allow to lock/unlock joined pieces
 - piece rotation
 - new game
+- hints
 - save game progress
 - settings
   - more or fewer pieces
   - rotation
 - icon
-- transpose grid/gamesolve logic will only work for square grid
+- transpose grid/game solved logic will only work for square grid
 
 ## Gribbles
 
