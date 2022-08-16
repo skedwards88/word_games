@@ -166,7 +166,7 @@ export function gameInit({ useSaved }) {
   // }
 
   const gridSize = 12;
-  const minLetters = 10; // 20 40 60 todo setting
+  const minLetters = 20; // 20 40 60 todo setting
   const minWordLength = 4;
   const maxWordLength = 7;
   const grid = generateGrid({
