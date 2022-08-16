@@ -25,6 +25,7 @@ function Letter({ pieceID, rowIndex, colIndex, letters, dragToken }) {
   return (
     <div
       data-piece-id={pieceID}
+      id={`poolLetter-${pieceID}`}
       className={className}
       draggable="true"
       onDragStart={(event) => {
@@ -73,6 +74,7 @@ function Piece({ letters, pieceID, handlePoolDragEnter, dragToken }) {
   return (
     <div
       className="poolPiece"
+      id={`poolPiece-${pieceID}`}
       style={{
         "--numRows": `${letters.length}`,
         "--numCols": `${letters[0].length}`,

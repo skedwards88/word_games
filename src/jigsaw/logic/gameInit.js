@@ -148,7 +148,7 @@ function makePieces(grid) {
   return pieces;
 }
 
-export function gameInit({ useSaved, sortBy }) {
+export function gameInit({ useSaved }) {
   // const savedState =
   //   useSaved ?? true
   //     ? JSON.parse(localStorage.getItem("jigsawState"))
@@ -160,14 +160,13 @@ export function gameInit({ useSaved, sortBy }) {
   //   savedState.hasOwnProperty("board") &&
   //   savedState.hasOwnProperty("hints") &&
   //   savedState.hasOwnProperty("hintindex") &&
-  //   savedState.hasOwnProperty("sortBy") &&
   //   savedState.pool.length
   // ) {
   //   return savedState;
   // }
 
   const gridSize = 12;
-  const minLetters = 40;
+  const minLetters = 10; // 20 40 60 todo setting
   const minWordLength = 4;
   const maxWordLength = 7;
   const grid = generateGrid({
@@ -187,10 +186,8 @@ export function gameInit({ useSaved, sortBy }) {
     poolIndex: index,
   }));
 
-  //todo trim off excess whitespace row/col on edge
   return {
     pieces: pieceData,
-    sortBy: sortBy,
-    gridSize: gridSize, // todo any way to derive?
+    gridSize: gridSize,
   };
 }
