@@ -76,6 +76,81 @@ input[type="checkbox" i]:checked {
   background-size: contain;
 }
 
+/* Slider setting styling */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 50%;
+  background: rgb(38 36 129);
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  height: 1vh;
+  cursor: pointer;
+  background: rgb(239 239 239);
+  border-radius: 2px;
+  /* background: linear-gradient(0.25turn, rgb(118, 102, 102), rgb(239 239 239)); */
+}
+input[type=range]::-webkit-slider-thumb {
+  border: 1px solid black;
+  height: calc(var(--default-font-size) * 1.5);
+  width: calc(var(--default-font-size) * 1);
+  border-radius: 2px;
+  background: rgb(239 239 239);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: calc(var(--default-font-size) * -0.6);
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: rgb(239 239 239);
+}
+input[type=range]::-moz-range-track {
+  /* width: 100%; */
+  height: 1vh;
+  cursor: pointer;
+  background: rgb(239 239 239);
+  border-radius: 2px;
+}
+input[type=range]::-moz-range-thumb {
+  border: 1px solid black;
+  height: calc(var(--default-font-size) * 1.5);
+  width: calc(var(--default-font-size) * 1);
+  border-radius: 2px;
+  background: rgb(239 239 239);
+}
+input[type=range]::-ms-track {
+  /* width: 100%; */
+  height: 1vh;
+  cursor: pointer;
+  background: rgb(239 239 239);
+  border-radius: 2px;
+}
+input[type=range]::-ms-fill-lower {
+  background: rgb(239 239 239);
+  border: 1px solid black;
+  border-radius: 2.6px;
+}
+input[type=range]::-ms-fill-upper {
+  background: rgb(239 239 239);
+  border: 1px solid black;
+  border-radius: 2px;
+}
+input[type=range]::-ms-thumb {
+  border: 1px solid black;
+  height: calc(var(--default-font-size) * 1.5);
+  width: calc(var(--default-font-size) * 1);
+  border-radius: 2px;
+  background: rgb(239 239 239);
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: rgb(239 239 239);
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: rgb(239 239 239);
+}
+
 #controls {
   display: flex;
   justify-content: space-evenly;

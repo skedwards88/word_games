@@ -148,7 +148,8 @@ function makePieces(grid) {
   return pieces;
 }
 
-export function gameInit({ useSaved }) {
+export function gameInit({ numLetters, useSaved }) {
+  console.log(`game init with ${numLetters}`)
   // const savedState =
   //   useSaved ?? true
   //     ? JSON.parse(localStorage.getItem("jigsawState"))
@@ -166,7 +167,7 @@ export function gameInit({ useSaved }) {
   // }
 
   const gridSize = 12;
-  const minLetters = 20; // 20 40 60 todo setting
+  const minLetters = numLetters || 40;
   const minWordLength = 4;
   const maxWordLength = 7;
   const grid = generateGrid({
@@ -189,5 +190,6 @@ export function gameInit({ useSaved }) {
   return {
     pieces: pieceData,
     gridSize: gridSize,
+    numLetters: numLetters,
   };
 }

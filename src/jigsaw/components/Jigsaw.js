@@ -106,6 +106,7 @@ function Jigsaw({ setCurrentDisplay }) {
           id="newGameButton"
           onClick={() => {
             dispatchGameState({
+              ...gameState,
               action: "newGame",
             });
           }}

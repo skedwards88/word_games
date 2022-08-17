@@ -9,11 +9,11 @@ export default function Settings({ dispatchGameState, gameState }) {
 
   function handleNewGame(event) {
     event.preventDefault();
-    const newSortBy = event.target.elements.sortBy.value;
+    const newNumLetters = event.target.elements.numLetters.value;
 
     dispatchGameState({
       action: "newGame",
-      sortBy: newSortBy,
+      numLetters: newNumLetters,
     });
     setShowSettings(false);
   }
@@ -21,16 +21,23 @@ export default function Settings({ dispatchGameState, gameState }) {
   return showSettings ? (
     <form className="modal" onSubmit={(e) => handleNewGame(e)}>
       <div id="settings">
+
         <div className="setting">
           <div className="setting-description">
-            <label htmlFor="sortBy">Sort</label>
+            <label htmlFor="numLetters">Letters</label>
           </div>
-          <select id="sortBy" defaultValue={gameState.sortBy ?? "None"}>
-            <option value="Alphabetical">Alphabetical</option>
-            <option value="Vowels">Vowels</option>
-            <option value="None">None</option>
-          </select>
+          <div className="setting-info">Fewer</div>
+          <input
+            id="numLetters"
+            className="numLetters"
+            type="range"
+            min="20"
+            max="60"
+            defaultValue={gameState.numLetters || "40"}
+          />
+          <div className="setting-info">More</div>
         </div>
+
       </div>
       <div id="setting-buttons">
         <button type="submit" aria-label="new game">
