@@ -30,11 +30,9 @@
 - if drop on pool below letter, goes to end
 - allow to lock/unlock joined pieces
 - piece rotation
-- new game
 - hints
-- save game progress
+- save game progress + settings
 - settings
-  - more or fewer pieces
   - rotation
 - icon
 - transpose grid/game solved logic will only work for square grid

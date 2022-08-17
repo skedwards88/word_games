@@ -341,7 +341,9 @@ a {
 #jigsaw_icon {
   background-color: rgb(38 36 129) !important;
   border: 0 !important;
+  /* background-image: url("./images/jigsaw.svg"); */
 }
+
 /* Gribbles-specific */
 
 #gribbles {
