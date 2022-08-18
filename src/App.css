@@ -121,7 +121,7 @@ input[type=range]::-webkit-slider-runnable-track {
   height: 2vh;
   cursor: pointer;
   background: var(--light-color);
-  border-radius: 100% 0% 0% 0%;
+  border-radius: 2px;
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: var(--light-color);
@@ -130,13 +130,13 @@ input[type=range]::-moz-range-track {
   height: 2vh;
   cursor: pointer;
   background: var(--light-color);
-  border-radius: 100% 0% 0% 0%;
+  border-radius: 2px;
 }
 input[type=range]::-ms-track {
   height: 2vh;
   cursor: pointer;
   background: var(--light-color);
-  border-radius: 100% 0% 0% 0%;
+  border-radius: 2px;
 }
 input[type=range]::-ms-fill-lower {
   background: var(--light-color);
@@ -150,17 +150,13 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
   background: var(--light-color);
 }
-/* #numLetters::after {
-  content: "+";
-  color: var(--light-color);
-  font-size: calc(var(--default-font-size) / 1);
-  padding: 0 1vh;
-} */
 
 #numLetters-info {
   color: var(--light-color);
   font-size: calc(var(--default-font-size) / 1);
   padding: 0 1vh;
+  justify-content:center;
+  align-items:center;
 }
 
 #numLetters-container{

@@ -23,9 +23,12 @@ export default function Settings({ dispatchGameState, gameState }) {
       <div id="settings">
         <div className="setting">
           <div className="setting-description">
-            <label htmlFor="numLetters">Letters</label>
+            <label htmlFor="numLetters">Number of pieces</label>
           </div>
           <div id="numLetters-container">
+          <div id="numLetters-info" className="setting-info">
+              –
+            </div>
             <input
               id="numLetters"
               className="numLetters"
