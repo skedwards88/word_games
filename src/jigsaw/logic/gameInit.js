@@ -148,8 +148,7 @@ function makePieces(grid) {
   return pieces;
 }
 
-export function gameInit({ numLetters, useSaved=true }) {
-
+export function gameInit({ numLetters, useSaved = true }) {
   const savedState = useSaved
     ? JSON.parse(localStorage.getItem("jigsawState"))
     : undefined;

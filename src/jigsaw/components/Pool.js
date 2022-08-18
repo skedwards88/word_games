@@ -54,7 +54,13 @@ function Letter({ pieceID, rowIndex, colIndex, letters, dragToken }) {
   );
 }
 
-function Piece({ letters, pieceID, handlePoolDragEnter, dragToken, dropOnPool }) {
+function Piece({
+  letters,
+  pieceID,
+  handlePoolDragEnter,
+  dragToken,
+  dropOnPool,
+}) {
   let letterElements = [];
   for (let rowIndex = 0; rowIndex < letters.length; rowIndex++) {
     for (let colIndex = 0; colIndex < letters[rowIndex].length; colIndex++) {
@@ -81,7 +87,7 @@ function Piece({ letters, pieceID, handlePoolDragEnter, dragToken, dropOnPool })
       onDragEnter={(event) => {
         handlePoolDragEnter({
           event: event,
-          targetPieceID:pieceID,
+          targetPieceID: pieceID,
         });
       }}
       onDragEnd={(event) => {

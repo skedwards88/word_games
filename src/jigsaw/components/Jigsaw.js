@@ -19,9 +19,20 @@ function Jigsaw({ setCurrentDisplay }) {
     window.localStorage.setItem("jigsawState", JSON.stringify(gameState));
   }, [gameState]);
 
-  function dragToken({ event, dragArea, pieceID, relativeTop, relativeLeft, boardTop, boardLeft }) {
+  function dragToken({
+    event,
+    dragArea,
+    pieceID,
+    relativeTop,
+    relativeLeft,
+    boardTop,
+    boardLeft,
+  }) {
     event.dataTransfer.setDragImage(document.createElement("img"), 0, 0);
-    event.dataTransfer.setData("draggedElementID", event.target.parentElement.id)
+    event.dataTransfer.setData(
+      "draggedElementID",
+      event.target.parentElement.id
+    );
     if (dragArea === "pool") {
       event.target.parentElement.classList.add("dragging");
     }
@@ -44,7 +55,9 @@ function Jigsaw({ setCurrentDisplay }) {
 
     event.preventDefault();
 
-    document.getElementById(event.dataTransfer.getData("draggedElementID")).classList.remove("dragging")
+    document
+      .getElementById(event.dataTransfer.getData("draggedElementID"))
+      .classList.remove("dragging");
 
     dispatchGameState({
       action: "dropOnPool",
@@ -54,7 +67,9 @@ function Jigsaw({ setCurrentDisplay }) {
 
   function handleBoardDrop({ event, rowIndex, colIndex }) {
     event.preventDefault();
-    document.getElementById(event.dataTransfer.getData("draggedElementID")).classList.remove("dragging")
+    document
+      .getElementById(event.dataTransfer.getData("draggedElementID"))
+      .classList.remove("dragging");
 
     dispatchGameState({
       action: "dropOnBoard",
@@ -95,14 +110,20 @@ function Jigsaw({ setCurrentDisplay }) {
         gridSize={gameState.gridSize}
         dragToken={dragToken}
       ></Board>
-      {gameState.pieces.filter((piece) => piece.poolIndex >= 0).length ? <Pool
-        pieces={gameState.pieces}
-        dropOnPool={dropOnPool}
-        handlePoolDragEnter={handlePoolDragEnter}
-        dragToken={dragToken}
-      ></Pool> : <Result pieces={gameState.pieces} gridSize={gameState.gridSize} dropToken={dropOnPool}></Result>}
-      
-      
+      {gameState.pieces.filter((piece) => piece.poolIndex >= 0).length ? (
+        <Pool
+          pieces={gameState.pieces}
+          dropOnPool={dropOnPool}
+          handlePoolDragEnter={handlePoolDragEnter}
+          dragToken={dragToken}
+        ></Pool>
+      ) : (
+        <Result
+          pieces={gameState.pieces}
+          gridSize={gameState.gridSize}
+          dropToken={dropOnPool}
+        ></Result>
+      )}
 
       <div id="controls">
         <button

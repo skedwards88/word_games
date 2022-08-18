@@ -2,7 +2,7 @@ import { gameInit } from "./gameInit";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
-    return gameInit({...payload, useSaved: false});
+    return gameInit({ ...payload, useSaved: false });
   }
   if (payload.action === "startDrag") {
     // store drag data in the game state
@@ -124,8 +124,14 @@ export function gameReducer(currentGameState, payload) {
       if (
         newPieces[pieceIndex].boardTop + rowShift < 0 ||
         newPieces[pieceIndex].boardLeft + colShift < 0 ||
-        newPieces[pieceIndex].boardTop + newPieces[pieceIndex].letters.length + rowShift > currentGameState.gridSize ||
-        newPieces[pieceIndex].boardLeft +  newPieces[pieceIndex].letters[0].length + colShift > currentGameState.gridSize
+        newPieces[pieceIndex].boardTop +
+          newPieces[pieceIndex].letters.length +
+          rowShift >
+          currentGameState.gridSize ||
+        newPieces[pieceIndex].boardLeft +
+          newPieces[pieceIndex].letters[0].length +
+          colShift >
+          currentGameState.gridSize
       ) {
         return {
           ...currentGameState,

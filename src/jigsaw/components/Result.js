@@ -18,22 +18,22 @@ function piecesOverlapQ(boardPieces, gridSize) {
         if (letters[rowIndex][colIndex]) {
           if (Boolean(grid[top][left])) {
             overlappingPiecesQ = true;
-            break
-          }  
+            break;
+          }
           grid[top][left] = letters[rowIndex][colIndex];
         }
         left += 1;
       }
       if (overlappingPiecesQ) {
-        break
+        break;
       }
       top += 1;
     }
     if (overlappingPiecesQ) {
-      break
+      break;
     }
   }
-  return {piecesOverlap: overlappingPiecesQ, grid: grid}
+  return { piecesOverlap: overlappingPiecesQ, grid: grid };
 }
 
 function gameSolvedQ(pieces, gridSize) {
@@ -41,7 +41,7 @@ function gameSolvedQ(pieces, gridSize) {
     (piece) => piece.boardTop >= 0 && piece.boardLeft >= 0
   );
 
-  const {piecesOverlap, grid} = piecesOverlapQ(boardPieces, gridSize)
+  const { piecesOverlap, grid } = piecesOverlapQ(boardPieces, gridSize);
   if (piecesOverlap) {
     return {
       gameIsSolved: false,
@@ -49,7 +49,7 @@ function gameSolvedQ(pieces, gridSize) {
     };
   }
 
-  const {gameIsSolved, reason} = crosswordValidQ({ grid: grid });
+  const { gameIsSolved, reason } = crosswordValidQ({ grid: grid });
   return {
     gameIsSolved: gameIsSolved,
     reason: reason,
@@ -57,8 +57,7 @@ function gameSolvedQ(pieces, gridSize) {
 }
 
 export default function Result({ dropToken, pieces, gridSize }) {
-
-  const {gameIsSolved, reason} = gameSolvedQ(pieces, gridSize)
+  const { gameIsSolved, reason } = gameSolvedQ(pieces, gridSize);
 
   return (
     <div
