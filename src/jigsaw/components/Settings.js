@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Settings({ dispatchGameState, gameState }) {
-  const [showSettings, setShowSettings] = React.useState(true);
+  const [showSettings, setShowSettings] = React.useState(false);
 
   function handleShowSettings() {
     setShowSettings(!showSettings);
