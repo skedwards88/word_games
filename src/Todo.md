@@ -24,18 +24,19 @@
 
 ## Jigsaw
 
-- eliminate space between board and pool/make board fit free space
+- bug trying to drag first piece back to pool?
+- can I make the pool drop target the whole piece instead of the letter?
 - tests
-- make work horizontal and with resize/rotate during play
 - if drop on pool below letter, goes to end
-- allow to lock/unlock joined pieces
 - piece rotation
 - hints
 - save game progress + settings
-- settings
-  - rotation
-- icon
+- publish:
+  - unhide icon in css
+  - add game name to home screen
+  - update instructions
 - transpose grid/game solved logic will only work for square grid
+- allow to lock/unlock joined pieces?
 
 ## Gribbles
 
