@@ -27,7 +27,6 @@
 - tests
 - piece rotation
 - hints
-- save game progress + settings
 - publish:
   - unhide icon in css
   - add game name to home screen

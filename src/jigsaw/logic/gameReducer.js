@@ -2,7 +2,7 @@ import { gameInit } from "./gameInit";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
-    return gameInit(payload);
+    return gameInit({...payload, useSaved: false});
   }
   if (payload.action === "startDrag") {
     // store drag data in the game state

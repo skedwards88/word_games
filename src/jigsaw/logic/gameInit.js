@@ -148,23 +148,20 @@ function makePieces(grid) {
   return pieces;
 }
 
-export function gameInit({ numLetters, useSaved }) {
-  console.log(`game init with ${numLetters}`)
-  // const savedState =
-  //   useSaved ?? true
-  //     ? JSON.parse(localStorage.getItem("jigsawState"))
-  //     : undefined;
+export function gameInit({ numLetters, useSaved=true }) {
 
-  // if (
-  //   savedState &&
-  //   savedState.hasOwnProperty("pool") &&
-  //   savedState.hasOwnProperty("board") &&
-  //   savedState.hasOwnProperty("hints") &&
-  //   savedState.hasOwnProperty("hintindex") &&
-  //   savedState.pool.length
-  // ) {
-  //   return savedState;
-  // }
+  const savedState = useSaved
+    ? JSON.parse(localStorage.getItem("jigsawState"))
+    : undefined;
+
+  if (
+    savedState &&
+    savedState.hasOwnProperty("pieces") &&
+    savedState.hasOwnProperty("gridSize") &&
+    savedState.hasOwnProperty("numLetters")
+  ) {
+    return savedState;
+  }
 
   const gridSize = 12;
   const minLetters = numLetters || 40;
@@ -190,6 +187,6 @@ export function gameInit({ numLetters, useSaved }) {
   return {
     pieces: pieceData,
     gridSize: gridSize,
-    numLetters: numLetters,
+    numLetters: minLetters,
   };
 }
