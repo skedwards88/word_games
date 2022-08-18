@@ -14,6 +14,7 @@
 - add test to make sure common exclusion/additions don't share words
 - add way to share app url
 - add way to share url with specific game settings
+- add way to track metrics
 
 ## Crossle
 
@@ -45,10 +46,11 @@
 
 ## Palette
 
+- change color scheme? Or allow as a setting?
+
 ## Packed
 
 - eliminate symmetrical solutions? Or make a setting?
-- allow 4 letter also?
 
 ## Other ideas
 
