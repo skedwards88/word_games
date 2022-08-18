@@ -24,10 +24,7 @@
 
 ## Jigsaw
 
-- bug trying to drag first piece back to pool?
-- can I make the pool drop target the whole piece instead of the letter?
 - tests
-- if drop on pool below letter, goes to end
 - piece rotation
 - hints
 - save game progress + settings
