@@ -20,7 +20,6 @@
 - tests
 - rename to "spatial" if want to keep crossle for jigsaw?
 - add islands or irregular boundary option?
-- sort setting is not saved
 
 ## Jigsaw
 
