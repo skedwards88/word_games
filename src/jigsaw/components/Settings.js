@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Settings({ dispatchGameState, gameState }) {
-  const [showSettings, setShowSettings] = React.useState(false);
+  const [showSettings, setShowSettings] = React.useState(true);
 
   function handleShowSettings() {
     setShowSettings(!showSettings);
@@ -26,7 +26,7 @@ export default function Settings({ dispatchGameState, gameState }) {
           <div className="setting-description">
             <label htmlFor="numLetters">Letters</label>
           </div>
-          <div className="setting-info">Fewer</div>
+          <div id="numLetters-container">
           <input
             id="numLetters"
             className="numLetters"
@@ -35,7 +35,8 @@ export default function Settings({ dispatchGameState, gameState }) {
             max="60"
             defaultValue={gameState.numLetters || "40"}
           />
-          <div className="setting-info">More</div>
+          <div id="numLetters-info" className="setting-info">+</div>
+          </div>
         </div>
 
       </div>
