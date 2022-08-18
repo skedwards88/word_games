@@ -5,8 +5,10 @@ html {
 
 .App {
   --default-font-size: min(4vmax, 7vmin);
-  background-color: rgb(38 36 129);
-  color: rgb(255 255 255);
+  --dark-color: rgb(5 5 95);
+  --light-color: rgb(239 239 239);
+  background-color: var(--dark-color);
+  color: var(--light-color);
   font-family: sans-serif;
   font-size: var(--default-font-size);
   display: grid;
@@ -28,8 +30,8 @@ button {
   appearance: none;
   font-size: var(--default-font-size);
   font-family: sans-serif;
-  background-color: rgb(239 239 239);
-  border: 1px solid rgb(239 239 239);
+  background-color: var(--light-color);
+  border: 1px solid var(--light-color);
   border-radius: 2px;
   color: black;
   margin: 0;
@@ -44,8 +46,8 @@ select {
   -moz-appearance: none; */
   font-size: var(--default-font-size);
   font-family: sans-serif;
-  background-color: rgb(239 239 239);
-  border: 1px solid rgb(239 239 239);
+  background-color: var(--light-color);
+  border: 1px solid var(--light-color);
   border-radius: 2px;
   text-align: center;
   color: black;
@@ -62,8 +64,8 @@ input[type="checkbox" i] {
   min-width: var(--default-font-size);
   min-height: var(--default-font-size);
   border-radius: 2px;
-  background-color: rgb(239 239 239);
-  border: 3px solid rgb(239 239 239);
+  background-color: var(--light-color);
+  border: 3px solid var(--light-color);
   margin: 0;
   padding: 1px 6px;
   height: fit-content;
@@ -79,76 +81,93 @@ input[type="checkbox" i]:checked {
 /* Slider setting styling */
 input[type=range] {
   -webkit-appearance: none;
-  width: 50%;
-  background: rgb(38 36 129);
+  width: 100%;
+  background: var(--dark-color);
 }
 input[type=range]:focus {
   outline: none;
 }
-input[type=range]::-webkit-slider-runnable-track {
-  height: 1vh;
-  cursor: pointer;
-  background: rgb(239 239 239);
-  border-radius: 2px;
-  /* background: linear-gradient(0.25turn, rgb(118, 102, 102), rgb(239 239 239)); */
-}
+
+/* Slider thumb */
 input[type=range]::-webkit-slider-thumb {
-  border: 1px solid black;
-  height: calc(var(--default-font-size) * 1.5);
-  width: calc(var(--default-font-size) * 1);
-  border-radius: 2px;
-  background: rgb(239 239 239);
-  cursor: pointer;
   -webkit-appearance: none;
-  margin-top: calc(var(--default-font-size) * -0.6);
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: rgb(239 239 239);
-}
-input[type=range]::-moz-range-track {
-  /* width: 100%; */
-  height: 1vh;
-  cursor: pointer;
-  background: rgb(239 239 239);
+  height: calc(var(--default-font-size) * 1.5);
+  width: calc(var(--default-font-size) * 0.5);
   border-radius: 2px;
+  background: var(--light-color);
+  box-shadow: 0 0 2px 2px black;
+  cursor: pointer;
+  margin-top: calc(var(--default-font-size) * -0.5);
 }
 input[type=range]::-moz-range-thumb {
-  border: 1px solid black;
   height: calc(var(--default-font-size) * 1.5);
-  width: calc(var(--default-font-size) * 1);
+  width: calc(var(--default-font-size) * 0.5);
   border-radius: 2px;
-  background: rgb(239 239 239);
-}
-input[type=range]::-ms-track {
-  /* width: 100%; */
-  height: 1vh;
-  cursor: pointer;
-  background: rgb(239 239 239);
-  border-radius: 2px;
-}
-input[type=range]::-ms-fill-lower {
-  background: rgb(239 239 239);
-  border: 1px solid black;
-  border-radius: 2.6px;
-}
-input[type=range]::-ms-fill-upper {
-  background: rgb(239 239 239);
-  border: 1px solid black;
-  border-radius: 2px;
+  background: var(--light-color);
+  box-shadow: 0 0 2px 2px black;
+
 }
 input[type=range]::-ms-thumb {
-  border: 1px solid black;
   height: calc(var(--default-font-size) * 1.5);
-  width: calc(var(--default-font-size) * 1);
+  width: calc(var(--default-font-size) * 0.5);
   border-radius: 2px;
-  background: rgb(239 239 239);
+  background: var(--light-color);
+  box-shadow: 0 0 2px 2px black;
   cursor: pointer;
 }
+
+/* Slider track */
+input[type=range]::-webkit-slider-runnable-track {
+  height: 2vh;
+  cursor: pointer;
+  background: var(--light-color);
+  border-radius: 100% 0% 0% 0%;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: var(--light-color);
+}
+input[type=range]::-moz-range-track {
+  height: 2vh;
+  cursor: pointer;
+  background: var(--light-color);
+  border-radius: 100% 0% 0% 0%;
+}
+input[type=range]::-ms-track {
+  height: 2vh;
+  cursor: pointer;
+  background: var(--light-color);
+  border-radius: 100% 0% 0% 0%;
+}
+input[type=range]::-ms-fill-lower {
+  background: var(--light-color);
+}
+input[type=range]::-ms-fill-upper {
+  background: var(--light-color);
+}
 input[type=range]:focus::-ms-fill-lower {
-  background: rgb(239 239 239);
+  background: var(--light-color);
 }
 input[type=range]:focus::-ms-fill-upper {
-  background: rgb(239 239 239);
+  background: var(--light-color);
+}
+/* #numLetters::after {
+  content: "+";
+  color: var(--light-color);
+  font-size: calc(var(--default-font-size) / 1);
+  padding: 0 1vh;
+} */
+
+#numLetters-info {
+  color: var(--light-color);
+  font-size: calc(var(--default-font-size) / 1);
+  padding: 0 1vh;
+}
+
+#numLetters-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: baseline;
 }
 
 #controls {
@@ -156,7 +175,7 @@ input[type=range]:focus::-ms-fill-upper {
   justify-content: space-evenly;
   align-items: center;
   grid-area: controls;
-  border-top: 2px solid white;
+  border-top: 2px solid var(--light-color);
   width: 100%;
   height: 7vh;
 }
@@ -220,10 +239,10 @@ input[type=range]:focus::-ms-fill-upper {
   text-align: center;
   overflow: scroll;
   justify-items: center;
-  background-color: rgb(38 36 129);
+  background-color: var(--dark-color);
   justify-content: space-evenly;
   align-items: center;
-  color: rgb(255 255 255);
+  color: var(--light-color);
   font-family: sans-serif;
   font-size: var(--default-font-size);
 }
@@ -268,7 +287,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 a {
-  color: white;
+  color: var(--light-color);
 }
 
 /* Home */
@@ -296,7 +315,7 @@ a {
   border: 0;
   margin: 3px;
   background-color: transparent;
-  color: white;
+  color: var(--light-color);
   font-size: var(--default-font-size);
   display: flex;
   justify-content: center;
@@ -313,8 +332,8 @@ a {
   height: 35vmin;
   width: 35vmin;
   margin: 5px;
-  background-color: white;
-  border: 2px solid white;
+  background-color: var(--light-color);
+  border: 2px solid var(--light-color);
   border-radius: 20px;
 }
 
@@ -339,7 +358,7 @@ a {
 }
 
 #jigsaw_icon {
-  background-color: rgb(38 36 129) !important;
+  background-color: var(--dark-color) !important;
   border: 0 !important;
   /* background-image: url("./images/jigsaw.svg"); */
 }
@@ -375,7 +394,7 @@ a {
 #gribbles #foundWords {
   grid-area: foundWords;
   display: flex;
-  background-color: white;
+  background-color: var(--light-color);
   color: black;
   flex-direction: column;
   min-height: 10vh;
@@ -397,7 +416,7 @@ a {
 
 #gribbles #wordResult {
   grid-area: board;
-  background-color: rgb(38 36 129);
+  background-color: var(--dark-color);
   touch-action: none;
   z-index: 1;
   display: flex;
@@ -408,7 +427,7 @@ a {
 #gribbles #board {
   grid-area: board;
   display: grid;
-  background-color: rgb(38 36 129);
+  background-color: var(--dark-color);
   touch-action: none;
   justify-content: center;
 }
@@ -426,7 +445,7 @@ a {
 #gribbles .letter {
   touch-action: none;
   margin: 4vmin;
-  background-color: rgb(38 36 129);
+  background-color: var(--dark-color);
   font-weight: bold;
   text-align: center;
 }
@@ -470,14 +489,14 @@ a {
   text-decoration: none;
   text-align: center;
   appearance: none;
-  background-color: rgb(239 239 239);
+  background-color: var(--light-color);
   font-size: 7vw;
   width: 8vw;
   padding: 3px 0;
   color: black;
   font-family: sans-serif;
   margin: 0;
-  border: 1px solid rgb(239 239 239);
+  border: 1px solid var(--light-color);
   border-radius: 2px;
 }
 
@@ -568,7 +587,7 @@ a {
 #palette #board {
   grid-area: board;
   display: grid;
-  background-color: rgb(38 36 129);
+  background-color: var(--dark-color);
   touch-action: none;
   justify-content: center;
   grid-template-columns: repeat(4, min(15vmax, 20vmin));
@@ -578,7 +597,7 @@ a {
 #palette .letter {
   touch-action: none;
   margin: 4vmin;
-  background-color: rgb(38 36 129);
+  background-color: var(--dark-color);
   font-weight: bold;
   text-align: center;
   justify-content: center;
@@ -628,7 +647,7 @@ a {
 .guessBox {
   min-height: min(4vmax, 16vmin);
   min-width: min(4vmax, 16vmin);
-  border: 1px solid white;
+  border: 1px solid var(--light-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -658,8 +677,8 @@ a {
   width: fit-content;
   height: fit-content;
   justify-self: center;
-  color: rgb(239 239 239);
-  border: 1px solid rgb(239 239 239);
+  color: var(--light-color);
+  border: 1px solid var(--light-color);
   margin: 10vmin 0 0;
 }
 
@@ -674,7 +693,7 @@ a {
 }
 
 #packed .boardLetter {
-  border: 2px solid rgb(239 239 239);
+  border: 2px solid var(--light-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -745,13 +764,13 @@ a {
   width: fit-content;
   height: fit-content;
   justify-self: center;
-  color: rgb(239 239 239);
-  border: 1px solid rgb(239 239 239);
+  color: var(--light-color);
+  border: 1px solid var(--light-color);
   margin: 3vmin 0 0;
 }
 
 #crossle .boardLetter {
-  border: 0.5px solid rgb(239 239 239);
+  border: 0.5px solid var(--light-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -823,8 +842,8 @@ a {
   width: fit-content;
   height: fit-content;
   justify-self: center;
-  color: rgb(239 239 239);
-  border: 1px solid rgb(239 239 239);
+  color: var(--light-color);
+  border: 1px solid var(--light-color);
   margin: 3vmin 0 0;
 }
 
@@ -840,19 +859,19 @@ a {
 }
 
 #jigsaw .borderTop {
-  border-top: 0.5px solid rgb(239 239 239);
+  border-top: 0.5px solid var(--light-color);
 }
 
 #jigsaw .borderLeft {
-  border-left: 0.5px solid rgb(239 239 239);
+  border-left: 0.5px solid var(--light-color);
 }
 
 #jigsaw .borderRight {
-  border-right: 0.5px solid rgb(239 239 239);
+  border-right: 0.5px solid var(--light-color);
 }
 
 #jigsaw .borderBottom {
-  border-bottom: 0.5px solid rgb(239 239 239);
+  border-bottom: 0.5px solid var(--light-color);
 }
 
 #jigsaw #pool {
@@ -863,7 +882,7 @@ a {
   display: flex;
   overflow: scroll;
   flex-direction: row;
-  border: 1px solid rgb(239 239 239);
+  border: 1px solid var(--light-color);
   min-height: 30vmin;
 }
 
@@ -997,7 +1016,7 @@ a {
 
   #controls {
     flex-direction: column;
-    border: solid white;
+    border: solid var(--light-color);
     border-width: 0 0 0 2px;
     align-items: center;
     height: 100%;
