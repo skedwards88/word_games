@@ -1,6 +1,7 @@
 import { gameInit } from "./gameInit";
 
 export function gameReducer(currentGameState, payload) {
+  console.log(JSON.stringify(payload))
   if (payload.action === "newGame") {
     return gameInit(payload);
   }
@@ -26,7 +27,7 @@ export function gameReducer(currentGameState, payload) {
     const dragData = currentGameState.dragData;
 
     // if dragging a blank space from the pool, return early
-    if (!dragData.pieceID) {
+    if (dragData.pieceID === undefined) {
       return {
         ...currentGameState,
       };
