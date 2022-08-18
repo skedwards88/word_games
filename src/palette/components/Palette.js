@@ -70,7 +70,7 @@ function Palette({ setCurrentDisplay }) {
           info={
             <div>
               {<h1>Palette</h1>}
-              {`Connect adjacent letters to build words that match the given color patterns.`}
+              {`Connect letters to build words that match the given color patterns.`}
             </div>
           }
         ></Info>

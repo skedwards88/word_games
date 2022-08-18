@@ -27,11 +27,7 @@
 - tests
 - piece rotation
 - hints
-- publish:
-  - unhide icon in css
-  - add game name to home screen
-  - update instructions
-  - merge branch to main
+- remove new game/bug note
 - transpose grid/game solved logic will only work for square grid
 - allow to lock/unlock joined pieces?
 

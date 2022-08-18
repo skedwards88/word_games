@@ -62,7 +62,7 @@ function App() {
             onClick={() => setCurrentDisplay(gameIndex.Jigsaw)}
           >
             <div className="gameIcon" id="jigsaw_icon"></div>
-            <div></div>
+            <div>Jigsaw</div>
           </button>
         </div>
         <div id="controls">

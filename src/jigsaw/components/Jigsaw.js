@@ -140,7 +140,7 @@ function Jigsaw({ setCurrentDisplay }) {
           info={
             <div>
               {<h1>Jigsaw</h1>}
-              {`You discovered a new game! It's still under development. Feel free to play around, and be sure to come back once all features are in place.`}
+              {`Arrange the pieces to make words vertically and horizontally. All words must connect.\n\nDrag a blank space to move all of the words.\n\nThis is a new game! Please let me know if you see anything unexpected.`}
             </div>
           }
         ></Info>
