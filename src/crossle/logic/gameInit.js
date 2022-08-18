@@ -2,6 +2,7 @@ import { generateGrid } from "./generateGrid";
 import { shuffleArray } from "../../common/shuffleArray";
 import { getPositionalFractions } from "../../common/getPositionalFractions";
 import { sortLettersBy } from "../../common/sortLetters";
+import { sortMethods } from "../../common/sortLetters";
 
 function getIndexesWithWords({ grid, minWordLength }) {
   const transposedGrid = grid.map((_, index) => grid.map((row) => row[index]));
@@ -50,11 +51,13 @@ function getIndexesWithWords({ grid, minWordLength }) {
   return solution;
 }
 
-export function gameInit({ useSaved, sortBy }) {
+export function gameInit({ useSaved=true, sortBy }) {
   const savedState =
     useSaved ?? true
       ? JSON.parse(localStorage.getItem("crossleState"))
       : undefined;
+
+  sortBy = sortBy || savedState?.sortBy || sortMethods.None;
 
   if (
     savedState &&
@@ -67,6 +70,7 @@ export function gameInit({ useSaved, sortBy }) {
   ) {
     return savedState;
   }
+
 
   const gridSize = 9;
   const minLetters = 25;

@@ -21,6 +21,19 @@
 - rename to "spatial" if want to keep crossle for jigsaw?
 - add islands or irregular boundary option?
 
+## Jigsaw
+
+- tests
+- piece rotation
+- hints
+- publish:
+  - unhide icon in css
+  - add game name to home screen
+  - update instructions
+  - merge branch to main
+- transpose grid/game solved logic will only work for square grid
+- allow to lock/unlock joined pieces?
+
 ## Gribbles
 
 ## Thirdle

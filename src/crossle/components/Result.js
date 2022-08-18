@@ -1,8 +1,10 @@
 import React from "react";
-import { gameSolvedQ } from "../logic/gameSolvedQ";
+import { crosswordValidQ } from "../../common/crosswordValidQ";
+import {partitionArray} from "../../common/partitionArray"
 
 export default function Result({ dropToken, board }) {
-  const { gameIsSolved, reason } = gameSolvedQ({ board: board });
+  const grid = partitionArray(board, Math.sqrt(board.length))
+  const { gameIsSolved, reason } = crosswordValidQ({ grid: grid });
 
   return (
     <div
