@@ -36,10 +36,13 @@ function Jigsaw({ setCurrentDisplay }) {
     });
   }
 
-  function dropOnPool({ event }) {
+  function dropOnPool({ event, targetPieceID }) {
+    // Can drop on a pool piece or an empty section of the pool,
+    // so prevent bubbling up so that this handler doesn't execute twice
+    // when drop on a pool piece
+    event.stopPropagation();
+
     event.preventDefault();
-    console.log("drop on pool");
-    const targetPieceID = event.target.getAttribute("data-piece-id");
 
     document.getElementById(event.dataTransfer.getData("draggedElementID")).classList.remove("dragging")
 
@@ -51,7 +54,6 @@ function Jigsaw({ setCurrentDisplay }) {
 
   function handleBoardDrop({ event, rowIndex, colIndex }) {
     event.preventDefault();
-    console.log("drop on board");
     document.getElementById(event.dataTransfer.getData("draggedElementID")).classList.remove("dragging")
 
     dispatchGameState({
@@ -61,11 +63,13 @@ function Jigsaw({ setCurrentDisplay }) {
     });
   }
 
-  function handlePoolDragEnter({ event }) {
-    console.log("drag pool enter");
-    event.preventDefault();
-    const targetPieceID = event.target.getAttribute("data-piece-id");
+  function handlePoolDragEnter({ event, targetPieceID }) {
+    // Can drop on a pool piece or an empty section of the pool,
+    // so prevent bubbling up so that this handler doesn't execute twice
+    // when drop on a pool piece
+    event.stopPropagation();
 
+    event.preventDefault();
     dispatchGameState({
       action: "dragOverPool",
       targetPieceID: targetPieceID,
@@ -73,7 +77,6 @@ function Jigsaw({ setCurrentDisplay }) {
   }
 
   function handleBoardDragEnter({ event, rowIndex, colIndex }) {
-    console.log("drag board enter");
     event.preventDefault();
 
     dispatchGameState({

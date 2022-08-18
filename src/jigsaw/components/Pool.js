@@ -24,7 +24,6 @@ function Letter({ pieceID, rowIndex, colIndex, letters, dragToken }) {
 
   return (
     <div
-      data-piece-id={pieceID}
       id={`poolLetter-${pieceID}`}
       className={className}
       draggable="true"
@@ -55,7 +54,7 @@ function Letter({ pieceID, rowIndex, colIndex, letters, dragToken }) {
   );
 }
 
-function Piece({ letters, pieceID, handlePoolDragEnter, dragToken }) {
+function Piece({ letters, pieceID, handlePoolDragEnter, dragToken, dropOnPool }) {
   let letterElements = [];
   for (let rowIndex = 0; rowIndex < letters.length; rowIndex++) {
     for (let colIndex = 0; colIndex < letters[rowIndex].length; colIndex++) {
@@ -79,10 +78,10 @@ function Piece({ letters, pieceID, handlePoolDragEnter, dragToken }) {
         "--numRows": `${letters.length}`,
         "--numCols": `${letters[0].length}`,
       }}
-      data-piece-id={pieceID}
       onDragEnter={(event) => {
         handlePoolDragEnter({
           event: event,
+          targetPieceID:pieceID,
         });
       }}
       onDragEnd={(event) => {
@@ -93,6 +92,7 @@ function Piece({ letters, pieceID, handlePoolDragEnter, dragToken }) {
       }}
       onDrop={(event) => {
         event.preventDefault();
+        dropOnPool({ event: event, targetPieceID: pieceID });
       }}
     >
       {letterElements}
@@ -116,6 +116,7 @@ export default function Pool({
       handlePoolDragEnter={handlePoolDragEnter}
       key={piece.id}
       dragToken={dragToken}
+      dropOnPool={dropOnPool}
     ></Piece>
   ));
 
@@ -130,7 +131,9 @@ export default function Pool({
         event.preventDefault();
       }}
       onDragEnter={(event) => {
-        event.preventDefault();
+        handlePoolDragEnter({
+          event: event,
+        });
       }}
       onDragOver={(event) => {
         event.preventDefault();

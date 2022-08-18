@@ -1,7 +1,6 @@
 import { gameInit } from "./gameInit";
 
 export function gameReducer(currentGameState, payload) {
-  console.log(JSON.stringify(payload))
   if (payload.action === "newGame") {
     return gameInit(payload);
   }
@@ -166,7 +165,6 @@ export function gameReducer(currentGameState, payload) {
 
     // if top or left is off grid, return early
     if (newTop < 0 || newLeft < 0) {
-      console.log(`early return for top left off grid`);
       return {
         ...currentGameState,
       };
@@ -175,13 +173,11 @@ export function gameReducer(currentGameState, payload) {
     // if bottom or right would go off grid, return early
     const letters = newPieces[dragData.pieceID].letters;
     if (newTop + letters.length > currentGameState.gridSize) {
-      console.log(`early return for bottom off grid`);
       return {
         ...currentGameState,
       };
     }
     if (newLeft + letters[0].length > currentGameState.gridSize) {
-      console.log(`early return for right off grid`);
       return {
         ...currentGameState,
       };
