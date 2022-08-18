@@ -880,8 +880,8 @@ a {
   width: 100%;
   height: 100%;
   display: flex;
-  overflow: scroll;
-  flex-direction: row;
+  overflow-x: scroll;
+  overflow-y: hidden;  flex-direction: row;
   min-height: calc(3 * var(--box-size));
 }
 
@@ -971,6 +971,29 @@ a {
     left: var(--y);
   }
 
+  #jigsaw {
+    grid-template-areas: "board pool controls";
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+    --box-size: calc(min(5.5vw, 8vh))
+  }
+
+  #jigsaw #board {
+    align-self: center;
+    margin: 0 0 0 3vmin;
+  }
+
+  #jigsaw #pool {
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  #jigsaw .poolPiece {
+    height: fit-content;
+    width: 100%;
+  }
+  
   #thirdle {
     grid-template-areas:
       "pattern controls"
