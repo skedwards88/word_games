@@ -44,7 +44,7 @@ function getPieceDimension(pieceData) {
   };
 }
 
-function assemblePiece(pieceData) {
+function assemblePiece({pieceData, rowIndex, colIndex}) {
   const { numCols, numRows, minTop, minLeft } = getPieceDimension(pieceData);
   const topAdjust = Math.abs(Math.min(0, minTop));
   const leftAdjust = Math.abs(Math.min(0, minLeft));
@@ -57,7 +57,7 @@ function assemblePiece(pieceData) {
       pieceData[pieceIndex].left + leftAdjust
     ] = pieceData[pieceIndex].letter;
   }
-  return grid;
+  return {letters: grid, actualTop: rowIndex - topAdjust, actualLeft: colIndex - leftAdjust};
 }
 
 function makePieces(grid) {
@@ -140,11 +140,11 @@ function makePieces(grid) {
           }
           pieceLevel++;
         }
-        piecesData.push(pieceData);
+        piecesData.push({pieceData: pieceData, rowIndex: rowIndex, colIndex: colIndex});
       }
     }
   }
-  const pieces = piecesData.map((data) => assemblePiece(data));
+  const pieces = piecesData.map((data) => assemblePiece({pieceData: data.pieceData, rowIndex: data.rowIndex, colIndex: data.colIndex}));
   return pieces;
 }
 
@@ -176,16 +176,19 @@ export function gameInit({ numLetters, useSaved = true }) {
   console.log(JSON.stringify(grid));
   const pieces = shuffleArray(makePieces(grid));
   const pieceData = pieces.map((piece, index) => ({
-    letters: piece,
+    letters: piece.letters,
     id: index,
     boardTop: undefined,
     boardLeft: undefined,
     poolIndex: index,
+    actualTop: piece.actualTop,
+    actualLeft: piece.actualLeft,
   }));
 
   return {
     pieces: pieceData,
     gridSize: gridSize,
     numLetters: minLetters,
+    hintLevel: 0,
   };
 }

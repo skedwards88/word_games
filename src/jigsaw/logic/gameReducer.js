@@ -3,8 +3,29 @@ import { gameInit } from "./gameInit";
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
     return gameInit({ ...payload, useSaved: false });
-  }
-  if (payload.action === "startDrag") {
+  } else if(payload.action === "getHint") {
+    let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
+    let newHintLevel = currentGameState.hintLevel + 1;
+    // return all pieces above the hint level to the pool
+    // and all pieces below the hint level to the correct board position
+    for (let index = 0; index < newPieces.length; index++) {
+      if (index < newHintLevel) {
+        newPieces[index].boardTop = newPieces[index].actualTop;
+        newPieces[index].boardLeft = newPieces[index].actualLeft;
+        newPieces[index].poolIndex = undefined;
+      } else {
+        newPieces[index].boardTop = undefined;
+        newPieces[index].boardLeft = undefined;
+        newPieces[index].poolIndex = index - newHintLevel;
+      }
+    }
+
+    return {
+      ...currentGameState,
+      pieces: newPieces,
+      hintLevel: newHintLevel,
+    }
+  } else if (payload.action === "startDrag") {
     // store drag data in the game state
     // since drag event data is only available to
     // the drag start and drop events (not drag enter)
