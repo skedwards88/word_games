@@ -15,6 +15,7 @@
 - add way to share app url
 - add way to share url with specific game settings
 - add way to track metrics
+- TODO! in all reducers, use else if instead of if, otherwise risk double execution
 
 ## Crossle
 
