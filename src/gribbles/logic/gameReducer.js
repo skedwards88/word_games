@@ -7,7 +7,18 @@ export function gameReducer(currentGameState, payload) {
     return gameInit(payload);
   }
 
+  if (payload.action === "startWord") {
+    return {
+      ...currentGameState,
+      wordInProgress: true,
+      playedIndexes: [payload.letterIndex],
+    };
+  }
+
   if (payload.action === "addLetter") {
+    if (!currentGameState.wordInProgress) {
+      return currentGameState;
+    }
     // Don't add the letter if it isn't neighboring the current sequence
     const isNeighboring = checkIfNeighbors({
       indexA:
@@ -43,6 +54,7 @@ export function gameReducer(currentGameState, payload) {
     if (newWord.length < currentGameState.minWordLength) {
       return {
         ...currentGameState,
+        wordInProgress: false,
         playedIndexes: [],
         result: currentGameState.playedIndexes.length <= 1 ? "" : "Too short",
       };
@@ -52,6 +64,7 @@ export function gameReducer(currentGameState, payload) {
     if (currentGameState.foundWords.includes(newWord)) {
       return {
         ...currentGameState,
+        wordInProgress: false,
         playedIndexes: [],
         result: "Already found",
       };
@@ -62,6 +75,7 @@ export function gameReducer(currentGameState, payload) {
     if (!isWord) {
       return {
         ...currentGameState,
+        wordInProgress: false,
         playedIndexes: [],
         result: "Unknown word",
       };
@@ -79,6 +93,7 @@ export function gameReducer(currentGameState, payload) {
     return {
       ...currentGameState,
       foundWords: newFoundWords,
+      wordInProgress: false,
       playedIndexes: [],
       bonusWordCount: newBonusWordCount,
     };

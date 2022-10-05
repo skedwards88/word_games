@@ -16,12 +16,16 @@ function Letter({ letter, letterAvailability, index, dispatchGameState }) {
     myDiv.className = newClass;
   }, [letterAvailability]);
 
-  function handlePointerDown(e) {
+  function handlePointerDown(e, index) {
     e.preventDefault();
     e.target.releasePointerCapture(e.pointerId);
+    dispatchGameState({
+      action: "startWord",
+      letterIndex: index,
+    });
   }
 
-  function handlePointerEnter(e, letter, index, letterAvailability) {
+  function handlePointerEnter(e, index, letterAvailability) {
     e.preventDefault();
     if (!letterAvailability) {
       return;
@@ -30,7 +34,6 @@ function Letter({ letter, letterAvailability, index, dispatchGameState }) {
     // Add the letter to the list of letters
     dispatchGameState({
       action: "addLetter",
-      letter: letter,
       letterIndex: index,
     });
   }
@@ -48,12 +51,9 @@ function Letter({ letter, letterAvailability, index, dispatchGameState }) {
       className="letter"
       ref={myRef}
       key={index.toString() + letter}
-      onPointerDown={(e) => handlePointerDown(e)}
-      onPointerEnter={(e) =>
-        handlePointerEnter(e, letter, index, letterAvailability)
-      }
-      onTouchEnd={(e) => handlePointerUp(e)}
-      onMouseUp={(e) => handlePointerUp(e)}
+      onPointerDown={(e) => handlePointerDown(e, index)}
+      onPointerEnter={(e) => handlePointerEnter(e, index, letterAvailability)}
+      onPointerUp={(e) => handlePointerUp(e)}
       draggable={false}
     >
       {letter}

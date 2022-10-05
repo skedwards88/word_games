@@ -8,6 +8,14 @@ export function gameReducer(currentGameState, payload) {
     return gameInit(false);
   }
 
+  if (payload.action === "startWord") {
+    return {
+      ...currentGameState,
+      wordInProgress: true,
+      playedIndexes: [payload.letterIndex],
+    };
+  }
+
   if (payload.action === "hint") {
     let newHintLevel = currentGameState.hintLevel + 1;
 
@@ -38,6 +46,9 @@ export function gameReducer(currentGameState, payload) {
   }
 
   if (payload.action === "addLetter") {
+    if (!currentGameState.wordInProgress) {
+      return currentGameState;
+    }
     // Don't add the letter if it isn't neighboring the current sequence
     const isNeighboring = checkIfNeighbors({
       indexA:
@@ -70,6 +81,7 @@ export function gameReducer(currentGameState, payload) {
       return {
         ...currentGameState,
         playedIndexes: [],
+        wordInProgress: false,
       };
     }
 
@@ -82,6 +94,7 @@ export function gameReducer(currentGameState, payload) {
       return {
         ...currentGameState,
         playedIndexes: [],
+        wordInProgress: false,
       };
     }
 
@@ -121,6 +134,7 @@ export function gameReducer(currentGameState, payload) {
       playedIndexes: [],
       clueMatches: clueMatches,
       clueIndexes: clueIndexes,
+      wordInProgress: false,
     };
   }
 }
