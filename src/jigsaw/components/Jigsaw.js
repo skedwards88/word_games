@@ -135,7 +135,7 @@ function Jigsaw({ setCurrentDisplay }) {
             });
           }}
         ></button>
-         <button
+        <button
           id="helpButton"
           // disabled={!gameState.pool.length} todo
           onClick={() => dispatchGameState({ action: "getHint" })}
