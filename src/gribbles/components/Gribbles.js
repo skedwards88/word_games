@@ -153,11 +153,6 @@ function Gribbles({ setCurrentDisplay }) {
           sideEffectShow={() => timerDispatch({ action: "pause" })}
           sideEffectHide={() => timerDispatch({ action: "play" })}
         ></Info>
-        {/* <Info
-          info={`Gribbles!\n\nConnect adjacent letters to build words. Can you find all the words before time is up?`}
-          sideEffect={() => console.log('yay')}
-        >
-        </Info> */}
         <button
           id="homeButton"
           onClick={() => setCurrentDisplay(gameIndex.Home)}

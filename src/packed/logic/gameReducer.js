@@ -4,7 +4,6 @@ import { getPositionalFractions } from "../../common/getPositionalFractions";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "dropOnPool") {
-    console.log("drop on pool");
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
 

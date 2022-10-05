@@ -17,7 +17,6 @@ function pickRandom(array) {
 }
 
 function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
-  console.log("starting get playable");
   const colorDistribution = ["red", "green", "blue"];
   let foundPlayableBoard = false;
   let letters;
@@ -25,7 +24,6 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
   let clueIndexes = [];
 
   while (!foundPlayableBoard) {
-    console.log("new round");
     // Pick a random assortment of letters and colors
     letters = getLetters(gridSize);
     colors = letters.map(() => pickRandom(colorDistribution));
@@ -104,7 +102,6 @@ export function gameInit(useSaved = true) {
     ? JSON.parse(localStorage.getItem("paletteState"))
     : undefined;
 
-  console.log(JSON.stringify(savedState));
   if (
     savedState &&
     savedState.minWordLength &&
@@ -132,18 +129,6 @@ export function gameInit(useSaved = true) {
     numClues,
   });
   const clueMatches = clueIndexes.map(() => false);
-  console.log(
-    JSON.stringify({
-      minWordLength: minWordLength,
-      letters: letters,
-      colors: colors,
-      clueIndexes: clueIndexes,
-      clueMatches: clueMatches,
-      playedIndexes: [],
-      easyMode: easyMode,
-      hintLevel: 0,
-    })
-  );
 
   return {
     minWordLength: minWordLength,

@@ -15,7 +15,6 @@ export function getGameOver(board) {
   for (let index = 0; index < rows.length; index += 1) {
     const { isWord } = isKnown(rows[index].join(""));
     if (!isWord) {
-      console.log(`unknown ${rows[index].join("")}`);
       return false;
     }
   }
@@ -24,7 +23,6 @@ export function getGameOver(board) {
   for (let index = 0; index < columns.length; index += 1) {
     const { isWord } = isKnown(columns[index].join(""));
     if (!isWord) {
-      console.log(`unknown ${columns[index].join("")}`);
       return false;
     }
   }

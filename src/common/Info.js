@@ -9,7 +9,6 @@ export default function Info({ info, sideEffectShow, sideEffectHide }) {
     }
 
     if (showInfo && sideEffectHide) {
-      console.log("hide effect");
       sideEffectHide();
     }
 

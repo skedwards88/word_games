@@ -50,7 +50,6 @@ export function gameReducer(currentGameState, payload) {
 
     // if we already have the word, don't add the word
     if (currentGameState.foundWords.includes(newWord)) {
-      console.log("already found");
       return {
         ...currentGameState,
         playedIndexes: [],
@@ -61,7 +60,6 @@ export function gameReducer(currentGameState, payload) {
     // check if word is a real word
     const { isWord, isEasy } = isKnown(newWord);
     if (!isWord) {
-      console.log(`unknown word ${newWord}`);
       return {
         ...currentGameState,
         playedIndexes: [],

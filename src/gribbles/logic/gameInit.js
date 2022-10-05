@@ -27,7 +27,6 @@ function getPlayableLetters({ gridSize, minWordLength, easyMode }) {
       minWordLength: minWordLength,
       easyMode: easyMode,
     });
-    console.log(`FOUND ${allWords.length}`);
     if (allWords.length > minWords) {
       foundPlayableLetters = true;
     }

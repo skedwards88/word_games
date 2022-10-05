@@ -187,7 +187,6 @@ export function gameInit({ numLetters, useSaved = true }) {
     maxWordLength: maxWordLength,
   });
 
-  console.log(JSON.stringify(grid));
   const pieces = shuffleArray(makePieces(grid));
   const pieceData = pieces.map((piece, index) => ({
     letters: piece.letters,

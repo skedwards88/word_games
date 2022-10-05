@@ -134,7 +134,6 @@ export function generateGrid({
       }
 
       count++;
-      console.log(`count ${count}`);
 
       letterCount = grid.reduce(
         (accumulator, row) => accumulator + row.join("").length,
@@ -142,9 +141,5 @@ export function generateGrid({
       );
     }
   }
-  // console.log(solution);
-  // console.log(JSON.stringify(solution));
-  // console.log(grid);
-  // console.log(JSON.stringify(grid))
   return grid;
 }

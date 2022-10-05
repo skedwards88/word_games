@@ -67,7 +67,6 @@ export function gameReducer(currentGameState, payload) {
     if (
       currentGameState.playedIndexes.length < currentGameState.minWordLength
     ) {
-      console.log("too short");
       return {
         ...currentGameState,
         playedIndexes: [],
@@ -80,7 +79,6 @@ export function gameReducer(currentGameState, payload) {
       .join("");
     const { isWord } = isKnown(word);
     if (!isWord) {
-      console.log(`unknown word ${word}`);
       return {
         ...currentGameState,
         playedIndexes: [],

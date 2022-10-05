@@ -10,7 +10,6 @@ export function getClue() {
 
   while (!foundPlayable && count < 500) {
     //todo decide how to handle infinite loop
-    console.log(count);
     count += 1;
 
     // Choose random word of length > 3

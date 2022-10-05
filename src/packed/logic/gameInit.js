@@ -81,12 +81,9 @@ function attemptToGetGame(gridSize) {
 }
 
 function getGame(gridSize) {
-  let count = 0;
   let found = false;
   let game;
   while (!found) {
-    count += 1;
-    console.log(`round ${count}`);
     game = attemptToGetGame(gridSize);
     if (game) {
       found = true;
