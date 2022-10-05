@@ -51,7 +51,7 @@ function getIndexesWithWords({ grid, minWordLength }) {
   return solution;
 }
 
-export function gameInit({ useSaved=true, sortBy }) {
+export function gameInit({ useSaved = true, sortBy }) {
   const savedState =
     useSaved ?? true
       ? JSON.parse(localStorage.getItem("crossleState"))
@@ -61,16 +61,15 @@ export function gameInit({ useSaved=true, sortBy }) {
 
   if (
     savedState &&
-    savedState.hasOwnProperty("pool") &&
-    savedState.hasOwnProperty("board") &&
-    savedState.hasOwnProperty("hints") &&
-    savedState.hasOwnProperty("hintIndex") &&
-    savedState.hasOwnProperty("sortBy") &&
+    savedState.pool &&
+    savedState.board &&
+    savedState.hints &&
+    savedState.hintIndex >= 0 &&
+    savedState.sortBy &&
     savedState.pool.length
   ) {
     return savedState;
   }
-
 
   const gridSize = 9;
   const minLetters = 25;
@@ -94,7 +93,7 @@ export function gameInit({ useSaved=true, sortBy }) {
 
   // Generate the pool
   let poolLetters = grid.flatMap((i) => i).filter((i) => i);
-  poolLetters = sortLettersBy(poolLetters, sortBy)
+  poolLetters = sortLettersBy(poolLetters, sortBy);
   const positions = getPositionalFractions({
     poolLetters: poolLetters,
     maxLettersAcross: gridSize,

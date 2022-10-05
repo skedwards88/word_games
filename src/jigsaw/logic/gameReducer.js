@@ -3,7 +3,7 @@ import { gameInit } from "./gameInit";
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
     return gameInit({ ...payload, useSaved: false });
-  } else if(payload.action === "getHint") {
+  } else if (payload.action === "getHint") {
     let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
     let newHintLevel = currentGameState.hintLevel + 1;
     // return all pieces above the hint level to the pool
@@ -24,7 +24,7 @@ export function gameReducer(currentGameState, payload) {
       ...currentGameState,
       pieces: newPieces,
       hintLevel: newHintLevel,
-    }
+    };
   } else if (payload.action === "startDrag") {
     // store drag data in the game state
     // since drag event data is only available to

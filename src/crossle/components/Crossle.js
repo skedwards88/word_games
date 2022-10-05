@@ -41,7 +41,7 @@ function Crossle({ setCurrentDisplay }) {
     // in order to later calculate the position relative to the pool, but it is hacky/may have unaccounted edge cases.
     // Instead, only allow the drop if the target is the pool.
     if (event.target.id !== "pool" && event.target.id !== "result") {
-      return
+      return;
     }
 
     dispatchGameState({
@@ -55,7 +55,7 @@ function Crossle({ setCurrentDisplay }) {
       poolHeight: event.target.offsetHeight,
       poolLeft: event.target.offsetLeft,
       poolTop: event.target.offsetTop,
-  });
+    });
   }
 
   function dropOnBoard({ event, index }) {

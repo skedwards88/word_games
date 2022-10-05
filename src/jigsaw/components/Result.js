@@ -10,13 +10,12 @@ function piecesOverlapQ(boardPieces, gridSize) {
 
   for (let index = 0; index < boardPieces.length; index++) {
     const letters = boardPieces[index].letters;
-    const id = boardPieces[index].id;
     let top = boardPieces[index].boardTop;
     for (let rowIndex = 0; rowIndex < letters.length; rowIndex++) {
       let left = boardPieces[index].boardLeft;
       for (let colIndex = 0; colIndex < letters[rowIndex].length; colIndex++) {
         if (letters[rowIndex][colIndex]) {
-          if (Boolean(grid[top][left])) {
+          if (grid[top][left]) {
             overlappingPiecesQ = true;
             break;
           }

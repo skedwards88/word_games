@@ -59,7 +59,7 @@ export function gameReducer(currentGameState, payload) {
     }
 
     // check if word is a real word
-    const { isPartialWord, isWord, isEasy } = isKnown(newWord);
+    const { isWord, isEasy } = isKnown(newWord);
     if (!isWord) {
       console.log(`unknown word ${newWord}`);
       return {

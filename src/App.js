@@ -56,8 +56,8 @@ function App() {
             <div className="gameIcon" id="crossle_icon"></div>
             <div>Crossle</div>
           </button>
-          
-           <button
+
+          <button
             className="gameButton"
             onClick={() => setCurrentDisplay(gameIndex.Jigsaw)}
           >

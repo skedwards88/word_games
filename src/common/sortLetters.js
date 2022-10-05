@@ -20,7 +20,7 @@ export const sortMethods = {
 };
 
 export function sortLettersBy(letters, sortBy) {
-  let lettersCopy = [...letters]
+  let lettersCopy = [...letters];
   if (sortBy === sortMethods.Alphabetical) {
     lettersCopy = lettersCopy.sort();
   } else if (sortBy === sortMethods.Vowels) {
@@ -28,5 +28,5 @@ export function sortLettersBy(letters, sortBy) {
   } else {
     lettersCopy = shuffleArray(lettersCopy);
   }
-  return lettersCopy
+  return lettersCopy;
 }

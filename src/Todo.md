@@ -2,6 +2,9 @@
 
 ## General
 
+-> palette rare bug?
+-> make work on desktop
+
 - set up precommit hooks to auto run linters and tests
 - set up autodeploy and tests
 - enums

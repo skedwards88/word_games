@@ -41,15 +41,18 @@ export default function getPatternsForRow(grid, rowIndex, minLength) {
       }
 
       if (
-        // don't push the pattern if any of these cases are true
-        // no letters
-        !includesLetter ||
-        // less than minLength
-        currentPosition - startPosition < minLength ||
-        // the next element is a letter
-        row[currentPosition + 1]?.match("^[A-Z]$")
+        !(
+          // don't push the pattern if any of these cases are true
+          // no letters
+          (
+            !includesLetter ||
+            // less than minLength
+            currentPosition - startPosition < minLength ||
+            // the next element is a letter
+            row[currentPosition + 1]?.match("^[A-Z]$")
+          )
+        )
       ) {
-      } else {
         patterns.push([pattern, startPosition]);
       }
     }

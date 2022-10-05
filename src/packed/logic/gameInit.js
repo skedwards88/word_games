@@ -103,10 +103,10 @@ export function gameInit({ useSaved, gridSize }) {
 
   if (
     savedState &&
-    savedState.hasOwnProperty("solution") &&
-    savedState.hasOwnProperty("board") &&
-    savedState.hasOwnProperty("pool") &&
-    savedState.hasOwnProperty("locked") &&
+    savedState.solution &&
+    savedState.board &&
+    savedState.pool &&
+    savedState.locked &&
     savedState.board.some((i) => !i)
   ) {
     return savedState;

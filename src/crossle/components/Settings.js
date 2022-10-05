@@ -27,7 +27,9 @@ export default function Settings({ dispatchGameState, gameState }) {
             <label htmlFor="sortBy">Sort</label>
           </div>
           <select id="sortBy" defaultValue={gameState.sortBy ?? "None"}>
-            <option value={sortMethods.Alphabetical}>{sortMethods.Alphabetical}</option>
+            <option value={sortMethods.Alphabetical}>
+              {sortMethods.Alphabetical}
+            </option>
             <option value={sortMethods.Vowels}>{sortMethods.Vowels}</option>
             <option value={sortMethods.None}>{sortMethods.None}</option>
           </select>

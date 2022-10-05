@@ -78,7 +78,7 @@ export function gameReducer(currentGameState, payload) {
     const word = currentGameState.playedIndexes
       .map((index) => currentGameState.letters[index])
       .join("");
-    const { isPartialWord, isWord, isEasy } = isKnown(word);
+    const { isWord } = isKnown(word);
     if (!isWord) {
       console.log(`unknown word ${word}`);
       return {

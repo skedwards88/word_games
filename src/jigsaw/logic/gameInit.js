@@ -44,7 +44,7 @@ function getPieceDimension(pieceData) {
   };
 }
 
-function assemblePiece({pieceData, rowIndex, colIndex}) {
+function assemblePiece({ pieceData, rowIndex, colIndex }) {
   const { numCols, numRows, minTop, minLeft } = getPieceDimension(pieceData);
   const topAdjust = Math.abs(Math.min(0, minTop));
   const leftAdjust = Math.abs(Math.min(0, minLeft));
@@ -57,7 +57,11 @@ function assemblePiece({pieceData, rowIndex, colIndex}) {
       pieceData[pieceIndex].left + leftAdjust
     ] = pieceData[pieceIndex].letter;
   }
-  return {letters: grid, actualTop: rowIndex - topAdjust, actualLeft: colIndex - leftAdjust};
+  return {
+    letters: grid,
+    actualTop: rowIndex - topAdjust,
+    actualLeft: colIndex - leftAdjust,
+  };
 }
 
 function makePieces(grid) {
@@ -140,11 +144,21 @@ function makePieces(grid) {
           }
           pieceLevel++;
         }
-        piecesData.push({pieceData: pieceData, rowIndex: rowIndex, colIndex: colIndex});
+        piecesData.push({
+          pieceData: pieceData,
+          rowIndex: rowIndex,
+          colIndex: colIndex,
+        });
       }
     }
   }
-  const pieces = piecesData.map((data) => assemblePiece({pieceData: data.pieceData, rowIndex: data.rowIndex, colIndex: data.colIndex}));
+  const pieces = piecesData.map((data) =>
+    assemblePiece({
+      pieceData: data.pieceData,
+      rowIndex: data.rowIndex,
+      colIndex: data.colIndex,
+    })
+  );
   return pieces;
 }
 
@@ -155,9 +169,9 @@ export function gameInit({ numLetters, useSaved = true }) {
 
   if (
     savedState &&
-    savedState.hasOwnProperty("pieces") &&
-    savedState.hasOwnProperty("gridSize") &&
-    savedState.hasOwnProperty("numLetters")
+    savedState.pieces &&
+    savedState.gridSize &&
+    savedState.numLetters
   ) {
     return savedState;
   }

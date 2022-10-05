@@ -104,16 +104,17 @@ export function gameInit(useSaved = true) {
     ? JSON.parse(localStorage.getItem("paletteState"))
     : undefined;
 
+  console.log(JSON.stringify(savedState));
   if (
     savedState &&
-    savedState.hasOwnProperty("minWordLength") &&
-    savedState.hasOwnProperty("letters") &&
-    savedState.hasOwnProperty("colors") &&
-    savedState.hasOwnProperty("clueIndexes") &&
-    savedState.hasOwnProperty("clueMatches") &&
-    savedState.hasOwnProperty("playedIndexes") &&
-    savedState.hasOwnProperty("easyMode") &&
-    savedState.hasOwnProperty("hintLevel") &&
+    savedState.minWordLength &&
+    savedState.letters &&
+    savedState.colors &&
+    savedState.clueIndexes &&
+    savedState.clueMatches &&
+    savedState.playedIndexes &&
+    savedState.easyMode !== undefined &&
+    savedState.hintLevel >= 0 &&
     !savedState.clueMatches.every((i) => i)
   ) {
     return savedState;
@@ -131,6 +132,18 @@ export function gameInit(useSaved = true) {
     numClues,
   });
   const clueMatches = clueIndexes.map(() => false);
+  console.log(
+    JSON.stringify({
+      minWordLength: minWordLength,
+      letters: letters,
+      colors: colors,
+      clueIndexes: clueIndexes,
+      clueMatches: clueMatches,
+      playedIndexes: [],
+      easyMode: easyMode,
+      hintLevel: 0,
+    })
+  );
 
   return {
     minWordLength: minWordLength,

@@ -25,13 +25,14 @@ export function gameReducer(currentState, payload) {
       };
 
     case "guess":
-      const result = isValidGuess({
-        word: currentState.currentGuess,
-        pattern: currentState.pattern,
-      });
       return {
         ...currentState,
-        result: result ? "Success!" : "Try again",
+        result: isValidGuess({
+          word: currentState.currentGuess,
+          pattern: currentState.pattern,
+        })
+          ? "Success!"
+          : "Try again",
       };
 
     case "giveUp":

@@ -5,13 +5,7 @@ export function gameInit(useSaved = true) {
     ? JSON.parse(localStorage.getItem("thirdleState"))
     : undefined;
 
-  if (
-    savedState &&
-    savedState.hasOwnProperty("pattern") &&
-    savedState.hasOwnProperty("answers") &&
-    savedState.hasOwnProperty("currentGuess") &&
-    savedState.hasOwnProperty("result")
-  ) {
+  if (savedState && savedState.pattern && savedState.answers) {
     return {
       ...savedState,
       result: "",

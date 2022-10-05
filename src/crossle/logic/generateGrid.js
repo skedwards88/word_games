@@ -38,7 +38,6 @@ export function generateGrid({
 
   let letterCount = 0;
   let grid;
-  let solution;
   let orientationIsRows;
 
   while (letterCount < minLetters) {
@@ -46,7 +45,6 @@ export function generateGrid({
     grid = Array.from({ length: gridSize }, () =>
       Array.from({ length: gridSize }, () => "")
     );
-    solution = [];
     orientationIsRows = true;
 
     //
@@ -128,12 +126,10 @@ export function generateGrid({
             //   orientationIsRows: orientationIsRows,
             // });
             break;
-          } else {
           }
         }
         if (matchingWord) {
           break;
-        } else {
         }
       }
 

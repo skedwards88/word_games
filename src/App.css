@@ -79,17 +79,17 @@ input[type="checkbox" i]:checked {
 }
 
 /* Slider setting styling */
-input[type=range] {
+input[type="range"] {
   -webkit-appearance: none;
   width: 100%;
   background: var(--dark-color);
 }
-input[type=range]:focus {
+input[type="range"]:focus {
   outline: none;
 }
 
 /* Slider thumb */
-input[type=range]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: calc(var(--default-font-size) * 1.5);
   width: calc(var(--default-font-size) * 0.5);
@@ -99,15 +99,14 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
   margin-top: calc(var(--default-font-size) * -0.5);
 }
-input[type=range]::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
   height: calc(var(--default-font-size) * 1.5);
   width: calc(var(--default-font-size) * 0.5);
   border-radius: 2px;
   background: var(--light-color);
   box-shadow: 0 0 2px 2px black;
-
 }
-input[type=range]::-ms-thumb {
+input[type="range"]::-ms-thumb {
   height: calc(var(--default-font-size) * 1.5);
   width: calc(var(--default-font-size) * 0.5);
   border-radius: 2px;
@@ -117,37 +116,37 @@ input[type=range]::-ms-thumb {
 }
 
 /* Slider track */
-input[type=range]::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
   height: 2vh;
   cursor: pointer;
   background: var(--light-color);
   border-radius: 2px;
 }
-input[type=range]:focus::-webkit-slider-runnable-track {
+input[type="range"]:focus::-webkit-slider-runnable-track {
   background: var(--light-color);
 }
-input[type=range]::-moz-range-track {
+input[type="range"]::-moz-range-track {
   height: 2vh;
   cursor: pointer;
   background: var(--light-color);
   border-radius: 2px;
 }
-input[type=range]::-ms-track {
+input[type="range"]::-ms-track {
   height: 2vh;
   cursor: pointer;
   background: var(--light-color);
   border-radius: 2px;
 }
-input[type=range]::-ms-fill-lower {
+input[type="range"]::-ms-fill-lower {
   background: var(--light-color);
 }
-input[type=range]::-ms-fill-upper {
+input[type="range"]::-ms-fill-upper {
   background: var(--light-color);
 }
-input[type=range]:focus::-ms-fill-lower {
+input[type="range"]:focus::-ms-fill-lower {
   background: var(--light-color);
 }
-input[type=range]:focus::-ms-fill-upper {
+input[type="range"]:focus::-ms-fill-upper {
   background: var(--light-color);
 }
 
@@ -155,11 +154,11 @@ input[type=range]:focus::-ms-fill-upper {
   color: var(--light-color);
   font-size: calc(var(--default-font-size) / 1);
   padding: 0 1vh;
-  justify-content:center;
-  align-items:center;
+  justify-content: center;
+  align-items: center;
 }
 
-#numLetters-container{
+#numLetters-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -811,7 +810,6 @@ a {
   opacity: 0.5;
 }
 
-
 /* jigsaw-specific */
 
 #jigsaw {
@@ -824,7 +822,7 @@ a {
     auto
     1fr
     auto;
-    --box-size: calc(min(8vw, 5.5vh))
+  --box-size: calc(min(8vw, 5.5vh));
 }
 
 #jigsaw #board {
@@ -875,7 +873,8 @@ a {
   height: 100%;
   display: flex;
   overflow-x: scroll;
-  overflow-y: hidden;  flex-direction: row;
+  overflow-y: hidden;
+  flex-direction: row;
   min-height: calc(3 * var(--box-size));
 }
 
@@ -969,7 +968,7 @@ a {
     grid-template-areas: "board pool controls";
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
-    --box-size: calc(min(5.5vw, 8vh))
+    --box-size: calc(min(5.5vw, 8vh));
   }
 
   #jigsaw #board {
@@ -987,7 +986,7 @@ a {
     height: fit-content;
     width: 100%;
   }
-  
+
   #thirdle {
     grid-template-areas:
       "pattern controls"

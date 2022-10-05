@@ -77,7 +77,6 @@ function isSingleGroupingQ(grid) {
 }
 
 export function crosswordValidQ({ grid }) {
-
   const isSingleGrouping = isSingleGroupingQ(grid);
   if (!isSingleGrouping) {
     return {

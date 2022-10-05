@@ -26,7 +26,7 @@ export default function Settings({ dispatchGameState, gameState }) {
             <label htmlFor="numLetters">Number of pieces</label>
           </div>
           <div id="numLetters-container">
-          <div id="numLetters-info" className="setting-info">
+            <div id="numLetters-info" className="setting-info">
               –
             </div>
             <input

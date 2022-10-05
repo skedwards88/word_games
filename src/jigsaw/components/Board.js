@@ -24,10 +24,10 @@ function generateGridFromBoardPieces(boardPieces, gridSize) {
             relativeTop: rowIndex,
             relativeLeft: colIndex,
             pieceID: id,
-            borderTop: !Boolean(letters[rowIndex - 1]?.[colIndex]),
-            borderBottom: !Boolean(letters[rowIndex + 1]?.[colIndex]),
-            borderLeft: !Boolean(letters[rowIndex][colIndex - 1]),
-            borderRight: !Boolean(letters[rowIndex][colIndex + 1]),
+            borderTop: !letters[rowIndex - 1]?.[colIndex],
+            borderBottom: !letters[rowIndex + 1]?.[colIndex],
+            borderLeft: !letters[rowIndex][colIndex - 1],
+            borderRight: !letters[rowIndex][colIndex + 1],
             overlapping: overlapping,
           };
         }

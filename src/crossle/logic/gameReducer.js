@@ -238,7 +238,7 @@ export function gameReducer(currentGameState, payload) {
     );
 
     // Generate the new pool
-    newPoolLetters = sortLettersBy(newPoolLetters, currentGameState.sortBy)
+    newPoolLetters = sortLettersBy(newPoolLetters, currentGameState.sortBy);
     const positions = getPositionalFractions({
       poolLetters: newPoolLetters,
       maxLettersAcross: newBoard.length,

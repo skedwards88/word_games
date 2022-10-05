@@ -1,9 +1,9 @@
 import React from "react";
 import { crosswordValidQ } from "../../common/crosswordValidQ";
-import {partitionArray} from "../../common/partitionArray"
+import { partitionArray } from "../../common/partitionArray";
 
 export default function Result({ dropToken, board }) {
-  const grid = partitionArray(board, Math.sqrt(board.length))
+  const grid = partitionArray(board, Math.sqrt(board.length));
   const { gameIsSolved, reason } = crosswordValidQ({ grid: grid });
 
   return (
