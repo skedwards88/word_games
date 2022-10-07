@@ -19,7 +19,17 @@ function Palette({ setCurrentDisplay }) {
   }, [gameState]);
 
   return (
-    <div className="App" id="palette">
+    <div
+      className="App"
+      id="palette"
+      onPointerUp={(e) => {
+        e.preventDefault();
+
+        dispatchGameState({
+          action: "endWord",
+        });
+      }}
+    >
       <Clues
         clueMatches={gameState.clueMatches}
         hintLevel={gameState.hintLevel}

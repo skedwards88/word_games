@@ -74,14 +74,6 @@ export default function Board({
   gameOver,
   dispatchGameState,
 }) {
-  function handlePointerUp(e) {
-    e.preventDefault();
-
-    dispatchGameState({
-      action: "endWord",
-    });
-  }
-
   const board = letters.map((letter, index) => (
     <Letter
       letter={letter}
@@ -97,11 +89,7 @@ export default function Board({
   const numColumns = Math.sqrt(letters.length);
 
   return (
-    <div
-      id="board"
-      className={`rows${numColumns}`}
-      onPointerUp={(e) => handlePointerUp(e)}
-    >
+    <div id="board" className={`rows${numColumns}`}>
       {board}{" "}
     </div>
   );

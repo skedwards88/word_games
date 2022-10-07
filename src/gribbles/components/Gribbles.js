@@ -81,7 +81,17 @@ function Gribbles({ setCurrentDisplay }) {
   });
 
   return (
-    <div className="App" id="gribbles">
+    <div
+      className="App"
+      id="gribbles"
+      onPointerUp={(e) => {
+        e.preventDefault();
+
+        dispatchGameState({
+          action: "endWord",
+        });
+      }}
+    >
       <TimerBlocker
         timerState={timerState}
         timerDispatch={timerDispatch}
