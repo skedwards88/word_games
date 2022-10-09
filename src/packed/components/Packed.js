@@ -123,7 +123,7 @@ function Packed({ setCurrentDisplay }) {
           info={
             <div>
               {<h1>Packed</h1>}
-              {`Arrange the letters to make every column and every row a word`}
+              {`Arrange the letters to make every column and every row a word.`}
             </div>
           }
         ></Info>

@@ -80,7 +80,7 @@ function Palette({ setCurrentDisplay }) {
           info={
             <div>
               {<h1>Palette</h1>}
-              {`Connect letters to build words that match the given color patterns.`}
+              {`Build words that match the color patterns by swiping to connect adjacent letters.`}
             </div>
           }
         ></Info>

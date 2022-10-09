@@ -157,7 +157,7 @@ function Gribbles({ setCurrentDisplay }) {
           info={
             <div>
               {<h1>Gribbles</h1>}
-              {`\n\nConnect adjacent letters to build words. Can you find all the words before time is up?`}
+              {`\n\nBuild words by swiping to connect adjacent letters. Can you find all the words before time is up?`}
             </div>
           }
           sideEffectShow={() => timerDispatch({ action: "pause" })}
