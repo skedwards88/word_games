@@ -16,7 +16,13 @@ function pickRandom(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
+function getPlayableBoard({
+  gridSize,
+  minWordLength,
+  maxWordLength,
+  easyMode,
+  numClues,
+}) {
   const colorDistribution = ["red", "green", "blue"];
   let foundPlayableBoard = false;
   let letters;
@@ -27,10 +33,12 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
     // Pick a random assortment of letters and colors
     letters = getLetters(gridSize);
     colors = letters.map(() => pickRandom(colorDistribution));
+    clueIndexes = [];
 
     const wordIndexes = findAllWordIndexes({
       grid: letters,
       minWordLength: minWordLength,
+      maxWordLength: maxWordLength,
       easyMode: easyMode,
     });
 
@@ -38,11 +46,6 @@ function getPlayableBoard({ gridSize, minWordLength, easyMode, numClues }) {
 
     for (let index = 0; index < shuffledWordIndexes.length; index++) {
       const currentClue = shuffledWordIndexes[index];
-
-      // If word is not 4-6 long, skip
-      if (currentClue.length < 4 || currentClue.length > 6) {
-        continue;
-      }
 
       // If the color pattern of the clue is already used, skip
       const currentClueColors = currentClue.map((index) => colors[index]);
@@ -105,6 +108,7 @@ export function gameInit(useSaved = true) {
   if (
     savedState &&
     savedState.minWordLength &&
+    savedState.maxWordLength &&
     savedState.letters &&
     savedState.colors &&
     savedState.clueIndexes &&
@@ -119,19 +123,22 @@ export function gameInit(useSaved = true) {
 
   const easyMode = true;
   const minWordLength = 4;
+  const maxWordLength = 6;
   const gridSize = 4;
   const numClues = 5;
 
   const [letters, colors, clueIndexes] = getPlayableBoard({
-    gridSize,
-    minWordLength,
-    easyMode,
-    numClues,
+    gridSize: gridSize,
+    minWordLength: minWordLength,
+    maxWordLength: maxWordLength,
+    easyMode: easyMode,
+    numClues: numClues,
   });
   const clueMatches = clueIndexes.map(() => false);
 
   return {
     minWordLength: minWordLength,
+    maxWordLength: maxWordLength,
     letters: letters,
     colors: colors,
     clueIndexes: clueIndexes,

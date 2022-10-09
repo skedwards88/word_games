@@ -1,7 +1,12 @@
 import { getSurroundingIndexes } from "./getSurroundingIndexes";
 import { isKnown } from "./isKnown";
 
-export function findAllWordIndexes({ grid, minWordLength, easyMode }) {
+export function findAllWordIndexes({
+  grid,
+  minWordLength,
+  maxWordLength = 30,
+  easyMode,
+}) {
   let foundWordIndexes = [];
 
   const neighborIndexes = grid.map((_, index) =>
@@ -20,11 +25,19 @@ export function findAllWordIndexes({ grid, minWordLength, easyMode }) {
       const { isPartial, isWord, isEasy } = isKnown(newWord);
 
       if (easyMode) {
-        if (isEasy && newWord.length >= minWordLength) {
+        if (
+          isEasy &&
+          newWord.length >= minWordLength &&
+          newWord.length <= maxWordLength
+        ) {
           foundWordIndexes.push(newWordIndexes);
         }
       } else {
-        if (isWord && newWord.length >= minWordLength) {
+        if (
+          isWord &&
+          newWord.length >= minWordLength &&
+          newWord.length <= maxWordLength
+        ) {
           foundWordIndexes.push(newWordIndexes);
         }
       }
@@ -45,10 +58,16 @@ export function findAllWordIndexes({ grid, minWordLength, easyMode }) {
   return foundWordIndexes;
 }
 
-export function findAllWords({ grid, minWordLength, easyMode }) {
+export function findAllWords({
+  grid,
+  minWordLength,
+  maxWordLength = 30,
+  easyMode,
+}) {
   const foundWordIndexes = findAllWordIndexes({
     grid: grid,
     minWordLength: minWordLength,
+    maxWordLength: maxWordLength,
     easyMode: easyMode,
   });
   const foundWords = foundWordIndexes.map((indexList) =>
