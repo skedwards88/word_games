@@ -19,10 +19,7 @@ export function timerReducer(currentTimerState, payload) {
     };
   }
   if (payload.action === "reset") {
-    return timerInit({
-      gameLength: payload.gameLength,
-      bonusTime: payload.bonusTime,
-    });
+    return timerInit({ ...payload, useSaved: false });
   }
   if (payload.action === "play") {
     return { ...currentTimerState, isRunning: true };

@@ -4,7 +4,7 @@ import { checkIfNeighbors } from "../../common/checkIfNeighbors";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
-    return gameInit(payload);
+    return gameInit({ ...payload, useSaved: false });
   }
 
   if (payload.action === "startWord") {

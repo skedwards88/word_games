@@ -34,12 +34,38 @@ function getPlayableLetters({ gridSize, minWordLength, easyMode }) {
   return [letters, allWords];
 }
 
-export function gameInit({ gridSize, minWordLength, easyMode }) {
+export function gameInit({
+  gridSize,
+  minWordLength,
+  easyMode,
+  useSaved = true,
+}) {
+  const savedGameState = useSaved
+    ? JSON.parse(localStorage.getItem("gribblesGameState"))
+    : undefined;
+
+  const savedTimerState = useSaved
+    ? JSON.parse(localStorage.getItem("gribblesTimerState"))
+    : undefined;
+
+  if (
+    savedGameState &&
+    savedTimerState &&
+    savedTimerState.remainingTime > 0 &&
+    savedGameState.foundWords &&
+    savedGameState.bonusWordCount >= 0 &&
+    savedGameState.minWordLength &&
+    savedGameState.letters &&
+    savedGameState.allWords &&
+    savedGameState.easyMode
+  ) {
+    return { ...savedGameState, playedIndexes: [], result: "" };
+  }
+
   // use the specified settings, otherwise check local storage, otherwise use default
-  gridSize = gridSize || JSON.parse(localStorage.getItem("gridSize")) || 4;
-  minWordLength =
-    minWordLength || JSON.parse(localStorage.getItem("minWordLength")) || 3;
-  easyMode = easyMode ?? JSON.parse(localStorage.getItem("easyMode")) ?? false;
+  gridSize = gridSize || Math.sqrt(savedGameState?.letters?.length) || 4;
+  minWordLength = minWordLength || savedGameState?.minWordLength || 3;
+  easyMode = easyMode ?? savedGameState?.easyMode ?? true;
 
   const [letters, allWords] = getPlayableLetters({
     gridSize: gridSize,

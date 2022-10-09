@@ -33,36 +33,15 @@ function Gribbles({ setCurrentDisplay }) {
   }, [gameState.foundWords]);
 
   React.useEffect(() => {
-    window.localStorage.setItem(
-      "gridSize",
-      JSON.stringify(Math.sqrt(gameState.letters.length))
-    );
-  }, [gameState.letters]);
-
-  React.useEffect(() => {
-    window.localStorage.setItem("easyMode", JSON.stringify(gameState.easyMode));
-  }, [gameState.easyMode]);
+    window.localStorage.setItem("gribblesGameState", JSON.stringify(gameState));
+  }, [gameState]);
 
   React.useEffect(() => {
     window.localStorage.setItem(
-      "minWordLength",
-      JSON.stringify(gameState.minWordLength)
+      "gribblesTimerState",
+      JSON.stringify(timerState)
     );
-  }, [gameState.minWordLength]);
-
-  React.useEffect(() => {
-    window.localStorage.setItem(
-      "gameLength",
-      JSON.stringify(timerState.gameLength)
-    );
-  }, [timerState.gameLength]);
-
-  React.useEffect(() => {
-    window.localStorage.setItem(
-      "bonusTime",
-      JSON.stringify(timerState.bonusTime)
-    );
-  }, [timerState.bonusTime]);
+  }, [timerState]);
 
   function handleVisibilityChange() {
     // Pause the timer if the page is hidden
