@@ -2,8 +2,6 @@
 
 A collection of word games.
 
-**Intended for touch screen only; does not work on desktop.**
-
 **Players:** 1
 
 **Time:** 5 minutes
