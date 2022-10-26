@@ -4,11 +4,11 @@ import Pool from "./Pool";
 import Result from "./Result";
 import Board from "./Board";
 import Settings from "./Settings";
-import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
 import { gameReducer } from "../logic/gameReducer";
+import { Link } from "react-router-dom";
 
-function Jigsaw({ setCurrentDisplay }) {
+function Jigsaw() {
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
     {},
@@ -149,10 +149,7 @@ function Jigsaw({ setCurrentDisplay }) {
             </div>
           }
         ></Info>
-        <button
-          id="homeButton"
-          onClick={() => setCurrentDisplay(gameIndex.Home)}
-        ></button>
+        <Link to={`/`} id="homeButton"></Link>
       </div>
     </div>
   );

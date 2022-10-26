@@ -4,10 +4,10 @@ import Pool from "./Pool";
 import Board from "./Board";
 import Settings from "./Settings";
 import { Result } from "./Result";
-import { gameIndex } from "../../gameIndex";
 import { gameInit } from "../logic/gameInit";
 import { gameReducer } from "../logic/gameReducer";
 import { getGameOver, getBoardIsFull } from "../logic/getGameOver";
+import { Link } from "react-router-dom";
 
 export function dragToken({ event, letter, index, dragArea }) {
   event.dataTransfer.setData("letter", letter);
@@ -18,7 +18,7 @@ export function dragToken({ event, letter, index, dragArea }) {
   event.target.classList.add("dragging");
 }
 
-function Packed({ setCurrentDisplay }) {
+function Packed() {
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
     {},
@@ -127,10 +127,7 @@ function Packed({ setCurrentDisplay }) {
             </div>
           }
         ></Info>
-        <button
-          id="homeButton"
-          onClick={() => setCurrentDisplay(gameIndex.Home)}
-        ></button>
+        <Link to={`/`} id="homeButton"></Link>
       </div>
     </div>
   );
