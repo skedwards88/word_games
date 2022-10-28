@@ -296,6 +296,9 @@ input[type="range"]:focus::-ms-fill-upper {
   background-image: url("./images/home.svg");
 }
 
+a {
+  color: var(--light-color);
+}
 /* Home */
 
 #home {
