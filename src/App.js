@@ -8,27 +8,27 @@ const App = () => {
   return (
     <div className="App" id="home">
       <div id="games">
-        <Link to={`palette`} className="gameButton">
+        <Link draggable={false} to={`palette`} className="gameButton">
           <div className="gameIcon" id="palette_icon"></div>
           <div>Palette</div>
         </Link>
-        <Link to={`gribbles`} className="gameButton">
+        <Link draggable={false}  to={`gribbles`} className="gameButton">
           <div className="gameIcon" id="gribbles_icon"></div>
           <div>Gribbles</div>
         </Link>
-        <Link to={`jigsaw`} className="gameButton">
+        <Link draggable={false}  to={`jigsaw`} className="gameButton">
           <div className="gameIcon" id="jigsaw_icon"></div>
           <div>Jigsaw</div>
         </Link>
-        <Link to={`crossle`} className="gameButton">
+        <Link draggable={false}  to={`crossle`} className="gameButton">
           <div className="gameIcon" id="crossle_icon"></div>
           <div>Crossle</div>
         </Link>
-        <Link to={`packed`} className="gameButton">
+        <Link draggable={false}  to={`packed`} className="gameButton">
           <div className="gameIcon" id="packed_icon"></div>
           <div>Packed</div>
         </Link>
-        <Link to={`thirdle`} className="gameButton">
+        <Link draggable={false}  to={`thirdle`} className="gameButton">
           <div className="gameIcon" id="thirdle_icon"></div>
           <div>Thirdle</div>
         </Link>
