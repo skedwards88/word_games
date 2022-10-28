@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App.js";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import ErrorPage from "./errorPage.js";
 import Gribbles from "./gribbles/components/Gribbles";
 import Thirdle from "./thirdle/components/Thirdle";
@@ -10,7 +10,7 @@ import Packed from "./packed/components/Packed";
 import Crossle from "./crossle/components/Crossle";
 import Jigsaw from "./jigsaw/components/Jigsaw";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <App />,
