@@ -3,7 +3,7 @@ html {
   height: 100%;
 }
 
-.App {
+#root {
   --default-font-size: min(4vmax, 7vmin);
   --dark-color: rgb(5 5 95);
   --light-color: rgb(239 239 239);
@@ -17,6 +17,15 @@ html {
   top: 0;
   height: 100%;
   width: 100%;
+}
+
+#error-page {
+  text-align: center;
+}
+
+#error-text {
+  font-style: italic;
+  font-size: calc(var(--default-font-size) * 0.75);
 }
 
 h1 {
@@ -278,13 +287,18 @@ input[type="range"]:focus::-ms-fill-upper {
 }
 
 #homeButton {
+  padding: 1px 6px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 50%;
+  height: 50%;
   background-image: url("./images/home.svg");
 }
 
 a {
   color: var(--light-color);
 }
-
 /* Home */
 
 #home {

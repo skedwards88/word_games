@@ -10,9 +10,9 @@ import Score from "./Score";
 import { timerInit } from "../logic/timerInit";
 import { timerReducer } from "../logic/timerReducer";
 import { gameReducer } from "../logic/gameReducer";
-import { gameIndex } from "../../gameIndex";
+import { Link } from "react-router-dom";
 
-function Gribbles({ setCurrentDisplay }) {
+function Gribbles() {
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
     {},
@@ -142,10 +142,7 @@ function Gribbles({ setCurrentDisplay }) {
           sideEffectShow={() => timerDispatch({ action: "pause" })}
           sideEffectHide={() => timerDispatch({ action: "play" })}
         ></Info>
-        <button
-          id="homeButton"
-          onClick={() => setCurrentDisplay(gameIndex.Home)}
-        ></button>
+        <Link to={`/`} id="homeButton"></Link>
       </div>
     </div>
   );

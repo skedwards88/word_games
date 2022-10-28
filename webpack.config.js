@@ -64,7 +64,7 @@ module.exports = (env, argv) => {
   resolve: { extensions: ["*", ".js", ".jsx"] },
   output: {
     publicPath: "",
-    filename: "bundle.js",
+    filename: "bundle.[hash].js",
     path: path.resolve(__dirname, "dist"),
     clean: true, // removes unused files from output dir
   },
@@ -74,6 +74,7 @@ module.exports = (env, argv) => {
   },
   devServer: {
     static: "./dist",
+    historyApiFallback: true,
   },
   plugins: plugins,
 }
