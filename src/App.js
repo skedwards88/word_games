@@ -37,7 +37,7 @@ const App = () => {
         <Info
           info={
             <div id="info">
-              {`Word Games (beta ${packageJson.version})\n\nInstall or add to home screen for offline play!\n\nWant more games?\nCheck `}
+              {`Word Games (version ${packageJson.version})\n\nInstall or add to home screen for offline play!\n\nWant more games?\nCheck `}
               <a href="https://skedwards88.github.io/portfolio/">these</a>
               {` out. `}
               {<hr></hr>}

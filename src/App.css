@@ -4,7 +4,7 @@ html {
 }
 
 .App {
-  --default-font-size: min(4vmax, 7vmin);
+  --default-font-size: min(1cm, min(4vmax, 7vmin));
   --dark-color: rgb(5 5 95);
   --light-color: rgb(239 239 239);
   background-color: var(--dark-color);
@@ -332,6 +332,8 @@ a {
   flex-direction: column;
   height: fit-content;
   width: fit-content;
+  font-style: normal;
+  text-decoration: none;
 }
 
 #home .gameIcon {

@@ -19,7 +19,7 @@ export default function Info({ info, sideEffectShow, sideEffectHide }) {
     <div className="modal">
       <div id="info">{info}</div>
       <button className="close" onClick={() => handleShowInfo()}>
-        CLOSE
+        PLAY
       </button>
     </div>
   ) : (
