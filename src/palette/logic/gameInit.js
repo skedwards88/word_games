@@ -23,7 +23,7 @@ function getPlayableBoard({
   easyMode,
   numClues,
 }) {
-  const colorDistribution = ["red", "green", "blue"];
+  const colorDistribution = ["red", "green", "yellow"];
   let foundPlayableBoard = false;
   let letters;
   let colors;
