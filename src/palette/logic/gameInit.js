@@ -16,6 +16,14 @@ function pickRandom(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
+function tallyColors(colors = []) {
+  let tally = {};
+  colors.forEach(
+    (color) => (tally[color] = tally[color] ? tally[color] + 1 : 1)
+  );
+  return tally;
+}
+
 function getPlayableBoard({
   gridSize,
   minWordLength,
@@ -25,14 +33,22 @@ function getPlayableBoard({
 }) {
   const colorDistribution = ["red", "green", "yellow"];
   let foundPlayableBoard = false;
-  let letters;
-  let colors;
+  let letters = [];
+  let colors = [];
   let clueIndexes = [];
 
   while (!foundPlayableBoard) {
     // Pick a random assortment of letters and colors
     letters = getLetters(gridSize);
-    colors = letters.map(() => pickRandom(colorDistribution));
+    // make sure that we have at least 4 of each color
+    let colorTally = {};
+    while (
+      Object.values(colorTally).length < colorDistribution.length ||
+      Object.values(colorTally).some((i) => i < 4)
+    ) {
+      colors = letters.map(() => pickRandom(colorDistribution));
+      colorTally = tallyColors(colors);
+    }
     clueIndexes = [];
 
     const wordIndexes = findAllWordIndexes({
