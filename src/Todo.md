@@ -8,12 +8,11 @@
 - enums
 - multiplayer play or way to share?
 - errors/error boundaries
-- curate common list
 - make styling per file
 - add install button https://web.dev/customize-install/
+- put on app stores (one app per game?)
 - add test to make sure common exclusion/additions don't share words
 - add way to share url with specific game settings
-- add way to track metrics
 
 ## Crossle
 
@@ -25,8 +24,6 @@
 
 - tests
 - piece rotation
-- hints
-- remove new game/bug note
 - transpose grid/game solved logic will only work for square grid
 - allow to lock/unlock joined pieces?
 
@@ -42,6 +39,7 @@
 ## Palette
 
 - change color scheme? Or allow as a setting?
+- add a way to control difficulty? e.g. min word length, total num letters in clues, color connectedness, word frequency, number of possible solutions
 
 ## Packed
 
