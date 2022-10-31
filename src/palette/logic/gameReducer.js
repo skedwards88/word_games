@@ -6,17 +6,13 @@ import { arraysMatchQ } from "../../common/arraysMatchQ";
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
     return gameInit(false);
-  }
-
-  if (payload.action === "startWord") {
+  } else if (payload.action === "startWord") {
     return {
       ...currentGameState,
       wordInProgress: true,
       playedIndexes: [payload.letterIndex],
     };
-  }
-
-  if (payload.action === "hint") {
+  } else if (payload.action === "hint") {
     let newHintLevel = currentGameState.hintLevel + 1;
 
     // If the hit level exceeds the length of any of the clues, that clue is fully solved
@@ -43,9 +39,7 @@ export function gameReducer(currentGameState, payload) {
       hintLevel: newHintLevel,
       clueMatches: newClueMatches,
     };
-  }
-
-  if (payload.action === "addLetter") {
+  } else if (payload.action === "addLetter") {
     if (!currentGameState.wordInProgress) {
       return currentGameState;
     }
@@ -71,9 +65,7 @@ export function gameReducer(currentGameState, payload) {
       ...currentGameState,
       playedIndexes: newPlayedIndexes,
     };
-  }
-
-  if (payload.action === "endWord") {
+  } else if (payload.action === "endWord") {
     // if the word is below the min length, don't add the word
     if (
       currentGameState.playedIndexes.length < currentGameState.minWordLength
@@ -136,5 +128,8 @@ export function gameReducer(currentGameState, payload) {
       clueIndexes: clueIndexes,
       wordInProgress: false,
     };
+  } else {
+    console.log(`unknown action: ${payload.action}`);
+    return { ...currentGameState };
   }
 }

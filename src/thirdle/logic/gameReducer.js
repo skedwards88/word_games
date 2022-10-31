@@ -44,5 +44,9 @@ export function gameReducer(currentState, payload) {
 
     case "newGame":
       return gameInit(false);
+
+    default:
+      console.log(`unknown action: ${payload.action}`);
+      return { ...currentState };
   }
 }

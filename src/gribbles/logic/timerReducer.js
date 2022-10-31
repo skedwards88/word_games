@@ -8,8 +8,7 @@ export function timerReducer(currentTimerState, payload) {
       remainingTime: newRemainingTime,
       isRunning: newRemainingTime > 0 ? currentTimerState.isRunning : false,
     };
-  }
-  if (payload.action === "increment") {
+  } else if (payload.action === "increment") {
     const newRemainingTime =
       currentTimerState.remainingTime + currentTimerState.bonusTime;
     return {
@@ -17,16 +16,14 @@ export function timerReducer(currentTimerState, payload) {
       remainingTime: newRemainingTime,
       isRunning: newRemainingTime > 0 ? currentTimerState.isRunning : false,
     };
-  }
-  if (payload.action === "reset") {
+  } else if (payload.action === "reset") {
     return timerInit({ ...payload, useSaved: false });
-  }
-  if (payload.action === "play") {
+  } else if (payload.action === "play") {
     return { ...currentTimerState, isRunning: true };
-  }
-  if (payload.action === "pause") {
+  } else if (payload.action === "pause") {
     return { ...currentTimerState, isRunning: false };
+  } else {
+    console.log(`unknown action: ${payload.action}`);
+    return { ...currentTimerState };
   }
-  // todo make this an error
-  console.log(`unknown ${console.log(JSON.stringify(payload))}`);
 }

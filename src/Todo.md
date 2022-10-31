@@ -2,23 +2,18 @@
 
 ## General
 
--> palette rare bug?
--> make work on desktop
-
+- upgrade to react 18
 - set up precommit hooks to auto run linters and tests
 - set up autodeploy and tests
 - enums
 - multiplayer play or way to share?
 - errors/error boundaries
-- works on desktop too?
 - curate common list
 - make styling per file
 - add install button https://web.dev/customize-install/
 - add test to make sure common exclusion/additions don't share words
-- add way to share app url
 - add way to share url with specific game settings
 - add way to track metrics
-- TODO! in all reducers, use else if instead of if, otherwise risk double execution
 
 ## Crossle
 

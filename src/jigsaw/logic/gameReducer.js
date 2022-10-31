@@ -220,7 +220,8 @@ export function gameReducer(currentGameState, payload) {
       pieces: newPieces,
       dragData: payload.action === "dropOnBoard" ? {} : dragData,
     };
+  } else {
+    console.log(`unknown action: ${payload.action}`);
+    return { ...currentGameState };
   }
-
-  return { ...currentGameState };
 }

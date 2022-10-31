@@ -50,9 +50,7 @@ export function gameReducer(currentGameState, payload) {
       board: newBoard,
       pool: newPool,
     };
-  }
-
-  if (payload.action === "dropOnBoard") {
+  } else if (payload.action === "dropOnBoard") {
     let newBoard = [...currentGameState.board];
     let newPool = [...currentGameState.pool];
     const initialLetterAtDrag = payload.letter;
@@ -97,9 +95,7 @@ export function gameReducer(currentGameState, payload) {
       board: newBoard,
       pool: newPool,
     };
-  }
-
-  if (payload.action === "getHint") {
+  } else if (payload.action === "getHint") {
     let newLocked = [...currentGameState.locked];
     let newBoard = [...currentGameState.board];
     let newPool = [];
@@ -153,11 +149,10 @@ export function gameReducer(currentGameState, payload) {
       board: newBoard,
       pool: newPool,
     };
-  }
-
-  if (payload.action === "newGame") {
+  } else if (payload.action === "newGame") {
     return gameInit({ ...payload, useSaved: false });
+  } else {
+    console.log(`unknown action: ${payload.action}`);
+    return { ...currentGameState };
   }
-
-  return { ...currentGameState };
 }

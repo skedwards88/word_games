@@ -5,17 +5,13 @@ import { checkIfNeighbors } from "../../common/checkIfNeighbors";
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
     return gameInit({ ...payload, useSaved: false });
-  }
-
-  if (payload.action === "startWord") {
+  } else if (payload.action === "startWord") {
     return {
       ...currentGameState,
       wordInProgress: true,
       playedIndexes: [payload.letterIndex],
     };
-  }
-
-  if (payload.action === "addLetter") {
+  } else if (payload.action === "addLetter") {
     if (!currentGameState.wordInProgress) {
       return currentGameState;
     }
@@ -42,9 +38,7 @@ export function gameReducer(currentGameState, payload) {
       playedIndexes: newPlayedIndexes,
       result: "",
     };
-  }
-
-  if (payload.action === "endWord") {
+  } else if (payload.action === "endWord") {
     const newWord = currentGameState.playedIndexes
       .map((index) => currentGameState.letters[index])
       .join("")
@@ -97,5 +91,8 @@ export function gameReducer(currentGameState, payload) {
       playedIndexes: [],
       bonusWordCount: newBonusWordCount,
     };
+  } else {
+    console.log(`unknown action: ${payload.action}`);
+    return { ...currentGameState };
   }
 }
