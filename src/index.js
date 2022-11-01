@@ -1,5 +1,5 @@
+import { createRoot } from "react-dom/client";
 import React from "react";
-import ReactDOM from "react-dom";
 import App from "./App.js";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import ErrorPage from "./errorPage.js";
@@ -60,9 +60,10 @@ if (process.env.NODE_ENV !== "development" && "serviceWorker" in navigator) {
   });
 }
 
-ReactDOM.render(
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
