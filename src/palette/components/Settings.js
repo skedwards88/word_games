@@ -24,6 +24,9 @@ export default function Settings({ dispatchGameState, gameState }) {
         <div className="setting">
           <div className="setting-description">
             <label htmlFor="minWordLength">Min word length</label>
+            <div className="setting-info">
+              Answers will have at least this many letters.
+            </div>
           </div>
           <select
             id="minWordLength"
@@ -31,6 +34,7 @@ export default function Settings({ dispatchGameState, gameState }) {
           >
             <option value="4">4</option>
             <option value="5">5</option>
+            <option value="6">6</option>
           </select>
         </div>
       </div>
