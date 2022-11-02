@@ -116,7 +116,7 @@ function getPlayableBoard({
   return [letters, colors, clueIndexes];
 }
 
-export function gameInit(useSaved = true) {
+export function gameInit({minWordLength, useSaved = true}) {
   const savedState = useSaved
     ? JSON.parse(localStorage.getItem("paletteState"))
     : undefined;
@@ -138,7 +138,7 @@ export function gameInit(useSaved = true) {
   }
 
   const easyMode = true;
-  const minWordLength = 4;
+  minWordLength = minWordLength || 4;
   const maxWordLength = 6;
   const gridSize = 4;
   const numClues = 5;

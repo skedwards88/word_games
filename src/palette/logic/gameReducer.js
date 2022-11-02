@@ -5,7 +5,7 @@ import { arraysMatchQ } from "../../common/arraysMatchQ";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
-    return gameInit(false);
+    return gameInit({ ...payload, useSaved: false });
   } else if (payload.action === "startWord") {
     return {
       ...currentGameState,

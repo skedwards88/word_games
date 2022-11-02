@@ -6,6 +6,7 @@ import { gameReducer } from "../logic/gameReducer";
 import Clues from "./Clues";
 import CurrentWord from "./CurrentWord";
 import { Link } from "react-router-dom";
+import Settings from "./Settings";
 
 function Palette() {
   const [gameState, dispatchGameState] = React.useReducer(
@@ -76,6 +77,7 @@ function Palette() {
           disabled={gameState.clueMatches.every((i) => i)}
           onClick={() => dispatchGameState({ action: "hint" })}
         ></button>
+        <Settings dispatchGameState={dispatchGameState} gameState={gameState} />
         <Info
           info={
             <div>
