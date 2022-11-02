@@ -39,6 +39,12 @@ export function gameReducer(currentGameState, payload) {
       result: "",
     };
   } else if (payload.action === "endWord") {
+    // Since we end the word on board up or on app up (in case the user swipes off the board), we can end up calling this case twice.
+    // Return early if we no longer have a word in progress.
+    if (!currentGameState.wordInProgress) {
+      return currentGameState;
+    }
+
     const newWord = currentGameState.playedIndexes
       .map((index) => currentGameState.letters[index])
       .join("")
