@@ -37,7 +37,8 @@ const App = () => {
         <Info
           info={
             <div id="info">
-              {`Word Games (version ${packageJson.version})\n\nInstall or add to home screen for offline play!\n\nWant more games?\nCheck `}
+              <h1>Word Games</h1>
+              {`Install or add to home screen for offline play!\n\nWant more games?\nCheck `}
               <a href="https://skedwards88.github.io/portfolio/">these</a>
               {` out. `}
               {<hr></hr>}
@@ -48,6 +49,8 @@ const App = () => {
                 Wiktionary
               </a>
               {` and data therein for word frequency data.`}
+              {<hr></hr>}
+              <small> {`version ${packageJson.version}`}</small>
             </div>
           }
         />
