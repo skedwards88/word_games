@@ -38,7 +38,6 @@ function getPlayableBoard({
   let clueIndexes = [];
 
   while (!foundPlayableBoard) {
-    console.log("loop")
     // Pick a random assortment of letters and colors
     letters = getLetters(gridSize);
     // make sure that we have at least 4 of each color
