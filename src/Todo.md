@@ -26,6 +26,7 @@
 - piece rotation
 - transpose grid/game solved logic will only work for square grid
 - allow to lock/unlock joined pieces?
+- not working on ipad?
 
 ## Gribbles
 

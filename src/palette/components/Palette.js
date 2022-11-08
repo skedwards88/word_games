@@ -83,6 +83,12 @@ function Palette() {
             <div>
               {<h1>Palette</h1>}
               {`Build words that match the color patterns by swiping to connect adjacent letters.`}
+              {`\n\n`}
+              {<hr></hr>}
+              {`\n`}
+              {`Do you want a daily version of this game? Check out `}
+              <a href="https://palettegame.com">Palette</a>
+              {`.`}
             </div>
           }
         ></Info>
