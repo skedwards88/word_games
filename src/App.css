@@ -17,6 +17,7 @@ html {
   top: 0;
   height: 100%;
   width: 100%;
+  overflow: scroll;
 }
 
 #error-page {
@@ -181,6 +182,7 @@ input[type="range"]:focus::-ms-fill-upper {
   grid-area: controls;
   width: 100%;
   height: 5vh;
+  border-bottom: 2px solid var(--light-color);
 }
 
 #controls > button, #homeButton {
@@ -206,6 +208,10 @@ input[type="range"]:focus::-ms-fill-upper {
 #info {
   white-space: pre-line;
   padding: 5vmin;
+}
+
+.close {
+  margin-bottom: 2vh;
 }
 
 #settingsButton {
