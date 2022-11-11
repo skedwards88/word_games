@@ -82,7 +82,7 @@ function Palette() {
           info={
             <div>
               {<h1>Palette</h1>}
-              {`Build words that match the color patterns by swiping to connect adjacent letters.`}
+              {`Swipe to connect letters into words that match the color patterns.`}
               {`\n\n`}
               {<hr></hr>}
               {`\n`}
