@@ -87,7 +87,7 @@ function Palette() {
               {<hr></hr>}
               {`\n`}
               {`Do you want a daily version of this game? Check out `}
-              <a href="https://palettegame.com">Palette</a>
+              <a href="https://palettegame.com">palettegame.com</a>
               {`.`}
             </div>
           }
