@@ -1,6 +1,6 @@
 {
   "name": "word_games",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "description": "",
   "main": "index.js",
   "scripts": {
