@@ -16,10 +16,10 @@ function pickRandom(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-function tallyColors(colors = []) {
+function tallyItems(items = []) {
   let tally = {};
-  colors.forEach(
-    (color) => (tally[color] = tally[color] ? tally[color] + 1 : 1)
+  items.forEach(
+    (item) => (tally[item] = tally[item] ? tally[item] + 1 : 1)
   );
   return tally;
 }
@@ -40,6 +40,14 @@ function getPlayableBoard({
   while (!foundPlayableBoard) {
     // Pick a random assortment of letters and colors
     letters = getLetters(gridSize);
+    // If there are more than 3 of a single letter, restart
+    // (It would be more efficient to do this as we draw, 
+    // but it's not a big loss to just check here.)
+    const letterTally = tallyItems(letters);
+    if (Object.values(letterTally).some(i => i > 3)) {
+      continue
+    }
+
     // make sure that we have at least 4 of each color
     let colorTally = {};
     while (
@@ -47,18 +55,21 @@ function getPlayableBoard({
       Object.values(colorTally).some((i) => i < 4)
     ) {
       colors = letters.map(() => pickRandom(colorDistribution));
-      colorTally = tallyColors(colors);
+      colorTally = tallyItems(colors);
     }
-    clueIndexes = [];
 
+    // find all possible words
     const wordIndexes = findAllWordIndexes({
       grid: letters,
       minWordLength: minWordLength,
       maxWordLength: maxWordLength,
       easyMode: easyMode,
     });
-
     const shuffledWordIndexes = shuffleArray(wordIndexes);
+    
+    // assemble the clues by going through each word and,
+    // if the word/clue isn't too similar, add it to the clue list
+    clueIndexes = [];
 
     for (let index = 0; index < shuffledWordIndexes.length; index++) {
       const currentClue = shuffledWordIndexes[index];
@@ -75,27 +86,59 @@ function getPlayableBoard({
         continue;
       }
 
-      // If the same word (including plurals) is already used, skip
+      // If the first two letters, last two letters, or any stretch of 3 letters
+      // is already used in another word of the same length, skip
+      // (to keep answers from being too similar)
       const currentWord = currentClue.map((index) => letters[index]).join("");
       const foundCluesWords = clueIndexes.map((clue) =>
         clue.map((index) => letters[index]).join("")
       );
-      let duplicateWord = false;
+      const foundCluesWordsOfSameLength = foundCluesWords.filter(clue => clue.length === currentWord.length);
+      
+      let indexesToCompare = []
+      for (let index = 0; index <= currentWord.length - 2; index++) {
+        if (index === 0) {
+          indexesToCompare.push([index, index + 1])
+        } else if (index === currentWord.length - 2) {
+          indexesToCompare.push([index, index + 1])
+        } else
+        indexesToCompare.push([index, index + 1, index + 2])
+      }
+      
+      let tooSimilar = false;
+      for (let index = 0; index < indexesToCompare.length; index++) {
+        const comparisonIndex = indexesToCompare[index];
+        const firstIndex = comparisonIndex[0]
+        const lastIndex = comparisonIndex[comparisonIndex.length - 1] + 1;
+        const comparisonSnippets = foundCluesWordsOfSameLength.map(i=>i.slice(firstIndex, lastIndex))
+        if (comparisonSnippets.includes(currentWord.slice(firstIndex, lastIndex))) {
+          tooSimilar = true
+          break
+        }
+      }
+      if (tooSimilar) {
+        continue
+      }
+
+      // If the new word is a plural or singular of an existing word, skip
+      // (This isn't covered by the above check, which only looks at clues of the same length)
+      const foundCluesWordsLengthOffOne = foundCluesWords.filter(clue => ((clue.length === currentWord.length + 1) || clue.length === currentWord.length - 1));
+      
+      let pluralDuplicate = false;
       for (
         let comparisonIndex = 0;
-        comparisonIndex < foundCluesWords.length;
+        comparisonIndex < foundCluesWordsLengthOffOne.length;
         comparisonIndex++
       ) {
         if (
-          foundCluesWords[comparisonIndex] === currentWord ||
-          foundCluesWords[comparisonIndex] + "S" === currentWord ||
-          foundCluesWords[comparisonIndex] === currentWord + "S"
+          foundCluesWordsLengthOffOne[comparisonIndex] + "S" === currentWord ||
+          foundCluesWordsLengthOffOne[comparisonIndex] === currentWord + "S"
         ) {
-          duplicateWord = true;
+          pluralDuplicate = true;
           break;
         }
       }
-      if (duplicateWord) {
+      if (pluralDuplicate) {
         continue;
       }
 
