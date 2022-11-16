@@ -2,6 +2,7 @@
 
 ## General
 
+- get rid of modal styling and instead return different components (like in daily palette)
 - upgrade to react 18
 - set up precommit hooks to auto run linters and tests
 - set up autodeploy and tests
