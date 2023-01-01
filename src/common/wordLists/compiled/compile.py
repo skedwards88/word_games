@@ -39,7 +39,7 @@ def getCommonWords():
 
 def getAllWords():
   wordnik = []
-  with open(f"{root}raw/wordnik.txt", "r") as file:
+  with open(f"{root}processed/wordnik.txt", "r") as file:
     for line in file:
       wordnik.append(line.strip())
 

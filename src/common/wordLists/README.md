@@ -12,13 +12,15 @@
 
 ## Processed word lists
 
-Files were processed into files that contain words that also exist in the Wordnik list.
+Files were processed into files that contain words that also exist in the Wordnik list but not the LDNOOBW word list.
 
-`processed/gutenberg.txt` is `raw/gutenberg.txt` minus words that do not exist in `raw/wordnik.txt`, minus words from `LDNOOBW.txt`. `processed/gutenberg_processor.py` is the script that generated this file.
+`processed/wordnik.txt` is `raw/wordnik.txt` minus words from `LDNOOBW.txt`. `processed/wordnik_processor.py` is the script that generated this file.
 
-`processed/movies.txt` is `raw/movies.txt` minus words that do not exist in `raw/wordnik.txt`, minus words from `LDNOOBW.txt`. `processed/movies_processor.py` is the script that generated this file.
+`processed/gutenberg.txt` is `raw/gutenberg.txt` minus words that do not exist in `processed/wordnik.txt`. `processed/gutenberg_processor.py` is the script that generated this file.
 
-`processed/wiki.txt` is `raw/wiki.txt`, minus words that words that do not exist in `raw/wordnik.txt` or that are used < 1000 times on Wikipedia, minus words from `LDNOOBW.txt`. `processed/wiki_frequency_processor.py` is the script that generated this file.
+`processed/movies.txt` is `raw/movies.txt` minus words that do not exist in `processed/wordnik.txt`. `processed/movies_processor.py` is the script that generated this file.
+
+`processed/wiki.txt` is `raw/wiki.txt`, minus words that words that do not exist in `processed/wordnik.txt`. `processed/wiki_frequency_processor.py` is the script that generated this file.
 
 ## Compiled word lists
 

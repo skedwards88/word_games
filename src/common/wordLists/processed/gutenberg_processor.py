@@ -1,7 +1,7 @@
 root = "src/common/wordLists/"
 
 wordnik = []
-with open(f"{root}raw/wordnik.txt", "r") as file:
+with open(f"{root}processed/wordnik.txt", "r") as file:
   for line in file:
     wordnik.append(line.strip())
 
@@ -13,15 +13,9 @@ with open(f"{root}raw/gutenberg.txt", "r") as inFile:
       continue
     gutenberg.append(word.upper())
 
-offensive = []
-with open(f"{root}raw/LDNOOBW.txt", "r") as file:
-  for line in file:
-    offensive.append(line.strip().upper())
-
 common = list(set(gutenberg).intersection(set(wordnik)))
-commonMinusOffensive = list(set(common).difference(set(offensive)))
-commonMinusOffensive.sort()
+common.sort()
 
 with open(f"{root}processed/gutenberg.txt", "w") as file:
-  for word in commonMinusOffensive:
+  for word in common:
     file.writelines(f"{word}\n")
