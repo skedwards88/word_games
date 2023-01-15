@@ -10,10 +10,12 @@
 - multiplayer play or way to share?
 - errors/error boundaries
 - make styling per file
-- add install button https://web.dev/customize-install/
 - put on app stores (one app per game?)
 - add test to make sure common exclusion/additions don't share words
 - add way to share url with specific game settings
+- package code for use in daily palette
+- add install button https://web.dev/customize-install/
+- 
 
 ## Crossle
 
@@ -27,7 +29,7 @@
 - piece rotation
 - transpose grid/game solved logic will only work for square grid
 - allow to lock/unlock joined pieces?
-- not working on ipad?
+- make hints not reset whole puzzle if you have things that match
 
 ## Gribbles
 
