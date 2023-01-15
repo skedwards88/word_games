@@ -1,29 +1,115 @@
 import { gameInit } from "./gameInit";
 
+function giveHint(currentGameState) {
+  const pieces = JSON.parse(JSON.stringify(currentGameState.pieces));
+  const { maxShiftLeft, maxShiftRight, maxShiftUp, maxShiftDown } =
+    currentGameState;
+
+  let shiftLeft;
+  let shiftUp;
+  // check each piece until we find one on the board within the shift range
+  for (let pieceIndex = 0; pieceIndex < pieces.length; pieceIndex++) {
+    const { boardLeft, boardTop, solutionLeft, solutionTop } =
+      pieces[pieceIndex];
+    // if the piece is not on the board, skip to the next piece
+    if (boardLeft === undefined || boardTop === undefined) {
+      continue;
+    }
+    // if the piece is on the board, check whether it is within the shift range
+    //   if yes, set the shift and break loop
+    const actualShiftLeft = solutionLeft - boardLeft;
+    const actualShiftUp = solutionTop - boardTop;
+    if (
+      actualShiftLeft <= maxShiftLeft &&
+      actualShiftUp <= maxShiftUp &&
+      -1 * actualShiftLeft <= maxShiftRight &&
+      -1 * actualShiftUp <= maxShiftDown
+    ) {
+      shiftLeft = actualShiftLeft;
+      shiftUp = actualShiftUp;
+      break;
+    }
+  }
+
+  let realignedPieces = [];
+  let numRealigned = 0;
+  // if we found a piece on the board that is within the shift range, realign all other pieces on the board to match if they don't already
+  if (shiftLeft != undefined && shiftUp != undefined) {
+    for (let pieceIndex = 0; pieceIndex < pieces.length; pieceIndex++) {
+      const { boardLeft, boardTop, solutionLeft, solutionTop } =
+        pieces[pieceIndex];
+      // if the piece is not on the board, skip to the next piece
+      if (boardLeft === undefined || boardTop === undefined) {
+        realignedPieces = [...realignedPieces, pieces[pieceIndex]];
+        continue;
+      }
+      const newLeft = solutionLeft - shiftLeft;
+      const newTop = solutionTop - shiftUp;
+      const realignedPiece = {
+        ...pieces[pieceIndex],
+        boardLeft: newLeft,
+        boardTop: newTop,
+        poolIndex: undefined,
+      };
+      realignedPieces = [...realignedPieces, realignedPiece];
+      if (boardLeft != newLeft || boardTop != newTop) {
+        numRealigned++;
+      }
+    }
+  } else {
+    // if didn't find any pieces on the board within the shift range,
+    //   move all pieces on the board into place
+    for (let pieceIndex = 0; pieceIndex < pieces.length; pieceIndex++) {
+      const { boardLeft, boardTop, solutionLeft, solutionTop } =
+        pieces[pieceIndex];
+      // if the piece is not on the board, skip to the next piece
+      if (boardLeft === undefined || boardTop === undefined) {
+        realignedPieces = [...realignedPieces, pieces[pieceIndex]];
+        continue;
+      }
+      const realignedPiece = {
+        ...pieces[pieceIndex],
+        boardLeft: solutionLeft,
+        boardTop: solutionTop,
+        poolIndex: undefined,
+      };
+      realignedPieces = [...realignedPieces, realignedPiece];
+      if (boardLeft != solutionLeft || boardTop != solutionTop) {
+        numRealigned++;
+      }
+    }
+  }
+
+  // if we didn't need to move any pieces that are already on the board, move one new piece onto the board
+  if (!numRealigned) {
+    realignedPieces = [...pieces];
+    for (let pieceIndex = 0; pieceIndex < pieces.length; pieceIndex++) {
+      const { boardLeft, boardTop, solutionLeft, solutionTop } =
+        pieces[pieceIndex];
+      // if the piece is not on the board, add it to the board and break the loop
+      if (boardLeft === undefined || boardTop === undefined) {
+        realignedPieces[pieceIndex] = {
+          ...pieces[pieceIndex],
+          boardLeft: shiftLeft ? solutionLeft - shiftLeft : solutionLeft,
+          boardTop: shiftUp ? solutionTop - shiftUp : solutionTop,
+          poolIndex: undefined,
+        };
+        break;
+      }
+    }
+  }
+
+  return realignedPieces;
+}
+
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
     return gameInit({ ...payload, useSaved: false });
   } else if (payload.action === "getHint") {
-    let newPieces = JSON.parse(JSON.stringify(currentGameState.pieces));
-    let newHintLevel = currentGameState.hintLevel + 1;
-    // return all pieces above the hint level to the pool
-    // and all pieces below the hint level to the correct board position
-    for (let index = 0; index < newPieces.length; index++) {
-      if (index < newHintLevel) {
-        newPieces[index].boardTop = newPieces[index].actualTop;
-        newPieces[index].boardLeft = newPieces[index].actualLeft;
-        newPieces[index].poolIndex = undefined;
-      } else {
-        newPieces[index].boardTop = undefined;
-        newPieces[index].boardLeft = undefined;
-        newPieces[index].poolIndex = index - newHintLevel;
-      }
-    }
-
+    const newPieces = giveHint(currentGameState);
     return {
       ...currentGameState,
       pieces: newPieces,
-      hintLevel: newHintLevel,
     };
   } else if (payload.action === "startDrag") {
     // store drag data in the game state

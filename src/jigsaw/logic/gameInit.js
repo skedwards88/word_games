@@ -1,6 +1,45 @@
 import { generateGrid } from "./generateGrid";
 import { shuffleArray } from "../../common/shuffleArray";
 
+function getMaxShifts(grid) {
+  const transposedGrid = grid.map((_, index) => grid.map((row) => row[index]))
+
+  let maxShiftUp = 0
+  for (let index = 0; index < grid.length; index++) {
+    if (grid[index].every(i => i === "")) {
+      maxShiftUp++
+    } else { break }
+  }
+
+  let maxShiftDown = 0
+  for (let index = grid.length - 1; index >= 0; index--) {
+    if (grid[index].every(i => i === "")) {
+      maxShiftDown++
+    } else { break }
+  }
+
+  let maxShiftLeft = 0
+  for (let index = 0; index < transposedGrid.length; index++) {
+    if (transposedGrid[index].every(i => i === "")) {
+      maxShiftLeft++
+    } else { break }
+  }
+
+  let maxShiftRight = 0
+  for (let index = transposedGrid.length - 1; index >= 0; index--) {
+    if (transposedGrid[index].every(i => i === "")) {
+      maxShiftRight++
+    } else { break }
+  }
+
+  return {
+    maxShiftDown: maxShiftDown,
+    maxShiftLeft: maxShiftLeft,
+    maxShiftRight: maxShiftRight,
+    maxShiftUp: maxShiftUp,
+  }
+}
+
 function getPieceDimension(pieceData) {
   const maxTop = pieceData
     .map((data) => data.top)
@@ -59,8 +98,8 @@ function assemblePiece({ pieceData, rowIndex, colIndex }) {
   }
   return {
     letters: grid,
-    actualTop: rowIndex - topAdjust,
-    actualLeft: colIndex - leftAdjust,
+    solutionTop: rowIndex - topAdjust,
+    solutionLeft: colIndex - leftAdjust,
   };
 }
 
@@ -187,6 +226,8 @@ export function gameInit({ numLetters, useSaved = true }) {
     maxWordLength: maxWordLength,
   });
 
+  const {maxShiftLeft,maxShiftRight,maxShiftUp, maxShiftDown} = getMaxShifts(grid)
+
   const pieces = shuffleArray(makePieces(grid));
   const pieceData = pieces.map((piece, index) => ({
     letters: piece.letters,
@@ -194,14 +235,17 @@ export function gameInit({ numLetters, useSaved = true }) {
     boardTop: undefined,
     boardLeft: undefined,
     poolIndex: index,
-    actualTop: piece.actualTop,
-    actualLeft: piece.actualLeft,
+    solutionTop: piece.solutionTop,
+    solutionLeft: piece.solutionLeft,
   }));
 
   return {
     pieces: pieceData,
     gridSize: gridSize,
     numLetters: minLetters,
-    hintLevel: 0,
+    maxShiftLeft: maxShiftLeft,
+    maxShiftRight: maxShiftRight,
+    maxShiftUp: maxShiftUp,
+    maxShiftDown: maxShiftDown,
   };
 }
