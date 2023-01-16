@@ -144,7 +144,7 @@ function Jigsaw() {
         <Info
           info={
             <div>
-              {<h1>Jigsaw</h1>}
+              {<h1>Crossjig</h1>}
               {`Arrange the pieces to make words vertically and horizontally. All words must connect.\n\nDrag a blank space to move the whole puzzle.`}
             </div>
           }
