@@ -1,7 +1,20 @@
 import { getTrie } from "./trie";
 
-jest.mock("./wordLists/compiled/uncommonWords.json");
-jest.mock("./wordLists/compiled/commonWords.json");
+jest.mock('@skedwards88/word_lists', () => {
+  return {
+    commonWords: ["WALK", "CAMP", "QUIET", "LET"],
+    uncommonWords: [
+      "NATURE",
+      "CAMPERS",
+      "SOLITUDE",
+      "HAPPINESS",
+      "CAMPERVANS",
+      "SCAMPER",
+      "SCAMPERS",
+      "CAMPER"
+    ],
+  }
+})
 
 test("Trie builds as expected", () => {
   const trie = getTrie();

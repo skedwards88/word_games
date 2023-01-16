@@ -1,7 +1,20 @@
 import { findAllWords } from "./findAllWords";
 
-jest.mock("../../common/wordLists/compiled/uncommonWords.json");
-jest.mock("../../common/wordLists/compiled/commonWords.json");
+jest.mock('@skedwards88/word_lists', () => {
+  return {
+    commonWords: ["WALK", "CAMP", "QUIET", "LET"],
+    uncommonWords: [
+      "NATURE",
+      "CAMPERS",
+      "SOLITUDE",
+      "HAPPINESS",
+      "CAMPERVANS",
+      "SCAMPER",
+      "SCAMPERS",
+      "CAMPER"
+    ],
+  }
+})
 
 test("Easy mode, min length 4", () => {
   const grid = [

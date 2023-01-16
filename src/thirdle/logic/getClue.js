@@ -1,5 +1,5 @@
 import { shuffleArray } from "../../common/shuffleArray";
-import commonWords from "../../common/wordLists/compiled/commonWords.json";
+import {commonWords} from "@skedwards88/word_lists";
 import { buildPattern } from "./buildPattern";
 
 export function getClue() {

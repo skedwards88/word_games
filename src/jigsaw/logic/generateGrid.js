@@ -1,5 +1,5 @@
 import getPatternsForRow from "./getRegexForRow.js";
-import commonWords from "../../common/wordLists/compiled/commonWords.json";
+import {commonWords} from "@skedwards88/word_lists";
 import { shuffleArray } from "../../common/shuffleArray";
 
 function getCommonWordsForLenRange(minLength, maxLength) {

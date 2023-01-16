@@ -1,5 +1,4 @@
-import commonWords from "./wordLists/compiled/commonWords.json";
-import uncommonWords from "./wordLists/compiled/uncommonWords.json";
+import {commonWords, uncommonWords} from "@skedwards88/word_lists";
 
 export function getTrie() {
   let trie = {};

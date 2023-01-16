@@ -1,7 +1,20 @@
 import { isKnown } from "./isKnown";
 
-jest.mock("./wordLists/compiled/uncommonWords.json");
-jest.mock("./wordLists/compiled/commonWords.json");
+jest.mock('@skedwards88/word_lists', () => {
+  return {
+    commonWords: ["WALK", "CAMP", "QUIET", "LET"],
+    uncommonWords: [
+      "NATURE",
+      "CAMPERS",
+      "SOLITUDE",
+      "HAPPINESS",
+      "CAMPERVANS",
+      "SCAMPER",
+      "SCAMPERS",
+      "CAMPER"
+    ],
+  }
+})
 
 test("Unknown word", () => {
   const result = isKnown("CAT");
