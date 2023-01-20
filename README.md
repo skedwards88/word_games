@@ -24,4 +24,4 @@ To run locally and register the service worker, run `npm start`.
 
 To deploy, push to `main` or manually trigger the GitHub Actions `deploy.yml` workflow.
 
-To regenerate the word lists, run `npm run prebuild`. For information about the word lists, see [`src/common/wordLists/README.md`](src/common/wordLists/README.md). To add a word to the list of common words that the code uses to generate clues, add the word to `src/common/wordLists/compiled/notActuallyUncommon.txt`. To exclude a word from the list of common words that the code uses to generate clues, add the word to `src/common/wordLists/compiled/notActuallyCommon.txt`.
+The word lists are from https://github.com/skedwards88/word_lists/pkgs/npm/word_lists. To modify the word lists, make changes in https://github.com/skedwards88/word_lists and create a new version of the package. Then, import the new version to this project (`npm install @skedwards88/word_lists@VERSION_NUMBER`).

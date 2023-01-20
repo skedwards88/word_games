@@ -1,9 +1,7 @@
 import { getLetterPool } from "./letterPool";
-import commonWords from "./wordLists/compiled/commonWords.json";
-import uncommonWords from "./wordLists/compiled/uncommonWords.json";
+import { commonWords, uncommonWords } from "@skedwards88/word_lists";
 
-jest.mock("./wordLists/compiled/uncommonWords.json");
-jest.mock("./wordLists/compiled/commonWords.json");
+jest.mock("@skedwards88/word_lists");
 
 test("All letters represented in pool, except for Q (is Qu)", () => {
   const pool = getLetterPool();
