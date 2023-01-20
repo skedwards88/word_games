@@ -1,6 +1,6 @@
 import { getTrie } from "./trie";
 
-jest.mock('@skedwards88/word_lists')
+jest.mock("@skedwards88/word_lists");
 
 test("Trie builds as expected", () => {
   const trie = getTrie();

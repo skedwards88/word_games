@@ -8,6 +8,6 @@ module.exports = {
     "CAMPERVANS",
     "SCAMPER",
     "SCAMPERS",
-    "CAMPER"
+    "CAMPER",
   ],
-}
+};

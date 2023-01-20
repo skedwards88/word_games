@@ -1,4 +1,4 @@
-import {commonWords} from "@skedwards88/word_lists";
+import { commonWords } from "@skedwards88/word_lists";
 import { shuffleArray } from "../../common/shuffleArray.js";
 import { getPositionalFractions } from "../../common/getPositionalFractions";
 

@@ -1,4 +1,4 @@
-import {commonWords, uncommonWords} from "@skedwards88/word_lists";
+import { commonWords, uncommonWords } from "@skedwards88/word_lists";
 
 export function getLetterPool() {
   let letterDistribution = {};

@@ -1,6 +1,6 @@
 import { isValidGuess } from "./isValidGuess";
 
-jest.mock('@skedwards88/word_lists')
+jest.mock("@skedwards88/word_lists");
 
 test("word matches pattern and is known word", () => {
   expect(isValidGuess({ word: "CAMPERS", pattern: "[A-Z]+ERS$" })).toEqual(

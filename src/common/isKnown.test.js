@@ -1,6 +1,6 @@
 import { isKnown } from "./isKnown";
 
-jest.mock('@skedwards88/word_lists')
+jest.mock("@skedwards88/word_lists");
 
 test("Unknown word", () => {
   const result = isKnown("CAT");
