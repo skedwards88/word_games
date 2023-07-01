@@ -39,7 +39,7 @@ const App = () => {
             <div id="info">
               <h1>Word Games</h1>
               {`Install or add to home screen for offline play!\n\nWant more games?\nCheck `}
-              <a href="https://skedwards88.github.io/portfolio/">these</a>
+              <a href="https://skedwards88.github.io/">these</a>
               {` out. `}
               {<hr></hr>}
               {`Thanks to `}
