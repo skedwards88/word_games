@@ -371,8 +371,8 @@ a {
   background-image: url("./images/crossle.svg");
 }
 
-#jigsaw_icon {
-  background-image: url("./images/jigsaw.svg");
+#crossjig_icon {
+  background-image: url("./images/crossjig.svg");
 }
 
 /* Gribbles-specific */
@@ -829,9 +829,9 @@ a {
   opacity: 0.5;
 }
 
-/* jigsaw-specific */
+/* crossjig-specific */
 
-#jigsaw {
+#crossjig {
   display: grid;
   grid-template-areas:
     "controls"
@@ -841,12 +841,12 @@ a {
     1fr;
 }
 
-#jigsaw .infoText {
+#crossjig .infoText {
   white-space: pre-wrap;
   text-align: center;
 }
 
-#jigsaw .infoText a {
+#crossjig .infoText a {
   color: rgb(123, 155, 165);
 }
 
@@ -907,13 +907,13 @@ a {
     left: var(--y);
   }
 
-  #jigsaw {
+  #crossjig {
     grid-template-areas: "info controls";
     grid-template-columns: 1fr auto;
     grid-template-rows: 1fr;
   }
 
-  #jigsaw .infoText {
+  #crossjig .infoText {
     display: flex;
     flex-direction: column;
     align-self: center;

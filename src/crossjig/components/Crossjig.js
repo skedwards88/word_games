@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Jigsaw() {
+function Crossjig() {
 
   return (
-    <div className="App" id="jigsaw">
+    <div className="App" id="crossjig">
       <div id="controls">
         <Link to={`/`} id="homeButton"></Link>
       </div>
@@ -17,4 +17,4 @@ function Jigsaw() {
   );
 }
 
-export default Jigsaw;
+export default Crossjig;

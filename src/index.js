@@ -8,7 +8,7 @@ import Thirdle from "./thirdle/components/Thirdle";
 import Palette from "./palette/components/Palette";
 import Packed from "./packed/components/Packed";
 import Crossle from "./crossle/components/Crossle";
-import Jigsaw from "./jigsaw/components/Jigsaw";
+import Crossjig from "./crossjig/components/Crossjig";
 
 const router = createHashRouter([
   {
@@ -33,8 +33,8 @@ const router = createHashRouter([
     element: <Crossle />,
   },
   {
-    path: "jigsaw",
-    element: <Jigsaw />,
+    path: "crossjig",
+    element: <Crossjig />,
   },
   {
     path: "packed",

@@ -20,16 +20,7 @@
 ## Crossle
 
 - tests
-- rename to "spatial" if want to keep crossle for jigsaw?
 - add islands or irregular boundary option?
-
-## Jigsaw
-
-- tests
-- piece rotation
-- transpose grid/game solved logic will only work for square grid
-- allow to lock/unlock joined pieces?
-- make hints not reset whole puzzle if you have things that match
 
 ## Gribbles
 
