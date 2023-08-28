@@ -16,8 +16,8 @@ const App = () => {
           <div className="gameIcon" id="gribbles_icon"></div>
           <div>Gribbles</div>
         </Link>
-        <Link draggable={false}  to={`jigsaw`} className="gameButton">
-          <div className="gameIcon" id="jigsaw_icon"></div>
+        <Link draggable={false}  to={`crossjig`} className="gameButton">
+          <div className="gameIcon" id="crossjig_icon"></div>
           <div>Crossjig</div>
         </Link>
         <Link draggable={false}  to={`crossle`} className="gameButton">
