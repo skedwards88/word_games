@@ -4,6 +4,8 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  repository_dispatch:
+    types: [update-word-lists]
 
 permissions:
   contents: write # Required for bumping version (read-only required for deployment)
