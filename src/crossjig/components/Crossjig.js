@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Crossjig() {
 
   return (
-    <div className="App" id="crossjig">
+    <div className="App graduated" id="crossjig">
       <div id="controls">
         <Link to={`/`} id="homeButton"></Link>
       </div>
