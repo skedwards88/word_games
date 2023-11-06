@@ -13,16 +13,13 @@
 - put on app stores (one app per game?)
 - add test to make sure common exclusion/additions don't share words
 - add way to share url with specific game settings
-- package code for use in daily palette
 - add install button https://web.dev/customize-install/
-- 
+-
 
 ## Crossle
 
 - tests
 - add islands or irregular boundary option?
-
-## Gribbles
 
 ## Thirdle
 

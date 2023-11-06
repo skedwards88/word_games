@@ -1,98 +1,17 @@
 import React from "react";
-import Info from "../../common/Info";
-import Board from "./Board";
-import { gameInit } from "../logic/gameInit";
-import { gameReducer } from "../logic/gameReducer";
-import Clues from "./Clues";
-import CurrentWord from "./CurrentWord";
 import { Link } from "react-router-dom";
-import Settings from "./Settings";
 
 function Palette() {
-  const [gameState, dispatchGameState] = React.useReducer(
-    gameReducer,
-    {},
-    gameInit
-  );
-
-  React.useEffect(() => {
-    window.localStorage.setItem("paletteState", JSON.stringify(gameState));
-  }, [gameState]);
 
   return (
-    <div
-      className="App"
-      id="palette"
-      onPointerUp={(e) => {
-        e.preventDefault();
-
-        dispatchGameState({
-          action: "endWord",
-        });
-      }}
-    >
-      <Clues
-        clueMatches={gameState.clueMatches}
-        hintLevel={gameState.hintLevel}
-        clueColors={gameState.clueIndexes.map((clue) =>
-          clue.map((index) => gameState.colors[index])
-        )}
-        clueLetters={gameState.clueIndexes.map((clue) =>
-          clue.map((index) => gameState.letters[index])
-        )}
-      ></Clues>
-      {gameState.clueMatches.every((i) => i) ? (
-        <div id="currentWord">Complete!</div>
-      ) : (
-        <CurrentWord
-          letters={gameState.playedIndexes.map(
-            (index) => gameState.letters[index]
-          )}
-          colors={gameState.playedIndexes.map(
-            (index) => gameState.colors[index]
-          )}
-        ></CurrentWord>
-      )}
-      <Board
-        letters={gameState.letters}
-        colors={gameState.colors}
-        playedIndexes={gameState.playedIndexes}
-        gameOver={gameState.clueMatches.every((i) => i)}
-        dispatchGameState={dispatchGameState}
-      ></Board>
+    <div className="App graduated" id="palette">
       <div id="controls">
-        <button
-          id="newGameButton"
-          onClick={() => {
-            dispatchGameState({
-              action: "newGame",
-              gridSize: Math.sqrt(gameState.letters.length),
-              minWordLength: gameState.minWordLength,
-              easyMode: gameState.easyMode,
-            });
-          }}
-        ></button>
-        <button
-          id="helpButton"
-          disabled={gameState.clueMatches.every((i) => i)}
-          onClick={() => dispatchGameState({ action: "hint" })}
-        ></button>
-        <Settings dispatchGameState={dispatchGameState} gameState={gameState} />
-        <Info
-          info={
-            <div>
-              {<h1>Palette</h1>}
-              {`Swipe to connect letters into words that match the color patterns.`}
-              {`\n\n`}
-              {<hr></hr>}
-              {`\n`}
-              {`Do you want a daily version of this game? Check out `}
-              <a href="https://palettegame.com">palettegame.com</a>
-              {`.`}
-            </div>
-          }
-        ></Info>
         <Link to={`/`} id="homeButton"></Link>
+      </div>
+      <div className="infoText">
+        {`Palette (now Lexlet) has graduated to a standalone app!\n\nYou can find it at `}
+        <a href="https://lexlet.com/">lexlet.com</a>
+        {` or `}<a href="https://play.google.com/store/apps/details?id=com.palettegame.twa">on the Google Play Store</a>{'.'}
       </div>
     </div>
   );
