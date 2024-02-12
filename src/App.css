@@ -7,6 +7,7 @@ html {
   --default-font-size: min(1cm, min(4vmax, 7vmin));
   --dark-color: rgb(5 5 95);
   --light-color: rgb(239 239 239);
+
   background-color: var(--dark-color);
   color: var(--light-color);
   font-family: sans-serif;
@@ -90,17 +91,18 @@ input[type="checkbox" i]:checked {
 
 /* Slider setting styling */
 input[type="range"] {
-  -webkit-appearance: none;
+  appearance: none;
   width: 100%;
   background: var(--dark-color);
 }
+
 input[type="range"]:focus {
   outline: none;
 }
 
 /* Slider thumb */
 input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
+  appearance: none;
   height: calc(var(--default-font-size) * 1.5);
   width: calc(var(--default-font-size) * 0.5);
   border-radius: 2px;
@@ -109,6 +111,7 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
   margin-top: calc(var(--default-font-size) * -0.5);
 }
+
 input[type="range"]::-moz-range-thumb {
   height: calc(var(--default-font-size) * 1.5);
   width: calc(var(--default-font-size) * 0.5);
@@ -116,6 +119,7 @@ input[type="range"]::-moz-range-thumb {
   background: var(--light-color);
   box-shadow: 0 0 2px 2px black;
 }
+
 input[type="range"]::-ms-thumb {
   height: calc(var(--default-font-size) * 1.5);
   width: calc(var(--default-font-size) * 0.5);
@@ -132,30 +136,37 @@ input[type="range"]::-webkit-slider-runnable-track {
   background: var(--light-color);
   border-radius: 2px;
 }
+
 input[type="range"]:focus::-webkit-slider-runnable-track {
   background: var(--light-color);
 }
+
 input[type="range"]::-moz-range-track {
   height: 2vh;
   cursor: pointer;
   background: var(--light-color);
   border-radius: 2px;
 }
+
 input[type="range"]::-ms-track {
   height: 2vh;
   cursor: pointer;
   background: var(--light-color);
   border-radius: 2px;
 }
+
 input[type="range"]::-ms-fill-lower {
   background: var(--light-color);
 }
+
 input[type="range"]::-ms-fill-upper {
   background: var(--light-color);
 }
+
 input[type="range"]:focus::-ms-fill-lower {
   background: var(--light-color);
 }
+
 input[type="range"]:focus::-ms-fill-upper {
   background: var(--light-color);
 }
@@ -185,7 +196,8 @@ input[type="range"]:focus::-ms-fill-upper {
   border-bottom: 2px solid var(--light-color);
 }
 
-#controls > button, #homeButton {
+#controls > button,
+#homeButton {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -194,7 +206,6 @@ input[type="range"]:focus::-ms-fill-upper {
   height: var(--default-font-size);
   background-color: transparent;
   padding: 1px 6px;
-
 }
 
 #homeButton {
@@ -297,11 +308,10 @@ input[type="range"]:focus::-ms-fill-upper {
   margin: 10px;
 }
 
-
-
 a {
   color: var(--light-color);
 }
+
 /* Home */
 
 #home {
@@ -484,7 +494,7 @@ a {
 #packed {
   display: grid;
   grid-template-areas:
-  "controls"
+    "controls"
     "board"
     "pool";
   grid-template-rows:
@@ -659,7 +669,7 @@ a {
 }
 
 .graduated .infoText a {
-  color: rgb(123, 155, 165);
+  color: rgb(123 155 165);
 }
 
 /* Landscape */
