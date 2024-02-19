@@ -1,4 +1,4 @@
-import { buildPattern } from "./buildPattern";
+import {buildPattern} from "./buildPattern";
 
 // Single gaps
 

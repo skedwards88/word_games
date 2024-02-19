@@ -1,7 +1,7 @@
 import React from "react";
-import { sortMethods } from "../../common/sortLetters";
+import {sortMethods} from "../../common/sortLetters";
 
-export default function Settings({ dispatchGameState, gameState }) {
+export default function Settings({dispatchGameState, gameState}) {
   const [showSettings, setShowSettings] = React.useState(false);
 
   function handleShowSettings() {

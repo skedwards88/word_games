@@ -1,6 +1,6 @@
-import { shuffleArray } from "../../common/shuffleArray";
-import { commonWords } from "@skedwards88/word_lists";
-import { buildPattern } from "./buildPattern";
+import {shuffleArray} from "../../common/shuffleArray";
+import {commonWords} from "@skedwards88/word_lists";
+import {buildPattern} from "./buildPattern";
 
 export function getClue() {
   let foundPlayable = false;
@@ -35,5 +35,5 @@ export function getClue() {
     }
   }
 
-  return { pattern: pattern, answers: matches.slice(0, 10) };
+  return {pattern: pattern, answers: matches.slice(0, 10)};
 }

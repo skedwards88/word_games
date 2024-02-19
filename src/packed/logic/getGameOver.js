@@ -1,5 +1,5 @@
-import { isKnown } from "../../common/isKnown";
-import { partitionArray } from "../../common/partitionArray";
+import {isKnown} from "../../common/isKnown";
+import {partitionArray} from "../../common/partitionArray";
 
 export function getBoardIsFull(board) {
   return !board.some((i) => !i);
@@ -13,7 +13,7 @@ export function getGameOver(board) {
 
   const rows = partitionArray(board, Math.sqrt(board.length));
   for (let index = 0; index < rows.length; index += 1) {
-    const { isWord } = isKnown(rows[index].join(""));
+    const {isWord} = isKnown(rows[index].join(""));
     if (!isWord) {
       return false;
     }
@@ -21,7 +21,7 @@ export function getGameOver(board) {
 
   const columns = rows.map((_, index) => rows.map((row) => row[index]));
   for (let index = 0; index < columns.length; index += 1) {
-    const { isWord } = isKnown(columns[index].join(""));
+    const {isWord} = isKnown(columns[index].join(""));
     if (!isWord) {
       return false;
     }

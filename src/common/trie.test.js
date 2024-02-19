@@ -1,4 +1,4 @@
-import { getTrie } from "./trie";
+import {getTrie} from "./trie";
 
 jest.mock("@skedwards88/word_lists");
 

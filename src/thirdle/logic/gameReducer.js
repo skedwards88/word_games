@@ -1,5 +1,5 @@
-import { isValidGuess } from "./isValidGuess";
-import { gameInit } from "./gameInit";
+import {isValidGuess} from "./isValidGuess";
+import {gameInit} from "./gameInit";
 
 export function gameReducer(currentState, payload) {
   switch (payload.action) {
@@ -47,6 +47,6 @@ export function gameReducer(currentState, payload) {
 
     default:
       console.log(`unknown action: ${payload.action}`);
-      return { ...currentState };
+      return {...currentState};
   }
 }

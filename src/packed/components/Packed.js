@@ -3,13 +3,13 @@ import Info from "../../common/Info";
 import Pool from "./Pool";
 import Board from "./Board";
 import Settings from "./Settings";
-import { Result } from "./Result";
-import { gameInit } from "../logic/gameInit";
-import { gameReducer } from "../logic/gameReducer";
-import { getGameOver, getBoardIsFull } from "../logic/getGameOver";
-import { Link } from "react-router-dom";
+import {Result} from "./Result";
+import {gameInit} from "../logic/gameInit";
+import {gameReducer} from "../logic/gameReducer";
+import {getGameOver, getBoardIsFull} from "../logic/getGameOver";
+import {Link} from "react-router-dom";
 
-export function dragToken({ event, letter, index, dragArea }) {
+export function dragToken({event, letter, index, dragArea}) {
   event.dataTransfer.setData("letter", letter);
   event.dataTransfer.setData("dragIndex", `${index}`); // touch screen sets 0 as undefined, so convert to string
   event.dataTransfer.setData("dragArea", dragArea);
@@ -22,14 +22,14 @@ function Packed() {
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
     {},
-    gameInit
+    gameInit,
   );
 
   React.useEffect(() => {
     window.localStorage.setItem("packedState", JSON.stringify(gameState));
   }, [gameState]);
 
-  function dropOnPool({ event }) {
+  function dropOnPool({event}) {
     const letter = event.dataTransfer.getData("letter");
     const dragIndex = event.dataTransfer.getData("dragIndex");
     const dragArea = event.dataTransfer.getData("dragArea");
@@ -67,7 +67,7 @@ function Packed() {
     });
   }
 
-  function dropOnBoard({ event, index }) {
+  function dropOnBoard({event, index}) {
     const letter = event.dataTransfer.getData("letter");
     const dragIndex = event.dataTransfer.getData("dragIndex");
     const dragArea = event.dataTransfer.getData("dragArea");
@@ -116,7 +116,7 @@ function Packed() {
         <button
           id="helpButton"
           disabled={gameIsOver}
-          onClick={() => dispatchGameState({ action: "getHint" })}
+          onClick={() => dispatchGameState({action: "getHint"})}
         ></button>
         <Settings dispatchGameState={dispatchGameState} gameState={gameState} />
         <Info

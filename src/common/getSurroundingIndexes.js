@@ -1,4 +1,4 @@
-export function getSurroundingIndexes({ index, gridSize }) {
+export function getSurroundingIndexes({index, gridSize}) {
   const column = index % gridSize;
   const row = Math.floor(index / gridSize);
   let surroundingIndexes = [];

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Info({ info, sideEffectShow, sideEffectHide }) {
+export default function Info({info, sideEffectShow, sideEffectHide}) {
   const [showInfo, setShowInfo] = React.useState(false);
 
   function handleShowInfo() {

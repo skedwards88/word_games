@@ -1,7 +1,7 @@
-import { createRoot } from "react-dom/client";
+import {createRoot} from "react-dom/client";
 import React from "react";
 import App from "./App.js";
-import { RouterProvider, createHashRouter } from "react-router-dom";
+import {RouterProvider, createHashRouter} from "react-router-dom";
 import ErrorPage from "./errorPage.js";
 import Gribbles from "./gribbles/components/Gribbles";
 import Thirdle from "./thirdle/components/Thirdle";
@@ -50,7 +50,7 @@ if (process.env.NODE_ENV !== "development" && "serviceWorker" in navigator) {
   const scope = location.hostname === "localhost" ? "" : "/word_games/";
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register(path, { scope: scope })
+      .register(path, {scope: scope})
       .then((registration) => {
         console.log("SW registered: ", registration);
       })
@@ -65,5 +65,5 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

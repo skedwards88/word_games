@@ -1,10 +1,10 @@
 import getPatternsForRow from "./getRegexForRow.js";
-import { commonWords } from "@skedwards88/word_lists";
-import { shuffleArray } from "../../common/shuffleArray";
+import {commonWords} from "@skedwards88/word_lists";
+import {shuffleArray} from "../../common/shuffleArray";
 
 function getCommonWordsForLenRange(minLength, maxLength) {
   const filteredWords = commonWords.filter(
-    (word) => word.length < maxLength && word.length > minLength
+    (word) => word.length < maxLength && word.length > minLength,
   );
   return shuffleArray(filteredWords);
 }
@@ -42,8 +42,8 @@ export function generateGrid({
 
   while (letterCount < minLetters) {
     let count = 0;
-    grid = Array.from({ length: gridSize }, () =>
-      Array.from({ length: gridSize }, () => "")
+    grid = Array.from({length: gridSize}, () =>
+      Array.from({length: gridSize}, () => ""),
     );
     orientationIsRows = true;
 
@@ -55,7 +55,7 @@ export function generateGrid({
     letterCount = startingWord.length;
     const startingRowIndex = Math.floor(Math.random() * gridSize);
     const startingColIndex = Math.floor(
-      Math.random() * (gridSize - startingWord.length)
+      Math.random() * (gridSize - startingWord.length),
     );
     for (
       let index = startingColIndex;
@@ -98,7 +98,7 @@ export function generateGrid({
         const patterns = getPatternsForRow(
           grid,
           rowIndexesByCounts[metaIndex],
-          minWordLength
+          minWordLength,
         );
         for (
           let patternIndex = 0;
@@ -137,7 +137,7 @@ export function generateGrid({
 
       letterCount = grid.reduce(
         (accumulator, row) => accumulator + row.join("").length,
-        0
+        0,
       );
     }
   }

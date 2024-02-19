@@ -1,13 +1,13 @@
 import React from "react";
 
-function Key({ dispatchThirdleState, key }) {
+function Key({dispatchThirdleState, key}) {
   if (key === "enter") {
     return (
       <button
         className="keyboardLetter keyboardControl"
         id="enter"
         key={key}
-        onClick={() => dispatchThirdleState({ action: "guess" })}
+        onClick={() => dispatchThirdleState({action: "guess"})}
       ></button>
     );
   }
@@ -17,7 +17,7 @@ function Key({ dispatchThirdleState, key }) {
         className="keyboardLetter keyboardControl"
         id="backspace"
         key={key}
-        onClick={() => dispatchThirdleState({ action: "removeLetter" })}
+        onClick={() => dispatchThirdleState({action: "removeLetter"})}
       ></button>
     );
   }
@@ -27,7 +27,7 @@ function Key({ dispatchThirdleState, key }) {
         className="keyboardLetter keyboardControl"
         id="delete"
         key={key}
-        onClick={() => dispatchThirdleState({ action: "clearWord" })}
+        onClick={() => dispatchThirdleState({action: "clearWord"})}
       ></button>
     );
   }
@@ -35,24 +35,24 @@ function Key({ dispatchThirdleState, key }) {
     <button
       className="keyboardLetter"
       key={key}
-      onClick={() => dispatchThirdleState({ action: "addLetter", letter: key })}
+      onClick={() => dispatchThirdleState({action: "addLetter", letter: key})}
     >
       {key}
     </button>
   );
 }
 
-function Row({ dispatchThirdleState, keys }) {
+function Row({dispatchThirdleState, keys}) {
   return (
     <div className="keyboardRow">
       {keys.map((key) =>
-        Key({ dispatchThirdleState: dispatchThirdleState, key: key })
+        Key({dispatchThirdleState: dispatchThirdleState, key: key}),
       )}
     </div>
   );
 }
 
-export function Keyboard({ dispatchThirdleState }) {
+export function Keyboard({dispatchThirdleState}) {
   return (
     <div id="keyboard">
       <Row

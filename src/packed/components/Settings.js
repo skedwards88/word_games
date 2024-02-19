@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Settings({ dispatchGameState, gameState }) {
+export default function Settings({dispatchGameState, gameState}) {
   const [showSettings, setShowSettings] = React.useState(false);
 
   function handleShowSettings() {

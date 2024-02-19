@@ -1,12 +1,12 @@
 import React from "react";
-import { dragToken } from "./Packed";
-import { polyfill } from "mobile-drag-drop";
+import {dragToken} from "./Packed";
+import {polyfill} from "mobile-drag-drop";
 
 polyfill({
   dragImageCenterOnTouch: true,
 });
 
-function PoolLetter({ letterProperties, index }) {
+function PoolLetter({letterProperties, index}) {
   return (
     <div
       style={{
@@ -31,17 +31,17 @@ function PoolLetter({ letterProperties, index }) {
   );
 }
 
-export default function Pool({ pool, dropToken }) {
+export default function Pool({pool, dropToken}) {
   let letters = [];
 
   letters = pool.map((letterProperties, index) =>
-    PoolLetter({ letterProperties: letterProperties, index: index })
+    PoolLetter({letterProperties: letterProperties, index: index}),
   );
 
   return (
     <div
       id="pool"
-      onDrop={(event) => dropToken({ event: event })}
+      onDrop={(event) => dropToken({event: event})}
       onDragOver={(event) => {
         event.preventDefault();
       }}

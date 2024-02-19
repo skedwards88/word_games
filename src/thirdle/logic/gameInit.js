@@ -1,4 +1,4 @@
-import { getClue } from "./getClue";
+import {getClue} from "./getClue";
 
 export function gameInit(useSaved = true) {
   const savedState = useSaved
@@ -13,7 +13,7 @@ export function gameInit(useSaved = true) {
     };
   }
 
-  const { pattern, answers } = getClue();
+  const {pattern, answers} = getClue();
 
   return {
     pattern: pattern,

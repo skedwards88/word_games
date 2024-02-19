@@ -1,17 +1,17 @@
 import React from "react";
-import { Keyboard } from "./Keyboard";
+import {Keyboard} from "./Keyboard";
 import Info from "../../common/Info";
-import { gameInit } from "../logic/gameInit";
-import { gameReducer } from "../logic/gameReducer";
-import { Result } from "./Result";
-import { beautifyPattern } from "../logic/beautifyPattern";
-import { Link } from "react-router-dom";
+import {gameInit} from "../logic/gameInit";
+import {gameReducer} from "../logic/gameReducer";
+import {Result} from "./Result";
+import {beautifyPattern} from "../logic/beautifyPattern";
+import {Link} from "react-router-dom";
 
 function Thirdle() {
   const [thirdleState, dispatchThirdleState] = React.useReducer(
     gameReducer,
     {},
-    gameInit
+    gameInit,
   );
 
   React.useEffect(() => {
@@ -27,12 +27,12 @@ function Thirdle() {
       <div id="controls">
         <button
           id="newGameButton"
-          onClick={() => dispatchThirdleState({ action: "newGame" })}
+          onClick={() => dispatchThirdleState({action: "newGame"})}
         ></button>
 
         <button
           id="helpButton"
-          onClick={() => dispatchThirdleState({ action: "giveUp" })}
+          onClick={() => dispatchThirdleState({action: "giveUp"})}
         ></button>
 
         <Info

@@ -1,12 +1,12 @@
 import React from "react";
-import { dragToken } from "./Crossle";
-import { polyfill } from "mobile-drag-drop";
+import {dragToken} from "./Crossle";
+import {polyfill} from "mobile-drag-drop";
 
 polyfill({
   dragImageCenterOnTouch: true,
 });
 
-export default function Board({ letters, dropToken }) {
+export default function Board({letters, dropToken}) {
   const board = letters.map((letter, index) => (
     <div
       className="boardLetter"
@@ -24,7 +24,7 @@ export default function Board({ letters, dropToken }) {
       onDragOver={(event) => {
         event.preventDefault();
       }}
-      onDrop={(event) => dropToken({ event: event, index: index })}
+      onDrop={(event) => dropToken({event: event, index: index})}
       onDragEnter={(event) => {
         event.preventDefault();
       }}

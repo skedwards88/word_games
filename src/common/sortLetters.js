@@ -1,4 +1,4 @@
-import { shuffleArray } from "./shuffleArray";
+import {shuffleArray} from "./shuffleArray";
 
 function sortVowels(letters) {
   let vowels = [];

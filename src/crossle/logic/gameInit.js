@@ -1,10 +1,10 @@
-import { generateGrid } from "./generateGrid";
-import { shuffleArray } from "../../common/shuffleArray";
-import { getPositionalFractions } from "../../common/getPositionalFractions";
-import { sortLettersBy } from "../../common/sortLetters";
-import { sortMethods } from "../../common/sortLetters";
+import {generateGrid} from "./generateGrid";
+import {shuffleArray} from "../../common/shuffleArray";
+import {getPositionalFractions} from "../../common/getPositionalFractions";
+import {sortLettersBy} from "../../common/sortLetters";
+import {sortMethods} from "../../common/sortLetters";
 
-function getIndexesWithWords({ grid, minWordLength }) {
+function getIndexesWithWords({grid, minWordLength}) {
   const transposedGrid = grid.map((_, index) => grid.map((row) => row[index]));
   const jointGrid = [...grid, ...transposedGrid];
   let solution = [];
@@ -51,7 +51,7 @@ function getIndexesWithWords({ grid, minWordLength }) {
   return solution;
 }
 
-export function gameInit({ useSaved = true, sortBy }) {
+export function gameInit({useSaved = true, sortBy}) {
   const savedState =
     useSaved ?? true
       ? JSON.parse(localStorage.getItem("crossleState"))
@@ -88,7 +88,7 @@ export function gameInit({ useSaved = true, sortBy }) {
     getIndexesWithWords({
       grid: grid,
       minWordLength: minWordLength,
-    })
+    }),
   );
 
   // Generate the pool
@@ -105,7 +105,7 @@ export function gameInit({ useSaved = true, sortBy }) {
         letter: letter,
         xFractionalPosition: positions[index].x,
         yFractionalPosition: positions[index].y,
-      })
+      }),
   );
 
   return {

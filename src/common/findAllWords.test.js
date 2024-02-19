@@ -1,4 +1,4 @@
-import { findAllWords } from "./findAllWords";
+import {findAllWords} from "./findAllWords";
 
 jest.mock("@skedwards88/word_lists");
 

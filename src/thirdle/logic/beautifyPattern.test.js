@@ -1,4 +1,4 @@
-import { beautifyPattern } from "./beautifyPattern";
+import {beautifyPattern} from "./beautifyPattern";
 
 test("^ABC[A-Z]+", () => {
   const pattern = "^ABC[A-Z]+";

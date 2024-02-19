@@ -1,6 +1,6 @@
-import { commonWords } from "@skedwards88/word_lists";
-import { shuffleArray } from "../../common/shuffleArray.js";
-import { getPositionalFractions } from "../../common/getPositionalFractions";
+import {commonWords} from "@skedwards88/word_lists";
+import {shuffleArray} from "../../common/shuffleArray.js";
+import {getPositionalFractions} from "../../common/getPositionalFractions";
 
 function getTrieOfLength(wordLength) {
   let trie = {};
@@ -65,7 +65,7 @@ function attemptToGetGame(gridSize) {
     // col
     word = getWordThatStartsWith(
       gridSize,
-      words.map((word) => word[index]).join("")
+      words.map((word) => word[index]).join(""),
     );
     if (word) {
       for (let subIndex = index + 1; subIndex < gridSize; subIndex++) {
@@ -92,7 +92,7 @@ function getGame(gridSize) {
   return game.join("").split("");
 }
 
-export function gameInit({ useSaved, gridSize }) {
+export function gameInit({useSaved, gridSize}) {
   const savedState =
     useSaved ?? true
       ? JSON.parse(localStorage.getItem("packedState"))
@@ -128,7 +128,7 @@ export function gameInit({ useSaved, gridSize }) {
         letter: letter,
         xFractionalPosition: positions[index].x,
         yFractionalPosition: positions[index].y,
-      })
+      }),
   );
 
   return {

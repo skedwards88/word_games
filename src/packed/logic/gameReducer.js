@@ -1,6 +1,6 @@
-import { shuffleArray } from "../../common/shuffleArray";
-import { gameInit } from "./gameInit";
-import { getPositionalFractions } from "../../common/getPositionalFractions";
+import {shuffleArray} from "../../common/shuffleArray";
+import {gameInit} from "./gameInit";
+import {getPositionalFractions} from "../../common/getPositionalFractions";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "dropOnPool") {
@@ -19,7 +19,7 @@ export function gameReducer(currentGameState, payload) {
     if (payload.dragArea === "board") {
       // Don't allow a hinted letter to be moved
       if (currentGameState.locked[payload.dragIndex]) {
-        return { ...currentGameState };
+        return {...currentGameState};
       }
 
       // remove the letter at the dragged board index
@@ -31,7 +31,7 @@ export function gameReducer(currentGameState, payload) {
           letter: payload.letter,
           xFractionalPosition: xFractionalPosition,
           yFractionalPosition: yFractionalPosition,
-        })
+        }),
       );
     }
 
@@ -58,7 +58,7 @@ export function gameReducer(currentGameState, payload) {
 
     // Don't allow a hinted letter to be replaced
     if (currentGameState.locked[payload.dropIndex]) {
-      return { ...currentGameState };
+      return {...currentGameState};
     }
 
     // from the pool
@@ -73,7 +73,7 @@ export function gameReducer(currentGameState, payload) {
         newPool = newPool
           .slice(0, payload.dragIndex)
           .concat(
-            newPool.slice(parseInt(payload.dragIndex) + 1, newPool.length)
+            newPool.slice(parseInt(payload.dragIndex) + 1, newPool.length),
           );
       }
     }
@@ -82,7 +82,7 @@ export function gameReducer(currentGameState, payload) {
     if (payload.dragArea === "board") {
       // Don't allow a hinted letter to be moved
       if (currentGameState.locked[payload.dragIndex]) {
-        return { ...currentGameState };
+        return {...currentGameState};
       }
 
       // swap letters at positions
@@ -104,12 +104,12 @@ export function gameReducer(currentGameState, payload) {
     const falseIndexes = newLocked.reduce(
       (accumulator, item, index) =>
         item ? accumulator : [...accumulator, index],
-      []
+      [],
     );
 
     // If there are no more hints to give, do nothing
     if (!falseIndexes.length) {
-      return { ...currentGameState };
+      return {...currentGameState};
     }
 
     // Choose a random hint to give
@@ -140,7 +140,7 @@ export function gameReducer(currentGameState, payload) {
           letter: letter,
           xFractionalPosition: positions[index].x,
           yFractionalPosition: positions[index].y,
-        })
+        }),
     );
 
     return {
@@ -150,9 +150,9 @@ export function gameReducer(currentGameState, payload) {
       pool: newPool,
     };
   } else if (payload.action === "newGame") {
-    return gameInit({ ...payload, useSaved: false });
+    return gameInit({...payload, useSaved: false});
   } else {
     console.log(`unknown action: ${payload.action}`);
-    return { ...currentGameState };
+    return {...currentGameState};
   }
 }

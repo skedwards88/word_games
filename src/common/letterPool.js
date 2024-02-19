@@ -1,4 +1,4 @@
-import { commonWords, uncommonWords } from "@skedwards88/word_lists";
+import {commonWords, uncommonWords} from "@skedwards88/word_lists";
 
 export function getLetterPool() {
   let letterDistribution = {};
@@ -45,7 +45,7 @@ export function getLetterPool() {
   for (let letter in letterDistribution) {
     letterPercentages[letter] = Math.max(
       1,
-      Math.round(100 * (letterDistribution[letter] / totalLetters))
+      Math.round(100 * (letterDistribution[letter] / totalLetters)),
     );
   }
 

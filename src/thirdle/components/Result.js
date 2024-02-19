@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Result({ thirdleState }) {
+export function Result({thirdleState}) {
   if (thirdleState.result === "giveUp") {
     return (
       <div id="answers">

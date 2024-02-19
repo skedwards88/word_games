@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Result({ boardIsFull, gameIsOver, dropToken }) {
+export function Result({boardIsFull, gameIsOver, dropToken}) {
   let resultText = "";
   if (boardIsFull) {
     if (gameIsOver) {
@@ -13,7 +13,7 @@ export function Result({ boardIsFull, gameIsOver, dropToken }) {
   return (
     <div
       id="result"
-      onDrop={(event) => dropToken({ event: event })}
+      onDrop={(event) => dropToken({event: event})}
       onDragOver={(event) => {
         event.preventDefault();
       }}

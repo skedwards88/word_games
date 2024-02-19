@@ -1,7 +1,7 @@
-import { gameInit } from "./gameInit";
-import { getPositionalFractions } from "../../common/getPositionalFractions";
-import { partitionArray } from "../../common/partitionArray";
-import { sortLettersBy } from "../../common/sortLetters";
+import {gameInit} from "./gameInit";
+import {getPositionalFractions} from "../../common/getPositionalFractions";
+import {partitionArray} from "../../common/partitionArray";
+import {sortLettersBy} from "../../common/sortLetters";
 
 function subtractArrays(baseArray, itemsToRemove) {
   for (let index = 0; index < itemsToRemove.length; index++) {
@@ -11,7 +11,7 @@ function subtractArrays(baseArray, itemsToRemove) {
   return baseArray;
 }
 
-function shiftRow({ row, shift }) {
+function shiftRow({row, shift}) {
   if (shift > 0) {
     return [...Array(shift).fill(""), ...row.slice(0, row.length - shift)];
   } else {
@@ -22,7 +22,7 @@ function shiftRow({ row, shift }) {
   }
 }
 
-function shiftBoard({ board, rowShift, colShift }) {
+function shiftBoard({board, rowShift, colShift}) {
   // partition the flat board into a grid
   let grid = partitionArray(board, Math.sqrt(board.length));
 
@@ -71,11 +71,11 @@ function shiftBoard({ board, rowShift, colShift }) {
   }
 
   // shift left/right
-  grid = grid.map((row) => shiftRow({ row: row, shift: adjustedColShift }));
+  grid = grid.map((row) => shiftRow({row: row, shift: adjustedColShift}));
 
   // transpose, shift left/right (formerly up/down), untranspose
   grid = grid.map((_, index) => grid.map((row) => row[index]));
-  grid = grid.map((row) => shiftRow({ row: row, shift: adjustedRowShift }));
+  grid = grid.map((row) => shiftRow({row: row, shift: adjustedRowShift}));
   grid = grid.map((_, index) => grid.map((row) => row[index]));
 
   // if we cut off any letters, return the board unchanged
@@ -113,7 +113,7 @@ export function gameReducer(currentGameState, payload) {
           letter: payload.letter,
           xFractionalPosition: xFractionalPosition,
           yFractionalPosition: yFractionalPosition,
-        })
+        }),
       );
     }
 
@@ -150,7 +150,7 @@ export function gameReducer(currentGameState, payload) {
         newPool = newPool
           .slice(0, payload.dragIndex)
           .concat(
-            newPool.slice(parseInt(payload.dragIndex) + 1, newPool.length)
+            newPool.slice(parseInt(payload.dragIndex) + 1, newPool.length),
           );
       }
     }
@@ -184,15 +184,15 @@ export function gameReducer(currentGameState, payload) {
       pool: newPool,
     };
   } else if (payload.action === "newGame") {
-    return gameInit({ ...payload, useSaved: false });
+    return gameInit({...payload, useSaved: false});
   } else if (payload.action === "getHint") {
     const hints = [...currentGameState.hints];
     const newHintIndex = currentGameState.hintIndex + 1;
 
     // populate the board with the hints
     const gridSize = Math.sqrt(currentGameState.board.length);
-    let newBoard = Array.from({ length: gridSize }, () =>
-      Array.from({ length: gridSize }, () => "")
+    let newBoard = Array.from({length: gridSize}, () =>
+      Array.from({length: gridSize}, () => ""),
     );
     for (
       let currentHintIndex = 0;
@@ -203,7 +203,7 @@ export function gameReducer(currentGameState, payload) {
 
       if (!hint.orientationIsRows) {
         newBoard = newBoard.map((_, index) =>
-          newBoard.map((row) => row[index])
+          newBoard.map((row) => row[index]),
         );
       }
 
@@ -217,7 +217,7 @@ export function gameReducer(currentGameState, payload) {
 
       if (!hint.orientationIsRows) {
         newBoard = newBoard.map((_, index) =>
-          newBoard.map((row) => row[index])
+          newBoard.map((row) => row[index]),
         );
       }
     }
@@ -228,7 +228,7 @@ export function gameReducer(currentGameState, payload) {
     let allLetters = [...oldBoardLetters, ...oldPoolLetters];
     let newPoolLetters = subtractArrays(
       allLetters,
-      newBoard.flatMap((i) => i).filter((i) => i)
+      newBoard.flatMap((i) => i).filter((i) => i),
     );
 
     // Generate the new pool
@@ -245,7 +245,7 @@ export function gameReducer(currentGameState, payload) {
           letter: letter,
           xFractionalPosition: positions[index].x,
           yFractionalPosition: positions[index].y,
-        })
+        }),
     );
     return {
       ...currentGameState,
@@ -255,6 +255,6 @@ export function gameReducer(currentGameState, payload) {
     };
   } else {
     console.log(`unknown action: ${payload.action}`);
-    return { ...currentGameState };
+    return {...currentGameState};
   }
 }

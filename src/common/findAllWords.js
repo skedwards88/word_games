@@ -1,5 +1,5 @@
-import { getSurroundingIndexes } from "./getSurroundingIndexes";
-import { isKnown } from "./isKnown";
+import {getSurroundingIndexes} from "./getSurroundingIndexes";
+import {isKnown} from "./isKnown";
 
 export function findAllWordIndexes({
   grid,
@@ -10,7 +10,7 @@ export function findAllWordIndexes({
   let foundWordIndexes = [];
 
   const neighborIndexes = grid.map((_, index) =>
-    getSurroundingIndexes({ index: index, gridSize: Math.sqrt(grid.length) })
+    getSurroundingIndexes({index: index, gridSize: Math.sqrt(grid.length)}),
   );
 
   function checkSurrounding(currentIndex, wordIndexes, visitedIndexes) {
@@ -22,7 +22,7 @@ export function findAllWordIndexes({
       }
       const newWordIndexes = [...wordIndexes, surroundingIndex];
       const newWord = newWordIndexes.map((index) => grid[index]).join("");
-      const { isPartial, isWord, isEasy } = isKnown(newWord);
+      const {isPartial, isWord, isEasy} = isKnown(newWord);
 
       if (easyMode) {
         if (
@@ -45,7 +45,7 @@ export function findAllWordIndexes({
         checkSurrounding(
           surroundingIndex,
           newWordIndexes,
-          visitedIndexes.concat(surroundingIndex)
+          visitedIndexes.concat(surroundingIndex),
         );
       }
     }
@@ -71,7 +71,7 @@ export function findAllWords({
     easyMode: easyMode,
   });
   const foundWords = foundWordIndexes.map((indexList) =>
-    indexList.map((index) => grid[index]).join("")
+    indexList.map((index) => grid[index]).join(""),
   );
   const uniqueFoundWords = new Set(foundWords);
 

@@ -1,4 +1,4 @@
-import { isKnown } from "./isKnown";
+import {isKnown} from "./isKnown";
 
 function getSurroundingLetterIndexes({
   startingIndex,
@@ -21,7 +21,7 @@ function getSurroundingLetterIndexes({
         !alreadyFoundIndexes.some(
           (alreadyFoundIndex) =>
             alreadyFoundIndex[0] === surroundingIndexes[index][0] &&
-            alreadyFoundIndex[1] === surroundingIndexes[index][1]
+            alreadyFoundIndex[1] === surroundingIndexes[index][1],
         )
       ) {
         surroundingLetterIndexes.push(surroundingIndexes[index]);
@@ -76,7 +76,7 @@ function isSingleGroupingQ(grid) {
   return numLetters === connectedIndexes.length;
 }
 
-export function crosswordValidQ({ grid }) {
+export function crosswordValidQ({grid}) {
   const isSingleGrouping = isSingleGroupingQ(grid);
   if (!isSingleGrouping) {
     return {
@@ -110,7 +110,7 @@ export function crosswordValidQ({ grid }) {
           !character.match("^[A-Z]$"))
       ) {
         if (currentWord.length > 1) {
-          const { isWord } = isKnown(currentWord);
+          const {isWord} = isKnown(currentWord);
           if (!isWord) {
             return {
               gameIsSolved: false,
@@ -123,5 +123,5 @@ export function crosswordValidQ({ grid }) {
       }
     }
   }
-  return { gameIsSolved: true, reason: "" };
+  return {gameIsSolved: true, reason: ""};
 }
