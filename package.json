@@ -4,28 +4,38 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
+    "build": "webpack",
     "dev": "webpack-dev-server --mode development",
     "start": "webpack-dev-server",
-    "build": "webpack",
-    "test": "jest",
-    "lint": "npx eslint --ignore-path .gitignore .",
-    "prettier": "npx prettier --ignore-path .gitignore --write ."
+    "eslint": "npx eslint --ignore-path .gitignore . --fix",
+    "prettier": "npx prettier --write .",
+    "style": "npx stylelint '**/*.css' --fix",
+    "lint": "npm run eslint && npm run prettier && npm run style"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skedwards88/word_games.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/skedwards88/word_games/issues"
+  },
+  "homepage": "https://github.com/skedwards88/word_games#readme",
   "dependencies": {
     "@skedwards88/word_lists": "^2.1.1",
     "mobile-drag-drop": "^2.3.0-rc.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/plugin-syntax-import-assertions": "^7.23.3",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
-    "@eslint/create-config": "github:eslint/create-config",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.6.0",
@@ -36,7 +46,6 @@
     "html-webpack-plugin": "^5.5.0",
     "jest": "^29.3.1",
     "prettier": "^2.6.0",
-    "react-router-dom": "^6.4.2",
     "style-loader": "^3.3.1",
     "stylelint": "^14.6.0",
     "stylelint-config-standard": "^25.0.0",
