@@ -2,12 +2,15 @@
   "name": "Word Games",
   "short_name": "Word Games",
   "description": "A collection of word games",
+  "id": "?word_games=202402221",
   "dir": "auto",
   "lang": "en-US",
   "display": "standalone",
   "start_url": "../.",
   "background_color": "#efefef",
   "theme_color": "#05055f",
+  "shortcuts": [],
+  "categories": ["games", "entertainment", "education"],
   "icons": [
     {
       "src": "favicon.svg",
