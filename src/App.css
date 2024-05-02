@@ -773,8 +773,15 @@ a {
 }
 
 /* Large screen */
-@media (orientation: landscape) and (min-height: 600px) and (min-width: 936px), (orientation: portrait) and (min-height: 600px) and (min-width: 600px) {
-  .App{
+@media
+  (orientation: landscape) and
+  (min-height: 600px) and
+  (min-width: 936px),
+  (orientation: portrait) and
+  (min-height: 600px) and
+  (min-width: 600px)
+{
+  .App {
     transform: scale(0.6);
   }
 }
